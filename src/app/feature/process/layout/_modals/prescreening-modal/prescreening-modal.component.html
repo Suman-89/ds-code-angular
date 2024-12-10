@@ -1,0 +1,75 @@
+<form #form="ngForm">
+  <div class="modal-header">
+    <h5 class="prescreenig-title">Initiate-Prescreening</h5>
+    <button
+      type="button"
+      class="close btn"
+      aria-label="Close"
+      (click)="close()"
+    >
+      <img height="20" src="./assets/images/cross.png" />
+    </button>
+  </div>
+  <div class="modal-body position-relative">
+    <div class="recruiters">
+      <div class="form-row no-margin">
+        <div class="form-group col-md-12">
+          <label> Recruiters <sup>*</sup> </label>
+          <app-type-ahead
+            [type]="'recruiters'"
+            [createAllowed]="false"
+            (resultEmitter)="selectRecruiter($event)"
+          >
+          </app-type-ahead>
+        </div>
+      </div>
+      <div class="form-row no-margin">
+        <div class="form-group col-md-12" *ngIf="showHiringCompany">
+          <label> Hiring Company <sup>*</sup> </label>
+          <input
+            [(ngModel)]="hiringCompForm"
+            class="inputstyle readonly form-control"
+            [(ngModel)]="selectedHiringCompany"
+            [placeholder]="'Select Hiring Company'"
+            [ngbTypeahead]="hiringListArrFn"
+            [required]="true"
+            readonly
+            [inputFormatter]="searchHiringCompany"
+            [resultFormatter]="searchHiringCompany"
+            (selectItem)="selectHiringCompany($event)"
+            (click)="focusHiringCompanyType$.next($event.target.value)"
+          />
+        </div>
+      </div>
+      <div class="form-row no-margin">
+        <div class="form-group col-md-12" *ngIf="showRole">
+          <label>Select Role<sup>*</sup></label>
+          <input
+            class="inputstyle readonly form-control"
+            [(ngModel)]="selectedRole"
+            [placeholder]="'Select Role'"
+            [ngbTypeahead]="selectRoleFn"
+            [required]="true"
+            readonly
+            [inputFormatter]="searchRoles"
+            [resultFormatter]="searchRoles"
+            (selectItem)="selectRole($event)"
+            (click)="focusSelectRole$.next($event.target.value)"
+            (ngModelChange)="roleObserver($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle">Cancel</button>
+    <button
+      type="submit"
+      [disabled]="buttonDisabler"
+      class="btn primarybtnstyle"
+      (click)="startprescreening()"
+    >
+      Start
+    </button>
+  </div>
+</form>

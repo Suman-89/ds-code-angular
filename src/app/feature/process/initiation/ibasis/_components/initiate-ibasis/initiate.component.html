@@ -1,0 +1,200 @@
+<div class="initiate-form">
+  <div class="form-row no-margin" *ngIf="initiationConfig.showCompany">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Company <sup>*</sup> </label>
+      <app-type-ahead
+        [type]="'company'"
+        [value]="initiation.partnerLegalName"
+        [createAllowed]="true"
+        [required]="true"
+        [search]="'dynamic'"
+        (searchCleared)="clearCompany($event)"
+        (resultEmitter)="selectCompany($event)"
+      >
+      </app-type-ahead>
+    </div>
+  </div>
+  <div
+    class="form-row no-margin"
+    *ngIf="initiationConfig.showProduct && viewData && viewData.addresses"
+  >
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Company Address <sup>*</sup> </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="selectedPartnerAddr"
+        [placeholder]="'Select Company Address'"
+        [ngbTypeahead]="localAddressArrayFn"
+        [required]="true"
+        [inputFormatter]="searchAddressFormatter"
+        readonly
+        [resultFormatter]="searchAddressFormatter"
+        (selectItem)="selectCompanyAddr($event)"
+        (click)="focusAddress$.next($event.target.value)"
+      />
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showProduct">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Product <sup>*</sup> </label>
+      <app-type-ahead
+        [type]="'products'"
+        [createAllowed]="false"
+        (resultEmitter)="selectProduct($event)"
+      >
+      </app-type-ahead>
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showOtherProduct">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Other Product Type<sup>*</sup> </label>
+      <app-type-ahead
+        [type]="'otherProducts'"
+        [createAllowed]="false"
+        (resultEmitter)="selectOtherProduct($event)"
+      >
+      </app-type-ahead>
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showContractType">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Contract Type <sup>*</sup> </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="selectedContractType"
+        [placeholder]="'Select Contract Type'"
+        [ngbTypeahead]="localCTArrayFn"
+        [required]="true"
+        [inputFormatter]="searchCTFormatter"
+        readonly
+        [resultFormatter]="searchCTFormatter"
+        (selectItem)="selectContractType($event)"
+        (click)="focusContractType$.next($event.target.value)"
+      />
+      <!-- <app-type-ahead [type]="'contractType'" [createAllowed]="false" (resultEmitter)="selectContractType($event)">
+      </app-type-ahead> -->
+      <p class="helper">
+        For all Products except Other, select Service Contract only if MSA or
+        IoT Trial is required. Select Amendment and Additional Service to add an
+        annex to existing MSA
+      </p>
+    </div>
+  </div>
+  <div
+    class="form-row no-margin"
+    *ngIf="initiationConfig.showAmendmentOpt && refCompObj.amendment"
+  >
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Amendment Type <sup>*</sup> </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="selectedAmendmentList"
+        [placeholder]="'Select Amendment Type'"
+        [ngbTypeahead]="localALArrayFn"
+        [required]="true"
+        [inputFormatter]="searchALFormatter"
+        readonly
+        [resultFormatter]="searchALFormatter"
+        (selectItem)="selectAmendmentType($event)"
+        (click)="focusAmendmentList$.next($event.target.value)"
+      />
+    </div>
+  </div>
+  <div
+    class="form-row no-margin"
+    *ngIf="initiationConfig.showOtherOpt && refCompObj.other"
+  >
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Other Type <sup>*</sup> </label>
+      <app-type-ahead
+        [type]="'secondLevel'"
+        [createAllowed]="false"
+        [secondLevelId]="refCompObj.other.code"
+        (resultEmitter)="selectSecondLevel($event)"
+      ></app-type-ahead>
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showAdditionalOpt">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Additional Services Type <sup>*</sup> </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="selectedAdditionalSvc"
+        [placeholder]="'Select Additional Services Type'"
+        [ngbTypeahead]="localAddtnlSvcFn"
+        [required]="true"
+        readonly
+        (selectItem)="selectAdditionalSvc($event)"
+        (click)="focusAddtnlSvc$.next($event.target.value)"
+      />
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showCurrAmend">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Currency Amendment Type <sup>*</sup> </label>
+      <app-type-ahead
+        [type]="'currAmend'"
+        [createAllowed]="false"
+        (resultEmitter)="selectRefData($event, 'currencyAmendmentType')"
+      >
+      </app-type-ahead>
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showIotOpt">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> IoT Contract Type <sup>*</sup> </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="selectedIotContractType"
+        [placeholder]="'Select Iot Contract Type'"
+        [ngbTypeahead]="localIotCTFn"
+        [required]="true"
+        [inputFormatter]="searchCEFormatter"
+        readonly
+        [resultFormatter]="searchCEFormatter"
+        (selectItem)="selectIotType($event)"
+        (click)="focusIotCT$.next($event.target.value)"
+      />
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showCEOpt">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Contracting Entity </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="selectedContractingEnt"
+        [placeholder]="'Select Contracting Entity'"
+        [ngbTypeahead]="localCEArrayFn"
+        [required]="true"
+        [inputFormatter]="searchCEFormatter"
+        readonly
+        [resultFormatter]="searchCEFormatter"
+        (selectItem)="selectContractEnt($event)"
+        (click)="focusCE$.next($event.target.value)"
+      />
+    </div>
+  </div>
+
+  <div class="form-row no-margin" *ngIf="initiationConfig.showCasePriority">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Priority </label>
+      <app-type-ahead
+        [type]="'casePriority'"
+        [createAllowed]="false"
+        (resultEmitter)="selectRefData($event, 'casePriority')"
+      >
+      </app-type-ahead>
+    </div>
+  </div>
+  <div class="form-row no-margin" *ngIf="initiationConfig.showCEOpt">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> My Group </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="selectedInitGroup"
+        disabled
+        readonly
+      />
+    </div>
+  </div>
+</div>

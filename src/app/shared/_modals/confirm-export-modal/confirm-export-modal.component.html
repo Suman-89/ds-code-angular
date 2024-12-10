@@ -1,0 +1,57 @@
+<div class="confirm_modal">
+  <button
+    type="button"
+    class="close"
+    aria-describedby="modal-title"
+    (click)="modal.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="modal-body">
+    <!-- <div class="mb-2 mt-2 form-group">Do you want to save this report ?</div>
+
+    <div class="custom-control custom-switch mr-4">
+      <input
+        type="checkbox"
+        class="custom-control-input cursor-pointer"
+        [checked]="wantsToSave"
+        id="templateswitch"
+        name="templateswitch"
+        (change)="changeWantsToSave($event.target.checked)"
+      />
+      <label class="custom-control-label cursor-pointer" for="templateswitch"
+        >Yes</label
+      >
+    </div> -->
+    <ng-container>
+      <div class="form-group col-md-12 padding-left-0 padding-right-0 mt-2">
+        <label for="fileName">Save Report As</label>
+        <input
+          class="inputstyle form-control fileNameInput"
+          id="fileName"
+          [(ngModel)]="fileName"
+        />
+      </div>
+      <div class="error">{{ error }}</div>
+    </ng-container>
+  </div>
+
+  <div>
+    <div class="modal-footer modal-footer-container">
+      <button
+        type="button"
+        class="btn adjust-btn-size secondarybtnstyle"
+        (click)="modal.dismiss('')"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn adjust-btn-size primarybtnstyle"
+        (click)="saveReport(fileName)"
+      >
+        OK
+      </button>
+    </div>
+  </div>
+</div>

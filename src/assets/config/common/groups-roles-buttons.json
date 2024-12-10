@@ -1,0 +1,61 @@
+{
+  "group": [
+    {
+      "label": "Add Group",
+      "action": "addgroup",
+      "singleSelect": null,
+      "forRoles": ["SUPER_ADMIN", "SYSTEM_ADMIN"],
+      "forScreens": null,
+      "cssClass": "primarybtnstyle",
+      "disabled": false
+    },
+    {
+      "label": "Delete Group",
+      "action": "deletegroup",
+      "singleSelect": null,
+      "forRoles": ["SUPER_ADMIN", "SYSTEM_ADMIN"],
+      "forScreens": null,
+      "cssClass": "primarybtnstyle",
+      "disabled": true
+    },
+    {
+      "label": "View Group",
+      "action": "viewgroup",
+      "singleSelect": null,
+      "forRoles": ["SUPER_ADMIN", "SYSTEM_ADMIN"],
+      "forScreens": null,
+      "cssClass": "primarybtnstyle",
+      "disabled": true
+    }
+  ],
+  "role": [
+    {
+      "label": "Add Role",
+      "action": "addrole",
+      "singleSelect": null,
+      "forRoles": ["SUPER_ADMIN", "SYSTEM_ADMIN"],
+      "forScreens": null,
+      "cssClass": "primarybtnstyle",
+      "disabled": false
+    },
+
+    {
+      "label": "Delete Role",
+      "action": "deleterole",
+      "singleSelect": null,
+      "forRoles": ["SUPER_ADMIN", "SYSTEM_ADMIN"],
+      "forScreens": null,
+      "cssClass": "primarybtnstyle",
+      "disabled": true
+    },
+    {
+      "label": "View Role",
+      "action": "editrole",
+      "singleSelect": null,
+      "forRoles": ["SUPER_ADMIN", "SYSTEM_ADMIN"],
+      "forScreens": null,
+      "cssClass": "primarybtnstyle",
+      "disabled": true
+    }
+  ]
+}

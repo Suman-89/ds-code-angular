@@ -1,0 +1,30 @@
+@import "variables";
+
+::ng-deep {
+  .multiselect-dropdown,
+  .form-control {
+    margin-bottom: 10px;
+  }
+  .singleSelection {
+    .multiselect-item-checkbox {
+      div {
+        padding-left: 0 !important;
+        &::before {
+          content: unset !important;
+        }
+        &::after {
+          content: unset !important;
+        }
+      }
+    }
+  }
+}
+
+.info {
+  color: rgba(var(--secondaryColor), 0.9);
+  font-style: italic;
+  font-size: 11px;
+  line-height: 11px;
+  margin-top: 5px;
+  //max-width: 400px;
+}

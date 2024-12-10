@@ -1,0 +1,231 @@
+{
+  "tabs": [
+    { "id": "email-configuration", "name": "Email Configuration" },
+    { "id": "dms-settings", "name": "DMS Settings" },
+    { "id": "active-directory-settings", "name": "Active Directory Settings" },
+    { "id": "theme", "name": "Theme" },
+    { "id": "dms-theme", "name": "DMS Theme" },
+    { "id": "gridSettings", "name": "Grid Settings" }
+  ],
+  "emailConfiguration": {
+    "appurl": "https://gmail.com",
+    "from": "User123",
+    "fromname": "User Name",
+    "maildomain": "gamil.com",
+    "host": "1111",
+    "password": "password123",
+    "port": "587",
+    "queryParam": "neelTest",
+    "queryParamVariableName": "dealuri"
+  },
+  "notification_content": {
+    "Comment": {
+      "defaulttemplate": "commentemail",
+      "excludeinitiator": true,
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "bodyVars": [],
+      "prefixVars": [],
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}"
+    },
+    "CommentReply": {
+      "defaulttemplate": "commentreplyemail",
+      "excludeinitiator": true,
+      "bodyVars": [],
+      "prefixVars": [],
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}"
+    },
+    "CaseComplete": {
+      "defaulttemplate": "",
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "bodyVars": [],
+      "prefixVars": [],
+      "othertemplates": [
+        {
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "roles": ["LEGAL_ADMIN"],
+          "template": "contractcompletedemail"
+        },
+        {
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "toinitiator": true,
+          "roles": [],
+          "template": "contractcompletedemail",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        }
+      ],
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}"
+    },
+    "CaseTerminate": {
+      "defaulttemplate": "",
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "bodyVars": [],
+      "prefixVars": [],
+      "othertemplates": [
+        {
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "toinitiator": true,
+          "roles": ["LEGAL_ADMIN"],
+          "template": "contractterminatedemail",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        },
+        {
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "toinitiator": true,
+          "roles": [],
+          "template": "contractterminatedemail",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        }
+      ],
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}"
+    },
+    "TaskAssignment": {
+      "defaulttemplate": "taskuserassignmentemail2user",
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "bodyVars": [],
+      "prefixVars": [],
+      "othertemplates": [
+        {
+          "roles": [],
+          "toinitiator": false,
+          "template": "taskuserassignmentemail2initiator",
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        }
+      ]
+    },
+    "TaskAssignmentGroup": {
+      "defaulttemplate": "taskgroupassignmentemail",
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "bodyVars": [],
+      "prefixVars": [],
+      "othertemplates": [
+        {
+          "roles": [],
+          "toinitiator": true,
+          "template": "taskgroupassignmentemail",
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        }
+      ]
+    },
+    "TaskReAssignment": {
+      "defaulttemplate": "taskuserreassignmentemail2user",
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "bodyVars": [],
+      "prefixVars": [],
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "othertemplates": [
+        {
+          "roles": [],
+          "toinitiator": false,
+          "template": "taskuserreassignmentemail2initiator",
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        }
+      ]
+    },
+    "TaskPulled": {
+      "defaulttemplate": "",
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "bodyVars": [],
+      "prefixVars": [],
+      "othertemplates": [
+        {
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "toinitiator": false,
+          "roles": [],
+          "template": "taskpulledbyuseremail",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        }
+      ]
+    },
+    "TaskReturned": {
+      "defaulttemplate": "taskreturnedtoqueueemail",
+      "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailBody": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+      "emailConfiguration": null,
+      "isEmailActive": null,
+      "subjectLine": null,
+      "bodyVars": [],
+      "prefixVars": [],
+      "othertemplates": [
+        {
+          "subprefixtext": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "subjectLine": "{frmusername} {frmuserid} {taskname} {loggeduser} {groupname}",
+          "toinitiator": false,
+          "roles": [],
+          "template": "taskreturnedtoqueueemail",
+          "bodyVars": [],
+          "emailBody": "",
+          "nottext": null,
+          "prefixVars": [],
+          "replacegroup": false
+        }
+      ]
+    }
+  }
+}

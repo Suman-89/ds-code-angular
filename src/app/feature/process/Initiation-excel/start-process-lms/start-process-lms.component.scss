@@ -1,0 +1,81 @@
+@import "src/scss/default/variables";
+.initiate-ddat {
+  margin: 0 auto;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: max-content;
+  background-color: #F2F3F5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+
+  .drop-title {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .drop {
+    width: 350px;
+    input[type="file"]::file-selector-button {
+      margin-right: 20px;
+      border: none;
+      background: var(--primaryColor);
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      @media (max-width: 1024px) {
+        font-size: 10px;
+        padding: 5px 10px;
+      }
+    }
+    @media (max-width: 1024px) {
+      input[type="file"]::file-selector-button {
+        margin-left: 30px;
+      }
+    }
+  }
+}
+
+.btn {
+  display: block;
+  margin: 20px auto 0;
+}
+
+
+
+.fileUpload {
+  background: var(--primaryColor);
+  padding: 7px 15px;
+  color: white;
+  border: 1px solid transparent;
+  font-size: 12px;
+  border-radius: 10px !important;
+  @media (max-width: 1024px) {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+}
+
+.header {
+    height: 50px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 500;
+    font-size: 25px;
+  }
+
+  .lms-grid {
+    width: 87%;
+    margin: auto;
+    margin-top: 20px;
+  }
+

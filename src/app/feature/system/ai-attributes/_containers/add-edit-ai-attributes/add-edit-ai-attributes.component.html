@@ -1,0 +1,371 @@
+<div class="container-fluid px-0">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      <span [innerHtml]="editId ? 'Edit' : 'Add'"></span> AI Attributes
+      <span class="secondary-color" *ngIf="editId" style="font-size: 22px"
+        >|</span
+      >
+      {{ editId }}
+    </div>
+  </div>
+  <div class="w-100" *ngIf="procDefForm">
+  <div class="tab-container">
+      <div
+        (click)="setVisibleTab(tab.id)"
+        class="tab-item"
+        [class.active]="activeTab == tab.id"
+        *ngFor="let tab of settingTabs"
+      >
+        <span>{{ tab.name }}</span>
+      </div>
+    </div>
+    <div class="no-gutters procDefForm">
+      <div
+        *ngIf="activeTab == 'ticketTypes'"
+        class="col-12"
+        style="overflow-x: hidden;height:100%"
+      >
+        <form (ngSubmit)="addKeyword()" class="row m-0" >
+          <div class="no-margin col-md-6 mr-0 pr-0">
+            
+
+            <small class="w-100 font-weight-normal">Product  Type</small>
+              <app-dropdown-search
+              [value]="selectedTicketType"
+              [id]="'-'"
+              [placeholder]="'Select Value'"
+              [dataList]="ticketTypes"
+              [setting]="refDataSetting"
+              ($onSelectItem)="setTicketTypes($event)"
+            ></app-dropdown-search>
+          </div>
+          <div class="col-6 ml-0">
+            <div class="row">
+              <div class="col-md-10 pr-1">
+              <small class="w-100 font-weight-normal">Keywords</small>
+              <div class="form-row no-margin col-md-12 no-padding">
+                <input
+                  autocomplete="off"
+                  name="new_keyword"
+                  required
+                  placeholder="Add Keyword"
+                  [(ngModel)]="newKeyword"
+                  class="inputstyle col-md-12 form-control"
+                />
+              </div>
+              <small class="w-100 text-secondary font-weight-light" style="font-size: 10px;">
+                To add multiple keywords at once use "," or "|" as separator.
+              </small>
+              </div>
+              <button
+                  class="col-md-2 btn mt-2  bg-transparent border-0"
+                  (click)="addKeyword()"
+                >
+                <div><i style="font-size: 24px;" class="fa fa-plus-circle"></i></div>
+              </button>
+            </div>
+          </div>
+          <div
+                class="col-md-12 mx-0 px-3 pt-0"
+                *ngIf="activeKeyword && selectedTicketType && activeKeyword.length > 0"
+              >
+              <small>Added Keywords</small>
+              <div class="row m-0">
+                <div  class="col-md-3 p-0" *ngFor="let alias of activeKeyword; let i = index">
+                  <div
+                    class="addedList mb-1"
+                    container="body"
+                    placement="top"
+                    [ngbTooltip]="alias"
+                  >
+                    {{ alias }}
+                    <span class="delIcon" (click)="deleteKeyword(alias)">
+                      <img height="15px" src="./assets/images/cross.png" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+        </form>
+
+        <div class="text-center my-4" *ngIf="!keywords?.length">
+          <h6 class="text-secondary text-capitalize">No keyword added to this process!</h6>
+        </div>
+        <div class="table-container mt-3" *ngIf="keywords?.length">
+          <div class="row bg-primary text-light border">
+            <div class="col-4 text-center font-weight-normal">Product Type</div>
+            <div class="col-6 text-center border-left font-weight-normal">Keywords</div>
+            <div class="col-2 text-center border-left font-weight-normal">Delete</div>
+
+          </div>
+          <div *ngFor="let ticket of keywords">
+            <div class="row border-bottom" *ngIf="ticket.ticketType">
+              <div class="col-4 text-center">{{ticket.ticketType}}</div>
+              <div class="col-6 border-left">
+                <span *ngFor="let key of ticket.keywords; let i=index" >
+                  <span class="secondary-color font-weight-bold" *ngIf="i !== 0">&nbsp; | &nbsp;</span>
+                  {{key}}
+                </span>
+                
+              </div>
+              <div class="col-2 text-center border-left font-weight-normal" (click)="deleteTicketType(ticket.ticketType)">
+                <i class="fa fa-trash text-danger"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+          *ngIf="activeTab == 'groupTypes'"
+          class="col-12 pr-2"
+          style="overflow-x: hidden;height:100%"
+        >
+        <div class="row" >
+          <div class="form-group  col-4">
+            <small class="w-100 font-weight-normal">Groups</small>
+            <app-dropdown-search
+              [value]="selectedAiGroup"
+              [id]="'-'"
+              [placeholder]="'Select Value'"
+              [dataList]="aiGroups"
+              [setting]="refDataSetting"
+              ($onSelectItem)="setAiGroupTypes($event)"
+            ></app-dropdown-search>
+          </div>
+
+          <div class="form-group  col-4 pl-0">
+            <small class="w-100 font-weight-normal">Product Types &nbsp;<span class="secondary-color"
+                >({{
+                  selectedTicketTypes ? selectedTicketTypes?.length : "0"
+                }})</span
+              >
+              <span
+                class="secondary-color"
+                *ngIf="selectedTicketTypes?.length ==multiSelectTicketTypes.length"
+              >
+                All Selected</span
+              >
+            </small>
+            <ng-multiselect-dropdown
+              [placeholder]="'Select'"
+              name="'ticket'"
+              [settings]="ticketDropdownSettings"
+              [data]="multiSelectTicketTypes"
+              [(ngModel)]="selectedTicketTypes"
+              #toolbarbutton="ngModel"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+
+          <div class="col-4 ml-0 pl-0 ">
+              <div class="row">
+                <div class="col-md-10 pr-0">
+                <small class="w-100 font-weight-normal">Decision Variable</small>
+                <app-dropdown-search
+                  [value]="selectedDecisionVariable"
+                  [id]="'-'"
+                  [placeholder]="'Select Value'"
+                  [dataList]="allDesVariables"
+                  [setting]="desDataSetting"
+                  ($onSelectItem)="setDecisionVariable($event)"
+                ></app-dropdown-search>
+                </div>
+                <button
+                    class="col-md-2 btn mt-2  bg-transparent border-0"
+                    (click)="addRemedyGroup()"
+                  >
+                  <div><i style="font-size: 24px;" class="fa fa-plus-circle"></i></div>
+                </button>
+              </div>
+
+            </div>
+        </div>
+         <div class="text-center my-4" *ngIf="!remedyGroup?.length">
+          <h6 class="text-secondary text-capitalize">No Remedy Group added to this process!</h6>
+        </div>
+        <div class="table-container mt-3" *ngIf="remedyGroup?.length">
+          <div class="row bg-primary text-light border">
+            <div class="col-3 text-center border-left font-weight-normal">Groups</div>
+            <div class="col-4 text-center font-weight-normal">Product Types</div>
+            <div class="col-3 text-center border-left font-weight-normal">Decision Variables</div>
+            <div class="col-2 text-center border-left font-weight-normal">Delete</div>
+          </div>
+          <div *ngFor="let item of remedyGroup">
+            <div class="row border-bottom" >
+              <div class="col-3 text-center">{{item.groupName}}</div>
+              <div class="col-4 border-left">
+                <span *ngFor="let key of item.ticketTypes; let i=index" >
+                  <span class="secondary-color font-weight-bold" *ngIf="i !== 0">&nbsp; | &nbsp;</span>
+                  {{key}}
+                </span>
+              </div>
+              <div class="col-3 border-left">{{item.decisionVariableName}}</div>
+              <div class="col-2 text-center border-left font-weight-normal" (click)="deleteRemedyGroup(item.groupName)">
+                <i class="fa fa-trash text-danger"></i>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="activeTab == 'delimiters'"
+        class="col-12"
+        style="overflow-x: hidden;height:100%"
+      >
+        <div class="row m-0" >
+          
+          <div class="col-6 ml-0">
+            <div class="row">
+              <div class="col-md-10 pr-1">
+              <small class="w-100 font-weight-normal">New Delimiter Keywords</small>
+              <div class="form-row no-margin col-md-12 no-padding">
+                <input
+                  autocomplete="off"
+                  name="new_keyword"
+                  required
+                  placeholder="Add Keyword"
+                  [(ngModel)]="newDelimiter"
+                  class="inputstyle col-md-12 form-control"
+                />
+              </div>
+              <small class="w-100 text-secondary font-weight-light" style="font-size: 10px;">
+                To add multiple keywords at once use "," or "|" as separator.
+              </small>
+              </div>
+              <button
+                  class="col-md-2 btn mt-2  bg-transparent border-0"
+                  (click)="addDelimiter()"
+                >
+                <div><i style="font-size: 24px;" class="fa fa-plus-circle"></i></div>
+              </button>
+            </div>
+          </div>
+          <div
+                class="col-md-12 mx-0 px-3 pt-0"
+                *ngIf="allFiltersDelimiters.delimiters && allFiltersDelimiters.delimiters.length > 0"
+              >
+              <small>Added Delimiters</small>
+              <div class="row m-0">
+                <div  class="col-md-3 p-0" *ngFor="let deli of allFiltersDelimiters.delimiters; let i = index">
+                  <div
+                    class="addedList mb-1"
+                    container="body"
+                    placement="top"
+                    [ngbTooltip]="deli"
+                  >
+                    {{ deli }}
+                    <span class="delIcon" (click)="deleteDelimiter(deli)">
+                      <img height="15px" src="./assets/images/cross.png" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div
+        *ngIf="activeTab == 'filterRules'"
+        class="col-12"
+        style="overflow-x: hidden;height:100%"
+      >
+        <div class="row m-0" >
+          <div class="no-margin col-md-6 mr-0 pr-0">
+            
+
+            <small class="w-100 font-weight-normal">Filter Type</small>
+              <app-dropdown-search
+              [value]="selectedFilterType"
+              [id]="'-'"
+              [placeholder]="'Select Filter Type'"
+              [dataList]="emailFilterTypes"
+              [setting]="desDataSetting"
+              ($onSelectItem)="setFilterTypes($event)"
+            ></app-dropdown-search>
+          </div>
+          <div class="col-6 ml-0">
+            <div class="row">
+              <div class="col-md-10 pr-1">
+              <small class="w-100 font-weight-normal">Keywords</small>
+              <div class="form-row no-margin col-md-12 no-padding">
+                <input
+                  autocomplete="off"
+                  name="new_keyword"
+                  required
+                  placeholder="Add Keyword"
+                  [(ngModel)]="newFilter"
+                  class="inputstyle col-md-12 form-control"
+                />
+              </div>
+              <small class="w-100 text-secondary font-weight-light" style="font-size: 10px;">
+                To add multiple keywords at once use "," or "|" as separator.
+              </small>
+              </div>
+              <button
+                  class="col-md-2 btn mt-2  bg-transparent border-0"
+                  (click)="addFilters()"
+                >
+                <div><i style="font-size: 24px;" class="fa fa-plus-circle"></i></div>
+              </button>
+            </div>
+          </div>
+          <div
+                class="col-md-12 mx-0 px-3 pt-0"
+                *ngIf="activeFilters && selectedFilterType && activeFilters.length > 0"
+              >
+              <small>Added Keywords</small>
+              <div class="row m-0">
+                <div  class="col-md-3 p-0" *ngFor="let alias of activeFilters; let i = index">
+                  <div
+                    class="addedList mb-1"
+                    container="body"
+                    placement="top"
+                    [ngbTooltip]="alias"
+                  >
+                    {{ alias }}
+                    <span class="delIcon" (click)="deleteFilterItem(alias)">
+                      <img height="15px" src="./assets/images/cross.png" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+
+        <div class="text-center my-4" *ngIf="!allFiltersDelimiters.filterList?.length">
+          <h6 class="text-secondary text-capitalize">No keyword added to this process!</h6>
+        </div>
+        <div class="table-container mt-3" *ngIf="allFiltersDelimiters.filterList?.length">
+          <div class="row bg-primary text-light border">
+            <div class="col-4 text-center font-weight-normal">Filter Type</div>
+            <div class="col-6 text-center border-left font-weight-normal">Keywords</div>
+            <div class="col-2 text-center border-left font-weight-normal">Delete</div>
+
+          </div>
+          <div *ngFor="let filter of allFiltersDelimiters.filterList">
+            <div class="row border-bottom">
+              <div class="col-4 text-center">{{filter.filterType}}</div>
+              <div class="col-6 border-left">
+                <span *ngFor="let key of filter.filterStrings; let i=index" >
+                  <span class="secondary-color font-weight-bold" *ngIf="i !== 0">&nbsp; | &nbsp;</span>
+                  {{key}}
+                </span>
+                
+              </div>
+              <div class="col-2 text-center border-left font-weight-normal" >
+                <i 
+                class="fa fa-trash text-danger" 
+                *ngIf="filter.filterStrings.length"
+                (click)="deleteFilterType(filter.filterType)"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

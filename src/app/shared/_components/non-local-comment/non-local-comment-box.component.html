@@ -1,0 +1,24 @@
+<div class="comment-container">
+  <ng-template #list let-item="item" let-labelProp="labelProp">
+    <div [ngbTooltip]="item[labelProp]" container="body" class="text-truncate">
+        {{item[labelProp]}}  
+    </div>
+  </ng-template>
+  <div class="form-group">
+      <div #comment 
+        [mentionListTemplate]="list"
+        [mentionConfig]="commentMentionConfig"
+        (mouseenter)="showFullScreenIcon = true"
+        (mouseleave)="showFullScreenIcon = false"
+      >
+      </div>
+      <div>
+        <textarea class="hidden" cols="60" rows="4" [id]="_commentBoxOptions?.id"></textarea>
+      </div>
+  </div>
+  <i *ngIf="_commentBoxOptions?.allowFullScreen" class="fa fa-arrows-alt full-screen-icon" 
+    aria-hidden="true" (click)="showFullCommentBoxModal()"></i>
+</div>
+ <div class="d-block text-right"  *ngIf="showSubmitBtn">
+  <button (click)="save()" class="btn primarybtnstyle">Submit</button>
+</div> 

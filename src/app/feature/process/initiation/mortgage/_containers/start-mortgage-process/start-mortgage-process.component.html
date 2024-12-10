@@ -1,0 +1,56 @@
+<div class="start-process-cont" id="startContainer">
+
+    <!-- Header Container including action buttons -->
+    <div class="header-cont">
+        <div class="header">
+            <h5>Initiate Mortgage</h5>
+        </div>
+        <!-- <div class="action-btns">
+            <button class="primarybtnstyle btn" (click)="openSelectModal()" *ngIf="showButton">Select Company Address</button>
+            <button class="primarybtnstyle btn" style="margin-left: 10px;" (click)="openEditModal()" *ngIf="showButton">Edit Company</button> 
+        </div> -->
+    </div>
+
+    <div class="process-info-cont">
+        <form #form="ngForm" class="initiate-form">
+            <div class="flex-prop">
+                <div class="doc-upload-cont">
+                    <app-initiate-mortgage *ngIf="!pdfData" 
+                        [inputData]="initiationData" 
+                        (docDataEmitter)="saveDocChanges($event)">
+                    </app-initiate-mortgage>
+                     <div style="height: 100%;">
+                        <!-- <app-new-pdf-viewer #pdf [data]="pdfData" [options]="pdfOptions" (isDocumentLoading)="isDocumentLoading($event)" (annotationSelected)="getSelectedAnnotation($event)" style="height:100%;display: block;"></app-new-pdf-viewer> -->
+
+                        <app-pdf-viewer #pdf 
+                        [data]="pdfData" 
+                        [options]="pdfOptions" 
+                        (annotateEmit)="addAnnotation($event)"
+                        (blurEvent)="blurEvent($event)"
+                        style="height:100%;display: block;"
+                        >
+                        </app-pdf-viewer>
+                     </div>
+                    </div>
+                <div *ngIf="extractedData.length>0" class="form-cont">
+
+                    <app-invoice-extract-mortgage 
+                      #invExtract
+                      [extractedData]="extractedData" 
+                      (selectAnnotation)="selectAnnotation($event)"
+                      (emitExtractedDataChanges)="editExtractedData($event)"
+                      >
+                    </app-invoice-extract-mortgage>
+
+                </div>
+
+
+            </div>
+            <div class="text-center btn-cont">
+                <button type="submit" class="btn primarybtnstyle" (click)="save()">Submit</button>
+                <button type="reset" (click)="back()" class="cancelbtn btn secondarybtnstyle">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</div>

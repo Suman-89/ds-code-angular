@@ -1,0 +1,21 @@
+@import '../../../../../shared/_components/document-list/document-list.component.scss' ;
+
+.modal-body{
+  max-height: 75vh;
+  overflow: scroll;
+}
+.documenticon{
+  height:25px !important;
+  width:25px !important;
+}
+
+.comment {
+  color: #b5b5b5;
+  font-size: 12px;
+}
+
+
+.commentContainer{
+  overflow-y: scroll;
+  max-height:80px;
+}

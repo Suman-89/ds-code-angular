@@ -1,0 +1,27 @@
+.nav-link.active {
+  color: var(--color-secondary);
+}
+.q-switch {
+  background-color: white;
+}
+.hidden {
+  visibility: hidden;
+}
+.custom-label {
+  font-size: 14px;
+  padding-top: 2px;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+.move-center {
+  display: flex;
+  justify-content: center;
+}
+.custom-col {
+  flex: 0 0 5.6923%; 
+}
+.col-1-5 {
+  width: 12.49996% !important;
+  flex: 0 0 12.49996% !important;
+}

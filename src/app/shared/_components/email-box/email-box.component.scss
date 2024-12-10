@@ -1,0 +1,98 @@
+@import "variables";
+
+.comment-container {
+  /* border-radius: 3px;
+    border: 1px solid var(--primaryColor)-1;
+    width: 100%;
+    height: 100%; */
+  position: relative;
+  .comment-box {
+    padding: 10px;
+    height: 100%;
+    overflow: auto;
+    border: none;
+    color: #4e4e4e;
+    &:focus {
+      outline: none;
+    }
+  }
+ 
+
+  .full-screen-icon {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    color: #b7b7b7;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .subject-style{
+    position: absolute;
+    top:3px;right:20px;
+    z-index: 2;
+  }
+
+  ::ng-deep {
+    .mention-menu {
+      max-width: 300px;
+      max-height: 210px;
+      .mention-active {
+        a {
+          background-color: rgba(var(--primaryColorRGB), 0.2) !important;
+          color: var(--primaryColor) !important;
+        }
+      }
+      .mention-item {
+        &:hover {
+          color: var(--primaryColor);
+          border: none;
+        }
+      }
+      .mention-item {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .mce-panel {
+      border: 1px solid var(--primaryColor1);
+      width: auto !important;
+      box-shadow: none;
+      /* border-bottom: none; */
+      iframe{
+        height: 20px !important;
+      }
+    }
+    .mce-top-part {
+      &::before {
+        box-shadow: none;
+      }
+    }
+    .mce-ico{
+      font-size: 12px;
+    }
+    .mce-btn button{
+      padding: 2px !important;
+      line-height: 10px;
+    }
+    .mce-last {
+      border-right: none;
+      border-left: none;
+      border-top: none;
+      iframe{
+        height:70px !important;
+      }
+    }
+
+    .mce-menubar {
+      border: none !important;
+    }
+    .mce-statusbar {
+      .mce-container-body {
+        display: none;
+      }
+    }
+    
+  }
+}

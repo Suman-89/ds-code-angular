@@ -1,0 +1,83 @@
+<form
+  #checkInForm="ngForm"
+  (ngSubmit)="checkInForm.valid && inputData.selectedDocument && save()"
+>
+  <div class="modal-header">
+    <div>
+      <h5 class="modal-title mt-0">
+        Check In File For {{ inputDoc.metadata?.partnerLegalName }}
+      </h5>
+      <p class="m-0">
+        <b>{{ inputDoc.logicaldocname }}</b>
+      </p>
+      <p class="m-0 comment" style="font-size: 13px">
+        <span>
+          {{
+            inputDoc.foldername === "In Process"
+              ? "Contract Document"
+              : inputDoc.foldername
+          }}
+        </span>
+        <span class="secondary-color font-weight-bold"> &nbsp;|&nbsp; </span>
+        <span> {{ inputDoc.metadata?.docType }} </span>
+      </p>
+    </div>
+
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <img src="./assets/images/cross.png" />
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-6">
+        <div
+          class="uploadContainer"
+          [ngClass]="{
+            'is-invalid': !inputData.selectedDocument && checkInForm.submitted
+          }"
+        >
+          <div style="text-align: center; color: #9a9a9a">
+            <div
+              *ngIf="inputData.selectedDocument; else chooseFileTemplate"
+              class="fileInfo"
+            >
+              <i class="fa fa-file" style="font-size: 32px"></i>
+              <div>{{ inputData.selectedDocument.name }}</div>
+            </div>
+            <ng-template #chooseFileTemplate>
+              <i class="fa fa-file" style="font-size: 32px"></i>
+              <div style="font-size: 18px">Drop files here</div>
+              <div style="font-size: 17px">or</div>
+              <div style="font-size: 17px">Click here to upload.</div>
+            </ng-template>
+          </div>
+          <input
+            type="file"
+            [accept]="acceptList"
+            (change)="handleFileInput($event)"
+          />
+        </div>
+      </div>
+
+      <div class="col-6">
+        <label class="form-label">Comment</label>
+        <!-- <textarea class="form-control" name="descr" #descr [(ngModel)]="inputData.comment"></textarea> -->
+        <div class="cmnt-container">
+          <app-comment-box
+            #commentBox
+            *ngIf="multiMentionConfig.mentions.length > 0"
+            [commentMentionConfig]="multiMentionConfig"
+            [commentBoxOptions]="commentBoxOptions"
+            [showSubmitBtn]="false"
+          ></app-comment-box>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">
+      Cancel
+    </button>
+    <button type="submit" class="btn primarybtnstyle">Save</button>
+  </div>
+</form>

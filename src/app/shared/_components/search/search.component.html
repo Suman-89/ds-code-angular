@@ -1,0 +1,3 @@
+<input class="inputstyle form-control" name="country" required  [placeholder]="'Type to search '+ type"
+[ngbTypeahead]="searchArray" autocomplete="off" [inputFormatter]="searchFormatter" [resultFormatter]="searchFormatter"
+(selectItem)="emitResult($event)" [(ngModel)]="selectedResult"/>

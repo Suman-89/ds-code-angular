@@ -1,0 +1,40 @@
+<div class="form-group custom-form-wrap">
+  <label class="group-header-label font-bold">Notice Contact Information
+   <div class="float-right cursor-pointer">
+     <span (click)="togglepanel()">
+        {{expandPanel? 'Collapse': 'Expand'}}
+    </span>
+  </div>
+  </label>
+  <form [formGroup]="noticeForm" class="form-row no-margin no-height"  [ngClass]="{'height-add': expandPanel}">
+      <div class="form-group col-md-6">
+        <label>
+          Email
+        </label>
+      <input type="email" name="entityname" formControlName="email" class="inputstyle form-control" placeholder="Enter email"/>
+      </div>
+      <div class="form-group col-md-6">
+      <label>
+        Telephone
+      </label>
+      <input type="tel" name="tel" formControlName="tel" class="inputstyle form-control" placeholder="Enter Telephone"/>
+      </div>
+      <div class="form-group col-md-6">
+      <label>
+      Fax
+      </label>
+      <input type="text" name="fax" formControlName="fax" class="inputstyle form-control" placeholder="Enter Fax"/>
+      </div>
+      <div class="form-group col-md-6">
+        <label>
+        Addressed to
+        </label>
+        <input type="text" name="fax" formControlName="attn" class="inputstyle form-control" placeholder="Enter Addressed To"/>
+      </div>
+      <div class="col-md-12" *ngIf="countries">
+      <app-address-form 
+      [countries]="countries"
+      [bindonchange]="true" [addressname]="'Notice Address'" (addressObjectEmitter)="addAddress($event)"></app-address-form>
+      </div>
+  </form>
+</div>

@@ -1,0 +1,113 @@
+<div class="h5 addheader">
+  Existing Addresses
+  <button
+    *ngIf="!showAddBtn"
+    class="primarybtnstyle btn float-right"
+    (click)="toggleAddressForm()"
+  >
+    Add New Address
+  </button>
+</div>
+<div *ngFor="let address of addresses; let idx = index" class="addedForm">
+  <div class="w-100 position-relative" *ngIf="editId !== idx">
+    <!-- <div class="addheader h6">
+     {{header}} &nbsp; <span *ngIf="!singleAddr">{{idx + 1}}</span>
+    <div class="addedFormActionBtnCont">
+      <img *ngIf="showActBtns" src="./assets/images/icon-edit.png" class="action-icon" (click)="editAddress(idx)"/>
+       <img *ngIf="showActBtns" src="./assets/images/icon-remove.png" class="action-icon"  (click)="emitAddressAction(address, idx, 'remove')"/>
+     </div>
+  </div>-->
+    <form class="form-row no-gutters">
+      <div
+        class="row no-margin col-md-12 p-0"
+        *ngIf="!header.includes('Bank') && !header.includes('Notice')"
+      >
+        <label class="font-weight-light mr-2 col-md-3 p-0">
+          Address Type <span class="float-right">:</span>
+        </label>
+        <div class="text-truncate col-md-8 p-0" style="font-weight: 500">
+          {{ address.type ? returnAddressType(address.type) : "" }}
+        </div>
+        <!-- <input class="inputstyle form-control" readonly [value]="address.type? address.type: ''"/> -->
+      </div>
+      <!-- <div class="form-group col-md-6">
+     <label>
+       Address
+     </label>
+     <input class="inputstyle form-control" readonly  [value]="address.line"/>
+   </div>
+   <div class="form-group col-md-6">
+     <label>
+       Country
+     </label>
+     <input class="inputstyle form-control" readonly [value]="address.country"/>
+   </div>
+   <div class="form-group col-md-4">
+     <label>
+       State
+     </label>
+     <input class="inputstyle form-control" readonly [value]="address.state"/>
+   </div>
+   <div class="form-group col-md-4">
+     <label>
+       City
+     </label>
+     <input class="inputstyle form-control" readonly [value]="address.city"/>
+   </div>
+   <div class="form-group col-md-4">
+     <label>
+       Zipcode/ Postal Code
+     </label>
+     <input class="inputstyle form-control" readonly [value]="address.postalcode"/>
+   </div> -->
+      <div class="row no-margin col-md-12 p-0">
+        <label class="font-weight-light mr-2 col-md-3 p-0">
+          Address <span class="float-right">:</span>
+        </label>
+        <div class="text-truncate col-md-8 p-0" style="font-weight: 500">
+          {{ address.friendlyaddress ? address.friendlyaddress : "" }}
+        </div>
+        <!-- <input class="inputstyle form-control" readonly [value]="address.friendlyaddress?address.friendlyaddress: ''"/> -->
+      </div>
+    </form>
+    <i
+      *ngIf="showActBtns"
+      class="action-icon addrsacticon fa fa-pencil"
+      (click)="editAddress(idx)"
+    ></i>
+    <i
+    *ngIf="showActBtns"
+  class="action-icon delete-icon fa fa-trash"
+  (click)="deleteAddress(address , idx)"
+></i>
+  </div>
+  <div class="w-100 position-relative" *ngIf="editId === idx">
+    <div
+      class="position-absolute"
+      *ngIf="showActBtns"
+      style="right: 0; top: 4px"
+    >
+      <!-- <img src="./assets/images/icon-remove.png" class="action-icon"  (click)="deleteAddress(address, idx)"/> -->
+      <button class="btn secondarybtnstyle" (click)="closeEdit()">
+        Cancel
+      </button>
+      <!-- <button class="btn primarybtnstyle ml-2"  (click)="deleteAddress(address, idx)">Delete</button> -->
+      <!-- <img src="./assets/images/icon-tick.png" class="action-icon"  (click)="closeEdit()"/> -->
+      <button
+        class="btn primarybtnstyle ml-2"
+        (click)="emitAddressAction(address, editId, 'edit')"
+      >
+        Save
+      </button>
+    </div>
+    <app-address-form
+      *ngIf="countries"
+      [bindonchange]="true"
+      [editAddress]="address"
+      [addressname]="'Edit Address'"
+      [countries]="countries"
+      (addressObjectEmitter)="changeAddress($event)"
+    >
+    </app-address-form>
+  </div>
+</div>

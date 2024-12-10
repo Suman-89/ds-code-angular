@@ -1,0 +1,118 @@
+<div class="form-group col-12">
+  <label>Conditions</label>
+  <span
+    (click)="addRuleSet()"
+    class="fa fa-plus float-right font-weight-light cursor-pointer"
+  ></span>
+
+  <div class="conditionsWrap">
+    <div
+      class="d-flex no-gutters border-bottom-1 pb-2 mb-4 position-relative align-items-center"
+      *ngFor="let rule of ruleset; let i = index"
+    >
+      <span
+        class="fa fa-minus delIcon cursor-pointer"
+        (click)="deleteRuleSet(i)"
+      ></span>
+      <div class="col-3 pr-2">
+        <!-- <select [name]="'rs'+i" [id]="'rsid' + i" class="form-control inputstyle" [(ngModel)]="ruleset[i].operand" (change)="selectOperand(ruleset[i].operand, i)">
+          <option value="" selected>Select</option>
+          <option *ngFor="let v of procVars" [ngValue]="v">
+              {{v.label}}
+          </option>
+        </select> -->
+        <div ngbDropdown class="d-inline-block w-100" container="body">
+          <button
+            class="btn btn-outline-primary w-100 text-truncate text-left"
+            id="vardd"
+            ngbDropdownToggle
+          >
+            {{
+              ruleset[i].operand && ruleset[i].operand.label
+                ? ruleset[i].operand.label
+                : "Select"
+            }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="vardd">
+            <div class="w-100 border-0 pl-2 pr-4">
+              <input
+                type="text"
+                class="inputstyle w-100"
+                placeholder="Search Variable"
+                (keyup)="filterVariableList($event.target.value)"
+              />
+            </div>
+            <button
+              ngbDropdownItem
+              *ngFor="let v of displayProcVars"
+              (click)="setOperand(v, i)"
+            >
+              {{ v.displaylabel }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-2 pr-2"
+        *ngIf="ruleset[i].operand && ruleset[i].operand !== ''"
+      >
+        <div ngbDropdown class="d-inline-block w-100" container="body">
+          <button
+            class="btn btn-outline-primary w-100 text-truncate text-left"
+            [id]="'opt' + ruleset[i].operator + i"
+            ngbDropdownToggle
+          >
+            {{
+              ruleset[i].operator && ruleset[i].operator
+                ? ruleset[i].operator
+                : "Select"
+            }}
+          </button>
+          <div ngbDropdownMenu>
+            <button
+              ngbDropdownItem
+              *ngFor="let op of getOperators(ruleset[i].operand)"
+              (click)="setOperator(op, i)"
+            >
+              {{ op }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="pr-2"
+        [ngClass]="{
+          'col-3': rule.operator == 'Between',
+          'col-6': rule.operator !== 'Between'
+        }"
+        *ngIf="
+          ruleset[i] &&
+          ruleset[i].operator &&
+          ruleset[i].operand &&
+          ruleset[i].firstValue
+        "
+      >
+        <app-ruleset-input-type
+          [singleSelect]="getSelectionType(i)"
+          [variable]="ruleset[i].firstValue"
+          [options]="ruleset[i].options"
+          [value]="rule.value"
+          (emitVal)="getRuleSetValue($event, i)"
+        >
+        </app-ruleset-input-type>
+      </div>
+      <div class="col-3 pr-3" *ngIf="ruleset[i].operator === 'Between'">
+        <app-ruleset-input-type
+          [singleSelect]="true"
+          [variable]="ruleset[i].secondValue"
+          [options]="ruleset[i].options"
+          [value]="rule.value[1]"
+          (emitVal)="getRuleSetValue($event, i, 1)"
+        >
+        </app-ruleset-input-type>
+      </div>
+    </div>
+  </div>
+</div>

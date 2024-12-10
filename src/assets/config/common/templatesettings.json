@@ -1,0 +1,101 @@
+{
+  "Comment": {
+    "defaulttemplate": "commentemail",
+    "excludeinitiator": true,
+    "subprefixtext": "Comments for"
+  },
+  "CommentReply": {
+    "defaulttemplate": "commentreplyemail",
+    "excludeinitiator": true,
+    "subprefixtext": "Reply for"
+  },
+  "ContractComplete": {
+    "defaulttemplate": "",
+    "subprefixtext": "Contract Process completed for",
+    "othertemplates": [
+      {
+        "subprefixtext": "Contract Process completed for",
+        "roles": [
+          "LEGAL_ADMIN"
+        ],
+        "template": "contractcompletedemail"
+      },{
+        "subprefixtext": "Contract Process completed for",
+        "toinitiator": true,
+        "template": "contractcompletedemail"
+      }]
+  },
+  "ContractTerminate": {
+    "defaulttemplate": "",
+    "subprefixtext": "Contract Process terminated for",
+    "othertemplates": [
+      {
+        "subprefixtext": "Contract Process terminated for",
+        "roles": [
+          "LEGAL_ADMIN"
+        ],
+        "template": "contractterminatedemail"
+      },{
+        "subprefixtext": "Contract Process terminated for",
+        "toinitiator": true,
+        "template": "contractterminatedemail"
+      }]
+  },
+  "TaskAssignment": {
+    "defaulttemplate": "taskuserassignmentemail2user",
+    "subprefixtext": "Task Assignment for",
+    "othertemplates": [{
+      "roles": [
+      ],
+      "toinitiator": false,
+      "template": "taskuserassignmentemail2initiator",
+      "subprefixtext": "Task Assignment for"
+    }]
+  },
+  "TaskAssignmentGroup": {
+  "defaulttemplate": "taskgroupassignmentemail",
+  "subprefixtext": "Task Assignment to @group@ for",
+  "othertemplates": [{
+    "roles": [
+    ],
+    "toinitiator": true,
+    "template": "taskgroupassignmentemail",
+    "subprefixtext": "Task Assignment to @group@ for"
+  }]
+},
+  "TaskReAssignment": {
+    "defaulttemplate": "taskuserreassignmentemail2user",
+    "subprefixtext": "Task ReAssignment for",
+    "othertemplates": [{
+      "roles": [
+      ],
+      "toinitiator": false,
+      "template": "taskuserreassignmentemail2initiator",
+      "subprefixtext": "Task ReAssignment for"
+    }]
+  },
+  "TaskPulled": {
+    "defaulttemplate": "",
+    "subprefixtext": "Task Pulled from @group@ Queue for",
+    "othertemplates": [
+      {
+        "subprefixtext": "Task Pulled from @group@ Queue for",
+        "toinitiator": false,
+        "roles": [
+        ],
+        "template": "taskpulledbyuseremail"
+      }]
+  },
+  "TaskReturned": {
+    "defaulttemplate": "taskreturnedtoqueueemail",
+    "subprefixtext": "Task Returned to @group@ Queue for",
+    "othertemplates": [
+      {
+        "subprefixtext": "Task Returned to @group@ Queue for",
+        "toinitiator": false,
+        "roles": [
+        ],
+        "template": "taskreturnedtoqueueemail"
+      }]
+  }
+}

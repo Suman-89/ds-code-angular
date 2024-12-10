@@ -1,0 +1,358 @@
+<div class="container-fluid">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{ selectedProcess.label
+      }}<span class="secondary-color" style="font-size: 22px; padding-left: 5px"
+        >|</span
+      >
+      {{ header }}
+    </div>
+  </div>
+  <div
+    class="w-100 d-flex justify-content-center"
+    *ngIf="template && recipientList && procForms"
+  >
+    <form #form="ngForm" class="addTemplateForm mt-4">
+      <div class="col-md-12 my-2">
+        <label class="form-label"
+          >Process Names<span class="text-danger">*</span></label
+        >
+        <!-- <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          name="processname"
+          [settings]="doctypeDropdownSettings"
+          [data]="allProcesses"
+          [(ngModel)]="template.processNames"
+          #toolbarbutton="ngModel"
+        >
+        </ng-multiselect-dropdown> -->
+        <input
+          [readOnly]="true"
+          class="inputstyle form-control"
+          name="processNames"
+          [(ngModel)]="template.processNames"
+        />
+      </div>
+      <div class="row no-margin" *ngIf="this.id || selectedProcess.name">
+        <div class="form-group col-md-6">
+          <label>Name<span class="text-danger">*</span> </label>
+          <input
+            required
+            class="inputstyle form-control"
+            placeholder="Enter Template Name"
+            name="formname"
+            #templname="ngModel"
+            [(ngModel)]="template.name"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Template Code<span class="text-danger">*</span> </label>
+          <input
+            readonly
+            class="inputstyle form-control"
+            placeholder="Enter Template Code"
+            name="code"
+            #templcode="ngModel"
+            [(ngModel)]="template.code"
+          />
+        </div>
+        <!-- <div class="form-group col-md-6">
+          <label>Notification Type<span class="text-danger">*</span> </label>
+          <select reuired class="inputstyle form-control" name="formname" #type="ngModel" [(ngModel)]="template.type">
+            <option value="">Select Notification type</option>
+            <option *ngFor="let t of types" [value]="t">{{t}}</option>
+          </select>
+        </div> -->
+        <div class="form-group col-12 position-relative">
+          <label
+            >Subject Line<span class="text-danger">*</span>
+            <!-- <span class="secondary-color font-italic">
+              ( <b>'Enter'</b> = To save Email Subject )
+            </span> -->
+          </label>
+          <!-- <input required class="inputstyle form-control" placeholder="Enter Subject Line" name="subj" #subj="ngModel" [(ngModel)]="template.subject"/> -->
+          <div *ngIf="enableEditSubjectLine">
+            <app-comment-box
+              #subjBox
+              *ngIf="multiMentionConfig.mentions.length > 0"
+              [commenttype]="'Subject'"
+              [commentMentionConfig]="multiMentionConfig"
+              [clearAfterSubmit]="false"
+              [isTemplate]="true"
+              [templateType]="templateType.subject"
+              (submitted)="onSubjectLineSubmitted($event)"
+            >
+            </app-comment-box>
+          </div>
+
+          <div
+            *ngIf="!enableEditSubjectLine"
+            class="addedForm"
+            [innerHTML]="template.subject.content"
+          ></div>
+
+          <div
+            class="delIcon cursor-pointer"
+            style="top: 0"
+            *ngIf="!enableEditSubjectLine"
+          >
+            <i class="fa fa-pencil" (click)="toggleEditSubject()"></i>
+          </div>
+        </div>
+        <div class="form-group col-12 position-relative">
+          <label
+            >Body<span class="text-danger">*</span>
+            <span class="secondary-color font-italic">
+              (
+              <!-- <b>'Enter'</b> = To save Email Body ;  -->
+              <b>'Shift+Enter'</b> = Start a new line ; <b>'Ctrl+Enter'</b> =
+              Enter new item in list )
+            </span>
+          </label>
+          <!-- <textarea required class="form-control w-100 inputstyle pt-1" name="body" #body="ngModel" placeholder="Enter Email Body Content" [(ngModel)]="template.body"></textarea> -->
+          <div *ngIf="enableEditContent">
+            <app-comment-box
+              #contentBox
+              *ngIf="multiMentionConfig.mentions.length > 0"
+              [commenttype]="'Email Content'"
+              [commentMentionConfig]="multiMentionConfig"
+              [clearAfterSubmit]="false"
+              [isTemplate]="true"
+              [templateType]="templateType.body"
+              (submitted)="onContentBodySubmitted($event)"
+            >
+            </app-comment-box>
+          </div>
+
+          <div
+            class="w-100"
+            *ngIf="!enableEditContent"
+            class="addedForm"
+            [innerHTML]="template.body.content"
+          ></div>
+
+          <div
+            class="delIcon cursor-pointer"
+            style="top: 0"
+            *ngIf="!enableEditContent"
+          >
+            <i class="fa fa-pencil" (click)="toggleEditContent()"></i>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <label>Send To Initiator</label>
+          <div class="toggle-switch" style="top: -5px">
+            <input
+              type="checkbox"
+              name="initiator"
+              [(ngModel)]="template.initiator"
+              (change)="setInitiator($event.target)"
+            />
+            <div class="knobs">
+              <span></span>
+            </div>
+            <div class="layer"></div>
+          </div>
+        </div>
+        <!-- commenting this line but can be uncommented in future. -->
+        <!-- <div class="form-group col-12" *ngIf="dropdownSettingsRole">
+          <label>Roles
+            <span class="text-danger">*</span> 
+          </label>
+          <div class="w-100">
+            <ng-multiselect-dropdown
+              [placeholder]="'Select Roles'"
+              id="rolelookupbox"
+              name="rolelookupbox"
+              #roleList
+              [(ngModel)]="selRoles"
+              [settings]="dropdownSettingsRole"
+              [data]="rolesArray"
+              class="w-100"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+        </div> -->
+        <div class="form-group col-12" *ngIf="dropdownSettingsRecipient">
+          <label>Recipients<span class="text-danger">*</span> </label>
+          <div class="w-100">
+            <!-- <div *ngIf="template.recipients?.length > 0" class="d-flex">
+              <div class="addedList pr-4" container="body" placement="top" [ngbTooltip]="returnUserFullname(recipient)"
+                *ngFor="let recipient of template.recipients; let i=index">
+                  {{returnUserFullname(recipient)}}
+                  <span class="delIcon" (click)="deleteRecipient(recipient)">
+                    <img height="15px" src="./assets/images/cross.png"/>
+                   </span>
+                </div>
+            </div>
+
+          <input class="inputstyle border-0" name="recipients" #recipients="ngModel" [(ngModel)]="selRecipient"
+          [ngbTypeahead]="recipientsArray" autocomplete="off" [inputFormatter]="searchFormatter" 
+          [resultFormatter]="searchFormatter" (selectItem)="selectRecipient($event); resetRecipient()"/>
+          -->
+            <ng-multiselect-dropdown
+              [placeholder]="'Select Recipients'"
+              id="recipientlookupbox"
+              name="recipientlookupbox"
+              #recipList
+              [(ngModel)]="selRecipient"
+              [settings]="dropdownSettingsRecipient"
+              [data]="recipientList"
+              class="w-100"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <label>Variables containing emails<span class="text-danger">*</span> </label>
+          <div class="w-100">
+          <ng-multiselect-dropdown
+          [placeholder]="'Select Process Variables'"
+          name="selProcvars"
+          #selProcVars
+          [(ngModel)]="selProcvars"
+          [settings]="dropdownSettingsProcVars"
+          [data]="emailProcVars"
+          class="w-100"
+        >
+        </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <!-- <form class="form-group col-12" #outsideibemail (ngSubmit)="submitOutsideEmail()">
+          <label class="w-100 row no-gutters">Other Recipients</label>
+          <div *ngIf="displayOtherRecipient">
+            <app-non-local-comment-box 
+            #contentBox 
+            *ngIf="multiMentionConfig.mentions.length>0" 
+            [commenttype]="'Email Content'"
+            [commentMentionConfig]="multiMentionConfig" 
+            [clearAfterSubmit]="false"
+            [isTemplate]="true"
+            [value]="template.recipientHtml"
+            [templateType]="templateType.recipients"
+            (submitted)="onOtherRecipientsSubmitted($event)">
+          </app-non-local-comment-box>
+          </div>
+          <div *ngIf="!displayOtherRecipient" class="addedForm" [innerHTML]="template.recipientHtml">
+          
+          </div>
+          <div class="delIcon cursor-pointer" style="top: 0;" *ngIf="!displayOtherRecipient">
+            <i class="fa fa-pencil" (click)="toggleOtherRecipient()"></i>
+          </div>
+        </form> -->
+        <form
+          class="form-group col-12"
+          #outsideibemail
+          (ngSubmit)="submitOutsideEmail()"
+        >
+          <label class="w-100 row no-gutters">Other Recipients</label>
+          <div class="d-flex align-items-center">
+            <input
+              class="inputstyle col-6"
+              name="email"
+              [(ngModel)]="externalEmail"
+              type="email"
+              ngModel
+              #email="ngModel"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            />
+            <i
+              (click)="submitOutsideEmail()"
+              class="fa fa-plus-circle secondary-color col-1 cursor-pointer"
+            ></i>
+          </div>
+          <div class="text-danger">
+            <p *ngIf="email.errors?.pattern">This is not a valid Email!</p>
+          </div>
+        </form>
+        <div class="row no-gutters col-12">
+          <div
+            class="addedList col-md-3 pr-4 mb-2 pl-2"
+            container="body"
+            placement="top"
+            *ngFor="let extemail of template.externalEmails; let i = index"
+          >
+            <span style="text-transform: lowercase">{{ extemail }}</span>
+            <span class="delIcon" (click)="deleteextemail(extemail)">
+              <img height="15px" src="./assets/images/cross.png" />
+            </span>
+          </div>
+        </div>
+
+        <!-- <div class=""> -->
+        <div
+          class="form-group col-12"
+          *ngIf="procForms && procForms.length > 0"
+        >
+          <!-- <label>Workflow Task Name<span class="text-danger">*</span> </label> -->
+          <div class="w-100">
+            <app-multiselect-toggle
+              [list]="procForms"
+              [selectedList]="template.tasks"
+              (selectedListEmit)="addPoints($event)"
+            ></app-multiselect-toggle>
+            <!--            
+            <div *ngIf="template.triggerpoints?.length > 0" class="d-flex">
+              <div class="addedList pr-4" container="body" placement="top"
+                *ngFor="let tpoints of template.triggerpoints; let i=index">
+                  {{returnFormName(tpoints)}}
+                  <span class="delIcon" (click)="deleteTriggerpoints(tpoints)">
+                    <img height="15px" src="./assets/images/cross.png"/>
+                   </span>
+                </div>
+              </div>
+
+            <input class="inputstyle border-0" id="tplookupbox" name="triggerpoints" #triggerpoints="ngModel" 
+              placeholder="Enter Trigger Points" [(ngModel)]="selPoints" [ngbTypeahead]="procFormsArray"
+              autocomplete="off" [inputFormatter]="triggerpointsFormatter" 
+              [resultFormatter]="triggerpointsFormatter" (selectItem)="selectTriggerPoints($event); $event.target.value = ''"
+             /> 
+          -->
+            <!-- <ng-multiselect-dropdown 
+          [placeholder]="'Select Trigger Points'" 
+          id="tplookupbox"
+          #trpoints
+          name="triggerpoints"
+          [(ngModel)]="selPoints" 
+          [settings]="dropdownSettings"
+          [data]="procForms" 
+          class="w-100"
+          required>
+          </ng-multiselect-dropdown> -->
+          </div>
+        </div>
+        <div *ngIf="procVars &&  initiateRuleset" class="w-100">
+          <app-rule-set
+            #ruleSet
+            [procVars]="procVars"
+            [edit]="isEdit"
+            [ruleset]="ruleSetModel"
+            (ruleSetEmit)="addRuleSet($event)"
+          >
+          </app-rule-set>
+        </div>
+        <div *ngIf="procVars && !initiateRuleset && !id" class="w-100">
+          <app-rule-set
+            #ruleSet
+            [procVars]="procVars"
+            [edit]="isEdit"
+            [ruleset]="ruleSetModel"
+            (ruleSetEmit)="addRuleSet($event)"
+          >
+          </app-rule-set>
+        </div>
+      </div>
+      <div class="w-100 text-center">
+        <button class="secondarybtnstyle mr-1" (click)="back()">Back</button>
+        <button
+          class="primarybtnstyle ml-1 btn"
+          type="submit"
+          (click)="save()"
+          [disabled]="enableEditSubjectLine || enableEditContent"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+@import "variables" ;
+
+.formname{
+  font-size: 16px;
+  padding-left: 0.5rem;
+}
+
+.moveicon{
+    position: absolute;
+    left: 5px;
+    cursor: pointer;
+}
+
+.tickIcon{
+  position: absolute;
+  left: 10px;
+}
+
+.docRowLine{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left:30px;
+}
+
+.filterDocDisplay{
+  padding: 2px 5px;
+  border:1px solid;
+}
+
+.dropdown-toggle::after{
+  position: absolute;
+  right: 5px;
+  top: 12px;
+}

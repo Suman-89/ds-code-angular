@@ -1,0 +1,60 @@
+
+<div *ngIf="data"  class="card-container cursor-pointer">
+  <div class="image-overlay">
+     <!-- <button (click)="emitCard(4)" [title]="'Delete'  + ' ' + data.name" class="btn cust-padding float-right">
+      <img src="./assets/images/icon-remove.png" height="25">
+    </button> -->
+    <button (click)="enableEditing()" class="btn cust-padding float-right">
+        <i *ngIf="!enableEdit" tooltip="Click to Edit" class="fa fa-pencil" height="25"> </i>
+        <i *ngIf="enableEdit" tooltip="Undo Edit" class="fa fa-undo" height="25"></i>
+    </button>
+
+    </div>
+  <div class="card-content-wrap">
+    <div class="card-image-wrap" (click)="emitCard(1)">
+      <i class="card-image bg-white fa fa-th-large">  </i>
+    </div>
+    <div class="card-desc">
+        <h5 (click)="emitCard(1)" class="text-overflow-wrap mb-0" *ngIf="!enableEdit">{{data.name}}</h5>
+        <div *ngIf="enableEdit" class="row no-gutters">
+          <input class="col-md-8" type="text" [(ngModel)]="editParam"/>
+          <span class="col-md-3 text-center">
+            <i class="fa fa-tick" (click)="emitCard(3)" *ngIf="editParam.length>1"> </i>
+          </span>
+        </div>
+        <div (click)="emitCard(1)">
+        <p class="no-margin"><b>Level:</b>&nbsp; {{data.levels}}</p>
+        <p class="no-margin" *ngIf="data.code"><b>Code:</b>&nbsp; {{data.code}}</p>
+        <p class="no-margin" *ngIf="data.description">{{data.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="addData"  class="card-container cursor-pointer" (click)="emitCard(2)">
+
+  <div class="card-content-wrap">
+    <div class="card-image-wrap">
+     <i class="card-image-add fa fa-plus"> </i>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="addInstance"  class="card-container cursor-pointer">
+  <div class="card-content-wrap">
+    <div class="h4 custMarg border-bottom">
+    Add Instances
+    </div>
+      <form class="form-row addInstanceForm">
+            <div class="col-md-12">
+              <label class="col-md-3">Name</label>
+              <input class="inputstyle col-md-9" name="instancename" [(ngModel)]="instanceName" placeholder="Name of Instance"/>
+            </div>
+            <div class="col-md-12 btn-wrap">
+              <button class="primarybtnstyle"   (click)="emitCard(3)">Add</button>
+              <button class="secondarybtnstyle" (click)="emitCard(4)">Cancel</button>
+            </div>
+        </form>
+ </div>
+</div> -->

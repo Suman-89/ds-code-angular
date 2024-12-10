@@ -1,0 +1,75 @@
+@import "variables";
+@import "./../../../../../shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.pageHeader{
+  width: 94%;
+  padding: 0 10px;
+}
+.addProcForm {
+  width: 94%;
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: $card-box-shadow;
+}
+
+.descbox {
+  border: 1px solid var(--primaryColor1);
+  border-radius: 5px;
+  // &:focus {
+
+  // }
+}
+.custom-switch{
+  padding-top: 3px;
+}
+.custom-control-label {
+  font-size: 13px;
+  padding-top: 2px;
+}
+
+.reviewable-groups {
+  width: 300px;
+}
+
+.addedVariablesRow {
+  border: 1px solid var(--secondaryColor);
+  border-radius: 5px;
+  margin: 0.25rem 0 0.5rem;
+  padding: 5px 0;
+  position: relative;
+}
+
+.formname {
+  font-size: 16px;
+  padding-left: 0.5rem;
+}
+
+.moveicon {
+  position: absolute;
+  left: 5px;
+  cursor: pointer;
+}
+
+.tickIcon {
+  position: absolute;
+  left: 10px;
+}
+
+.docRowLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.filterDocDisplay {
+  padding: 2px 5px;
+  border: 1px solid;
+}
+
+.dropdown-toggle::after {
+  position: absolute;
+  right: 5px;
+  top: 12px;
+}

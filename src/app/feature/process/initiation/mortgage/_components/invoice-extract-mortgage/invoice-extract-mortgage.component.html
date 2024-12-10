@@ -1,0 +1,28 @@
+
+
+
+<!-- <div>
+  <form>
+    <form [formGroup]="form" (onchange)="emitData()">
+      <formly-form [model]="model" [fields]="fields">
+      </formly-form>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </form>
+</div> -->
+
+<div class="w-100" *ngIf="extractedData">
+    <div class="h5">
+      Extracted Data
+    </div>
+  
+    <form class="row no-gutters" #extractionForm>
+      
+      <div class="col-12 form-group" *ngFor="let f of extractedData; let idx = index;">
+        <label class="w-100">{{f.label}}</label>
+        <input type="text" class="inputstyle w-100" readonly [(ngModel)]="f.textValue" (click)="emitForAnnotation(f)" [ngModelOptions]="{standalone: true}"/>
+      </div>
+  </form>
+</div>
+  
+  

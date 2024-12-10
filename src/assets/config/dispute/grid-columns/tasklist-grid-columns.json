@@ -1,0 +1,189 @@
+{
+  "work_list": [
+    {
+      "text": "Company Name",
+      "filtertype": "input",
+      "datafield": "partnerLegalName",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Partner Type",
+      "filtertype": "input",
+      "datafield": "partnerType",
+      "width": "15%"
+    },
+    {
+      "text": "Invoice amount",
+      "filtertype": "input",
+      "datafield": "invoiceAmount",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Disputed Amount",
+      "filtertype": "input",
+      "datafield": "disputedAmount",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Created Date",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "datafield": "created",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Customer/Vendor Dispute Type",
+      "filtertype": "input",
+      "datafield": "vendorDisputeType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Customer/Vendor SAP number",
+      "filtertype": "input",
+      "datafield": "customerSapNumber",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Initiator Name",
+      "filtertype": "input",
+      "datafield": "initiator",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Initiation Date",
+      "datafield": "contractInitiationTime",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    }
+  ],
+  "work_basket": [
+    {
+      "text": "Company Name",
+      "filtertype": "input",
+      "datafield": "partnerLegalName",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Partner Type",
+      "filtertype": "input",
+      "datafield": "partnerType",
+      "width": "15%"
+    },
+    {
+      "text": "Invoice amount",
+      "filtertype": "input",
+      "datafield": "invoiceAmount",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Disputed Amount",
+      "filtertype": "input",
+      "datafield": "disputedAmount",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Created Date",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "datafield": "created",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Customer/Vendor Dispute Type",
+      "filtertype": "input",
+      "datafield": "vendorDisputeType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Customer/Vendor SAP number",
+      "filtertype": "input",
+      "datafield": "customerSapNumber",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Initiator Name",
+      "filtertype": "input",
+      "datafield": "initiator",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Initiation Date",
+      "datafield": "contractInitiationTime",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    }
+  ],
+  "contract_list": [
+    {
+      "text": "Company Name",
+      "filtertype": "input",
+      "datafield": "partnerlegalname",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Partner Type",
+      "filtertype": "input",
+      "datafield": "partnerType",
+      "width": "15%"
+    },
+    {
+      "text": "Invoice amount",
+      "filtertype": "input",
+      "datafield": "invoiceAmount",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Disputed Amount",
+      "filtertype": "input",
+      "datafield": "disputedAmount",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Customer/Vendor Dispute Type",
+      "filtertype": "input",
+      "datafield": "vendorDisputeType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Customer/Vendor SAP number",
+      "filtertype": "input",
+      "datafield": "customerSapNumber",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Initiator Name",
+      "filtertype": "input",
+      "datafield": "initiatedbyfullname",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Initiation Date",
+      "datafield": "contractInitiationTime",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    }
+  ]
+}

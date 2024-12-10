@@ -1,0 +1,39 @@
+@import "variables";
+.report-grid-toolbar-cont {
+  .toolbar-cont {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .gridBtns {
+    margin: 10px;
+    margin-top: 0;
+  }
+  .seperator {
+    color: #ff9900;
+    font-weight: 800;
+  }
+  .checkedOptions {
+    color: blue;
+    padding-left: 0.5rem;
+    .seperator {
+      color: #ff9900;
+    }
+    &.black {
+      color: grey;
+      font-style: italic;
+    }
+  }
+  .flex {
+    display: flex;
+  }
+
+  .customInput {
+    width: 200px;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .error {
+    color: red;
+  }
+}

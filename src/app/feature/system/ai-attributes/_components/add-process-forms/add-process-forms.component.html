@@ -1,0 +1,674 @@
+<div class="container-fluid">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">{{ header }}</div>
+  </div>
+  <div class="w-100 d-flex justify-content-center" *ngIf="procFormModel">
+    <!-- <div>{{procFormModel|json}}</div> -->
+    <form #form="ngForm" class="addProcForm mt-4">
+      <div class="col-md-12 mb-2">
+        <label class="w-100 font-weight-normal"
+          >Process Names<span class="text-danger">*</span></label
+        >
+        <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          name="processname"
+          [settings]="doctypeDropdownSettings"
+          [data]="allProcesses"
+          [(ngModel)]="procFormModel.processNames"
+          #toolbarbutton="ngModel"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div
+        class="row no-margin"
+        *ngIf="routeId || procFormModel?.processNames?.length"
+      >
+        <div class="form-group col-md-6">
+          <label>Name<span class="text-danger">*</span> </label>
+          <input
+            required
+            class="inputstyle form-control"
+            placeholder="Enter Form Name"
+            name="formname"
+            #formname="ngModel"
+            [(ngModel)]="procFormModel.name"
+            (blur)="trimFields('name')"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Form Key<span class="text-danger">*</span> </label>
+          <input
+            required
+            [readonly]="routeId"
+            class="inputstyle form-control"
+            placeholder="Enter Form Key"
+            name="formkey"
+            #key="ngModel"
+            [(ngModel)]="procFormModel.key"
+          />
+        </div>
+        <!-- <div class="form-group col-md-6">
+          <label>Display Title<span class="text-danger">*</span> </label>
+          <input required class="inputstyle form-control" placeholder="Enter Form Display Title" name="displaytitle" #displaytitle="ngModel" [(ngModel)]="procFormModel.displaytitle"/>
+        </div> -->
+        <div class="col-md-6 form-group">
+          <label class="w-100">Default Display tab</label>
+          <!-- <select class="inputstyle form-control" name="default" [(ngModel)]="procFormModel.defaulttab">
+            <option *ngFor="let tab of tabNames" [value]="tab"> {{tab}} </option>
+          </select> -->
+          <app-dropdown-search
+            [value]="procFormModel.defaulttab"
+            [placeholder]="'Select display tab'"
+            [dataList]="tabNames"
+            [id]="''"
+            ($onSelectItem)="selectDisplayTab($event)"
+          ></app-dropdown-search>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="w-100">Group<span class="text-danger">*</span> </label>
+          <!-- <select class="inputstyle form-control" required name="group" #group="ngModel" [(ngModel)]="procFormModel.groupname">
+            <option selected default value="">Select Group</option>
+            <option *ngFor="let group of groups" [value]="group.name"> {{group.name}} </option>
+          </select> -->
+          <app-dropdown-search
+            [value]="procFormModel.groupname"
+            [placeholder]="'Select group'"
+            [dataList]="groups"
+            [id]="''"
+            [setting]="groupSetting"
+            ($onSelectItem)="selectGroup($event)"
+          ></app-dropdown-search>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="w-100">Display Type</label>
+          <select
+            class="inputstyle form-control"
+            name="labelalignment"
+            #labelalignment="ngModel"
+            [(ngModel)]="procFormModel.labelalignment"
+          >
+            <option
+              *ngFor="let align of labelAlignmentTypes"
+              [value]="align.value"
+            >
+              {{ align.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6 no-margin">
+          <div class="form-row col-md-12 no-margin no-padding">
+            <label class="font-weight-normal"> Multi Select Value</label>
+            <input
+              name="vendorsapIds"
+              autocomplete="off"
+              required
+              placeholder="Vendor sap id"
+              [(ngModel)]="formValue"
+              class="inputstyle col-md-10 form-control"
+            />
+            <button
+              class="col-md-2 btn addContactBtn bg-transparent border-0"
+              (click)="addVendorSapId()"
+              style="transform: translateY(-4px)"
+            >
+              <i class="fa fa-plus-circle fa-lg"></i>
+            </button>
+          </div>
+          <div
+            class="col-md-12"
+            *ngIf="vendorsapIds && vendorsapIds.length > 0"
+          >
+            <label>Added Value</label>
+            <div class="row m-0 mb-1">
+              <div
+                class="pb-1"
+                *ngFor="let alias of vendorsapIds; let i = index"
+              >
+                <div
+                  class="addedList pr-4"
+                  container="body"
+                  placement="top"
+                  [ngbTooltip]="alias"
+                >
+                  <small style="font-size: 13px">{{ alias }}</small>
+                  <span
+                    class="delIcon pl-1 pb-1"
+                    style="transform: translateY(-2px)"
+                    (click)="deleteAlias(alias)"
+                  >
+                    <img height="15px" src="./assets/images/cross.png" />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input cursor-pointer"
+              id="reviewable"
+              name="reviewable"
+              [checked]="procFormModel.reviewable"
+              [(ngModel)]="procFormModel.reviewable"
+              (click)="unsetAssignable()"
+            />
+            <label class="custom-control-label cursor-pointer" for="reviewable"
+              >Reviewable</label
+            >
+          </div>
+
+          <div *ngIf="procFormModel.reviewable" class="reviewable-groups mt-2">
+            <label>Reviewing Groups</label>
+            <ng-multiselect-dropdown
+              [placeholder]="'Select'"
+              name="groupselect"
+              [(ngModel)]="reviewingGroup"
+              [settings]="groupDropdownSettings"
+              [data]="groups"
+              #selgroup="ngModel"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input cursor-pointer"
+              id="revisable"
+              name="revisable"
+              [checked]="procFormModel.revisable"
+              [(ngModel)]="procFormModel.revisable"
+            />
+            <label class="custom-control-label cursor-pointer" for="revisable"
+              >Revisable</label
+            >
+          </div>
+        </div>
+        <div *ngIf="procFormModel.revisable" class="form-group col-md-4">
+          <label>Revisable Groups</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Select'"
+            name="revisegroupselect"
+            [(ngModel)]="reviseGroup"
+            [settings]="groupDropdownSettings"
+            [data]="groups"
+            #selgrouprevise="ngModel"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="form-group col-md-2">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input cursor-pointer"
+              id="rejectable"
+              name="rejectable"
+              [checked]="procFormModel.rejectable"
+              [(ngModel)]="procFormModel.rejectable"
+            />
+            <label class="custom-control-label cursor-pointer" for="rejectable"
+              >Rejectable</label
+            >
+          </div>
+        </div>
+        <div *ngIf="procFormModel.rejectable" class="form-group col-md-4">
+          <label>Rejectable Groups</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Select'"
+            name="rejectgroupselect"
+            [(ngModel)]="rejectGroup"
+            [settings]="groupDropdownSettings"
+            [data]="groups"
+            #selgroupreject="ngModel"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+        <!--  -->
+        <div class="form-group col-md-2">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              name="assignable"
+              id="assignable"
+              class="custom-control-input cursor-pointer"
+              [checked]="procFormModel.assignable"
+              [(ngModel)]="procFormModel.assignable"
+              (click)="unsetReviewable()"
+            />
+            <label for="assignable" class="custom-control-label cursor-pointer"
+              >Assignable</label
+            >
+          </div>
+        </div>
+        <div class="form-group col-md-4" *ngIf="procFormModel.assignable">
+          <label>Assignable Groups</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Select'"
+            name="assigngroupselect"
+            [(ngModel)]="assigningGroup"
+            [settings]="groupDropdownSettings"
+            [data]="groups"
+            #selgroupassign="ngModel"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+        <!--  -->
+        <div class="form-group col-md-4">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input cursor-pointer"
+              id="commentneeded"
+              name="commentneeded"
+              [(ngModel)]="procFormModel.commentsneeded"
+            />
+            <label
+              class="custom-control-label cursor-pointer"
+              for="commentneeded"
+              >Comments Mandatory</label
+            >
+          </div>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input cursor-pointer"
+              id="reviewtask"
+              name="reviewtask"
+              [(ngModel)]="procFormModel.isreviewtask"
+            />
+            <label class="custom-control-label cursor-pointer" for="reviewtask"
+              >Review Task</label
+            >
+          </div>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input cursor-pointer"
+              id="emailenabled"
+              name="emailenabled"
+              [(ngModel)]="procFormModel.emailenabled"
+            />
+            <label
+              class="custom-control-label cursor-pointer"
+              for="emailenabled"
+              >Email Enabled</label
+            >
+          </div>
+        </div>
+
+        <!-- <br>
+          <div class="col-md-6">
+            <ng-multiselect-dropdown 
+              [placeholder]="'Select'" name="vendorsapIdsList" 
+              [settings]="doctypeDropdownSettings" [data]="vendorsapIds"
+              [(ngModel)]="procFormModel.processNames" #toolbarbutton="ngModel">
+          </ng-multiselect-dropdown>
+          </div> -->
+        <div class="form-group col-md-6">
+          <label class="w-100">Description</label>
+          <textarea
+            class="form-control w-100"
+            name="description"
+            #description="ngModel"
+            placeholder="Enter Form Description"
+            [(ngModel)]="procFormModel.description"
+          >
+          </textarea>
+        </div>
+        <div class="form-group col-md-6" *ngIf="formtypes">
+          <label>Form Type</label>
+          <select
+            class="form-control w-100"
+            [(ngModel)]="procFormModel.formtype"
+            name="formtype"
+            #formtype="ngModel"
+            (change)="procFormModel.formtype = $event.target.value"
+          >
+            <option *ngFor="let opt of formtypes" [value]="opt">
+              {{ opt }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="form-group col-md-6"
+          *ngIf="procFormModel.formtype.includes('Initiation')"
+        >
+          <label>Process Name</label>
+          <app-dropdown-search
+            [value]="procFormModel.workflowname"
+            [placeholder]="'Select Process Name'"
+            [dataList]="processTypes"
+            [id]="''"
+            ($onSelectItem)="selectProcessName($event)"
+          ></app-dropdown-search>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label>Document Type for Listing</label>
+          <!-- <ng-multiselect-dropdown [placeholder]="'Select Default Document Type'" name="groupselect" [(ngModel)]="procFormModel.selecteddoctypes"
+          [settings]="doctypeDropdownSettings" [data]="documentTypes" #seldoctypes="ngModel">
+          </ng-multiselect-dropdown> -->
+          <div ngbDropdown class="d-inline-block w-100" container="body">
+            <div
+              id="docdropdown"
+              class="position-relative cursor-pointer filterDocDisplay"
+              ngbDropdownToggle
+            >
+              <span
+                *ngIf="
+                  procFormModel.selecteddoctypes &&
+                  procFormModel.selecteddoctypes?.length > 0
+                "
+              >
+                {{ procFormModel.selecteddoctypes[0].name }}
+                <span *ngIf="procFormModel.selecteddoctypes?.length > 1"
+                  >&nbsp;+&nbsp;
+                  {{ procFormModel.selecteddoctypes.length - 1 }} &nbsp; more
+                </span>
+              </span>
+              <span
+                class="filter-count"
+                *ngIf="procFormModel.selecteddoctypes?.length === 0"
+              >
+                Select Document List
+              </span>
+            </div>
+            <div
+              ngbDropdownMenu
+              class="dropdown-menu w-100"
+              aria-labelledby="docdropdown"
+            >
+              <button
+                ngbDropdownItem
+                style="width: 500px"
+                *ngFor="let type of documentTypes"
+                class="position-relative docRowLine"
+              >
+                <!-- <span class="tickIcon" (click)="filterDocument(type)">
+                    <i class="fa fa-check" *ngIf="checkDocSelected(type)"></i>
+                   </span> -->
+
+                <span class="w-50" (click)="filterDocument(type)">
+                  {{
+                    type.name === "In Process" ? "Contract Document" : type.name
+                  }}</span
+                >
+                <div class="custom-control custom-switch">
+                  <input
+                    (change)="
+                      selectDefault($event.target, type.code, 'uploadable')
+                    "
+                    type="checkbox"
+                    class="custom-control-input cursor-pointer"
+                    [name]="'upload' + type.name"
+                    [(ngModel)]="type.uploadable"
+                    [id]="'upload' + type.name"
+                    [checked]="type.uploadable"
+                  />
+                  <label
+                    class="custom-control-label cursor-pointer"
+                    [for]="'upload' + type.name"
+                    >Uploadable</label
+                  >
+                </div>
+                <div class="custom-control custom-switch">
+                  <input
+                    (change)="
+                      selectDefault($event.target, type.code, 'selected')
+                    "
+                    type="checkbox"
+                    class="custom-control-input cursor-pointer"
+                    [name]="'seldefault' + type.name"
+                    [(ngModel)]="type.selected"
+                    [id]="'seldefault' + type.name"
+                    [checked]="type.selected"
+                  />
+                  <label
+                    class="custom-control-label cursor-pointer"
+                    [for]="'seldefault' + type.name"
+                    >Selected</label
+                  >
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form #variableForm="ngForm" class="form-row no-margin col-md-12">
+          <label class="w-100 border-bottom" style="font-weight: 400">
+            Variable
+          </label>
+          <div class="form-group col-md-3 no-padding" *ngIf="ddvars">
+            <!-- <select class="form-control" (change)="fetchDefault()" required name="variablename" #variable="ngModel" [(ngModel)]="formVariable.name">
+                <option value="">Select Variable Name</option>
+                <option *ngFor="let vars of ddvars" [value]="vars.name">{{vars.name}} </option>
+              </select> -->
+            <app-dropdown-search
+              [value]="formVariable.name"
+              [placeholder]="'Select Variable Name'"
+              [dataList]="ddvars"
+              [id]="''"
+              [setting]="variableSetting"
+              ($onSelectItem)="fetchDefault($event)"
+            ></app-dropdown-search>
+          </div>
+          <div class="form-group col-md-2 text-center">
+            <div
+              class="custom-control custom-switch"
+              *ngIf="formVariable.defaultvalue !== null"
+            >
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                [disabled]="selectedVariable.system !== null"
+                checked="true"
+                id="default"
+                name="default"
+                #default
+                [(ngModel)]="formVariable.defaultvalue"
+              />
+              <label class="custom-control-label cursor-pointer" for="default"
+                >Default</label
+              >
+            </div>
+          </div>
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="true"
+                id="visible"
+                #visible="ngModel"
+                name="visible"
+                [(ngModel)]="formVariable.visible"
+              />
+              <label class="custom-control-label cursor-pointer" for="visible"
+                >Visible</label
+              >
+            </div>
+          </div>
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="true"
+                id="mandatory"
+                name="mandatory"
+                #mandatory
+                [(ngModel)]="formVariable.ismandatory"
+              />
+              <label class="custom-control-label cursor-pointer" for="mandatory"
+                >Mandatory</label
+              >
+            </div>
+          </div>
+
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="false"
+                id="readonly"
+                #readonly="ngModel"
+                name="readonly"
+                [(ngModel)]="formVariable.readonly"
+              />
+              <label class="custom-control-label cursor-pointer" for="readonly"
+                >Readonly</label
+              >
+            </div>
+          </div>
+          <div class="col-md-1">
+            <button
+              class="primarybtnstyle"
+              [disabled]="!variableForm.valid"
+              (click)="addVariables()"
+              type="submit"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <!-- <div class="col-12" *ngIf="formVariable.name">
+              <app-expression-generator
+               [variableName]="formVariable.name"
+               [variables]="existingvariables"
+               (ruleEmitter)="assignExpression($event)"
+              ></app-expression-generator>
+            </div> -->
+        </form>
+
+        <div
+          *ngIf="procFormModel.variables && procFormModel.variables.length > 0"
+          class="col-md-12"
+        >
+          <h6 class="border-bottom">Added Variables</h6>
+          <div
+            *ngFor="let addedVars of procFormModel.variables; let i = index"
+            class="row no-margin addedVariablesRow"
+          >
+            <div class="col-md-4 position-relative">
+              <div
+                *ngIf="i > 0"
+                ngbTooltip="Move Up"
+                class="mr-1 moveicon"
+                (click)="moveup(i, addedVars)"
+              >
+                <i class="fa fa-arrow-up secondary-color"></i>
+              </div>
+              <div class="formname text-truncate" [ngbTooltip]="addedVars.name">
+                <b>Name:</b> {{ addedVars.name }}
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div
+                class="custom-control custom-switch"
+                *ngIf="
+                  addedVars.defaultvalue !== null ||
+                  addedVars.datatype === 'Boolean'
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.value || addedVars.defaultvalue"
+                  [id]="'defaultvalue' + i"
+                  [name]="'defaultvalue' + i"
+                  (change)="changeVarField($event.target, 'defaultvalue', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'defaultvalue' + i"
+                  >Default</label
+                >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.visible"
+                  [id]="'visibledisplay' + i"
+                  [name]="'visibledisplay' + i"
+                  (change)="changeVarField($event.target, 'visible', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'visibledisplay' + i"
+                  >Visible</label
+                >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  id="mandatorydisplay"
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [name]="'mandatorydisplay' + i"
+                  [id]="'mandatorydisplay' + i"
+                  [checked]="addedVars.mandetory || addedVars.ismandatory"
+                  (change)="changeVarField($event.target, 'ismandatory', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'mandatorydisplay' + i"
+                  >Mandatory</label
+                >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.readonly"
+                  [name]="'readonly' + i"
+                  [id]="'readonly' + i"
+                  (change)="changeVarField($event.target, 'readonly', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'readonly' + i"
+                  >Readonly</label
+                >
+              </div>
+            </div>
+            <!-- <div class="col-md-12" >
+                 <b>Expression: &nbsp;</b>    {{addedVars.expression}}
+              </div> -->
+            <span class="delIcon" (click)="deleteVariable(addedVars)">
+              <img height="15px" src="./assets/images/cross.png" />
+            </span>
+            <div class="col-12" *ngIf="addedVars.uielementtype == 'DROPDOWN'">
+              <app-ref-data-selector
+                [value]="addedVars.varValues"
+                [placeholder]="'Select Reference Data'"
+                [id]="addedVars.name"
+                [code]="addedVars.refdatacode"
+                ($onSelectItem)="onSelectProcessRef($event)"
+              ></app-ref-data-selector>
+            </div>
+          </div>
+          <!-- uielementtype: "DROPDOWN" -->
+          <!-- refdatacode: "CN" -->
+        </div>
+      </div>
+      <div class="w-100 text-center">
+        <button class="secondarybtnstyle mr-1" (click)="back()">Back</button>
+        <button class="primarybtnstyle ml-1 btn" type="submit" (click)="save()">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

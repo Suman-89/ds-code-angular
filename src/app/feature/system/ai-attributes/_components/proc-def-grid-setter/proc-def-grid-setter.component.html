@@ -1,0 +1,59 @@
+<div *ngIf="!!basicColumnsGrid && ready" class="mb-4">
+  <div class="mt-4">
+    <app-grid-setting-headers
+      (addColumnEmitter)="addNewCol()"
+      [gridSettingType]="gridSettingTypeEnum.PROC_DEF_DEFAULT"
+    >
+    </app-grid-setting-headers>
+  </div>
+  <div *ngFor="let column of basicColumnsGrid.columns; let index = index">
+    <app-grid-col-setting
+      [column]="column"
+      [index]="index"
+      [gridsettings]="gridsettings"
+      [variables]="filteredVariables"
+      [gridConfigValues]="gridConfigValues"
+      [gridSettingType]="gridSettingTypeEnum.PROC_DEF_DEFAULT"
+      [gridType]="gridTypeSetterEnum.BASIC"
+      (variableSelectedEmitter)="filterExistingVariables()"
+    ></app-grid-col-setting>
+  </div>
+</div>
+<div #nav="ngbNav" ngbNav [(activeId)]="activeTab" class="tab-item">
+  <div
+    *ngFor="let grid of gridsettings; let gridTypeIndex = index"
+    [ngbNavItem]="grid.type"
+  >
+    <ng-container *ngIf="gridTypeIndex > 0">
+      <a ngbNavLink>{{ gridLabelNames[grid.type] }}</a>
+      <ng-template ngbNavContent>
+        <app-grid-setting-headers
+          [gridSettingType]="gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+        >
+        </app-grid-setting-headers>
+        <div
+          class="row no-gutters w-100 border-top border-bottom pt-1 pb-0"
+          *ngIf="ready"
+        >
+          <div cdkDropList (cdkDropListDropped)="drop($event, gridTypeIndex)">
+            <div *ngFor="let column of grid.columns; let index = index" cdkDrag>
+              <div *ngIf="!column.disabled" style="min-width: 80vw">
+                <app-grid-col-setting
+                  [column]="column"
+                  [index]="index"
+                  [gridsettings]="gridsettings"
+                  [variables]="filteredVariables"
+                  [gridSettingType]="gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+                  [gridConfigValues]="gridConfigValues"
+                  [gridType]="grid.type"
+                  (variableSelectedEmitter)="filterExistingVariables()"
+                ></app-grid-col-setting>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

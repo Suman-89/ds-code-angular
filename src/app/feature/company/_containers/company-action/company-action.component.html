@@ -1,0 +1,8 @@
+<div class="container-fluid h-100">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">{{actType}}</div>
+  </div>
+        <div class="form-container overflow-hidden" *ngIf="editform">
+          <app-add-edit-company #company [showFlags]="true" [editDetails]="editform" [edit]="edit" (emitProfileImg)="getProfileImg($event)" (emitNewForm)="formClickEvent($event)"></app-add-edit-company>
+        </div>
+  </div>

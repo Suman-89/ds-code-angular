@@ -1,0 +1,56 @@
+<div class="start-process-cont" id="startContainer">
+
+    <!-- Header Container including action buttons -->
+    <div class="header-cont">
+        <div class="header">
+            <h5>Initiate Invoice (AP)</h5>
+        </div>
+        <!-- <div class="action-btns">
+            <button class="primarybtnstyle btn" (click)="openSelectModal()" *ngIf="showButton">Select Company Address</button>
+            <button class="primarybtnstyle btn" style="margin-left: 10px;" (click)="openEditModal()" *ngIf="showButton">Edit Company</button> 
+        </div> -->
+    </div>
+
+    <div class="process-info-cont">
+        <form #form="ngForm" class="initiate-form">
+            <div class="flex-prop">
+                <div class="doc-upload-cont">
+                    <app-initiate-taiho *ngIf="!pdfData" 
+                    [inputData]="initiationData" 
+                    (docDataEmitter)="saveDocChanges($event)">
+                    </app-initiate-taiho>
+                     <div style="height: 100%;">
+                        <app-pdf-viewer #pdf 
+                        [data]="pdfData" 
+                        [options]="pdfOptions" 
+                        (annotateEmit)="addAnnotation($event)"
+                        (blurEvent)="blurEvent($event)"
+                        style="height:100%;display: block;"
+                        >
+                        </app-pdf-viewer>
+                     </div>
+                    </div>
+                <div class="form-cont">
+
+                    <app-invoice-extract-taiho 
+                      #invExtract
+                      [extractedData]="extractedData" 
+                      [poTypeahead]="allPoData" 
+                      (selectAnnotation)="selectAnnotation($event)"
+                      (emitExtractedDataChanges)="editExtractedData($event)"
+                      (emitPoNumber)="fetchPurchaseDetails($event)"
+                      >
+                    </app-invoice-extract-taiho>
+
+                </div>
+
+
+            </div>
+            <div class="text-center btn-cont">
+                <button type="submit" class="btn primarybtnstyle" (click)="save()">Submit</button>
+                <button type="reset" (click)="back()" class="cancelbtn btn secondarybtnstyle">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,15 @@
+<div class="w-100">
+    <ng-multiselect-dropdown 
+      [placeholder]="placeholder" 
+      name="assigngroupselect" 
+      [(ngModel)]="displayValue"
+      [settings]="groupDropdownSettings" 
+      [data]="filterList"
+      #selvalue="ngModel"
+      (onSelect)="onSelectItem($event)"
+      (onSelectAll)="onSelectItemAll($event)"
+      (onDeSelect)="onSelectItem($event)"
+      (onDeSelectAll)="onDeSelectAll($event)"
+    >             
+    </ng-multiselect-dropdown>
+</div>

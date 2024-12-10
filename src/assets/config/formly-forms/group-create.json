@@ -1,0 +1,38 @@
+[
+  {
+    "key": "id",
+    "type": "input",
+    "templateOptions": {
+      "label": "Group Id",
+      "placeholder": "Group Id",
+      "required": true
+    },
+    "expressionProperties": {
+      "templateOptions.disabled": "formState.disabled"
+    }
+  },
+  {
+    "key": "name",
+    "type": "input",
+    "templateOptions": {
+      "label": "Group name",
+      "placeholder": "Group name",
+      "required": true
+    },
+    "expressionProperties": {
+      "templateOptions.disabled": "formState.disabled"
+    }
+  },
+  {
+    "key": "type",
+    "type": "input",
+    "templateOptions": {
+      "label": "Group Type",
+      "placeholder": "Group Type",
+      "required": true
+    },
+    "expressionProperties": {
+      "templateOptions.disabled": "formState.disabled"
+    }
+  }
+]

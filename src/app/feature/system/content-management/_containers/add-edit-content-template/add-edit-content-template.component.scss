@@ -1,0 +1,30 @@
+@import "variables";
+@import "./../../../../../shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.addTemplateForm {
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: $card-box-shadow;
+}
+
+.recipientBox {
+  border: 1px solid var(--primaryColor1);
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+}
+
+::ng-deep {
+  .mention {
+    &.user-mention {
+      color: var(--secondaryColor) !important;
+    }
+    &.group-mention {
+      color: var(--primaryColor) !important;
+    }
+    &.doc-mention {
+      color: var(--tertiarycolor) !important;
+    }
+  }
+}

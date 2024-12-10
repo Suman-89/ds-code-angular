@@ -1,0 +1,35 @@
+<div class="instancePanel" *ngIf="instances">
+
+  <div *ngIf="instances && instances.length !==0">
+    <div class="h5 text-center text-dark">Instances</div>
+    <div class="row no-gutters text-dark font-weight-bold">
+      <div class="col-md-6 pl-2">
+        Instance Name
+      </div>
+      <!-- <div class="col-md-6 pl-2">
+        Code
+     </div> -->
+    </div>
+    <div class="instanceList row no-gutters" *ngFor="let child of instances; let i =index;" [ngClass]="{'active-row': activeTab === child.name}"  [ngStyle]= "{'background': getColor(i+1)}">
+        <div class="instanceName col-md-6 text-truncate" *ngIf="editInstanceName !== child.name"  (click)="emitEvent(child, 'view')">
+          {{child.name}}
+        </div>
+        <!-- <div  class="instanceName col-md-6 text-truncate">
+          {{child.code}}
+        </div> -->
+        <div class="instanceName" *ngIf="editInstanceName === child.name">
+          <input class="inputstyle instanceInput" [(ngModel)]="editParams" [name]="'editins' + i"/>
+        </div>
+
+      <div class="instance-overlay" *ngIf="isEditable">
+        <i class=" fa fa-trash instanceIcon" title="Remove" (click)="emitEvent(child, 'delete')"> </i>
+        <i class="instanceIcon fa " title="Edit" [ngClass]="{'fa-pencil' :editInstanceName !== child.name , 'fa-undo' : editInstanceName === child.name  }" (click)="enableEdit(child)"> </i>
+        <i class="instanceIcon fa fa-check-square" *ngIf="editInstanceName === child.name && editParams.length>0"  title="Edit"  (click)="emitEvent(child, 'edit')"> </i>
+        <!-- <img class="instanceIcon" *ngIf="child && child.levels>1 && type !== 'child'" title="View" src="./assets/images/icon-eye.png" (click)="emitEvent(child, 'view')"/> -->
+      </div>
+    </div>
+  </div>
+  <div  class="instancechild text-center" *ngIf="instances.length===0">
+    No Instance Found
+  </div>
+</div>

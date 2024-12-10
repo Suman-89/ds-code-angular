@@ -1,0 +1,128 @@
+<div class="rule-container">
+  <div class="expressionContainer">
+    <div> {{variableName}}
+      <span *ngIf="stringExpression && stringExpression.length>0"> =</span>
+      {{stringExpression}}
+    </div>
+    <!-- <i class="fa fa-trash deleteBtn" (click)="deleteExpression()"></i> -->
+  </div>
+  <form>
+    <tree-root #tree [nodes]="exp">
+      <ng-template #treeNodeTemplate let-node let-index="index">
+        <div *ngIf="!node.data.operations && !node.data.children && index==0"
+          class="row noMargin btnCont justifyContent">
+
+          <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+            <div class="operationGrpBtn actionContainer" id="dropdownManual" ngbDropdownToggle (focus)="myDrop.open()">
+              Add Operand</div>
+            <div class="dropDownDiv" ngbDropdownMenu aria-labelledby="dropdownManual">
+              <div ngbDropdownItem class="operandBtn" (click)="addOperand(tree,node,'new')"><i
+                  class="fa fa-plus icon"></i>Add Operand</div>
+              <div ngbDropdownItem class="operandBtn" (click)="addValue(tree,node,'new')"><i
+                  class="fa fa-plus icon"></i>Add Value</div>
+              <div ngbDropdownItem class="operationGrpBtn" (click)="addGroup(tree,node)"><i
+                  class="fa fa-plus icon"></i>Add Group</div>
+            </div>
+          </div>
+          <i class="fa fa-times icon" aria-hidden="true" *ngIf="!node.isRoot"
+            (click)="deleteGroup(tree,node,index)"></i>
+        </div>
+
+        <div *ngIf="node.data.operations" class="row noMargin rowGroup">
+          <div *ngFor="let operation of node.data.operations; let i = index" class="inputPadding"
+            [ngClass]="{'operator':operation.type=='operator','operand':operation.type=='operand'||operation.type=='value'}">
+            <div class="row ml-1 mr-1 selectInputFlex" *ngIf="operation.type=='operator'">
+              <select class="form-control selectInput"
+                [ngClass]="{'lastInputWidth':((node.data.operations.length-1)==i && !node.data.children), 'inputWidth': ((node.data.operations.length-1)!= i || node.data.children)}"
+                name="{{operation.id}}" aria-placeholder="Choose Operator" [(ngModel)]="operation.value"
+                (change)="operatorSelected(tree,node,$event)">
+                <option value="" disabled selected>Operator</option>
+                <option *ngFor="let op of operators" [ngValue]="op.value">
+                  <div style="text-align: center">{{op.label}}</div>
+                </option>
+              </select>
+              <i class="fa fa-times icon" aria-hidden="true"
+                *ngIf="(node.data.operations.length-1)==i && !node.data.children"
+                (click)="deleteOperation(tree,node,i)"></i>
+            </div>
+            <div class="row ml-1 mr-1 selectInputFlex" *ngIf="operation.type=='value'">
+              <!-- <input class="form-control selectInput"
+                [ngClass]="{'lastInputWidth':((node.data.operations.length-1)==i && !node.data.children), 'inputWidth': ((node.data.operations.length-1)!= i || node.data.children)}"
+                name="{{operation.id}}" [(ngModel)]="operation.value"
+                [disabled]="availableOperands && availableOperands.length==0" (focusout)="operandChosed(tree)"> -->
+                <!-- <app-ruleset-input-type 
+                [singleSelect]=true
+                
+                >
+                </app-ruleset-input-type> -->
+              <i class="fa fa-times icon" aria-hidden="true"
+                *ngIf="(node.data.operations.length-1)==i && !node.data.children"
+                (click)="deleteOperation(tree,node,i)"></i>
+            </div>
+            <div class="row ml-1 mr-1 selectInputFlex" *ngIf="operation.type=='operand'">
+              <select class="form-control selectInput"
+                [ngClass]="{'lastInputWidth':((node.data.operations.length-1)==i && !node.data.children), 'inputWidth': ((node.data.operations.length-1)!= i || node.data.children)}"
+                name="{{operation.id}}" [(ngModel)]="operation.value" (change)="operandChosed(tree)"
+                [disabled]="availableOperands && availableOperands.length==0">
+                <option value="" disabled selected style="display: hidden">operand</option>
+                <option *ngFor="let operand of availableOperands" [ngValue]="operand">{{operand}}</option>
+              </select>
+              <i class="fa fa-times icon" aria-hidden="true"
+                *ngIf="(node.data.operations.length-1)==i && !node.data.children"
+                (click)="deleteOperation(tree,node,i)"></i>
+            </div>
+
+          </div>
+
+          <div *ngIf="showAddOperand(node)" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+            <div class="operationGrpBtn actionContainer" [ngClass]="{'disabledBtn':disableBtn(node)}"
+              id="dropdownManual" ngbDropdownToggle>Add Operand</div>
+            <div class="dropDownDiv" ngbDropdownMenu aria-labelledby="dropdownManual"
+              [ngClass]="{'hideDrpDown':disableBtn(node)}">
+              <div ngbDropdownItem class="operandBtn" (click)="addOperand(tree,node)"><i class="fa fa-plus icon"></i>Add
+                Operand</div>
+              <div ngbDropdownItem class="operandBtn" (click)="addValue(tree,node)"><i class="fa fa-plus icon"></i>Add
+                Value</div>
+              <div ngbDropdownItem class="operationGrpBtn" (click)="addGroup(tree,node)"><i
+                  class="fa fa-plus icon"></i>Add Group</div>
+            </div>
+          </div>
+
+          <div *ngIf="showAddOperator(node)" class="operationGrpBtn actionContainer"
+            (click)="disableBtn(node) ? $event.stopPropagation() : addOperator(tree,node)"
+            [ngClass]="{'disabledBtn':disableBtn(node)}"><i class="fa fa-plus icon"></i>Add Operator
+          </div>
+        </div>
+        <!-- <div *ngIf="!node.data.operations && index>0 && !disableOperator(node)" class="newNodeBtn actionContainer" [ngClass]="{'disabledBtn':disableOperator(node)}" (click)="disableOperator(node) ? $event.stopPropagation() : addOperator(tree,node,'new')">
+            <i class="fa fa-plus iconPadding"></i>Add Operator
+          </div> -->
+      </ng-template>
+    </tree-root>
+  </form>
+</div>
+
+<!-- <div>
+      {{stringExpression}}
+    </div>
+    <form (change)="setExpressionString()">
+    <div class="row m-0">
+
+      <div class="col-3">
+        <select class="form-control" name="variablename" [(ngModel)]="expressionModel.name">
+          <option value="">Select Variable Name</option>
+          <option *ngFor="let vars of variables" [value]="vars.name">{{vars.name}} </option>
+        </select>
+      </div>
+      <div class="col-3">
+        <select class="form-control" name="operator" [(ngModel)]="expressionModel.operator">
+          <option value="">Select Variable Name</option>
+          <option *ngFor="let op of operators" [value]="op">{{op}} </option>
+        </select>
+      </div>
+
+      <div class="col-3">
+      <input name="value" [(ngModel)]="expressionModel.value"/>
+      </div>
+  
+    </div>  
+   </form> -->

@@ -1,0 +1,62 @@
+<div class="fullHeight" id="maincont">
+  <!-- <ngx-loading [show]="loading">
+  </ngx-loading> -->
+  <div class="headerWrap" id="headerCont">
+    <app-header (themeEmit)="toggle($event)"></app-header>
+  </div>
+  <div class="bodyWrap d-flex" *ngIf="navData">
+    <div
+      class="sidePanel maxHeight"
+      [ngClass]="{
+        expandedLeftPanel: !openSideNav,
+        collapsedLeftPanel: !openSideNav
+      }"
+    >
+      <app-side-navbar
+        #sidenavbar
+        [navData]="navData"
+        [navStyle]="navStyle"
+        [loggedUser]="loggedUser"
+        [selectedMenu]="selectedMenu"
+        (selection)="onNavClick($event)"
+        (toggleExpansion)="toggleNavBar($event)"
+        (signOut)="onSignOut($event)"
+        (hoverOption)="onNavHovered($event)"
+      >
+      </app-side-navbar>
+    </div>
+    <div *ngIf="isTroubleTicketProcess" class="chatButtonContainer">
+      <button class="chatButton" (click)="toggleChat()">
+        <i class="fa fa-comment" style="font-size: larger;"></i>
+      </button>
+      <!-- <p style="font-weight: bold;color: var(--secondaryColor);">CSD Buddy</p> -->
+    </div>
+    <div class="chatPage" [ngClass]="{'show': showChat}">
+      <!-- Chat page content goes here -->
+      <button class="closeButton" (click)="toggleChat()">
+        <i class="fa fa-times"></i>
+      </button>
+        <div id="banner">
+          <h5 style="margin-left: 20px;">iBasis CSD Buddy</h5>
+        </div>
+        <!-- <div id="webchat" role="main"></div> -->
+      <!-- <button class="closeButton" (click)="reloadChatbot()">Reload Chatbot</button> -->
+     <!-- //csd buddy  -->
+      <!-- <iframe *ngIf="showChat" #chatbotFrame  src="https://web.powerva.microsoft.com/environments/Default-6ae3e83b-2c41-4697-b2b8-0fec53a953ea/bots/cr754_csdBuddy/webchat?__version__=2" frameborder="0" style="width: 100%; height: 100%;"></iframe> -->
+      <iframe *ngIf="showChat" #chatbotFrame  src="https://bot.ds-iflow.com/" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+
+      <!-- demo url -->
+      <!-- <iframe #chatbotFrame src="https://web.powerva.microsoft.com/environments/Default-6ae3e83b-2c41-4697-b2b8-0fec53a953ea/bots/cr754_digitalSherpaEmployeeBuddy/webchat?__version__=2" frameborder="0" style="width: 100%; height: 100%;"></iframe> -->
+
+    </div>
+    <div
+      class="noPadding mainPanel maxHeight"
+      [ngClass]="{
+        expandedmainPanel: !openSideNav,
+        collapsedmainPanel: openSideNav
+      }"
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

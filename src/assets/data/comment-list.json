@@ -1,0 +1,30 @@
+[
+    {
+        "comment": "Testing",
+        "user": {
+            "token": null,
+            "roleName": "Sales",
+            "email": "rgolu@yahoo.com",
+            "id": 8,
+            "createdDate": "0001-01-01T00:00:00Z",
+            "createdBy": 0,
+            "createdByUserName": null,
+            "name": "Rajesh Goyal"
+        },
+        "createdDate": "2020-02-25T11:37:50.833Z"
+    },
+    {
+        "comment": "Comment number two a lengthy comment for testing purpose only as thisa should not be taken in to consideration. also there can be tags here",
+        "user": {
+            "token": null,
+            "roleName": "Capacity",
+            "email": "debs.dip@gmail.com",
+            "id": 6,
+            "createdDate": "0001-01-01T00:00:00Z",
+            "createdBy": 0,
+            "createdByUserName": null,
+            "name": "Debdip Banerjee"
+        },
+        "createdDate": "2020-07-09T18:06:30.267Z"
+    }
+]

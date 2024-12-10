@@ -1,0 +1,245 @@
+<div class="all-cont">
+  <div
+    class="tasklist-cont {{ !taskActionRenderer ? 'w-100' : '' }}"
+    *ngIf="tasks || contracts || commentList"
+  >
+    <div class="header row no-gutters">
+      <h5 class="p-0" *ngIf="tasks || contracts">
+        {{ selectedProcess?.label
+        }}<span
+          class="secondary-color"
+          style="font-size: 22px; padding-left: 5px"
+          >|</span
+        >
+        {{
+          tasklistType == gridType.workbasket
+            ? headers.group
+            : tasklistType == gridType.contractlist
+            ? headers.contracts
+            : headers.myqueue
+        }}
+
+        <span
+          class="secondary-color"
+          *ngIf="tasklistType == gridType.contractlist"
+          >({{ gridFilterLength }}/{{ contracts.length }})</span
+        >
+        <span
+          class="secondary-color"
+          *ngIf="tasklistType !== gridType.contractlist"
+          >({{ gridFilterLength }}/{{ tasks.length }})</span
+        >
+      </h5>
+      <h5 *ngIf="commentList">My Comments({{ commentList.length }})</h5>
+      <!-- <div class="col-md-6"  *ngIf="tasklistType === gridType.contractlist">
+              <app-contract-search (searchObj)="search($event)"></app-contract-search>
+          </div> -->
+    </div>
+
+    <ng-container [ngSwitch]="tasklistType">
+      <div
+        class="grid-cont position-relative"
+        *ngSwitchCase="gridType.workbasket"
+      >
+        <div
+          class="position-absolute {{
+            taskActionRenderer ? 'top-right' : 'top-left'
+          }}"
+        >
+          <button ngbDropdown class="primarybtnstyle" container="body">
+            <div id="docdropdown" class="cursor-pointer" ngbDropdownToggle>
+              {{ retGrpName(selGrp) }}
+            </div>
+            <div
+              ngbDropdownMenu
+              class="dropdown-menu-right"
+              aria-labelledby="docdropdown"
+            >
+              <div *ngIf="participatingGroups?.length">
+                <button
+                  ngbDropdownItem
+                  *ngFor="let gid of participatingGroups"
+                  (click)="getTasksbyGrpName(gid)"
+                >
+                  {{ retGrpName(gid) }}
+                </button>
+              </div>
+              <button ngbDropdownItem *ngIf="!participatingGroups?.length">
+                No Participating Group
+              </button>
+            </div>
+          </button>
+        </div>
+        <app-grid-toolbar
+          #groupGrid
+          [type]="gridType.workbasket"
+          [data]="tasks"
+          [selectionMode]="'checkbox'"
+          [automaticPageSize]="true"
+          [pageable]="false"
+          (emitAction)="toolbarAction($event)"
+          (doubleClick)="doubleClick($event)"
+          (filterDataLength)="filterdata($event)"
+        ></app-grid-toolbar>
+        <!-- [selectFirstRow]="true" -->
+      </div>
+      <div
+        class="grid-cont position-relative"
+        *ngSwitchCase="gridType.worklist"
+      >
+        <div
+          class="position-absolute {{
+            taskActionRenderer ? 'top-right' : 'top-left'
+          }}"
+        >
+          <button ngbDropdown class="primarybtnstyle" container="body">
+            <div id="docdropdown" class="cursor-pointer" ngbDropdownToggle>
+              {{ retGrpName(selGrp) }}
+            </div>
+            <div
+              ngbDropdownMenu
+              class="dropdown-menu-right"
+              aria-labelledby="docdropdown"
+            >
+              <div *ngIf="participatingGroups?.length">
+                <button
+                  ngbDropdownItem
+                  *ngFor="let gid of participatingGroups"
+                  (click)="filterTaskbyGrpSelect(gid)"
+                >
+                  {{ retGrpName(gid) }}
+                </button>
+              </div>
+              <button ngbDropdownItem *ngIf="!participatingGroups?.length">
+                No Participating Group
+              </button>
+            </div>
+          </button>
+        </div>
+        <app-grid-toolbar
+          #tasklistGrid
+          [type]="gridType.worklist"
+          [data]="tasks"
+          [selectionMode]="'checkbox'"
+          [automaticPageSize]="true"
+          [pageable]="false"
+          (emitAction)="toolbarAction($event)"
+          (singleClick)="singleClick($event)"
+          (doubleClick)="doubleClick($event)"
+          (filterDataLength)="filterdata($event)"
+        ></app-grid-toolbar>
+      </div>
+      <div class="grid-cont" *ngSwitchCase="gridType.contractlist">
+        <div class="position-absolute">
+          <!-- {{
+            taskActionRenderer ? 'top-right' : 'top-left'
+          }}" -->
+          <button ngbDropdown class="primarybtnstyle" container="body">
+            <div id="docdropdown" class="cursor-pointer" ngbDropdownToggle>
+              {{ statusName }}
+            </div>
+            <div
+              ngbDropdownMenu
+              class="dropdown-menu-right"
+              aria-labelledby="docdropdown"
+            >
+              <div *ngIf="OverAllStatus.length > 0">
+                <button
+                  ngbDropdownItem
+                  *ngFor="let status of OverAllStatus"
+                  (click)="search(status)"
+                >
+                  {{ status }}
+                </button>
+              </div>
+            </div>
+          </button>
+        </div>
+        <app-grid-toolbar
+          #contractGrid
+          [type]="gridType.contractlist"
+          [data]="contracts"
+          [selectionMode]="'checkbox'"
+          [automaticPageSize]="true"
+          [pageable]="false"
+          [showRowDetails]="true"
+          [nestedSourceData]="nestedSourceData"
+          (emitAction)="toolbarAction($event)"
+          (doubleClick)="doubleClick($event)"
+          (nestedParentObj)="getChildTasks($event)"
+          [selectFirstRow]="true"
+          (filterDataLength)="filterdata($event)"
+        ></app-grid-toolbar>
+      </div>
+      <div class="grid-cont" *ngSwitchCase="gridType.allProcess">
+        <app-grid-toolbar
+          #contractGrid
+          [type]="gridType.allProcess"
+          [data]="contracts"
+          [selectionMode]="'checkbox'"
+          [automaticPageSize]="true"
+          [pageable]="false"
+          [showRowDetails]="true"
+          [nestedSourceData]="nestedSourceData"
+          (emitAction)="toolbarAction($event)"
+          (doubleClick)="doubleClick($event)"
+          (nestedParentObj)="getChildTasks($event)"
+          (filterDataLength)="filterdata($event)"
+        ></app-grid-toolbar>
+      </div>
+      <div class="grid-cont" *ngSwitchCase="gridType.comments">
+        <app-grid-toolbar
+          #commentGrid
+          [type]="gridType.comments"
+          [data]="commentList"
+          [selectionMode]="'checkbox'"
+          [automaticPageSize]="true"
+          [pageable]="false"
+          [showRowDetails]="true"
+          [nestedSourceData]="nestedSourceData"
+          (emitAction)="toolbarAction($event)"
+          (doubleClick)="doubleClick($event)"
+          (filterDataLength)="filterdata($event)"
+        ></app-grid-toolbar>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="contractInfo && taskActionRenderer" class="tast-action-cont">
+    <app-task-actions
+      [actions]="actions"
+      [taskDetails]="contractInfo"
+      [transcriptions]="transcriptionList"
+      [businessKey]="contractInfo.contractid"
+      [viewtype]="'contract'"
+      [comments]="commentsAll"
+      [taskId]="contractInfo.contractid"
+      [completedContract]="!contractInfo.inprogress"
+      [darkTheme]="true"
+    >
+    </app-task-actions>
+
+    <div class="chevron" *ngIf="showChevronIcons" style="left: 5px">
+      <div
+        class="chevron-arrow"
+        (click)="taskActionRendererIcon()"
+        *ngIf="taskActionRenderer"
+      >
+        <i
+          class="fa fa-chevron-right fa-lg chevron-icon"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="chevron" *ngIf="showChevronIcons">
+    <div
+      class="chevron-arrow"
+      (click)="taskActionRendererIcon()"
+      *ngIf="!taskActionRenderer"
+    >
+      <i class="fa fa-chevron-left fa-lg chevron-icon" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>

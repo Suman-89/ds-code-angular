@@ -1,0 +1,5 @@
+[
+  { "text": "Id", "datafield": "id" },
+  { "text": "Role Name", "datafield": "name" },
+  { "text": "Description", "datafield": "description" }
+]

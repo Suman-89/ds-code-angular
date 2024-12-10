@@ -1,0 +1,90 @@
+<div class="row no-gutters border-top border-bottom pt-2 pb-1 mt-4" >
+    <div class="col-2">
+        <label class="font-small custom-label">Variable</label>
+    </div>
+    <div class="col-2 pr-1">
+        <label class="font-small custom-label">Column Header</label>
+    </div>
+    <div class="col-2">
+        <label class="font-small custom-label">Cell Format</label>
+    </div>
+    <div class="col-1">
+        <label class="font-small custom-label">Width</label>
+    </div>
+    <div class="col-1">
+        <label class="font-small custom-label" >My Queue</label>
+    </div>
+    <div class="col-1">
+    <label class="font-small custom-label" >Group Queue</label>
+
+    </div>
+    <div class="col-1">
+        <label class="font-small custom-label" >All Processes</label>
+    </div>
+    <div class="col-1">
+        <label class="font-small custom-label" >All Tasks</label>
+    </div>
+    <div class="col-1" >
+        <i class="fa fa-plus iconAdd custom-label" [ngbTooltip]="'Add Column'" style="font-size: 20px;" (click)="addNewColDef()"></i>
+    </div>    
+</div>
+<div *ngIf="columnModel && columnModel.length>0">
+    <div class="row no-gutters border-bottom py-2" *ngFor="let cols of columnModel;let ind=index">
+        <div class="col-2 pr-1">
+            <select class="inputstyle w-100" [(ngModel)]="columnModel[ind].key" (change)="assignHeaderName($event.target.value, ind)">
+            <option value="">Select variable</option>   
+            <option *ngFor="let vars of variables" [value]="vars.name"> {{vars.displaylabel}} </option>
+            </select>
+        </div>
+        <div class="col-2 pr-1">
+            <input [name]="'headerinput'+ind" [(ngModel)]="columnModel[ind].header" (keyup)="assignHeader($event.target.value, ind)" class="inputstyle w-100" placeholder="Enter Header">
+        </div>
+        <div class="col-2 pr-1" >
+            <select *ngIf="columnModel[ind].filtertype == 'date'" class="inputstyle w-100" [(ngModel)]="columnModel[ind].cellsformat" (change)="assignCellsFormat($event.target.value, ind)">   
+            <option value="">Select variable</option>   
+            <option *ngFor="let format of cellFormat" [value]="format.value">{{format.text}}</option>
+            </select>
+        </div> 
+        <div class="col-1">
+              <input [name]="'width'+ind"  [(ngModel)]="columnModel[ind].width"
+               (keyup)="assignFieldWidth($event.target.value, ind)" 
+               class="inputstyle w-100" placeholder="Enter Width">
+        </div>
+        <div class="col-1 move-center">
+            <div class="custom-control custom-switch q-switch">
+                <input type="checkbox" class="custom-control-input cursor-pointer"
+                [id]="'myq'+ind" [name]="'myq'+ind" [checked]="checkForColInGrid(ind, gridTypeSetterEnum.MYQ)"
+                (change)="queueToggle($event.target.checked, ind, gridTypeSetterEnum.MYQ)">
+                <label class="custom-control-label cursor-pointer font-small custom-label" [for]="'myq'+ind"></label>
+            </div>
+        </div>
+        <div class="col-1 move-center">
+            <div class="custom-control custom-switch q-switch">
+                <input type="checkbox" class="custom-control-input cursor-pointer"
+                [id]="'grp'+ind" [name]="'grp'+ind" [checked]="checkForColInGrid(ind, gridTypeSetterEnum.GROUPQ)"
+                (change)="queueToggle($event.target.checked, ind, gridTypeSetterEnum.GROUPQ)">
+                <label class="custom-control-label cursor-pointer font-small custom-label" [for]="'grp'+ind"></label>
+            </div>
+        </div>
+        <div class="col-1 move-center">
+            <div class="custom-control custom-switch q-switch" >
+                <input type="checkbox" class="custom-control-input cursor-pointer"
+                [id]="'allp'+ind" [name]="'allp'+ind" [checked]="checkForColInGrid(ind, gridTypeSetterEnum.ALLPROCESS)"
+                (change)="queueToggle($event.target.checked, ind, gridTypeSetterEnum.ALLPROCESS)">
+                <label class="custom-control-label cursor-pointer font-small custom-label" [for]="'allp'+ind"></label>
+            </div>
+        </div>
+        <div class="col-1 move-center">
+            <div class="custom-control custom-switch q-switch">
+                <input type="checkbox" class="custom-control-input cursor-pointer"
+                [id]="'alltask'+ind" [name]="'alltask'+ind" [checked]="checkForColInGrid(ind, gridTypeSetterEnum.ALLTASKS)"
+                (change)="queueToggle($event.target.checked, ind, gridTypeSetterEnum.ALLTASKS)">
+                <label class="custom-control-label cursor-pointer font-small custom-label" [for]="'alltask'+ind"></label>
+            </div>
+        </div>
+        <div class="col-1">
+            <i class="fa fa-close iconAdd custom-label" [ngbTooltip]="'Remove'" (click)="removeColumn(ind,cols)"></i>
+        </div>
+        
+    </div>
+</div>

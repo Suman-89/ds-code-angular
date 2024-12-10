@@ -1,0 +1,13 @@
+[
+ { "text": "Task Name", "datafield": "taskname", "width": "150" },
+{ "text": "Group", "datafield": "groupname", "width": "150" },
+{ "text": "User", "datafield": "assignee", "width": "150" },
+{ "text": "Task Status", "filtertype": "checkedlist", "datafield": "taskstatus", "width": "auto", "minwidth": 100 },
+{ "text": "Overall Status", "filtertype": "checkedlist", "datafield": "overallStats", "width": "auto", "minwidth": 100 },
+{ "text": "Elapsed Time (Hours)", "datafield": "elapsedhour", "width": "auto", "cellsformat": "d2"},
+{ "text": "Elapsed Time (Days)", "datafield": "elapseddays", "width": "auto", "cellsformat": "d2"},
+{ "text": "Initiation Time", "datafield": "contractinitiationtime", "width": "200", "filtertype": "range", "cellsformat": "dd-MMM-yyyy HH:mm:ss"},
+{ "text": "Start Time", "datafield": "starttime", "width": "200", "filtertype": "range",  "cellsformat": "dd-MMM-yyyy HH:mm:ss"},
+{ "text": "End Time", "datafield": "endtime", "width": "200", "filtertype": "range", "cellsformat": "dd-MMM-yyyy HH:mm:ss"},
+{ "text": "Status", "filtertype": "checkedlist", "hidden":"true", "datafield": "contractstatus", "width": "auto", "minwidth": 100 }
+]

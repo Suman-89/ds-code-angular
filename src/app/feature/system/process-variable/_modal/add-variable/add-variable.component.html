@@ -1,0 +1,580 @@
+<!-- <form #form="ngForm" (ngSubmit)="form.valid && save()"> -->
+<form #form="ngForm">
+  <div class="modal-header">
+    <h5 class="modal-title secondary-color mt-0">{{ header }}</h5>
+    <button
+      type="button"
+      class="close btn"
+      aria-label="Close"
+      (click)="close()"
+    >
+      <img height="20" src="./assets/images/cross.png" />
+    </button>
+  </div>
+  <div class="modal-body position-relative">
+    <div class="metaCheckClass">
+      <!-- <input type="checkbox" [checked]="addEditVar.linkedtometadata" class="inputstyle cursor-pointer" name="linkedtotmeta" #linkedtometadata="ngModel" [(ngModel)]="addEditVar.linkedtometadata">
+
+      <label style="margin: 0 10px;">
+      Link To Metadata 
+    </label> -->
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [checked]="addEditVar.emailtemplatevariable"
+          id="templateswitch"
+          name="templateswitch"
+          #system="ngModel"
+          [(ngModel)]="addEditVar.emailtemplatevariable"
+        />
+        <label
+          class="custom-control-label cursor-pointer small-font"
+          for="templateswitch"
+          >Email Template Variable</label
+        >
+      </div>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [checked]="addEditVar.system"
+          id="systemswitch"
+          name="systemswitch"
+          #system="ngModel"
+          [(ngModel)]="addEditVar.system"
+        />
+        <label
+          class="custom-control-label cursor-pointer small-font"
+          for="systemswitch"
+          >System Variable</label
+        >
+      </div>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [checked]="addEditVar.linkedtometadata"
+          id="linkmetaswitch"
+          name="linkedtotmeta"
+          #linkedtometadata="ngModel"
+          [(ngModel)]="addEditVar.linkedtometadata"
+        />
+        <label
+          class="custom-control-label cursor-pointer small-font"
+          for="linkmetaswitch"
+          >Link To Metadata</label
+        >
+      </div>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [checked]="addEditVar.reviewvariable"
+          id="reviewswitch"
+          name="reviewswitch"
+          #review="ngModel"
+          [(ngModel)]="addEditVar.reviewvariable"
+        />
+        <label
+          class="custom-control-label cursor-pointer small-font"
+          for="reviewswitch"
+          >Review Variable</label
+        >
+      </div>
+      <div class="custom-control custom-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [checked]="addEditVar.applicableToAll"
+          id="applicableToAll"
+          name="applicableToAll"
+          #system="ngModel"
+          [(ngModel)]="addEditVar.applicableToAll"
+        />
+        <label
+          class="custom-control-label cursor-pointer small-font"
+          for="applicableToAll"
+          >For All Process</label
+        >
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <label class="form-label"
+        >Process Names<span class="text-danger">*</span></label
+      >
+      <ng-multiselect-dropdown
+        [placeholder]="'Select'"
+        name="processname"
+        [settings]="doctypeDropdownSettings"
+        [data]="allProcesses"
+        [(ngModel)]="addEditVar.processNames"
+        #toolbarbutton="ngModel"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+
+    <div class="row" *ngIf="isEdit || addEditVar?.processNames?.length">
+      <div class="col-md-4 mt-4">
+        <label class="form-label">Variable Family Name</label>
+        <!-- <select required class="form-control"  name="category" #category="ngModel" [(ngModel)]="addEditVar.categoryname">
+             <option value=''>Select Variable Family Name</option>
+             <option *ngFor="let cat of dropDownData.category" [value]="cat">{{cat}}</option>
+          </select> -->
+        <!-- <app-type-ahead  [search]="'dynamic'" [createAllowed]="true" [type]="'variable family name'" (resultEmitter)="assignGroup($event)"></app-type-ahead> -->
+        <input
+          class="form-control"
+          name="category"
+          #category="ngModel"
+          [(ngModel)]="addEditVar.categoryname"
+          placeholder="Enter Variable Family Name"
+          [ngbTypeahead]="searchArray"
+          autocomplete="off"
+          [inputFormatter]="varFormatter"
+          (selectItem)="addCategory($event)"
+        />
+      </div>
+      <div class="col-md-4 mt-4">
+        <label class="form-label"
+          >Field Name <span class="text-danger">*</span></label
+        >
+        <input
+          type="text"
+          [readonly]="isEdit"
+          (blur)="getFieldName($event.target.value)"
+          required
+          class="form-control"
+          name="fieldlabel"
+          #label="ngModel"
+          [(ngModel)]="addEditVar.label"
+        />
+      </div>
+      <div class="col-md-4 mt-4">
+        <label class="form-label"
+          >Field Display Label <span class="text-danger">*</span></label
+        >
+        <input
+          type="text"
+          required
+          class="form-control"
+          name="displaylabel"
+          #displaylabel="ngModel"
+          [(ngModel)]="addEditVar.displaylabel"
+          (blur)="trimFields('displaylabel')"
+        />
+      </div>
+
+      <div class="col-md-6 mt-4">
+        <label class="form-label"
+          >Variable Name<span class="text-danger">*</span></label
+        >
+        <input
+          type="text"
+          required
+          readonly
+          class="form-control"
+          name="fieldname"
+          #fieldname="ngModel"
+          [(ngModel)]="addEditVar.name"
+        />
+      </div>
+      <div class="col-md-6 mt-4">
+        <label class="form-label"
+          >Data Type<span class="text-danger">*</span></label
+        >
+        <select
+          required
+          class="form-control"
+          name="datatype"
+          #datatype="ngModel"
+          (change)="datatypeSelect()"
+          [(ngModel)]="addEditVar.datatype"
+        >
+          <option value="">Select Data Type</option>
+          <option *ngFor="let type of dropDownData.dataTypes" [value]="type">
+            {{ type }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mt-4">
+        <label class="form-label"
+          >Display Element Type<span class="text-danger">*</span></label
+        >
+        <select
+          required
+          class="form-control"
+          (change)="fetchSource(); addEditVar.valuesource = ''"
+          name="uitype"
+          #uitype="ngModel"
+          [(ngModel)]="addEditVar.uielementtype"
+        >
+          <option value="">Select Display Element Type</option>
+          <option *ngFor="let uitype of allUIeleTypes" [value]="uitype">
+            {{ uitype }}
+          </option>
+        </select>
+        <!--
+           <app-dropdown-search
+              [value]="addEditVar.uielementtype"
+              [placeholder]="'Display Element Type'"
+              [dataList]="allUIeleTypes"
+              [id]="''"
+              [setting]="variableSetting"
+              ($onSelectItem)="fetchSource()"
+            ></app-dropdown-search>
+         -->
+
+        <!--           
+          <app-dropdown-search
+            [value]="addEditVar.uielementtype"
+            [placeholder]="'Display Element Type'"
+            [dataList]="allUIeleTypes"
+            [id]="''"
+            ($onSelectItem)="fetchSource();changeDisplayElement($event)"
+          ></app-dropdown-search> -->
+      </div>
+      <div
+        *ngIf="addEditVar.uielementtype === 'DATEFIELD'"
+        class="col-md-6 mt-4"
+      >
+        <label class="form-label"
+          >Past Dates Allowed<span class="text-danger">*</span></label
+        >
+        <div class="toggle-switch">
+          <input
+            type="checkbox"
+            class="form-control"
+            name="allowPastDate"
+            #allowPastDate="ngModel"
+            [(ngModel)]="addEditVar.allowPastDate"
+            (change)="handleCheckboxChange($event)"
+          />
+          <div class="knobs">
+            <span></span>
+          </div>
+          <div class="layer"></div>
+        </div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <label class="form-label">Source {{ addEditVar.valuesource }}</label>
+        <span class="text-danger">*</span>
+        <select
+          required
+          [disabled]="addEditVar.uielementtype === 'DROPDOWN' && isDependent"
+          class="form-control"
+          (change)="selectSource()"
+          name="source"
+          #source="ngModel"
+          [(ngModel)]="addEditVar.valuesource"
+        >
+          <option value="">Select Source</option>
+          <option *ngFor="let source of allSources" [value]="source">
+            {{ source }}
+          </option>
+        </select>
+      </div>
+      <div
+        class="col-md-6 mt-4"
+        *ngIf="
+          addEditVar.valuesource === 'OTHERS' &&
+          addEditVar.uielementtype === 'MULTIVALUE'
+        "
+      >
+        <label class="form-label"
+          >Parameter Length <span class="text-danger">*</span></label
+        >
+        <input
+          type="text"
+          required
+          class="form-control"
+          name="selectedUrl"
+          #label="ngModel"
+          [(ngModel)]="addEditVar.selectedUrl"
+        />
+      </div>
+
+      <div
+        class="col-md-6 mt-4"
+        *ngIf="
+          !isDependent &&
+          addEditVar.valuesource === 'URL' &&
+          addEditVar.uielementtype === 'DROPDOWN'
+        "
+      >
+        <label class="form-label"
+          >Resource Url <span class="text-danger">*</span></label
+        >
+        <input
+          type="text"
+          required
+          class="form-control"
+          name="selectedUrl"
+          #label="ngModel"
+          [(ngModel)]="addEditVar.selectedUrl"
+        />
+      </div>
+
+      <div
+        class="col-md-6 mt-4"
+        *ngIf="
+          !isDependent &&
+          addEditVar.valuesource === 'REFDATA' &&
+          addEditVar.uielementtype === 'DROPDOWN'
+        "
+      >
+        <label class="form-label">Reference Data Value</label>
+        <!-- <select
+          [required]="addEditVar.uielementtype === 'DROPDOWN' && !isDependent"
+          class="form-control"
+          name="refcode"
+          #refcode="ngModel"
+          [(ngModel)]="addEditVar.refdatacode"
+        >
+          <option value="">Select Reference Data</option>
+          <option
+            *ngFor="let refcode of dropDownData.refData"
+            [value]="refcode.code"
+          >
+            {{ transfromRefdata(refcode.code) }}
+          </option>
+        </select> -->
+
+        {{ addEditVar.refdatacode }}
+        <app-dropdown-search
+          [value]="addEditVar.refdatacode"
+          [placeholder]="'Reference Data Value'"
+          [dataList]="referenceDataList"
+          [id]="''"
+          [setting]="variableSetting"
+          ($onSelectItem)="changeRefDataCode($event)"
+        ></app-dropdown-search>
+        <div
+          class="col-md-24 mt-2"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: start;
+          "
+        >
+          <label class="">
+            <input
+              type="checkbox"
+              class="mr-1 cursor-pointer"
+              [checked]="isMultiLevel"
+              (change)="checkboxToggleIsMultilevel($event)"
+            />
+            Multilevel Dropdown
+          </label>
+
+          <div
+            *ngIf="isMultiLevel"
+            style="
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 5px;
+              margin-bottom: 5px;
+            "
+          >
+            <div>Choose Level :</div>
+            <select name="levels" [(ngModel)]="addEditVar.refDataLevel" (change)="onLevelChange($event)">
+              <option value="">Select Level</option>
+              <option *ngFor="let option of levelOptions; let i = index" [value]="i + 1" [id]="'levelOption' + (i + 1)">
+                Level {{ i + 1 }}
+              </option>
+            </select>
+          </div>
+
+          <label class="">
+            <input
+              type="checkbox"
+              class="mr-1 cursor-pointer"
+              [checked]="addEditVar.isDropdownDependent"
+              (change)="checkboxToggleIsDropdownDependant()"
+            />
+            Dropdown Dependent
+          </label>
+          <div *ngIf="addEditVar.isDropdownDependent" class="col-md-6 no-padding">
+            <!-- <select class="form-control" name="parent" (change)="selectParentDropdown($event)">
+              <option value="">Select Parent Variable</option>
+              <option *ngFor="let parent of procVars" [value]="parent.label">
+                {{ parent.label }}
+              </option>
+            </select> -->
+            <app-dropdown-search
+            [value]="addEditVar.parentDropdownName"
+            [placeholder]="'Select Parent Variable'"
+            [dataList]="parentVarDropdown"
+            [id]="''"
+            [setting]="variableSetting"
+            ($onSelectItem)="selectParentDropdown($event)"
+          ></app-dropdown-search>
+          </div>
+        </div>
+
+  
+      </div>
+
+      <!-- <div
+        class="mt-4 col-md-12"
+        *ngIf="
+          addEditVar.uielementtype === 'DROPDOWN' &&
+          addEditVar.valuesource !== 'EMPTY'
+        "
+      > -->
+      <div class="mt-4 col-md-12">
+        <!-- <label *ngIf="addEditVar.uielementtype === 'DROPDOWN' && addEditVar.valuesource !== 'EMPTY'" class="">
+          <input
+            type="checkbox"
+            class="mr-1 cursor-pointer"
+            [checked]="isDependent"
+            (change)="checkboxToggle()"
+          />
+          Dependent Variable
+        </label> -->
+        <!-- <label *ngIf="addEditVar.uielementtype !== 'DROPDOWN'" class=""> -->
+        <label class="">
+          <input
+            type="checkbox"
+            class="mr-1 cursor-pointer"
+            [checked]="addEditVar.isDependantVar"
+            (change)="checkboxToggleisDependant()"
+          />
+          Dependent Variable
+        </label>
+        <!-- <div
+          class="col-md-6 no-padding"
+          *ngIf="addEditVar.uielementtype === 'DROPDOWN' && isDependent"
+        >
+          <select
+            class="form-control"
+            name="parent"
+            #parent="ngModel"
+            [(ngModel)]="addEditVar.parentname"
+          >
+            <option value="">Select Parent Variable</option>
+            <option *ngFor="let parent of parentVar" [value]="parent">
+              {{ parent }}
+            </option>
+          </select>
+        </div> -->
+        <!-- <div
+          class="col-md-12 no-padding"
+          *ngIf="
+            addEditVar.uielementtype !== 'DROPDOWN' && addEditVar.isDependantVar && procVars
+          "
+        > -->
+        <div
+          class="col-md-12 no-padding"
+          *ngIf="addEditVar.isDependantVar && procVars"
+        >
+          <!-- <div class="form-group col-12">
+            <label>Conditions</label>
+            <span (click)="addRuleSet()" class="fa fa-plus float-right font-weight-light cursor-pointer"></span>
+          
+            <div class="conditionsWrap">
+              <div class="d-flex border-bottom-1 mb-4 position-relative align-items-center" style="gap: 5px;" *ngFor="let rule of ruleset; let i = index">
+                <span class="fa fa-minus delIcon cursor-pointer" (click)="deleteRuleSet(i)"></span>
+               <div>
+                <select  (change)="onParentVariableChange($event)" class="form-control" name="" id="">
+                  <option value="">Select Parent Variable</option>
+            <option *ngFor="let parent of procvars" [value]="parent.name">
+              {{ parent.displaylabel }}
+            </option>
+                </select>
+               </div>
+               <div>
+                <select (change)="onOperatorChange($event)" class="form-control" name="" id="">
+                  <option value="">Select Operator</option>
+            <option *ngFor="let operator of logicalOperators" [value]="operator.value">
+              {{ operator.label }}
+            </option>
+                </select>
+               </div>
+               <div>
+                 <input class="form-control" type="text" placeholder="Enter value" (change)="onInputChange($event)">
+               </div>
+              </div>
+            </div>
+          </div> -->
+
+          <app-rule-set
+            #ruleSet
+            [procVars]="procVars"
+            [edit]="isEdit"
+            [ruleset]="ruleSetModel"
+            (ruleSetEmit)="addRuleSet($event)"
+          >
+          </app-rule-set>
+        </div>
+      </div>
+      <div *ngIf="addEditVar.reviewvariable" class="col-md-4 mt-4">
+        <label class="form-label">Map Review Variable Group</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          name="groupselect"
+          [(ngModel)]="mappedReviewGroup"
+          [settings]="groupDropdownSettings"
+          [data]="groups"
+          #selgroup="ngModel"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="col-md-12 mt-4">
+        <label class="form-label">Description</label>
+        <textarea
+          type="text"
+          class="form-control inputstyle pt-1"
+          placeholder="Enter Description.."
+          name="description"
+          #description="ngModel"
+          [(ngModel)]="addEditVar.description"
+        >
+        </textarea>
+      </div>
+
+      <!-- new expression feature -->
+
+      <div class="col-md-12 mt-4">
+        <!-- <textarea
+        type="text"
+        class="form-control inputstyle pt-1"
+        placeholder="Enter Expression..."
+        name="expression"
+        #description="ngModel"
+        [(ngModel)]="addEditVar.expression"
+      >
+      </textarea> -->
+        <label class="form-label">Expression</label>
+        <input
+          type="text"
+          class="form-control inputstyle pt-1"
+          placeholder="Enter Expression..."
+          name="addEditVar.expression"
+          #expression
+          (input)="handleExpressionChange($event)"
+          [value]="addEditVar.expression"
+          [ngbTypeahead]="searchNamesArray"
+          (selectItem)="addVarNames($event)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      [disabled]="!form.valid"
+      (click)="save()"
+      class="btn primarybtnstyle"
+    >
+      Save
+    </button>
+    <!-- <button type="submit" class="btn primarybtnstyle">Save</button> -->
+  </div>
+</form>

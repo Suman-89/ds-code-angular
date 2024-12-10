@@ -1,0 +1,19 @@
+{
+  "company" :[
+  { "text": "Name", "datafield": "name", "width": 200  },
+  { "text": "ID", "datafield": "id", "width":80 },
+  { "text": "Code", "datafield": "code",  "width": 200 },
+  { "text": "Company Short Name", "datafield": "friendlyname" },
+  { "text": "aadhaarId", "datafield": "aadhaarId" },
+  { "text": "Carrier Type", "datafield": "carriertype" },
+  { "text": "Aliases", "datafield": "aliases" },
+  { "text": "Group", "datafield": "groupname" },
+  { "text": "Parent", "datafield": "parentname" },
+  { "text": "Status", "datafield": "status" }
+], 
+ "country": [
+  { "text": "Country Name", "datafield": "countryname" },
+  { "text": "Country Code", "datafield": "countrycode", "hidden": true },
+  { "text": "Code", "datafield": "code", "hidden": true }
+  ]
+}

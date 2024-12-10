@@ -1,0 +1,25 @@
+.modal-cont {
+    padding-top: 30px;
+    // height: 85vh;
+    // overflow: scroll;
+    .header {
+        position: relative;
+
+        h3 {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 0px;
+        }
+        .modal-actions {
+            position: absolute;
+            right: 20px;
+            top: 0px;
+            cursor: pointer;
+        }
+    }
+}
+
+
+.main-cont{
+    height:80vh;
+}

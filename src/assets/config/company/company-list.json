@@ -1,0 +1,9 @@
+[
+  {"id": "1","name":"Verizon", "hasParent": false, "parentId": "", "parentname":""},
+  {"id": "2","name":"Vodafone", "hasParent": false, "parentId": "", "parentname":""},
+  {"id": "3","name":"Idea", "hasParent": false, "parentId": "", "parentname":""},
+  {"id": "4","name":"Bharati Airtel", "hasParent": false, "parentId": "", "parentname":""},
+  {"id": "5","name":"Verizon US", "hasParent": true, "parentId": "1", "parentname":"Verizon"},
+  {"id": "5","name":"Verizon RSA", "hasParent": true, "parentId": "1", "parentname":"Verizon"},
+  {"id": "5","name":"Verizon UK", "hasParent": true, "parentId": "1", "parentname":"Verizon"}
+]

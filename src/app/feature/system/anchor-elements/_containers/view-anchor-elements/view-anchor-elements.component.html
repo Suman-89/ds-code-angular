@@ -1,0 +1,20 @@
+ 
+
+ <div class="container-fluid" >
+  <div class="pageHeaderWrap" >
+    <div class="pageHeader">
+      {{selectedProcess}}<span class="secondary-color"  style="font-size:22px;padding-left:5px;">|</span>
+      Anchor Elements
+    </div>
+  </div>
+  <div class="w-100 gridCont" *ngIf="procForms">
+      <app-grid-toolbar #gridintsance
+      [selectionMode]="'radio'"
+      [type]="gridType.anchor_entity"
+      [data]="procForms"
+      (emitAction)="selectRow($event)"
+      (doubleClick)="doubleClick($event)"
+      >
+     </app-grid-toolbar>
+  </div>
+ </div>

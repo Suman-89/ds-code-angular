@@ -1,0 +1,12 @@
+.actions {
+  display: flex;
+  float: right;
+  margin-bottom: 10px;
+
+  .action-btn {
+    button {
+      margin-left: 5px;
+      height: 100%;
+    }
+  }
+}

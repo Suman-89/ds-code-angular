@@ -1,0 +1,160 @@
+@import "variables";
+nav {
+  padding: 0 15px 0px 10px;
+  a {
+    border: none;
+  }
+  .navbar-brand {
+    padding-bottom: 10px;
+    max-width: 200px;
+    img {
+      height: 50px;
+      border-radius: 6px;
+    }
+
+    .ibasis-header {
+      img {
+        height: 40px;
+      }
+    }
+  }
+  #navbarNav {
+    justify-content: space-between;
+    .search-form {
+      min-width: 45%;
+      .inputstyle {
+        &:hover,
+        &:focus {
+          box-shadow: $box-shadow-style;
+        }
+      }
+    }
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          padding: 0 15px;
+          line-height: 60px;
+          display: block;
+          max-height: 60px;
+          &.noti-icon-container {
+            position: relative;
+            .noti-icon {
+              font-size: 20px;
+              vertical-align: middle;
+              color: var(--primaryColor);
+            }
+            .noti-icon-badge {
+              position: absolute;
+              top: 12px;
+              right: 7px;
+              font-size: 12px;
+            }
+          }
+
+          &.nav-user {
+            img {
+              height: 35px;
+            }
+            .welcome-msg {
+              font-size: 12px;
+              margin-left: 5px;
+              color: #898585;
+              text-transform: capitalize;
+              line-height: 12px;
+              .uname {
+                //color: $brand-primary-color;
+                font-weight: 400;
+              }
+            }
+            .avtarContainer {
+              width: 40px;
+              /* margin: 0 auto; */
+              cursor: pointer;
+              padding: 4px 0;
+              /* &::after{
+                display: none;
+              }  */
+              .avtarmain {
+                width: 100%;
+                padding-top: 100%;
+                position: relative;
+                /* &::after{
+                  display: none;
+                } */
+                .avtartext {
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  -webkit-box-align: center;
+                  align-items: center;
+                  -webkit-box-pack: center;
+                  justify-content: center;
+                  display: -webkit-box;
+                  display: flex;
+                  font-size: 16px;
+                  border: 2px solid var(--primaryColor);
+                  border-radius: 50%;
+                  background-color: var(--primaryColor);
+                  color: white;
+                  text-transform: uppercase;
+                }
+              }
+            }
+          }
+        }
+        .notification-item-list {
+          max-height: 200px;
+          overflow: auto;
+          width: 400px;
+          .notify-item {
+            padding: 10px 20px;
+            // width:200px;
+            &:hover {
+              background: rgba(206, 235, 232, 0.38);
+            }
+            &.active {
+              color: var(--primaryColor);
+              background: rgba(206, 235, 232, 0.5);
+            }
+            .notify-icon {
+              float: left;
+              height: 36px;
+              width: 36px;
+              text-align: center;
+              margin-right: 10px;
+              border-radius: 50%;
+              color: #ffffff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .notify-details {
+              margin-bottom: 0;
+              overflow: hidden;
+              // margin-left: 45px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              font-weight: 500;
+            }
+            &.read {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.role {
+  color: #c1c1c1;
+}
+.name {
+  color: var(--primaryColor);
+  font-weight: 500;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

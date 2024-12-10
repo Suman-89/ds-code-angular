@@ -1,0 +1,31 @@
+<input
+  *ngIf="search == 'dynamic'"
+  [ngClass]="fromVoice ? 'inlineInput' : 'inputstyle form-control'"
+  [required]="required"
+  [placeholder]="'Type to search '"
+  [ngbTypeahead]="searchArray"
+  autocomplete="off"
+  [inputFormatter]="searchFormatter"
+  [resultFormatter]="searchFormatter"
+  (selectItem)="emitResult($event)"
+  (click)="focus$.next($event.target.value)"
+  [(ngModel)]="typeAheadVal"
+/>
+
+<input
+  *ngIf="search == 'local'"
+  [ngClass]="fromVoice ? 'inlineInput' : 'inputstyle form-control'"
+  [required]="required"
+  [placeholder]="'Type to search '"
+  [ngbTypeahead]="localArrayFn"
+  autocomplete="off"
+  [inputFormatter]="searchFormatter"
+  [resultFormatter]="searchFormatter"
+  (selectItem)="emitResult($event)"
+  (click)="focus$.next($event.target.value)"
+  [(ngModel)]="typeAheadVal"
+/>
+
+<div *ngIf="loading" class="spinner">
+  <img src="./assets/images/spinner.gif" />
+</div>

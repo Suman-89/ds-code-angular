@@ -1,0 +1,32 @@
+@import "../file-uploader-modal/file-uploader-modal.component.scss";
+@import "variables";
+
+::ng-deep {
+  .mention {
+    &.user-mention {
+      color: var(--secondaryColor) !important;
+    }
+    &.group-mention {
+      color: var(--primaryColor) !important;
+    }
+    &.doc-mention {
+      color: var(--tertiarycolor) !important;
+    }
+  }
+}
+// .cmnt-container {
+//   //height:118px
+// }
+.uploadContainer {
+  min-height: 302px;
+  width: 100%;
+  border: 1px dashed rgba(42, 168, 155, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+.docInfo {
+  padding: 20px;
+}

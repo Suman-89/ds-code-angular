@@ -1,0 +1,150 @@
+<div class="grid-toolbar-cont">
+  <div class="toolbar-cont ui-zoom-class">
+    <div class="flex">
+      <app-toolbar
+        *ngIf="!statePredefined"
+        [buttons]="buttons"
+        (actionEmit)="toolbarEmit($event)"
+      ></app-toolbar>
+      <ng-container *ngIf="statePredefined && filterable">
+        <button
+          class="btn adjust-btn-size primarybtnstyle rightFloat"
+          (click)="saveGridDefinition()"
+        >
+          Save Report
+        </button>
+      </ng-container>
+      <ng-container *ngIf="statePredefined && !filterable">
+        <button
+          class="btn adjust-btn-size primarybtnstyle rightFloat"
+          (click)="onlyDownload()"
+        >
+          Download
+        </button>
+      </ng-container>
+      <div
+        class="gridBtns"
+        *ngIf="showfixedBtns"
+        ngbDropdown
+        container="body"
+        placement="bottom-right"
+        (openChange)="chooseColumns($event)"
+      >
+        <ng-container *ngIf="showExportXlsxButton && !statePredefined">
+          <button
+            *ngIf="showSaveReportButton && ifContractProcess"
+            class="btn adjust-btn-size primarybtnstyle"
+            (click)="openConfirmExportModal()"
+          >
+            Save Report
+          </button>
+          <!-- <button
+            class="btn adjust-btn-size secondarybtnstyle"
+            (click)="exportXls()"
+            *ngIf="ifContractProcess || !showSaveReportButton"
+          >
+            Export Xlsx
+          </button> -->
+          <button
+            class="btn adjust-btn-size secondarybtnstyle"
+            (click)="exportXls()"
+            *ngIf="showExportXlsxButton"
+          >
+            Export Xlsx
+          </button>
+        </ng-container>
+        <ng-container *ngIf="!statePredefined">
+          <button
+            class="btn adjust-btn-size secondarybtnstyle"
+            (click)="clearFilters()"
+          >
+            Clear Filters
+          </button>
+        </ng-container>
+        <button
+          class="btn adjust-btn-size secondarybtnstyle"
+          (click)="resetGrid()"
+        >
+          <ng-container *ngIf="!statePredefined">
+            Reset Grid Preferences
+          </ng-container>
+          <ng-container *ngIf="statePredefined"> Back To Default </ng-container>
+        </button>
+        <button class="btn adjust-btn-size secondarybtnstyle" ngbDropdownToggle>
+          Choose Columns
+        </button>
+        <div ngbDropdownMenu class="dropdown-menu">
+          <div style="margin: 10px 0px">
+            <ng-container *ngIf="!statePredefined">
+              <div class="items" *ngFor="let column of selectedColumns">
+                <input
+                  class="customCheckbox"
+                  (change)="columnClicked(column)"
+                  [checked]="column.checked"
+                  type="checkbox"
+                />
+                <label>{{ column.text }}</label>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="statePredefined">
+              <div class="items" *ngFor="let column of preCalculatedColumns">
+                <input
+                  class="customCheckbox"
+                  (change)="preCalculatedColumnClicked(column)"
+                  [checked]="!column.hidden"
+                  type="checkbox"
+                />
+                <label>{{ column.text }}</label>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid-cont" *ngIf="columns.length > 1 && source && sourceMapReady">
+    <app-grid
+      #grid
+      [darkTheme]="darkTheme"
+      [rowIndex]="rowIndex"
+      [selectFirstRow]="selectFirstRow"
+      [type]="type"
+      [columns]="statePredefined ? preCalculatedColumns : columns"
+      [source]="source"
+      [ready]="ready"
+      [pageable]="pageable"
+      [groups]="groups"
+      [selectionMode]="selectionMode == 'checkbox' ? 'checkbox' : 'singlerow'"
+      [autoHeight]="!gridHeightFull"
+      [showRowDetails]="showRowDetails"
+      [nestedSourceData]="nestedSourceData"
+      [width]="width"
+      [height]="height"
+      filterable
+      [editable]="editable"
+      [localization]="localization"
+      [statePredefined]="statePredefined"
+      [filterable]="filterable"
+      [sortable]="sortable"
+      [groupable]="groupable"
+      [columnsreorder]="columnsreorder"
+      [predefinedState]="predefinedState"
+      (onFilterChange)="statePredefined ? onFilterChange($event) : null"
+      (lengthOfFilterData)="filterLength($event)"
+      (filterData)="filteredData($event)"
+      (onRowSelect)="statePredefined ? null : onGridRowSelect($event)"
+      (onRowUnselect)="statePredefined ? null : onGridRowUnselect($event)"
+      (onRowDoubleClick)="statePredefined ? null : onGridDoubleClick($event)"
+      (emitRowForNesting)="statePredefined ? null : emitRowForNesting($event)"
+      (singleClickEvent)="
+        statePredefined ? null : emitCellSingleClickEvent($event)
+      "
+      (celldblClickEvent)="
+        statePredefined ? null : emitCellDblClickEvent($event)
+      "
+      (cellValueChangeEmit)="
+        statePredefined ? null : emitCellValueChange($event)
+      "
+    ></app-grid>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+@import "src/app/shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.readonly {
+  background: transparent;
+  pointer-events: auto;
+}
+
+.uploadContainer {
+  min-height: 180px;
+  // height: 100%;
+  width: 100%;
+  // border: 1px dashed rgba(var(--primaryColorRGB), 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .fileInfo {
+    text-align: center;
+    color: var(--primaryColor);
+    font-weight: 400;
+    i {
+      font-size: 20px;
+    }
+    @media (max-width: 425px) {
+      h4 {
+        font-size: 14px;
+      }
+    }
+  }
+  &.is-invalid {
+    border-color: var(--dangerColor);
+  }
+}

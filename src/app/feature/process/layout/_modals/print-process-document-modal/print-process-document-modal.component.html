@@ -1,0 +1,83 @@
+<div>
+    <div class="modal-header">
+      <div>
+        <h5 class="modal-title mt-0">
+        {{partnerLegalName}} <span class="secondary-color">&nbsp;|&nbsp;</span>
+        {{product}} <span class="secondary-color">&nbsp;|&nbsp;</span>
+        {{contractType}}
+        </h5>
+      </div>
+        
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <img src="./assets/images/cross.png">
+      </button>
+    </div>
+    <div class="modal-body" >
+      <div class="row no-gutters">
+       <div class="col-md-8">
+        <h6>Process Documents</h6>
+        <div>
+          <label class="container">
+            <input type="checkbox" [checked]="allSelected" (change)="toggleAllSelection($event.target)">
+            <span class="checkmark"></span>
+          </label> 
+          <span class="pl-4">Select All</span>
+        </div>
+        <div class="documentCont">
+            <div class="documentRow position-relative" *ngFor="let doc of docs; let i = index">
+                <div class="position-absolute">
+                 <label class="container">
+                  <input type="checkbox" [checked]="doc.selected" (change)="toggleDocSelection($event.target, i)">
+                  <span class="checkmark"></span>
+                </label> 
+                </div>
+                <div style="padding-left:25px">
+                  <app-document-icon class="documenticon inline" [MIMEType]="doc.mimetype"></app-document-icon>
+                  <div class="docname inline">{{doc.logicaldocname}}
+                      <span class="comment inline" *ngIf="doc.version">&nbsp;({{doc.version}})</span>
+                     <div style="font-size:12px">
+                        <span class="secondary-color">{{doc.foldername === 'In Process' ? 'Contract Document' : doc.foldername}} </span>
+                        <span class="secondary-color" *ngIf="doc.foldername !== 'Miscellaneous'">
+                          <span class="primary-color font-weight-bold"> &nbsp;|&nbsp; </span>
+                          {{getDocTypefromFolder(doc)}}
+                        </span>
+                      </div>
+                     <div class="comment mt-1 mb-1">Created: {{doc.createdbyname}} <span class="primary-color font-weight-bold"> &nbsp;|&nbsp; </span>
+                                                      {{doc.createddate | date:'dd-MMM-yyyy HH:mm'}}
+                      </div>
+                      <div *ngIf="doc.metadata.ibasisContractingEntity" class="comment mt-1 mb-1">Contracting Entity: {{doc.metadata.ibasisContractingEntity}}</div>
+                      <div class="badge checkoutinfo text-light"  *ngIf="doc.checkoutby ">Checked Out: {{doc.checkedoutusername}}
+                        <span class="font-weight-bold"> &nbsp;|&nbsp; </span> {{doc.checkedoutdate |  date:'dd-MMM-yyyy HH:mm' }} </div>
+                      <div class="badge checkoutinfo text-light" *ngIf="!doc.checkoutby && doc.updateuserid">Last Updated: {{doc.updatebyname}}
+                        <span class="font-weight-bold"> &nbsp;|&nbsp; </span>{{doc.modifieddate | date:'dd-MMM-yyyy HH:mm' }} </div>
+                  </div>
+                 </div>
+                <i *ngIf="doc.confidential" class="fa fa-lock lockIcon"></i>
+            </div>
+        </div>
+
+       </div>
+       <div class="col-md-4 pl-2">
+            <h6>Supporting Documents</h6>
+            <p class="pl-1 position-relative" *ngFor="let supdoc of supportingDocs; let idx = index">
+             <span class="pr-1">
+              <label class="container">
+                <input type="checkbox" disabled [checked]="supdoc.selected" (change)="toggleSupportingDocSelection($event.target, idx)">
+                <span class="checkmark"></span>
+              </label> 
+             </span>  
+
+             
+             <span class="pl-4">{{supdoc.name}} </span>
+            </p>
+       </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn secondarybtnstyle" (click)="close()">Cancel</button>
+        <!-- <button type="submit" [disabled]="checkForNoSelect()" class="btn primarybtnstyle" (click)="printDocs()">Print</button> -->
+        <button type="submit" class="btn primarybtnstyle" (click)="printDocs()">Print</button>
+    </div>
+</div>
+  
+  

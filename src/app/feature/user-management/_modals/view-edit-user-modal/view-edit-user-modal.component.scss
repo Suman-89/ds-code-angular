@@ -1,0 +1,72 @@
+@import "../../../../shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.modal-body {
+  overflow-y: scroll;
+  height: 70vh;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex2 {
+  display: flex;
+}
+.form-label {
+  font-size: small;
+  margin: 0.25rem 0;
+  font-weight: 400;
+}
+.invisible {
+  visibility: hidden;
+}
+.btn-outline-primary {
+  border-color: var(--primaryColor);
+  color: var(--primaryColor);
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+  background-color: var(--primaryColor) !important;
+  color: white !important;
+}
+// .no-padding {
+//   // padding-bottom: 0;
+// }
+::ng-deep {
+  .multiselect-dropdown {
+    font-size: small !important;
+    // margin-top: -0.5em !important;
+  }
+
+  .phone{
+    display: flex;
+    gap: 5px;
+  }
+
+  .singleSelection {
+    .multiselect-item-checkbox {
+      div {
+        padding-left: 0 !important;
+        &::before {
+          content: unset !important;
+        }
+        &::after {
+          content: unset !important;
+        }
+      }
+    }
+  }
+  .selected-item {
+    font-size: 13px;
+  }
+  .fileuploader {
+    position: relative;
+    .hidden {
+      position: absolute;
+      top: 0;
+      opacity: 0;
+    }
+  }
+  .inputstyle {
+    width: 80%;
+  }
+}

@@ -1,0 +1,167 @@
+<div class="initiate-prescreening">
+  <div class="recruiters">
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12">
+        <label> Recruiters <sup>*</sup> </label>
+        <app-type-ahead
+          [type]="'recruiters'"
+          [createAllowed]="false"
+          (resultEmitter)="selectRecruiter($event)"
+        >
+        </app-type-ahead>
+      </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12" *ngIf="showHiringCompany">
+        <label> Hiring Company <sup>*</sup> </label>
+        <input
+          [(ngModel)]="hiringCompForm"
+          class="inputstyle readonly form-control"
+          [(ngModel)]="selectedHiringCompany"
+          [placeholder]="'Select Hiring Company'"
+          [ngbTypeahead]="hiringListArrFn"
+          [required]="true"
+          readonly
+          [inputFormatter]="searchHiringCompany"
+          [resultFormatter]="searchHiringCompany"
+          (selectItem)="selectHiringCompany($event)"
+          (click)="focusHiringCompanyType$.next($event.target.value)"
+        />
+      </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12" *ngIf="showRole">
+        <label>Select Role<sup>*</sup></label>
+        <input
+          class="inputstyle readonly form-control"
+          [(ngModel)]="selectedRole"
+          [placeholder]="'Select Role'"
+          [ngbTypeahead]="selectRoleFn"
+          [required]="true"
+          readonly
+          [inputFormatter]="searchRoles"
+          [resultFormatter]="searchRoles"
+          (selectItem)="selectRole($event)"
+          (click)="focusSelectRole$.next($event.target.value)"
+          (ngModelChange)="roleObserver($event)"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="drop" *ngIf="selectedRole">
+    <label for="images" class="drop-container">
+      <span class="drop-title">{{
+        isFile ? isFile : "Choose Candidates' File"
+      }}</span>
+      <div class="col text-end pl-0">
+        <div ngbDropdown placement="right" class="d-inline-block float_right">
+          <button
+            type="button"
+            class="btn chooseOne PullFromZoho"
+            id="dropdownBasic2"
+            ngbDropdownToggle
+          >
+            Choose One
+          </button>
+          <div
+            class="dropdownDiv"
+            style="
+              box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+                rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+            "
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic2"
+          >
+            <div class="mx-4">
+              <input
+                #input_dom_element
+                type="file"
+                (change)="handleFileUpload($event)"
+                required
+                style="display: none"
+                id="img"
+              />
+              <label for="img" class="btn PullFromZoho" ngbDropdownItem>
+                Choose file
+              </label>
+            </div>
+
+            <div class="mx-4 mb-3">
+              <button
+                ngbDropdownItem
+                class="btn PullFromZoho"
+                (click)="pullData()"
+              >
+                Pull From Zoho
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </label>
+
+    <label for="images" class="drop-container">
+      <span class="drop-title">{{
+        isQuesFile ? isQuesFile : "Choose Questionnaire"
+      }}</span>
+      <div class="col text-end pl-0">
+        <div ngbDropdown placement="right" class="d-inline-block float_right">
+          <button
+            type="button"
+            class="btn chooseOne PullFromZoho"
+            ngbDropdownToggle
+          >
+            Choose One
+          </button>
+          <div
+            class="dropdownDiv"
+            style="
+              box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+                rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+            "
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic2"
+          >
+            <div class="mx-4">
+              <input
+                #input_dom_element
+                type="file"
+                (change)="handleQuestionsFileUpload($event)"
+                required
+                style="display: none"
+                id="ques"
+              />
+              <label for="ques" class="btn PullFromZoho" ngbDropdownItem>
+                Choose file
+              </label>
+            </div>
+
+            <div class="mx-4 mb-3">
+              <!-- click funcrtion remioved in questionaire -->
+              <button ngbDropdownItem class="btn PullFromZoho">
+                Pull From Zoho
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </label>
+    <!-- <label for="images" class="drop-container">
+      <span class="drop-title">Choose Questionnaire</span>
+      <input
+        #input_dom_element
+        type="file"
+        (change)="handleQuestionsFileUpload($event)"
+        required
+      />
+    </label> -->
+  </div>
+</div>
+<button
+  *ngIf="excelData"
+  class="primarybtnstyle btn"
+  (click)="submitData()"
+  [disabled]="submitBtnDisabler"
+>
+  Submit
+</button>

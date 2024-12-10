@@ -1,0 +1,94 @@
+[
+    {
+        "validators": {
+            "validation": [
+                { 
+                    "name": "passwordMatch", "options": { "errorPath": "passwordConfirm"}
+                }
+            ]
+        },
+        "fieldGroup" : [
+            {
+                "key": "id",
+                "type": "input",
+                "templateOptions": {
+                    "label": "User Id",
+                    "type": "text",
+                    "placeholder": "User Id",
+                    "required": true
+                },
+                "expressionProperties": {
+                    "templateOptions.disabled": "formState.disabled"
+                }
+            },
+            {
+                "key": "password",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Password",
+                    "type": "password",
+                    "placeholder": "Password",
+                    "required": true
+                },
+                "expressionProperties": {
+                    "templateOptions.disabled": "formState.disabled"
+                }
+            },
+            {
+                "key": "passwordConfirm",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Password (repeat)",
+                    "type": "password",
+                    "placeholder": "Please repeat password",
+                    "required": true
+                },
+                "expressionProperties": {
+                    "templateOptions.disabled": "formState.disabled"
+                }
+            },
+            {
+                "key": "fName",
+                "type": "input",
+                "templateOptions": {
+                    "label": "First Name",
+                    "placeholder": "First Name",
+                    "required": true
+                },
+                "expressionProperties": {
+                    "templateOptions.disabled": "formState.disabled"
+                }
+            },
+            {
+                "key": "lName",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Last Name",
+                    "placeholder": "Last Name",
+                    "required": true
+                },
+                "expressionProperties": {
+                    "templateOptions.disabled": "formState.disabled"
+                }
+            },
+            {
+                "key": "email",
+                "type": "input",
+                "templateOptions": {
+                    "label": "Email",
+                    "type": "email",
+                    "placeholder": "Email",
+                    "required": true
+                },
+                "expressionProperties": {
+                    "templateOptions.disabled": "formState.disabled"
+                },
+                "validators": {
+                    "validation": [
+                        "emailValid"
+                    ]
+                }
+            }
+        ]
+    }
+]

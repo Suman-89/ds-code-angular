@@ -1,0 +1,425 @@
+<div class="contentWrap {{ darkTheme ? 'darkTheme' : '' }}">
+  <div class="uploadDoc">
+    <button
+      class="btn primarybtnstyle"
+      (click)="openNewDocModal()"
+      [ngClass]="{
+        disabledBtn:
+          isViewTask() &&
+          (!taskDetails ||
+            taskDetails.group ||
+            taskDetails.readonly ||
+            taskDetails.reviewTask)
+      }"
+    >
+      + New Document
+    </button>
+    <button
+      class="btn primarybtnstyle float-right"
+      [ngClass]="{
+        disabledBtn:
+          !completedContract &&
+          (!taskDetails || taskDetails.group || taskDetails.readonly)
+      }"
+      *ngIf="(taskDetails && checkFormName()) || completedContract"
+      (click)="print()"
+    >
+      Print
+    </button>
+    <!-- completedContract in condition -->
+  </div>
+  <div class="documentsCont maxHeight" *ngIf="documentList">
+    <div class="w-100 position-relative">
+      <div class="filterResults" *ngIf="!selectedType.includes('All')">
+        <span *ngFor="let sel of selectedType; let i = index"
+          >{{ sel === "In Process" ? "Contract Document" : sel }} ({{
+            countDoc(sel)
+          }})
+          <i *ngIf="i !== selectedType.length - 1">, &nbsp;</i>
+        </span>
+        (Total - {{ documentList.length }})
+      </div>
+      <div class="filterResults" *ngIf="selectedType.includes('All')">
+        All Documents (Total - {{ documentList.length }})
+      </div>
+      <div class="filterIconContainer" *ngIf="docTypes">
+        <div ngbDropdown class="d-inline-block" container="body">
+          <div
+            *ngIf="viewType !== 'company'"
+            id="docdropdown"
+            class="position-relative cursor-pointer"
+            ngbDropdownToggle
+          >
+            <i
+              class="fa fa-filter filterIcon secondary-color"
+              [ngClass]="{ nofilter: selectedType.includes('All') }"
+            ></i>
+            <span class="filter-count" *ngIf="!selectedType.includes('All')">
+              {{ selectedType.length }}
+            </span>
+          </div>
+          <div
+            ngbDropdownMenu
+            class="dropdown-menu-right"
+            aria-labelledby="docdropdown"
+          >
+            <button
+              ngbDropdownItem
+              *ngFor="let type of docTypes"
+              (click)="filterDocument(type)"
+              class="position-relative"
+            >
+              <i
+                *ngIf="selectedType.includes(type)"
+                class="fa fa-check tickIcon"
+              ></i>
+              {{ type === "In Process" ? "Contract Document" : type }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- *ngIf="
+        documentTabSettings.includeTranscriptDocuments &&
+          documentTabSettings.includeTranscriptDocuments;
+        else othertemplate
+      " -->
+      <div
+        class="documentRow position-relative"
+        *ngFor="let doc of documentList"
+      >
+        <div
+          *ngIf="determineView(doc)"
+          [ngClass]="{ 'confidential-fade': doc.confidential }"
+        >
+          <app-document-icon
+            class="documenticon inline"
+            (click)="download(doc)"
+            [MIMEType]="doc.mimetype"
+          ></app-document-icon>
+          <div class="docname inline" (click)="download(doc)">
+            {{
+              doc.logicaldocname !== ""
+                ? doc.logicaldocname
+                : doc.metadata.partnerLegalName
+            }}
+            <span class="comment inline" *ngIf="doc.version"
+              >&nbsp;({{ doc.version }})</span
+            >
+            <!-- <div class="comment" *ngIf="doc.metadata && doc.metadata.docType">{{doc.metadata.docType}}</div> -->
+            <div style="font-size: 11px">
+              <span class="secondary-color"
+                >{{
+                  doc.foldername === "In Process"
+                    ? "Contract Document"
+                    : doc.foldername
+                }}
+              </span>
+              <span
+                class="secondary-color"
+                *ngIf="doc.foldername !== 'Miscellaneous'"
+              >
+                <span class="primary-color font-weight-bold">
+                  &nbsp;|&nbsp;
+                </span>
+                {{ getDocTypefromFolder(doc) }}
+                <ng-container
+                  *ngIf="
+                    selectedProcess?.key === 'Initiation_contentCreationProcess'
+                  "
+                >
+                  {{ getCourse() }}
+                  <span
+                    *ngIf="!!getCourse()"
+                    class="primary-color font-weight-bold"
+                  >
+                    &nbsp;|&nbsp;
+                  </span>
+                  {{ getModule() }}
+                </ng-container>
+              </span>
+            </div>
+            <!-- <div class="comment" *ngIf="doc.comment && doc.comment!=''" style="color:#2aa89b">{{doc.comment}}</div> -->
+            <div class="comment">
+              Created: {{ doc.createdbyname }}
+              <span class="primary-color font-weight-bold">
+                &nbsp;|&nbsp;
+              </span>
+              {{ doc.createddate | date : "dd-MMM-yyyy HH:mm" }}
+            </div>
+            <div *ngIf="doc.metadata?.ibasisContractingEntity" class="comment">
+              Contracting Entity: {{ doc.metadata.ibasisContractingEntity }}
+            </div>
+            <!-- <div class="comment mt-1 mb-1" *ngIf="doc.modifieddate">Last Modified: {{doc.modifieddate | date:'dd-MMM-yyyy HH:mm zzzz'}}</div> -->
+            <div class="badge checkoutinfo text-light" *ngIf="doc.checkoutby">
+              Checked Out: {{ doc.checkedoutusername }}
+              <span class="font-weight-bold"> &nbsp;|&nbsp; </span>
+              {{ doc.checkedoutdate | date : "dd-MMM-yyyy HH:mm" }}
+            </div>
+            <div
+              class="badge checkoutinfo text-light"
+              *ngIf="!doc.checkoutby && doc.updateuserid"
+            >
+              Last Updated: {{ doc.updatebyname }}
+              <span class="font-weight-bold"> &nbsp;|&nbsp; </span
+              >{{ doc.modifieddate | date : "dd-MMM-yyyy HH:mm" }}
+            </div>
+
+            <!--   {{doc.checkedOutBy.roleName}}</div>
+              <div class="comment" *ngIf="!doc.checkedOutBy && doc.lastUpdatedBy">Last Updated by:
+                  {{doc.lastUpdatedBy.name}} | {{doc.lastUpdatedBy.roleName}}</div> -->
+          </div>
+          <div class="inline pull-right">
+            <!-- <img
+            src="assets/images/icon-version-history.png"
+            container="body"
+            ngbTooltip="View Version History"
+            (click)="openVersionModal(doc)"
+            class="downloadicon"
+          /> -->
+
+            <i
+              class="fa fa-list-alt downloadicon"
+              ngbTooltip="View Version History"
+              (click)="openVersionModal(doc)"
+              placement="top-right"
+            ></i>
+            <!-- <img
+            src="assets/images/icon-cancel-checkout.png"
+            container="body"
+            ngbTooltip="Cancel Check Out"
+            *ngIf="
+              taskDetails &&
+              !taskDetails.group &&
+              !taskDetails.readonly &&
+              doc.checkoutby &&
+              checkUploadable(doc.foldername)
+            "
+            (click)="cancelCheckout(doc)"
+            class="downloadicon"
+          /> -->
+
+            <i
+              class="fa fa-ban downloadicon"
+              ngbTooltip="Cancel Check Out"
+              *ngIf="
+                taskDetails &&
+                !taskDetails.group &&
+                !taskDetails.readonly &&
+                doc.checkoutby &&
+                checkUploadable(doc.foldername)
+              "
+              (click)="cancelCheckout(doc)"
+            >
+            </i>
+            <!-- <img
+            src="assets/images/icon-check-in.png"
+            container="body"
+            ngbTooltip="Check In"
+            *ngIf="
+              taskDetails &&
+              !taskDetails.group &&
+              !taskDetails.readonly &&
+              doc.checkoutby &&
+              checkUploadable(doc.foldername)
+            "
+            (click)="checkIn(doc)"
+            class="downloadicon"
+          /> -->
+            <i
+              class="fa fa-upload downloadicon"
+              ngbTooltip="Check In"
+              *ngIf="
+                taskDetails &&
+                !taskDetails.group &&
+                !taskDetails.readonly &&
+                doc.checkoutby &&
+                checkUploadable(doc.foldername)
+              "
+              (click)="checkIn(doc)"
+            ></i>
+            <!-- <img
+            src="assets/images/icon-check-out.png"
+            container="body"
+            ngbTooltip="Check Out"
+            *ngIf="
+              determineView(doc) &&
+              checkAuth(doc) &&
+              taskDetails &&
+              !taskDetails.group &&
+              !taskDetails.readonly &&
+              checkUploadable(doc.foldername) &&
+              doc.foldername !== 'Executed Contracts' &&
+              doc.foldername !== 'Final-unsigned' &&
+              !doc.checkoutby
+            "
+            (click)="checkOut(doc)"
+            class="downloadicon"
+          /> -->
+            <i
+              class="fa fa-download downloadicon"
+              ngbTooltip="Check Out"
+              (click)="checkOut(doc)"
+              *ngIf="
+                determineView(doc) &&
+                checkAuth(doc) &&
+                taskDetails &&
+                !taskDetails.group &&
+                !taskDetails.readonly &&
+                checkUploadable(doc.foldername) &&
+                doc.foldername !== 'Executed Contracts' &&
+                doc.foldername !== 'Final-unsigned' &&
+                !doc.checkoutby
+              "
+            >
+            </i>
+          </div>
+        </div>
+        <i *ngIf="doc.confidential" class="fa fa-lock lockIcon"></i>
+      </div>
+    </div>
+    <!-- <ng-template #othertemplate>
+      <div
+        class="documentRow position-relative"
+        *ngFor="let doc of documentList"
+      >
+        <div *ngIf="doc.transcriptId === null">
+          <div
+            *ngIf="determineView(doc)"
+            [ngClass]="{ 'confidential-fade': doc.confidential }"
+          >
+            <app-document-icon
+              class="documenticon inline"
+              (click)="download(doc)"
+              [MIMEType]="doc.mimetype"
+            ></app-document-icon>
+            <div class="docname inline" (click)="download(doc)">
+              {{
+                doc.logicaldocname !== ""
+                  ? doc.logicaldocname
+                  : doc.metadata.partnerLegalName
+              }}
+              <span class="comment inline" *ngIf="doc.version"
+                >&nbsp;({{ doc.version }})</span
+              >
+              <div style="font-size: 11px">
+                <span class="secondary-color"
+                  >{{
+                    doc.foldername === "In Process"
+                      ? "Contract Document"
+                      : doc.foldername
+                  }}
+                </span>
+                <span
+                  class="secondary-color"
+                  *ngIf="doc.foldername !== 'Miscellaneous'"
+                >
+                  <span class="primary-color font-weight-bold">
+                    &nbsp;|&nbsp;
+                  </span>
+                  {{ getDocTypefromFolder(doc) }}
+                  <ng-container
+                    *ngIf="
+                      selectedProcess?.key ===
+                      'Initiation_contentCreationProcess'
+                    "
+                  >
+                    {{ getCourse() }}
+                    <span
+                      *ngIf="!!getCourse()"
+                      class="primary-color font-weight-bold"
+                    >
+                      &nbsp;|&nbsp;
+                    </span>
+                    {{ getModule() }}
+                  </ng-container>
+                </span>
+              </div>
+              <div class="comment">
+                Created: {{ doc.createdbyname }}
+                <span class="primary-color font-weight-bold">
+                  &nbsp;|&nbsp;
+                </span>
+                {{ doc.createddate | date : "dd-MMM-yyyy HH:mm" }}
+              </div>
+              <div
+                *ngIf="doc.metadata?.ibasisContractingEntity"
+                class="comment"
+              >
+                Contracting Entity: {{ doc.metadata.ibasisContractingEntity }}
+              </div>
+              <div class="badge checkoutinfo text-light" *ngIf="doc.checkoutby">
+                Checked Out: {{ doc.checkedoutusername }}
+                <span class="font-weight-bold"> &nbsp;|&nbsp; </span>
+                {{ doc.checkedoutdate | date : "dd-MMM-yyyy HH:mm" }}
+              </div>
+              <div
+                class="badge checkoutinfo text-light"
+                *ngIf="!doc.checkoutby && doc.updateuserid"
+              >
+                Last Updated: {{ doc.updatebyname }}
+                <span class="font-weight-bold"> &nbsp;|&nbsp; </span
+                >{{ doc.modifieddate | date : "dd-MMM-yyyy HH:mm" }}
+              </div>
+            </div>
+            <div class="inline pull-right">
+              <i
+                class="fa fa-list-alt downloadicon"
+                ngbTooltip="View Version History"
+                (click)="openVersionModal(doc)"
+                placement="top-right"
+              ></i>
+
+              <i
+                class="fa fa-ban downloadicon"
+                ngbTooltip="Cancel Check Out"
+                *ngIf="
+                  taskDetails &&
+                  !taskDetails.group &&
+                  !taskDetails.readonly &&
+                  doc.checkoutby &&
+                  checkUploadable(doc.foldername)
+                "
+                (click)="cancelCheckout(doc)"
+              >
+              </i>
+
+              <i
+                class="fa fa-upload downloadicon"
+                ngbTooltip="Check In"
+                *ngIf="
+                  taskDetails &&
+                  !taskDetails.group &&
+                  !taskDetails.readonly &&
+                  doc.checkoutby &&
+                  checkUploadable(doc.foldername)
+                "
+                (click)="checkIn(doc)"
+              ></i>
+
+              <i
+                class="fa fa-download downloadicon"
+                ngbTooltip="Check Out"
+                (click)="checkOut(doc)"
+                *ngIf="
+                  determineView(doc) &&
+                  checkAuth(doc) &&
+                  taskDetails &&
+                  !taskDetails.group &&
+                  !taskDetails.readonly &&
+                  checkUploadable(doc.foldername) &&
+                  doc.foldername !== 'Executed Contracts' &&
+                  doc.foldername !== 'Final-unsigned' &&
+                  !doc.checkoutby
+                "
+              >
+              </i>
+            </div>
+          </div>
+          <i *ngIf="doc.confidential" class="fa fa-lock lockIcon"></i>
+        </div>
+      </div>
+    </ng-template> -->
+  </div>
+</div>

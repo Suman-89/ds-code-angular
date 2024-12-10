@@ -1,0 +1,81 @@
+@import "variables";
+
+input[type="radio"]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: white;
+  content: "";
+  border: 1px solid var(--primaryColor);
+  display: inline-block;
+  visibility: visible;
+}
+
+input[type="radio"]:checked:after {
+  width: 9px;
+  height: 9px;
+  border-radius: 15px;
+  top: -6px;
+  left: 2px;
+  position: relative;
+  background-color: var(--primaryColor);
+  border: 1px solid var(--primaryColor);
+  display: inline-block;
+  visibility: visible;
+}
+
+input[type="date"] {
+  width: 100%;
+}
+
+.initiate-form {
+  max-width: 350px;
+
+  .form-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .radio-btns {
+    .radio-cont {
+      display: inline-block;
+      margin-right: 10px;
+
+      label {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.textarea-style {
+  width: 100%;
+  height: 60px;
+  padding: 5px 15px;
+}
+
+.contract-types {
+  .contract-type {
+    padding: 3px 15px;
+    border: 1px solid #d6d6d6;
+    border-radius: 25px;
+    line-height: 1;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 10px;
+
+    p {
+      display: inline;
+      margin-right: 5px;
+      font-size: 13px;
+    }
+    img {
+      width: 13px;
+      cursor: pointer;
+    }
+  }
+}

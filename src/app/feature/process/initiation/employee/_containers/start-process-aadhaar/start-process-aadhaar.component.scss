@@ -1,0 +1,95 @@
+.start-process-cont {
+  width: 100%;
+  // max-width: 900px;
+  margin: 0;
+  height: 100%;
+  // padding: 0px 20px;
+
+  .header-cont {
+    display: flex;
+    margin: 0px;
+    position: relative;
+
+    .header {
+      flex-grow: 1;
+
+      h5 {
+        margin: 0px;
+        text-align: center;
+      }
+    }
+    .action-btns {
+      position: absolute;
+      right: 0px;
+    }
+  }
+
+  .process-info-cont {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    padding: 15px 30px;
+    background: white;
+    box-shadow: 0 0 5px 3px #eee;
+
+    .initiate-form {
+      margin-bottom: 10px;
+
+      .btn-cont {
+        margin-top: 25px;
+      }
+    }
+    .aadhaar-info-cont {
+      width: 100%;
+    }
+
+    .flex-prop {
+      display: flex;
+      justify-content: space-between;
+      .doc-upload-cont {
+        flex-grow: 1;
+        max-width: 50%;
+        padding: 10px 10px 0px 20px;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+          rgba(0, 0, 0, 0.23) 0px 6px 6px;
+      }
+      .form-cont {
+        flex-grow: 1;
+        max-width: 40%;
+        padding: 10px 20px 0px 0px;
+
+        .pdf-container {
+          height: 600px;
+        }
+      }
+    }
+  }
+}
+
+pdf-viewer {
+  display: block;
+  height: 80vh;
+}
+
+.newdoc-btn {
+  margin: 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .flex-prop {
+    flex-direction: column;
+    justify-content: center;
+
+    .doc-upload-cont {
+      max-width: 100% !important;
+    }
+
+    .form-cont {
+      max-width: 60% !important;
+      margin-top: 20px;
+      align-self: center;
+    }
+  }
+}

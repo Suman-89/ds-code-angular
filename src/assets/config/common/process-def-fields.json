@@ -1,0 +1,26 @@
+{
+  "fieldsType": [
+    { "text": "String", "value": "input" },
+    { "text": "Long", "value": "number" },
+    { "text": "DateTime", "value": "date" },
+    { "text": "Date", "value": "date" },
+    { "text": "DROPDOWN", "value": "checkedlist" },
+    { "text": "Boolean", "value": "checkbox" },
+    { "text": "Number", "value": "number" },
+    { "text": "RANGE", "value": "range" }
+  ],
+
+  "cellFormat": [
+    { "text": "dd-MMM-yyyy", "value": "dd-MMM-yyyy" },
+    { "text": "MMM-dd-yyyy", "value": "MMM-dd-yyyy" },
+    { "text": "dd-MMM-yyyy HH:mm:ss", "value": "dd-MMM-yyyy HH:mm:ss" }
+  ],
+
+  "filterTypes": [
+    { "text": "String", "value": "input" },
+    { "text": "Checked List", "value": "checkedlist" },
+    { "text": "Single Date", "value": "date" },
+    { "text": "Range", "value": "range" },
+    { "text": "Plain", "value": "nofilter" }
+  ]
+}

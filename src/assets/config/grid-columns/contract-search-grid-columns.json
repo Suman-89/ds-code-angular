@@ -1,0 +1,154 @@
+[
+  {
+    "text": "Created",
+    "datafield": "created",
+    "filtertype": "date",
+    "cellsformat": "dd-MMM-yyyy",
+    "width": "15%"
+  },
+  {
+    "text": "Company Name",
+    "filtertype": "input",
+    "datafield": "partnername",
+    "width": "auto",
+    "minwidth": 150
+  },
+  { "text": "Task Name", "datafield": "taskname", "width": "150" },
+
+  { "text": "Group", "datafield": "groupname", "width": "150" },
+  { "text": "User", "datafield": "assignee", "width": "150" },
+  {
+    "text": "Task Status",
+    "filtertype": "checkedlist",
+    "datafield": "taskstatus",
+    "width": "auto",
+    "minwidth": 100
+  },
+  {
+    "text": "Product",
+    "filtertype": "checkedlist",
+    "datafield": "product",
+    "width": "auto",
+    "minwidth": 100
+  },
+  {
+    "text": "Contract Type",
+    "filtertype": "checkedlist",
+    "datafield": "contracttype",
+    "width": "auto",
+    "minwidth": 100
+  },
+  {
+    "text": "Contract Type (2nd Level)",
+    "filtertype": "checkedlist",
+    "datafield": "contractTypeSecondLevel",
+    "width": "auto",
+    "minwidth": 100
+  },
+  {
+    "text": "Sub Product",
+    "filtertype": "checkedlist",
+    "datafield": "productSecondLevel",
+    "width": "auto",
+    "hidden": "true",
+    "minwidth": 100
+  },
+  {
+    "text": "iBasis Contracting Entity",
+    "filtertype": "input",
+    "datafield": "cename",
+    "width": "auto",
+    "minwidth": 150
+  },
+  {
+    "text": "Country",
+    "filtertype": "input",
+    "datafield": "country",
+    "width": "auto",
+    "minwidth": 150
+  },
+  {
+    "text": "Overall Status",
+    "filtertype": "checkedlist",
+    "datafield": "overallStats",
+    "width": "auto",
+    "minwidth": 100
+  },
+  {
+    "text": "Task Elapsed Time (Hours)",
+    "datafield": "elapsedhour",
+    "width": "auto",
+    "cellsformat": "d2"
+  },
+  {
+    "text": "Task Elapsed Time (Days)",
+    "datafield": "elapseddays",
+    "width": "auto",
+    "cellsformat": "d2"
+  },
+
+  {
+    "text": "Contract Initiation Time",
+    "datafield": "contractinitiationtime",
+    "width": "200",
+    "filtertype": "range",
+    "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+  },
+  {
+    "text": "Processed Date",
+    "datafield": "processdate",
+    "filtertype": "range",
+    "cellsformat": "dd-MMM-yyyy",
+    "width": "200"
+  },
+  {
+    "text": "Start Time",
+    "datafield": "starttime",
+    "width": "200",
+    "filtertype": "range",
+    "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+  },
+  {
+    "text": "End Time",
+    "datafield": "endtime",
+    "width": "200",
+    "filtertype": "range",
+    "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+  },
+  {
+    "text": "Contract Elapsed Time (Days)",
+    "datafield": "contractelapsedtime",
+    "width": "auto",
+    "cellsformat": "d2"
+  },
+
+  { "text": "Contract ID", "datafield": "contractid", "width": "200" },
+  { "text": "Priority", "datafield": "casePriority", "width": "200" },
+  {
+    "text": "Contract Status",
+    "filtertype": "checkedlist",
+    "hidden": "true",
+    "datafield": "contractstatus",
+    "width": "auto",
+    "minwidth": 100
+  },
+
+  {
+    "text": "Currency",
+    "hidden": "true",
+    "datafield": "currency",
+    "width": "auto"
+  },
+  {
+    "text": "Status",
+    "hidden": "false",
+    "datafield": "status",
+    "width": "auto"
+  },
+  {
+    "text": "Region",
+    "hidden": "true",
+    "datafield": "region",
+    "width": "auto"
+  }
+]

@@ -1,0 +1,11 @@
+<div>
+  <div class="header">Initiate Prescreening</div>
+  <div>
+    <app-initiate-prescreening
+      (excelEmit)="excelDataCollector($event)"
+    ></app-initiate-prescreening>
+  </div>
+  <div class="main-grid">
+    <app-csv-extract [excelData]="excelData"></app-csv-extract>
+  </div>
+</div>

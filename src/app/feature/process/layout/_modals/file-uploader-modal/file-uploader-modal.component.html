@@ -1,0 +1,260 @@
+<form
+  *ngIf="
+    selectedProcess.key === 'Initiation_vMTProcess' && !isCompanyCodePresent
+  "
+  (ngSubmit)="saveCompany()"
+>
+  <div class="modal-header">
+    <div>Please select a company before uploading new document</div>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <img src="./assets/images/cross.png" />
+    </button>
+  </div>
+
+  <div class="form-group col-md-12 pt-2">
+    <label> Company <sup>*</sup> </label>
+    <app-type-ahead
+      [type]="'company'"
+      [value]="inputData.partnerLegalName"
+      [createAllowed]="false"
+      [required]="true"
+      [search]="'dynamic'"
+      (searchCleared)="clearCompany()"
+      (resultEmitter)="selectCompany($event)"
+    >
+    </app-type-ahead>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">
+      Cancel
+    </button>
+    <button
+      [disabled]="!this.inputData.companyCode"
+      type="submit"
+      class="btn primarybtnstyle"
+    >
+      Ok
+    </button>
+  </div>
+</form>
+
+<form
+  *ngIf="
+    selectedProcess.key !== 'Initiation_vMTProcess' || isCompanyCodePresent
+  "
+  #docUploadForm="ngForm"
+  (ngSubmit)="
+    docUploadForm.valid &&
+      (inputData.selectedDocument || isOnEditMode) &&
+      save()
+  "
+>
+  <div class="modal-header" *ngIf="inputData && inputData.companyLegalName">
+    <h5 class="modal-title mt-0">
+      Upload File for {{ inputData.companyLegalName }}
+    </h5>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <img src="./assets/images/cross.png" />
+    </button>
+  </div>
+
+  <div class="modal-header" *ngIf="inputData && !inputData.companyLegalName">
+    Upload File
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <img src="./assets/images/cross.png" />
+    </button>
+  </div>
+  <div class="modal-body modalheight">
+    <div class="row">
+      <div class="col-6">
+        <div
+          class="uploadContainer"
+          [ngClass]="{
+            'is-invalid':
+              !inputData.selectedDocument &&
+              !isOnEditMode &&
+              docUploadForm.submitted
+          }"
+        >
+          <div style="text-align: center; color: #9a9a9a">
+            <div
+              *ngIf="inputData.selectedDocument; else chooseFileTemplate"
+              class="fileInfo"
+            >
+              <i class="fa fa-file" style="font-size: 32px"></i>
+              <div>{{ inputData.selectedDocument.name }}</div>
+            </div>
+            <ng-template #chooseFileTemplate>
+              <i class="fa fa-file" style="font-size: 32px"></i>
+              <div style="font-size: 18px">Drop files here</div>
+              <div style="font-size: 17px">or</div>
+              <div style="font-size: 17px">Click here to upload.</div>
+            </ng-template>
+          </div>
+          <input
+            type="file"
+            [accept]="acceptList"
+            (change)="handleFileInput($event)"
+          />
+        </div>
+        <!-- <div class="col-6">
+          <label class="form-label">Comment</label>
+          <div class="cmnt-container">
+            <app-comment-box
+              #commentBox
+              *ngIf="multiMentionConfig.mentions.length > 1"
+              [commentMentionConfig]="multiMentionConfig"
+              [commentBoxOptions]="commentBoxOptions"
+              [showSubmitBtn]="false"
+            >
+            </app-comment-box>
+          </div>
+        </div> -->
+        <div *ngIf="!readonly && inputData.selectedDocument">
+          <label class="form-label">Document Name</label>
+          <input
+            class="form-control"
+            name="cname"
+            [(ngModel)]="inputData.filename"
+            type="text"
+            placeholder=""
+          />
+          <div class="edit-info">
+            You may change the document name in the box above.
+          </div>
+        </div>
+
+        <label class="form-label"
+          >Document Category <span class="text-danger">*</span></label
+        >
+        <ng-multiselect-dropdown
+          *ngIf="inputData && showdocs"
+          [placeholder]="'Select'"
+          id="dcat"
+          name="dcat"
+          #dcat="ngModel"
+          [(ngModel)]="inputData.doccat"
+          [settings]="dropdownSettings"
+          [data]="docCategories"
+          class="singleSelection"
+          (onSelect)="onItemSelect($event)"
+          [ngClass]="{
+            'is-invalid':
+              dcat.invalid &&
+              (isFirstFocusOutOnMulitiSelect || docUploadForm.submitted)
+          }"
+          required
+          (focusout)="isFirstFocusOutOnMulitiSelect = true"
+        ></ng-multiselect-dropdown>
+
+        <app-refdata-form
+          *ngIf="
+            inputData &&
+            inputData.doccat &&
+            inputData.doccat[0]?.code == documentCategoryEnum.companyDocuments
+          "
+          [(ngModel)]="inputData.cdoc"
+          name="cdoc"
+          [parentForm]="docUploadForm"
+          [refdataFormModel]="cdocRefdataFormModel"
+          [selRef]="compDocRefData"
+          [options]="cdocOptions"
+        ></app-refdata-form>
+
+        <app-refdata-form
+          *ngIf="
+            inputData &&
+            inputData.doccat &&
+            inputData.doccat[0]?.code == documentCategoryEnum.kyc
+          "
+          [(ngModel)]="inputData.cdoc"
+          name="cdoc"
+          [parentForm]="docUploadForm"
+          [refdataFormModel]="cdocRefdataFormModel"
+          [selRef]="kycRefData"
+          [options]="cdocOptions"
+        ></app-refdata-form>
+
+        <div
+          *ngIf="
+            inputData &&
+            inputData.doccat &&
+            inputData.doccat[0]?.code == documentCategoryEnum.businessCase
+          "
+        >
+          <label class="form-label">{{ businessCaseRefData.name }}</label>
+          <input
+            readonly
+            class="form-control"
+            [(ngModel)]="bcType"
+            name="cdoc"
+          />
+        </div>
+        <app-refdata-form
+          *ngIf="
+            inputData &&
+            inputData.doccat &&
+            inputData.doccat[0]?.code == documentCategoryEnum.ofac
+          "
+          [(ngModel)]="inputData.cdoc"
+          name="cdoc"
+          [parentForm]="docUploadForm"
+          [refdataFormModel]="cdocRefdataFormModel"
+          [selRef]="ofacDocRefData"
+          [options]="cdocOptions"
+        ></app-refdata-form>
+        <div
+          *ngIf="
+            inputData &&
+            inputData.doccat &&
+            (inputData.doccat[0]?.code ==
+              documentCategoryEnum.executedContracts ||
+              inputData.doccat[0]?.code == documentCategoryEnum.inprocess)
+          "
+        >
+          <label class="form-label"
+            >Template Type <span class="text-danger">*</span></label
+          >
+          <ng-multiselect-dropdown
+            [placeholder]="'Select'"
+            name="tmplt"
+            class="singleSelection"
+            [(ngModel)]="inputData.cdoc"
+            [data]="templates"
+            [settings]="dropdownSettingsTemplate"
+            #tmplt="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                tmplt.invalid &&
+                (isFirstFocusOutOnTemplateMulitiSelect ||
+                  docUploadForm.submitted)
+            }"
+            required
+            (focusout)="isFirstFocusOutOnTemplateMulitiSelect = true"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-6">
+        <label class="form-label">Comment</label>
+        <div class="cmnt-container">
+          <app-comment-box
+            #commentBox
+            *ngIf="multiMentionConfig.mentions.length > 1"
+            [commentMentionConfig]="multiMentionConfig"
+            [commentBoxOptions]="commentBoxOptions"
+            [showSubmitBtn]="false"
+          >
+          </app-comment-box>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">
+      Cancel
+    </button>
+    <button type="submit" class="btn primarybtnstyle">Save</button>
+  </div>
+</form>

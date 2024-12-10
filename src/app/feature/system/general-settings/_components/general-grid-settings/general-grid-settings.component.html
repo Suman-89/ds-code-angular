@@ -1,0 +1,24 @@
+<div class="pt-4">
+  <app-grid-setting-headers (addColumnEmitter)="addNewCol()">
+  </app-grid-setting-headers>
+</div>
+<div
+  *ngIf="
+    this.gridsettings[0]?.columns &&
+    this.gridsettings[0]?.columns.length > 0 &&
+    ready
+  "
+>
+  <div *ngFor="let column of this.gridsettings[0]?.columns; let index = index">
+    <app-grid-col-setting
+      [column]="column"
+      [index]="index"
+      [gridsettings]="gridsettings"
+      [variables]="filteredVariables"
+      [gridSettingType]="gridSettingTypeEnum.GENERAL_SETTINGS"
+      [gridConfigValues]="gridConfigValues"
+      [gridType]="gridTypeSetterEnum.BASIC"
+      (variableSelectedEmitter)="filterExistingVariables()"
+    ></app-grid-col-setting>
+  </div>
+</div>

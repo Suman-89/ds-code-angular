@@ -1,0 +1,52 @@
+<div class="btnswrap">
+  <hr />
+  <div class="uploadWrap inline" *ngIf="form">
+    {{ form.name }}
+    <span *ngIf="saved"
+      ><img style="width: 20px" src="./assets/images/icon-checked.png"
+    /></span>
+  </div>
+</div>
+<div class="task-form-container">
+  <div class="task-desc" *ngIf="form.description">
+    <p style="margin-bottom: 0px">{{ form.description }}</p>
+  </div>
+  <div
+    *ngIf="formlyVars && formlyVars.length > 0"
+    [ngClass]="{ disabledForm: taskInfo.group || taskInfo.readonly }"
+  >
+   <div class="form-row company-name-style pb-2" *ngIf="isEmailProcess">
+      <div class="col-5 p-0" placement="top" [ngbTooltip]="partnerLegalName?.displaylabel" >
+        <label  class="horizontalLabel">{{partnerLegalName?.displaylabel}}</label>
+      </div>
+      <div class="col-sm-7 inputField" style="padding-left: 10px !important;margin-left: -18px!important">
+        <app-type-ahead
+          [type]="'company'"
+          [value]="partnerLegalName?.value"
+          [createAllowed]="false"
+          [required]="true"
+          [search]="'dynamic'"
+          (searchCleared)="clearCompany($event)"
+          (resultEmitter)="selectCompany($event)"
+          [fromVoice]="true"
+        >
+        </app-type-ahead>
+      </div>
+    
+  </div>
+    <form
+      #docUploadForm="ngForm"
+      [formGroup]="formGroup"
+      (ngSubmit)="saveModel()"
+      (change)="emitData()"
+    >
+      <formly-form
+        [model]="model"
+        [fields]="formlyVars"
+        [options]="options"
+        [form]="formGroup"
+      >
+      </formly-form>
+    </form>
+  </div>
+</div>

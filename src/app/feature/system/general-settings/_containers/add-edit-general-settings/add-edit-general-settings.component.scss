@@ -1,0 +1,119 @@
+@import "variables";
+@import "src/app/shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.varsection {
+  max-height: 58vh;
+  overflow-y: scroll;
+}
+
+.procDefForm {
+  height: 65vh;
+  max-height: 65vh;
+  overflow-y: scroll;
+}
+
+.selectedVariable {
+  background: var(--primaryColor);
+  color: white;
+  border: 2px solid var(--secondaryColor);
+  font-weight: 500;
+}
+
+.password-container {
+  position: relative;
+}
+.pw-eye-icon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+.inputstyle {
+  width: 80%;
+}
+.tab-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.tab-item {
+  flex: 1;
+  font-size: 18;
+  font-weight: 500;
+  text-align: center;
+  border-bottom: 2px solid var(--primaryColor1);
+  padding: 5px;
+  background-color: var();
+}
+.tab-item:hover {
+  background-color: var(--primaryColor1);
+}
+
+.active {
+  flex: 1;
+  background-color: var(--primaryColor1);
+  color: var(--secondaryColor);
+  font-weight: 600;
+  border-bottom: 2px solid black;
+}
+.notification-row {
+  background: white;
+  border-radius: 10px;
+  box-shadow: $box-shadow-style;
+  margin: 18px;
+}
+.selected-item {
+  font-size: 13px;
+}
+.abs-button {
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+}
+.close-button {
+  //    background-color: var(--primaryColor)-1;
+  padding: 1px 3px 3px 3px;
+  transform: translate(3px, 10px);
+}
+
+.fileuploader {
+  position: relative;
+  .hidden {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+  }
+}
+
+.list-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.list-box .icon-style {
+  display: block;
+  position: relative;
+  flex-direction: row;
+  width: 14.285%;
+  padding: 5px 14px;
+}
+.icon-box {
+  border-radius: 6px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 2px 10px #e6efe6, 1px 2px 10px #e6efe6;
+}
+
+.delete-icon {
+  position: absolute;
+  right: 20px;
+  top: 25px;
+}
+
+.themeTab {
+  label {
+    min-width: 120px;
+    text-align: left;
+  }
+}

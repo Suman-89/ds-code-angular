@@ -1,0 +1,48 @@
+@import "variables";
+
+.tagUserInput {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+
+  .tagUserInputDiv {
+    border: none;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    &:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+      .tagUserInputDiv[placeholder]:empty:before {
+        content: "";
+      }
+    }
+
+    .taggedUserInputSpan {
+      border: none;
+      max-width: 98%;
+      display: inline-block;
+    }
+    .taggedUserInputSpan[placeholder]:empty:before {
+      content: attr(placeholder);
+      color: var(--primaryColor);
+      opacity: 0.3 !important;
+      width: 100%;
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.user {
+  padding: 2px 2px 2px 3px;
+  color: #2aa89b;
+  cursor: pointer;
+  &:hover {
+    background: #eee;
+    transition: all 0.3s ease;
+  }
+}

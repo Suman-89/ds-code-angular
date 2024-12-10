@@ -1,0 +1,30 @@
+{
+  "process_form": [
+    { "text": "Name", "datafield": "name" },
+    { "text": "Key", "datafield": "key" },
+    { "text": "Details", "datafield": "description" },
+    { "text": "Group Name", "datafield": "groupname" },
+    { "text": "Default Tab", "datafield": "defaulttab" },
+    { "text": "Comment Required", "datafield": "commentsneeded" },
+    { "text": "Process Name", "datafield": "processNames" },
+    { "text": "Task has Review", "datafield": "reviewable" },
+    { "text": "Review Task", "datafield": "isreviewtask" }
+  ],
+  "process_definition": [
+    { "text": "Process Name", "datafield": "processname" },
+    { "text": "Label", "datafield": "processlabel" },
+    { "text": "Description", "datafield": "description" },
+    { "text": "Card Visible", "datafield": "isVisible", "cellsalign": "center" }
+  ],
+  "anchor_entity": [
+    { "text": "Process Name", "datafield": "processNames" },
+    { "text": "Entity Id", "datafield": "anchorConfigId" },
+    { "text": "Description", "datafield": "description" },
+    { "text": "Entity Name", "datafield": "anchorConfigDisplayName" }
+  ],
+  "keywords": [
+    { "text": "Keywords", "datafield": "keyword" },
+    { "text": "ticketType", "datafield": "ticketType" },
+    { "text": "descriptionVariable", "datafield": "descriptionVariable" }
+  ]
+}

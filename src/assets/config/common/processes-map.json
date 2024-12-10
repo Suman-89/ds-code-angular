@@ -1,0 +1,126 @@
+{
+  "buttons": [
+    { "id": "MYQ", "name": "My Queue" },
+    { "id": "readonly", "name": "Read Only" },
+    { "id": "GROUPQ", "name": "Group Queue" },
+    { "id": "ALLTASKS", "name": "All Tasks" },
+    { "id": "user", "name": "Users" },
+    { "id": "group", "name": "Groups" },
+    { "id": "company", "name": "Company" },
+    { "id": "country", "name": "Country" },
+    { "id": "process_variable", "name": "Process Variable" },
+    { "id": "ai_attributes", "name": "AI Attributes" },
+    { "id": "process_form", "name": "Process form" },
+    { "id": "content_management", "name": "Content Management" },
+    { "id": "email_list", "name": "Email List" },
+    { "id": "user_reports", "name": "User Reports" },
+    { "id": "process_definition", "name": "Process Definition" },
+    { "id": "reports", "name": "Reports" }
+  ],
+  "notificationButtons": [
+    { "id": "CaseComplete", "name": "Case Complete" },
+    { "id": "CaseTerminate", "name": "Case Terminate" },
+    { "id": "Comment", "name": "Comment" },
+    { "id": "CommentReply", "name": "CommentReply" },
+    { "id": "TaskAssignment", "name": "Task Assignment" },
+    { "id": "TaskAssignmentGroup", "name": "Task Assignment Group" },
+    { "id": "TaskPulled", "name": "Task Pulled" },
+    { "id": "TaskReAssignment", "name": "Tas Re-Assignment" },
+    { "id": "TaskReturned", "name": "Task Returned" }
+  ],
+  "tabs": [
+    { "id": "descriptions", "name": "Basic Details" },
+    { "id": "variables", "name": "Process Variables" },
+    { "id": "grids", "name": "Grid Settings" },
+    { "id": "notification_content", "name": "Notification Content" },
+    { "id": "sidenav", "name": "Side Nav" },
+    { "id": "toolbar-button", "name": "Toolbar Button" },
+    { "id": "dms-settings", "name": "DMS Settings" }
+  ],
+  "aiAttributeTabs": [
+    { "id": "ticketTypes", "name": "Product Types" },
+    { "id": "groupTypes", "name": "Groups" },
+    { "id": "delimiters", "name": "Delimiters" },
+    { "id": "filterRules", "name": "Filter Rules" }
+  ],
+  "tabSettings": [
+    {
+      "id": "transcript",
+      "name": "Transcript",
+      "icon": "fa fa-comments-o",
+      "isVisible": true,
+      "channels": [
+        {
+          "id": "whatsapp",
+          "name": "Whatsapp",
+          "icon": "fa-whatsapp",
+          "isVisible": true,
+          "channelText": "",
+          "channelDefaults": [],
+          "emailConfiguration": null,
+          "defaultWhatsappName": "",
+          "emailSubject": "SUBJECT"
+        },
+        {
+          "id": "email",
+          "name": "Email",
+          "icon": "fa-envelope",
+          "isVisible": true,
+          "channelText": "",
+          "channelDefaults": [],
+          "emailConfiguration": {
+            "appurl": "https://gmail.com",
+            "from": "User123",
+            "fromname": "User Name",
+            "maildomain": "gamil.com",
+            "host": "1111",
+            "password": "password123",
+            "port": "587",
+            "queryParam": "neelTest",
+            "queryParamVariableName": "dealuri"
+          },
+          "defaultWhatsappName": "",
+          "emailSubject": "SUBJECT"
+        }
+      ]
+    },
+    {
+      "id": "document",
+      "name": "Documents",
+      "icon": "fa fa-file",
+      "isVisible": true
+    },
+    {
+      "id": "comment",
+      "name": "Comments",
+      "icon": "fa fa-commenting-o",
+      "isVisible": true
+    },
+    {
+      "id": "audit",
+      "name": "Audit Trail",
+      "icon": "fa fa-history",
+      "isVisible": true
+    },
+    {
+      "id": "info",
+      "name": "Info",
+      "icon": "fa fa-info-circle",
+      "isVisible": true
+    }
+  ],
+  "taskTitleDefaults": [
+    {
+      "titleId": "taskTitle",
+      "titleText": "View Task Title",
+      "titleHTML": "View Task Title",
+      "titleVariables": []
+    },
+    {
+      "titleId": "contractTitle",
+      "titleText": "View Contract Title",
+      "titleHTML": "View Contract Title",
+      "titleVariables": []
+    }
+  ]
+}

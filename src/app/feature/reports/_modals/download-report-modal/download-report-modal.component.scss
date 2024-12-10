@@ -1,0 +1,68 @@
+@import "variables";
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+}
+.height10 {
+  height: 10px;
+}
+.confirm_modal {
+  .fileNameInput {
+    font-size: 1rem;
+  }
+  .modal-body {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+  }
+
+  .dateLabel {
+    margin: 10px 25px;
+    // width: 100px;
+  }
+  .dateRangerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+  }
+
+  .md-drppicker td.active {
+    background-color: #2aa89b;
+  }
+  .modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.close {
+  margin: 10px;
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 0;
+}
+::ng-deep {
+  ngx-daterangepicker-material {
+    & {
+      .md-drppicker {
+        .btn {
+          background-color: #ff9900;
+          font-size: 0.8rem;
+          &:hover {
+            background-color: #ff9900;
+          }
+        }
+      }
+      .md-drppicker td.active,
+      .md-drppicker td.active:hover {
+        background-color: #2aa89b;
+      }
+    }
+  }
+}

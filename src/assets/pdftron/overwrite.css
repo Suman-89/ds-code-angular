@@ -1,0 +1,45 @@
+.SearchOverlay{
+    /* width: 90px; */
+    display: none;
+}
+.SearchOverlay.open {
+    display: none;
+}
+.DocumentContainer.search-overlay {
+    margin-top: 0 !important;
+}
+.ToolGroupButton,.ToolButton{
+    display: none;
+}
+.ActionButton.hide-in-mobile {
+    display: flex !important;
+}
+.divider{
+    display: none; 
+}
+[data-element="searchButton"],[data-element="toolsButton"]{
+    display: none;
+} 
+/* .SearchOverlay .wrapper .main {
+    width:auto;
+}
+.SearchOverlay .wrapper .main .input-wrapper{
+    display: none ;
+}
+.SearchOverlay .wrapper .main .number-of-results{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 5px;
+} */
+/*.SearchOverlay .wrapper .main .button.previous {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid #e0e0e0;
+}*/
+
+/* .SearchOverlay .wrapper .options.visible{
+    display: none;
+} */
+
+

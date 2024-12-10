@@ -1,0 +1,25 @@
+@import "variables";
+
+
+.pdf-cont{
+    pointer-events: none;
+}
+
+
+
+.preview-link{
+    cursor: pointer;
+    color: white;
+}
+.preview-link:hover{
+    cursor: pointer;
+    color: var(--secondaryColor);
+}
+
+#downloadPDF{
+    background-color: var(--secondaryColor);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: var(--primaryColor);
+}

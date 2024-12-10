@@ -1,0 +1,13 @@
+ <div class="container-fluid">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">Process Forms</div>
+  </div>
+  <div class="w-100 gridCont" *ngIf="procForms">
+      <app-grid-toolbar #gridintsance
+      [selectionMode]="'radio'"
+      [type]="gridType"
+      [data]="procForms"
+      (emitAction)="selectRow($event)">
+     </app-grid-toolbar>
+     </div>
+ </div>

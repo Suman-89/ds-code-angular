@@ -1,0 +1,13 @@
+[
+  { "text": "Field Display Label", "datafield": "displaylabel" },
+  { "text": "Variable Name", "datafield": "name" },
+
+  { "text": "Data Type", "datafield": "datatype" },
+  { "text": "Variable Family", "datafield": "categoryname" },
+  { "text": "Reference Data", "datafield": "refdatacode" },
+  { "text": "Display Element type", "datafield": "uielementtype" },
+  { "text": "System Variable", "datafield": "system" },
+  { "text": "Linked To Metadata", "datafield": "linkedtometadata" },
+  { "text": "Email Template Variable", "datafield": "emailtemplatevariable" },
+  { "text": "Process Name", "datafield": "processNames", "width": 130 }
+]

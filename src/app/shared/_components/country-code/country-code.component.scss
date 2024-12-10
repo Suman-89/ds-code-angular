@@ -1,0 +1,23 @@
+.countryCode {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  .select {
+    width: 30%;
+  }
+  .number {
+    width: 50%;
+  }
+}
+
+.crossEdit {
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  right: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+

@@ -1,0 +1,221 @@
+<div class="modal-header">
+  <h5 class="bulkmessage-title">Send Bulk Message</h5>
+  <button type="button" class="close btn" aria-label="Close" (click)="close()">
+    <img height="20" src="./assets/images/cross.png" />
+  </button>
+</div>
+
+<div id="bulk-modal-body">
+  <div class="toDiv">
+    <p class="to-text">To,</p>
+    <button
+      (click)="showMore()"
+      id="showMore"
+      style="font-weight: 400; display: flex; justify-content: center"
+    >
+      Expand
+    </button>
+  </div>
+  <ng-container [ngSwitch]="opt">
+    <div *ngSwitchCase="1" id="selectedNumbers">
+      <div class="phoneNumbers">
+        <div
+          class="details"
+          *ngFor="let candidate of displayCandidate"
+          [ngStyle]="{
+            'background-color':
+              candidate.overallstats === 'Terminated' ||
+              candidate.overallstats === true
+                ? '#E0272F'
+                : '#041C44'
+          }"
+        >
+          {{ candidate.name }} - ({{ candidate.psCandidateMobile }})
+          <button class="close btn" (click)="removeCandidate(candidate.psId)">
+            <img height="auto" src="./assets/images/cross.png" />
+          </button>
+        </div>
+
+        <div
+          (click)="showMore()"
+          *ngIf="expand === false && rows.length > 4"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+          "
+        >
+          +{{ this.rows.length - 4 }} more ...
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="2" id="selectedNumbers">
+      <div class="phoneNumbers">
+        <div
+          class="details"
+          *ngFor="let candidate of displayCandidate"
+          [ngStyle]="{
+            'background-color':
+              candidate.overallstats === 'Terminated' ||
+              candidate.overallstats === true
+                ? '#E0272F'
+                : '#041C44'
+          }"
+        >
+          {{ candidate.psCandidateName }} - ({{ candidate.psCandidateMobile }})
+          <button class="close btn" (click)="removeCandidate(candidate.psId)">
+            <img height="auto" src="./assets/images/cross.png" />
+          </button>
+        </div>
+
+        <div
+          (click)="showMore()"
+          *ngIf="expand === false && rows.length > 4"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+          "
+        >
+          +{{ this.rows.length - 4 }} more ...
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="3" id="selectedNumbers">
+      <div class="phoneNumbers">
+        <div
+          class="details"
+          *ngFor="let candidate of displayCandidate"
+          [ngStyle]="{
+            'background-color':
+              candidate.overallstats === 'Terminated' ||
+              candidate.overallstats === true
+                ? '#E0272F'
+                : '#041C44'
+          }"
+        >
+          {{ candidate.name }} - ({{ candidate.phoneNumber }})
+          <button class="close btn" (click)="removeCandidate(candidate.psId)">
+            <img height="auto" src="./assets/images/cross.png" />
+          </button>
+        </div>
+
+        <div
+          (click)="showMore()"
+          *ngIf="expand === false && rows.length > 4"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+          "
+        >
+          +{{ this.rows.length - 4 }} more ...
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="4" id="selectedNumbers">
+      <div class="phoneNumbers">
+        <div
+          class="details"
+          *ngFor="let candidate of displayCandidate"
+          [ngStyle]="{
+            'background-color':
+              candidate.overallstats === 'Terminated' ||
+              candidate.overallstats === true
+                ? '#E0272F'
+                : '#041C44'
+          }"
+        >
+          {{ candidate.clientContactName }} - ({{
+            candidate.clientContactMobileNumber
+          }})
+          <button
+            class="close btn"
+            (click)="removeCandidate(candidate.contractid)"
+          >
+            <img height="auto" src="./assets/images/cross.png" />
+          </button>
+        </div>
+
+        <div
+          (click)="showMore()"
+          *ngIf="expand === false && rows.length > 4"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+          "
+        >
+          +{{ this.rows.length - 4 }} more ...
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="terminateWarning" *ngIf="isTerminated">
+    * Please remove the terminated cases
+  </div>
+  <div id="typeMessage">
+    <textarea
+      class="hidden"
+      [(ngModel)]="inputMsg"
+      id="editor"
+      placeholder="type your message here"
+    ></textarea>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <div class="buttonContainer">
+    <i
+      class="fa fa-paperclip attachmentButton"
+      style="font-size: 18px"
+      (click)="openEmailAttachment()"
+    ></i>
+
+    <span
+      class="d-block pl-2 font-weight-normal"
+      style="font-size: 12px"
+      *ngIf="taskActionSvc.emailSelectedFiles.length"
+    >
+      {{ taskActionSvc.emailSelectedFiles.length }} Files Selected
+      <span
+        class="secondary-color"
+        style="font-size: 18px; padding-left: 5px; padding-right: 5px"
+        >|</span
+      >
+      <small style="font-size: 12px">
+        {{
+          this.taskActionSvc.emailSelectedFileSize / (1024 * 1024)
+            | number : "1.2-2"
+        }}MB of 15MB
+        <em style="color: rgb(202, 41, 41)">{{
+          this.taskActionSvc.emailSelectedFileSize / (1024 * 1024) > 15
+            ? "Exceeding size limit."
+            : ""
+        }}</em>
+      </small>
+    </span>
+  </div>
+  <div class="buttonContainer1">
+    <button type="button" (click)="close()" class="btn secondarybtnstyle">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      [disabled]="expand || inputMsg.length === 0 || isTerminated"
+      class="btn primarybtnstyle"
+      (click)="sendBulkMessageReca()"
+    >
+      Send
+    </button>
+  </div>
+</div>

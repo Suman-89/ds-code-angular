@@ -1,0 +1,66 @@
+
+<div class="start-process-cont" id="startContainer">
+
+    <!-- Header Container including action buttons -->
+    <div class="header-cont">
+        <div class="header">
+            <h5>Initiate {{header}}</h5>
+        </div>
+        <!-- <div class="action-btns">
+            <button class="primarybtnstyle btn" (click)="openSelectModal()" *ngIf="showButton">Select Company Address</button>
+            <button class="primarybtnstyle btn" style="margin-left: 10px;" (click)="openEditModal()" *ngIf="showButton">Edit Company</button> 
+        </div> -->
+    </div>
+
+    <div class="process-info-cont">
+        <form #form="ngForm" class="initiate-form">
+            <div class="flex-prop">
+                <!-- <div class="doc-upload-cont" [ngStyle]="{'height:100vh': pdfData}">
+                    <app-task-action>
+                        
+                    </app-task-action>
+                </div> -->
+                <div class="form-cont" *ngIf="initData">
+                    <div class="form-group  col-md-12 row">
+                        <div class="col-5 pl-3 pt-1">
+                            <label>Company for Deal <span style="font-size: 16px;">*</span></label>
+                        </div>
+                        <div class="col-7 p-1">
+                            <app-type-ahead [type]="'company'" 
+                            [value]="invExtractinstance?.model?.dealCompany" 
+                            [createAllowed]="true" [required]="true"
+                            [search]="'dynamic'" (searchCleared)="clearCompany($event)" 
+                            (resultEmitter)="selectCompany($event)"
+                            [fromVoice]="true"
+                        >
+                        </app-type-ahead>
+                        </div>
+                    </div>
+
+                    <app-invoice-extract-config 
+                      #invExtract
+                      [initData]="initData" 
+                      [poTypeahead]="allPoData" 
+                      (selectAnnotation)="selectAnnotation($event)"
+                      (emitExtractedDataChanges)="editExtractedData($event)"
+                      (emitPoNumber)="fetchPurchaseDetails($event)"
+                      >
+                    </app-invoice-extract-config>
+
+                </div> 
+                <!-- <div class="doc-upload-cont">
+                    <app-doc-upload-initiation>
+
+                    </app-doc-upload-initiation>            
+                </div> -->
+
+
+            </div>
+            <div class="text-center btn-cont">
+                <button type="submit" class="btn primarybtnstyle" (click)="save()">Submit</button>
+                <button type="reset" (click)="back()" class="cancelbtn btn secondarybtnstyle">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</div>

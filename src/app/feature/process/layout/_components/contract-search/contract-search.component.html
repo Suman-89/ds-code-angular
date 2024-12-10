@@ -1,0 +1,78 @@
+<div class="w-100">
+  <div class="position-relative">
+    <!-- <input *ngIf="!showpanel" class="inputstyle topinputBox" placeholder="Search Across Contracts" (focus)="expandPanel()"/> -->
+    <form
+      class="row no-gutters expandPanel"
+      #searchform="ngForm"
+      (change)="search()"
+    >
+      <!-- <div class="cursor-pointer resetIcon text-dark" (click)="resetAndCloseForm()" ngbToolTip="Close">
+                <i class="fa fa-times"></i>
+           </div> -->
+      <!-- <div class="secondary-color col-md-12 h5 border-bottom">Search</div> -->
+      <div class="col-md-3 pr-1">
+        <label>Group</label>
+        <select
+          class="inputstyle col-md-12"
+          (change)="assignGroup($event.target.value)"
+          name="group"
+          [(ngModel)]="searchParams.group"
+        >
+          <option selected value="null">All</option>
+          <option *ngFor="let group of groups" [value]="group.id">
+            {{ group.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-3 pr-1" *ngIf="users || searchParams.user">
+        <label>User</label>
+        <select
+          class="inputstyle col-md-12"
+          name="user"
+          #user="ngModel"
+          [(ngModel)]="searchParams.user"
+        >
+          <option selected value="null">All</option>
+          <option *ngFor="let user of users" [value]="user.userid">
+            {{ user.fullname }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-2 pr-1">
+        <label>Task Status</label>
+        <!-- <input class="inputstyle"/>  -->
+        <select
+          class="inputstyle col-md-12"
+          name="stats"
+          #stats="ngModel"
+          [(ngModel)]="searchParams.inprocess"
+        >
+          <!-- <option selected default value="">Select Task Status</option> -->
+          <!-- <option selected value="null">All</option> -->
+          <option *ngFor="let status of taskStatus" [value]="status.value">
+            {{ status.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-2 pr-1">
+        <label>Overall Status</label>
+        <!-- <input class="inputstyle"/>  -->
+        <select
+          class="inputstyle col-md-12"
+          name="overallstats"
+          #overstats="ngModel"
+          [(ngModel)]="searchParams.contractstatus"
+        >
+          <!-- <option selected default value="">Select Task Status</option> -->
+          <!-- <option selected value="null">All</option> -->
+          <option *ngFor="let status of contractStatus" [value]="status.value">
+            {{ status.name }}
+          </option>
+        </select>
+      </div>
+      <!-- <div class="col-md-2 d-flex align-items-end">
+            <button [disabled]="!searchform.valid" class="primarybtnstyle" type="submit">Search</button>
+        </div> -->
+    </form>
+  </div>
+</div>

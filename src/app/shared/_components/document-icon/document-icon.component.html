@@ -1,0 +1,12 @@
+
+<!-- <ng-container [ngSwitch]="MIMEType">
+    <img *ngSwitchCase="documentMIMETypes.WORD" src="./assets/images/word.jpg">
+    <img *ngSwitchCase="documentMIMETypes.DOC" src="./assets/images/word.jpg">
+    <img *ngSwitchCase="documentMIMETypes.PDF" src="./assets/images/pdf.png">
+    <img *ngSwitchCase="documentMIMETypes.EXCEL" src="./assets/images/excel.png">
+    <img *ngSwitchCase="documentMIMETypes.CSV" src="./assets/images/excel.png">
+    <img *ngSwitchCase="documentMIMETypes.IMAGE" src="./assets/images/image.png">
+    <img *ngSwitchDefault src="./assets/images/document.png">
+</ng-container> -->
+<img [src]="imageValue">
+<span [innerHtml]="iconValue">{{iconValue}}</span>

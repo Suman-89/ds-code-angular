@@ -1,0 +1,134 @@
+@import "variables";
+
+
+.recruiters {
+  padding: 20px;
+  width: 350px;
+}
+
+.bulkmessage-title{
+font-weight: 300;
+color: var(--secondaryColor);
+}
+.to-text{
+  color: var(--primaryColor);
+  font-weight: bold;
+  font-size: large;
+}
+
+
+#bulk-modal-body{
+    width: 90%;
+   margin: auto;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+// border: 5px solid blue ;   
+  .toDiv{
+    display: flex;
+    justify-content: space-between ;
+    align-items: center;
+  }
+
+  #showMore{
+    
+    background-color: var(--secondaryColor);
+    border-radius: 5px;
+    border:none;
+    outline: none;
+    color: white;
+  } 
+  
+  .terminateWarning{
+    color: red;
+    font-style: italic;
+    font-size: smaller;
+    text-align: left;
+  }
+  
+  #selectedNumbers{
+    width: 100%;
+    height: auto;
+    // border: 5px solid green; 
+    // overflow: scroll;
+    // border: 1px solid var(--primaryColor);
+
+             
+    .phoneNumbers{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      overflow: scroll;
+      gap: 10px;
+      padding-top: 5px;
+
+      .details{
+      font-weight: 400;
+      font-size: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+        background-color:var(--primaryColor);
+        color: white;
+        padding: 4px 10px;
+      border-radius: 25px;
+
+    .close img{
+      width: 10px;
+    }
+      }  
+    }
+
+  }
+
+  #typeMessage{
+    width: 100%;
+    height: 45%;
+    margin-top: 10px;
+    overflow: hidden;  
+
+    #editor{
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+   
+  }
+}
+
+.attachmentButton {
+  display: block;
+  font-size: 16px;
+  padding: 5px;
+  // background-color: #b7b7b7;
+  border: 1.8px solid var(--secondaryColor);
+  border-radius: 4px;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.buttonContainer1 {
+  width: 140px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+
+

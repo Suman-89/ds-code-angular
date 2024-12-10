@@ -1,0 +1,128 @@
+<form
+  [formGroup]="checkHistoryForm"
+  class="initiate-form"
+  *ngIf="extractedAadhaarObj"
+>
+  <!-- <div class="boolean-grp">
+    <div class="comp-det">
+      <label class="attribute boolean">Aadhaar Verified:&nbsp;</label>
+      <label class="value" placement="top" container="body"
+        ><span class="boolean-green">
+          {{ extractedAadhaarObj.isAadhaarVerified ? "Yes" : "" }}
+        </span>
+        <span class="boolean-red">
+          {{ !extractedAadhaarObj.isAadhaarVerified ? "No" : "" }}
+        </span></label
+      >
+    </div>
+
+    <div class="comp-det">
+      <label class="attribute boolean">Blacklisted:&nbsp;</label>
+      <label class="value" placement="top" container="body">
+        <span class="boolean-red">
+          {{ extractedAadhaarObj.blackList ? "Yes" : "" }}
+        </span>
+        <span class="boolean-green">
+          {{ !extractedAadhaarObj.blackList ? "No" : "" }}
+        </span></label
+      >
+    </div>
+  </div> -->
+
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Employee Name<sup>*</sup></label>
+      <input
+        required
+        class="inputstyle readonly form-control"
+        [(ngModel)]="extractedAadhaarObj.employeeName"
+        [placeholder]="'Enter Employee Name'"
+        type="text"
+        formControlName="employeeName"
+      />
+    </div>
+  </div>
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Employee Address<sup>*</sup> </label>
+      <input
+        required
+        class="inputstyle readonly form-control"
+        [(ngModel)]="extractedAadhaarObj.employeeAddress"
+        [placeholder]="'Enter Employee Address'"
+        type="text"
+        formControlName="employeeAdress"
+      />
+    </div>
+  </div>
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Date Of Birth </label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="extractedAadhaarObj.dob"
+        type="date"
+        formControlName="dob"
+        [max]="getToday()"
+      />
+    </div>
+  </div>
+
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Priority </label>
+      <app-type-ahead
+        [type]="'casePriority'"
+        [createAllowed]="false"
+        (resultEmitter)="selectRefData($event, 'casePriority')"
+      >
+      </app-type-ahead>
+    </div>
+  </div>
+</form>
+
+<!-- <div class="initiate-form" *ngIf="extractedAadhaarObj && noHistory">
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Employee Name</label>
+      <input
+        class="inputstyle readonly form-control"
+        [(ngModel)]="extractedAadhaarObj.aadhaar.name"
+        [placeholder]="'Enter Employee Name'"
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Employee Address </label>
+      <input
+        class="inputstyle readonly form-control"
+        [placeholder]="'Select Company Address'"
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Date Of Birth </label>
+      <input
+        class="inputstyle readonly form-control"
+        [placeholder]="'Select Contracting Entity'"
+        type="date"
+      />
+    </div>
+  </div>
+
+  <div class="form-row no-margin">
+    <div class="form-group col-md-12 padding-left-0">
+      <label> Priority </label>
+      <app-type-ahead
+        [type]="'casePriority'"
+        [createAllowed]="false"
+        (resultEmitter)="selectRefData($event, 'casePriority')"
+      >
+      </app-type-ahead>
+    </div>
+  </div>
+</div> -->

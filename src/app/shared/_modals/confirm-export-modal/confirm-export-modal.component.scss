@@ -1,0 +1,34 @@
+@import "../../../shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+.confirm_modal {
+  .fileNameInput {
+    font-size: 1rem;
+  }
+  .modal-body {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .close {
+    margin: 10px;
+  }
+  .error {
+    color: red;
+  }
+  [type="checkbox"] {
+    appearance: none;
+  }
+  .regular-checkbox {
+    width: 15px;
+    height: 15px;
+    border: 1px solid;
+  }
+  [type="checkbox"]:checked + .regular-checkbox {
+    background-color: #2aa89b;
+  }
+}
+.modal-footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

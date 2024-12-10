@@ -1,0 +1,10 @@
+<div class="prescreening-grid">
+  <app-grid
+    *ngIf="excelData"
+    #grid
+    [type]="type"
+    [columns]="columns"
+    [source]="source"
+    [ready]="ready"
+  ></app-grid>
+</div>

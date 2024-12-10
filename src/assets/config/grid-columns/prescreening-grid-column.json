@@ -1,0 +1,21 @@
+{
+    "prescreening":[
+          { "text": "Service Order Number", "datafield": "Service Order Number" },
+          { "text": "Job Position", "datafield": "Job Position" },
+          { "text": "Job Description", "datafield": "Job Description" },
+          { "text": "Hiring Company Name", "datafield": "Hiring Company Name" },
+          { "text": "Recruiting Company Name", "datafield": "Recruiting Company Name" },
+          { "text": "Hiring Manager ID", "datafield": "Hiring Manager ID" },
+          { "text": "Hiring Manager Name", "datafield": "Hiring Manager Name" },
+          { "text": "Candidate Source", "datafield": "Candidate Source" },
+          { "text": "Candidate ID (ATS)", "datafield": "Candidate ID (ATS)" },
+          { "text": "Candidate First Name", "datafield": "Candidate First Name" },
+          { "text": "Candidate Last Name", "datafield": "Candidate Last Name" },
+          { "text": "Candidate Name", "datafield": "Candidate Name" },
+          { "text": "Candidate Mobile Number", "datafield": "Candidate Mobile Number" },
+          { "text": "Candidate Email", "datafield": "Candidate Email" },
+          { "text": "Rounds Of InterView", "datafield": "Rounds Of InterView" },
+          { "text": "Reason", "datafield": "Reason" },
+          {"text":"Cases", "datafield": "Cases","enabletooltips": false }
+    ]
+}

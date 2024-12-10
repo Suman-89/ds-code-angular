@@ -1,0 +1,46 @@
+.contentWrap {
+  height: 100%;
+  padding: 10px 0 0 10px;
+  overflow: auto;
+  position: relative;
+
+  .commentsCont {
+    overflow: auto;
+    height: 100%;
+    .commentRow,
+    .actionRow {
+      padding: 10px 10px;
+      font-size: 12px;
+      border-radius: 10px;
+      margin-top: 10px;
+
+      .fromCont {
+        width: 44%;
+        vertical-align: top;
+        display: inline-block;
+
+        .taskName {
+          font-weight: 500;
+          font-size: 13px;
+        }
+
+        .boundary {
+          margin: 0px 5px;
+          font-weight: 500;
+        }
+      }
+
+      .rightarrow {
+        max-width: 25px;
+        margin: 2%;
+        vertical-align: top;
+      }
+    }
+  }
+}
+
+.darkTheme {
+  .actionRow {
+    background-color: #ffffffbc;
+  }
+}

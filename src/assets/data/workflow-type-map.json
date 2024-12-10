@@ -1,0 +1,12 @@
+{"WorkflowList" : {
+    "Initiation Process Taiho": {"folder": "/taiho", "businessKeyPrefix": "INV", "label": "Taiho", "sidenavsuffix": "Taiho" },
+    "Initiation Process Impl":{"folder":"", "businessKeyPrefix": "CD", "label": "Impl", "sidenavsuffix": ""},
+    "Initiation Leave Approval":{"folder":"/taiho", "businessKeyPrefix": "CD", "label": "Leave Approval", "sidenavsuffix": "LeaveApplication"},
+    "Initiation ID Generation":{"folder":"/taiho", "businessKeyPrefix": "CD", "label": "ID Generate",  "sidenavsuffix": "IDGenerate"},
+    "Initiation Process HR Ticket":{"folder":"/hrticketprocess", "businessKeyPrefix": "HR", "label": "HR Ticket Process",  "sidenavsuffix": "HRTicketProcess"},
+    "Initiation_CreditRiskProcess": {"folder": "/taiho", "businessKeyPrefix": "LOAN", "label": "Process Credit Risk", "sidenavsuffix": "CreditRisk" },
+    "Initiation Dispute Process": {"folder": "/dispute", "businessKeyPrefix": "DIS", "label": "Dispute Process", "sidenavsuffix": "DisputeProcess" },
+    "Setup":  {"folder": "", "businessKeyPrefix": "", "label": "Setup", "sidenavsuffix": "admin" },
+     "Initiation_TicketProcess": {"folder":"/hrticketprocess", "businessKeyPrefix": "WN", "label": "Ticket Process",  "sidenavsuffix": "HRTicketProcess"}
+}
+}

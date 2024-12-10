@@ -1,0 +1,98 @@
+<div class="contentWrap p-0 mt-2 {{ darkTheme ? 'darkTheme' : '' }}">
+  <div class="inputblock" [hidden]="!showCommentBox">
+    <div class="info mb-2">
+      <div class="row">
+        <div class="col-12">
+          <!-- <small class="w-100 font-weight-normal text-primary">Reply As : </small> -->
+          <div
+            class="not-selectable d-inline-block"
+            *ngFor="let type of transcriptChannels"
+          >
+            <div
+              *ngIf="type.isVisible"
+              class="px-2 icon-box py-0 mx-1 font-weight-normal rounded-circle"
+              [ngClass]="{
+                'border-primary bg-light': selectedType == type.id
+              }"
+              (click)="selectMessageType(type.id)"
+            >
+              <i
+                class="fa {{ type.icon }} {{
+                  selectedType == type.id ? 'primary-color' : 'secondary-color'
+                }}"
+                [style.fontSize]="type.id == 'whatsapp' ? '16px' : '14px'"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demoInput" *ngIf="multiMentionConfig.mentions.length >= 3">
+      <div *ngFor="let type of transcriptChannels">
+        <div *ngIf="selectedType == type.id">
+          <app-comment-box
+            #commentBox
+            [commenttype]="type.id"
+            [subject]="subject + ': ' + businessKey"
+            [receivers]="receivers"
+            [commentMentionConfig]="multiMentionConfig"
+            (submitted)="onSubmitted($event)"
+            [maxChar]="selectedType === 'whatsapp' ? 800 : 0"
+            [taskDetails]="taskDetails"
+            [darkTheme]="darkTheme"
+          ></app-comment-box>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator">
+    <hr />
+    <div class="iconbtn" *ngIf="dontShowSendMessage">
+      <i
+        *ngIf="showCommentBox"
+        (click)="showCommentBox = false"
+        class="fa fa-chevron-circle-up fa-lg"
+        aria-hidden="true"
+      ></i>
+      <i
+        *ngIf="!showCommentBox"
+        (click)="showCommentBox = true"
+        class="fa fa-chevron-circle-down fa-lg"
+        aria-hidden="true"
+      ></i>
+    </div>
+  </div>
+  <div class="w-100 border-0">
+    <input
+      type="text"
+      class="inputstyle w-100 {{ darkTheme ? 'inputstyle_primary' : '' }}"
+      placeholder="Search Transcript"
+      (keyup)="filterComments($event.target.value)"
+    />
+  </div>
+  <div
+    class="commentsCont"
+    [ngClass]="{ commentArea: showCommentBox, noCommentArea: !showCommentBox }"
+    *ngIf="transcriptionList && transcriptionList?.length > 0"
+  >
+    <div class="commentRow" *ngFor="let comment of displayCommentList">
+      <app-display-comment
+        [data]="comment"
+        [type]="'transcription'"
+        [allowReply]="true"
+        [userList]="tagUsers"
+        [groupList]="tagGroups"
+        [docList]="docList"
+        [darkTheme]="darkTheme"
+        [businessKey]="businessKey"
+        [psCandidateEmail]="taskDetails.processvariables.psCandidateEmail"
+      ></app-display-comment>
+    </div>
+    <div class="history" *ngIf="isShowHistory">
+      <app-display-history
+        [darkTheme]="darkTheme"
+        [businessKey]="businessKey"
+      ></app-display-history>
+    </div>
+  </div>
+</div>

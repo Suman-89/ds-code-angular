@@ -1,0 +1,84 @@
+<div class="w-100" *ngIf="extractedData">
+  <form
+    class="row no-gutters extraction-form"
+    [formGroup]="extractionAadhaarForm"
+    #extractionForm
+    (ngSubmit)="checkHistory()"
+    (change)="emitData()"
+  >
+    <div class="col-12 form-group">
+      <label class="w-100 aadhaar-number-label">Aadhaar Number*</label>
+      <input
+        type="text"
+        class="inputstyle w-100 aadhaar-number"
+        name="aadhaar-number"
+        [(ngModel)]="extractedData.aadhaarId"
+        formControlName="aadhaarId"
+        required
+        [readOnly]="true"
+      />
+      <div
+        class="text-danger w-100 font-smaller"
+        *ngIf="extractionAadhaarForm.get('aadhaarId').hasError('pattern')"
+      >
+        Please enter a valid Aadhaar Number
+      </div>
+      <div
+        class="text-danger w-100 font-smaller"
+        *ngIf="extractionAadhaarForm.get('aadhaarId').hasError('required')"
+      >
+        Aadhaar Id can't be left blank
+      </div>
+    </div>
+    <!-- <div class="col-12 form-group">
+      <label class="w-100">Aadhaar Name*</label>
+      <input
+        type="text"
+        class="inputstyle w-100"
+        name="aadhaar-name"
+        [(ngModel)]="extractedData.name"
+        formControlName="name"
+        required
+      />
+      <div
+        class="text-danger w-100 font-smaller"
+        *ngIf="extractionAadhaarForm.get('name').hasError('pattern')"
+      >
+        Proper Naming Method should be followed. The first letter of your names
+        should be CAPITAL and a single space is required between your FIRST and
+        OTHER names.
+      </div>
+      <div
+        class="text-danger w-100 font-smaller"
+        *ngIf="extractionAadhaarForm.get('name').hasError('required')"
+      >
+        Aadhaar Name can't be left blank
+      </div>
+    </div> -->
+
+    <div class="btn-grp">
+      <button
+        class="check-verify-btn float-right primarybtnstyle btn ml-2"
+        [disabled]="extractionAadhaarForm.invalid || checkHistoryClick"
+      >
+        Check History
+      </button>
+      <button
+        class="check-verify-btn float-right primarybtnstyle btn ml-2"
+        type="button"
+        *ngIf="checkHistoryClick"
+        [disabled]="checkHistoryData?.blackList"
+        (click)="generateOtp()"
+      >
+        Verify Aadhaar
+      </button>
+    </div>
+    <p class="check-history-ditection">
+      {{
+        !checkHistoryClick
+          ? "*Click check history to fetch employee details"
+          : "*Click verify aadhaar to add or update aadhaar details"
+      }}
+    </p>
+  </form>
+</div>

@@ -1,0 +1,80 @@
+@import "variables";
+.comment {
+  .username {
+    font-weight: 500;
+    font-size: 14px;
+
+    .rolename {
+      font-weight: 400;
+    }
+    .rightarrow {
+      width: 20px;
+    }
+    .statusStyle {
+      font-size: 12px;
+    }
+    .CapCase {
+      text-transform: capitalize;
+    }
+  }
+  .commentText {
+    color: #4e4e4e;
+    font-size: 13px;
+    ::ng-deep {
+      p {
+        margin-bottom: 0;
+      }
+      b,
+      strong {
+        font-weight: 500;
+      }
+      // br{
+      // content: "";
+      // display: block;
+      // margin-top: 10px;
+      // // border-bottom: 20px solid transparent;
+      // }
+    }
+  }
+  .datetime {
+    color: #9a9a9a;
+    font-size: 11px;
+  }
+  .more {
+    float: right;
+    color: var(--secondaryColor);
+    &:hover {
+      color: var(--primaryColor);
+    }
+  }
+  .replyIcon {
+    font-size: 11px;
+    margin-left: 10px;
+    color: var(--secondaryColor);
+    &:hover {
+      color: var(--primaryColor);
+    }
+  }
+}
+
+.replyContainer {
+  padding: 0 0 0 20px;
+  .comment {
+    margin-top: 5px;
+    .username {
+      font-size: 12px;
+      .statusStyle {
+        font-size: 10px;
+      }
+    }
+    .commentText {
+      font-size: 11px;
+    }
+    .datetime {
+      font-size: 10px;
+    }
+    .replyIcon {
+      font-size: 10px;
+    }
+  }
+}

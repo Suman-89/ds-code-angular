@@ -1,0 +1,199 @@
+<div class="start-process-cont">
+  <div class="header-cont">
+    <div class="header">
+      <div class="taskName">
+        <h5>{{ taskDetails.name }}</h5>
+        <i
+          *ngIf="taskDetails.casePriority"
+          [ngbTooltip]="taskDetails.casePriority + ' priority'"
+          placement="top"
+          container="body"
+          [ngStyle]="getFlag()"
+          class="fa fa-flag"
+        ></i>
+      </div>
+      <div class="subtitle">
+        <!-- <div *ngIf="isContentCreationProcess">
+        <div class="h6 secondary-color row no-gutters mt-2 details">
+          <div class="subHead">
+            <label
+              [ngbTooltip]="getCourse()"
+              placement="top"
+              container="body"
+              class="subHead max-width-33 text-truncate"
+            >
+              {{ getCourse() }}
+            </label>
+            <label
+              [ngbTooltip]="getModule()"
+              placement="top"
+              container="body"
+              class="subHead max-width-33 text-truncate"
+            >
+              {{ getModule() }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="isVmtProcess">
+        <div class="h6 secondary-color row no-gutters mt-2 details">
+          <div class="max-width-50 subHead">
+            <label
+              class="width-200"
+              [ngbTooltip]="vars['dealId']"
+              placement="top"
+              container="body"
+              >Deal ID: {{ vars["dealId"]
+              }}{{ vars["amendmentId"] ? "." + vars["amendmentId"] : "" }}
+            </label>
+          </div>
+          <label
+            class="subHead max-width-33 text-truncate"
+            *ngIf="vars['dealType']"
+            [ngbTooltip]="vars['dealType']"
+            placement="top"
+            container="body"
+          >
+            {{ vars["dealType"] }}
+            <ng-container *ngIf="vars['dealType'] === 'New'"> </ng-container>
+          </label>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isContractProcess">
+        <div class="h6 secondary-color row no-gutters mt-2 details">
+          <div class="subHead" *ngIf="taskDetails.partnerLegalName">
+            <label
+              [ngbTooltip]="taskDetails.partnerLegalName"
+              placement="top"
+              container="body"
+            >
+              {{ taskDetails.partnerLegalName }}
+            </label>
+            <span
+              *appHasPermission="editPermissions"
+              class="link cursor-pointer company-edit-icon"
+              (click)="openEditModal()"
+            >
+              <i class="fa fa-pencil"> </i>
+            </span>
+          </div>
+          <label
+            class="subHead max-width-33 text-truncate"
+            *ngIf="taskDetails.product"
+            [ngbTooltip]="returnSecondLevel(taskDetails.product, 2)"
+            placement="top"
+            container="body"
+            >{{ returnSecondLevel(taskDetails.product, 2) }}</label
+          >
+          <label
+            class="subHead max-width-33 text-truncate"
+            [ngClass]="{
+              'max-width-50': taskDetails.contractType === 'Amendment'
+            }"
+            *ngIf="taskDetails.contractType"
+            [ngbTooltip]="returnSecondLevel(taskDetails.contractType, 1)"
+            placement="top"
+            container="body"
+            >{{ returnSecondLevel(taskDetails.contractType, 1) }}</label
+          >
+        </div>
+      </ng-container>
+       <ng-container *ngIf="isPreScreeningProcess">
+        <div class="h6 secondary-color row no-gutters mt-2 details">
+          <div class="subHead col-12" *ngIf="candidateName">
+            <label
+              [ngbTooltip]="candidateName"
+              placement="top"
+              container="body"
+            >
+              Candidate Name : {{ candidateName }}
+            </label>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isEmailProcess">
+        <div class="h6 secondary-color row no-gutters mt-2 details">
+          <div class="subHead" *ngIf="emailTicketId">
+            <label
+              [ngbTooltip]="emailTicketId"
+              placement="top"
+              container="body"
+            >
+               {{ emailTicketId }}
+            </label>
+          </div>
+          <div class="subHead" *ngIf="partnerLegalName">
+            <label
+              [ngbTooltip]="partnerLegalName"
+              placement="top"
+              container="body"
+            >
+               {{ partnerLegalName }}
+            </label>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isRCMBillingProcess">
+        <div class="h6 secondary-color row no-gutters mt-2 details">
+          <div class="subHead" *ngIf="patientName">
+            <label
+              [ngbTooltip]="patientName"
+              placement="top"
+              container="body"
+            >
+               {{ patientName }}
+            </label>
+          </div>
+          <div class="subHead" *ngIf="doctorName">
+            <label
+              [ngbTooltip]="doctorName"
+              placement="top"
+              container="body"
+            >
+               {{ doctorName }}
+            </label>
+          </div>
+          
+        </div>
+      </ng-container> -->
+
+        <ng-container *ngIf="taskTitles">
+          <div class="h6 secondary-color row no-gutters mt-2 details">
+            <div class="subHead" *ngFor="let title of taskTitles">
+              <label [ngbTooltip]="title" placement="top" container="body">
+                {{ title }}
+              </label>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      
+    </div>
+    <div class="action-btns" style="margin-top: 20px">
+      <app-toolbar
+        [buttons]="toolbarButtons"
+        [type]="'view'"
+        (actionEmit)="toolbarEmit($event)"
+      ></app-toolbar>
+    </div>
+  </div>
+
+  <div class="process-info-cont">
+    <div class="row-cont">
+      <app-task-actions
+        #taskActions
+        [actions]="actions"
+        [activeTab]="taskInfoSvc.defaultCommentTab"
+        [comments]="commentList"
+        [transcriptions]="transcriptionList"
+        [viewtype]="'task'"
+        [taskId]="taskId"
+        [businessKey]="taskDetails.businessKey"
+        [taskDetails]="taskDetails"
+      ></app-task-actions>
+    </div>
+    <div class="row-cont" *ngIf="procForm">
+      <app-task-form></app-task-form>
+    </div>
+  </div>
+</div>

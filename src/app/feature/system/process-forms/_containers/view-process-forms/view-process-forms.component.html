@@ -1,0 +1,50 @@
+<div class="container-fluid" *ngIf="viewType == 'process_form'">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{ selectedProcess
+      }}<span class="secondary-color" style="font-size: 22px; padding-left: 5px"
+        >|</span
+      >
+      Process Forms
+    </div>
+  </div>
+  <div class="w-100 gridCont" *ngIf="procForms">
+    <app-grid-toolbar
+      #gridintsance
+      [selectionMode]="'radio'"
+      [type]="gridType.process_form"
+      [data]="procForms"
+      (emitAction)="selectRow($event)"
+      (doubleClick)="doubleClick($event)"
+    >
+    </app-grid-toolbar>
+  </div>
+</div>
+<div class="container-fluid" *ngIf="viewType == gridType.processdefinition">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{ selectedProcess
+      }}<span class="secondary-color" style="font-size: 22px; padding-left: 5px"
+        >|</span
+      >
+      Process Definition Forms
+    </div>
+  </div>
+  <ng-container *ngIf="procForms">
+    <!-- <div class="d-flex w-100 justify-content-end mb-2">
+     <button class="primarybtnstyle mr-1" (click)="routeAction(1)">Add</button>
+     <button class="primarybtnstyle" [disabled]="!selectedForm" (click)="routeAction(2)">Edit</button>
+    </div> -->
+    <div class="w-100 gridCont" *ngIf="procForms">
+      <app-grid-toolbar
+        #gridintsance
+        [selectionMode]="'radio'"
+        [type]="gridType.processdefinition"
+        [data]="procForms"
+        (emitAction)="selectRow($event)"
+        (doubleClick)="doubleClickDEF($event)"
+      >
+      </app-grid-toolbar>
+    </div>
+  </ng-container>
+</div>

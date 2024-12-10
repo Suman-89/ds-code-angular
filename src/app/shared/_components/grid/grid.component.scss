@@ -1,0 +1,59 @@
+@import "variables";
+
+.rowHeight {
+  height: 40px;
+}
+::ng-deep {
+  .jqx-grid-column-header {
+    background: var(--primaryColor) !important;
+    color: white;
+    width: 20%;
+  }
+
+  span[id^="jqxWidget"] {
+    color: transparent !important;
+  }
+
+  .jqx-widget .jqx-grid-cell {
+    border-color: #aaa;
+    border-right-color: lightgray !important;
+  }
+  .darkTheme {
+    //grid select effect
+    .jqx-fill-state-pressed {
+      background-color: #e0e6f5;
+    }
+    .jqx-widget-header {
+      background-color: #989eae;
+      // border: 0;
+    }
+    // .jqx-grid-cell-pinned {
+    //   background-color: #989eae;
+    // }
+    .jqx-grid-cell-pinned {
+      background-color:#ffffff;
+    }
+    .jqx-fill-state-normal {
+      background-color: #ffffff;
+    }
+    // .jqx-scrollbar-state-normal {
+    //   background-color: #989eae;
+    // }
+    .jqx-reset {
+      background-color: #989eae;
+      // border: 1px solid lightgray;
+    }
+    .jqx-scrollbar-thumb-state-normal-horizontal {
+      border-radius: 50px;
+      height: 7px !important;
+      margin-top: 3px;
+      // transform: scale(0.7);
+    }
+    .jqx-scrollbar-thumb-state-normal {
+      border-radius: 50px;
+      width: 7px !important;
+      margin-left: 3px;
+      // transform: scale(0.7);
+    }
+  }
+}

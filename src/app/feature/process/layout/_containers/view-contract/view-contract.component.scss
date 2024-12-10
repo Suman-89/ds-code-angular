@@ -1,0 +1,103 @@
+@import "src/scss/default/variables";
+
+.start-process-cont {
+  padding: 0px 20px;
+  height: 100%;
+
+  .header-cont {
+    display: flex;
+    // margin-bottom: 10px;
+
+    .header {
+      flex-grow: 1;
+      max-width: 50%;
+      .taskName {
+        h5 {
+          margin: 0px;
+          max-width: calc(100% - 10px);
+          display: flex;
+        }
+        span {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        #title {
+          min-width: 20px;
+          color: var(--secondaryColor);
+          display: block;
+          border-right: 2px solid var(--primaryColor) !important;
+          padding-right: 6px;
+          padding-left: 6px;
+          font-size: 16px;
+          margin-bottom: 10px;
+          margin-top: 10px;
+        }
+        #title:first-child {
+          padding-left: 0px;
+        }
+        #title:last-child {
+          border-right: none !important;
+          padding-right: 0px;
+        }
+        i {
+          font-size: 15px;
+          padding: 3px;
+          margin-left: 10px;
+          border-radius: 40px;
+        }
+      }
+
+      .details {
+        label {
+          border-right: 2px solid var(--primaryColor);
+          padding: 0px 10px;
+          margin: 0px;
+
+          .link {
+            img {
+              width: 16px;
+              margin-left: 3px;
+              cursor: pointer;
+              vertical-align: top;
+              margin-top: 2px;
+            }
+          }
+        }
+
+        label:first-child {
+          padding-left: 0px;
+        }
+        label:last-child {
+          border-right: 0px;
+        }
+      }
+    }
+    .action-btns {
+      flex-grow: 1;
+      max-width: 50%;
+    }
+  }
+
+  .process-info-cont {
+    display: flex;
+    height: calc(100% - 60px);
+
+    .row-cont {
+      flex-grow: 1;
+      max-width: 49%;
+      margin: 0px 1%;
+      // padding: 10px;
+      height: 100%;
+      background: white;
+      box-shadow: 0 0 5px 3px #eee;
+    }
+    .row-cont:first-child {
+      margin-left: 0px;
+    }
+
+    .row-cont:last-child {
+      margin-right: 0px;
+    }
+  }
+}

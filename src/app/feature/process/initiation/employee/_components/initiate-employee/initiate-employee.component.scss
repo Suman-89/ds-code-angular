@@ -1,0 +1,31 @@
+@import "src/app/shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.readonly {
+  background: transparent;
+  pointer-events: auto;
+}
+.helper {
+  padding-top: 0.5em;
+  font-size: 0.7rem;
+  font-style: italic;
+}
+// .boolean-grp {
+//   display: flex;
+//   gap: 15px;
+//   padding: 10px 5px 0;
+//   .boolean {
+//     font-size: 14px;
+//   }
+// }
+
+// .boolean-green,
+// .boolean-red {
+//   font-weight: 700;
+//   font-size: 14px;
+// }
+// .boolean-green {
+//   color: green;
+// }
+// .boolean-red {
+//   color: red;
+// }

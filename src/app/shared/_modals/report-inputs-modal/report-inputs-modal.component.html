@@ -1,0 +1,23 @@
+<div class="form-group col-md-12 padding-left-0">
+  <label for="fileName">Last Updated</label>
+  <div class="input-group-append">
+    <input
+      required
+      class="form-control"
+      placeholder="DD-MMM-YYYY"
+      name="dp"
+      (click)="d1.toggle()"
+      (keydown)="$event.preventDefault(); d1.open()"
+      ngbDatepicker
+      #d1="ngbDatepicker"
+      formControlName="ofacdate"
+    />
+    <div class="input-group-append">
+      <button
+        class="btn btn-outline-primary fa fa-calendar"
+        (click)="d1.toggle()"
+        type="button"
+      ></button>
+    </div>
+  </div>
+</div>

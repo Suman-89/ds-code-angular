@@ -1,0 +1,10 @@
+@import "variables";
+
+
+.dashboard-wrap {
+  max-height:85%;
+  overflow: auto;
+}
+.row {
+  justify-content: flex-start;
+}

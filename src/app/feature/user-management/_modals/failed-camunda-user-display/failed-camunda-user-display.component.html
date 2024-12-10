@@ -1,0 +1,38 @@
+<div class="modal-header">
+ Sync AD Result
+ <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <img src="./assets/images/cross.png">
+</button>
+
+</div>
+<div class="modal-body">
+  <div class="row no-gutters border-bottom cursor-pointer">
+   <div class="col-3 font-weight-bold" *ngFor="let fl of filterList" (click)="filterUsers(fl.value)">
+     <span [ngClass]="{'secondary-color': fl.selected}">{{fl.label}}</span>
+    </div>
+  </div>
+  
+  <div class="row no-gutters border-bottom border-top">
+    <div class="col-3">Users From AD- {{users[userType.usersfromAD].length}}</div>
+    <div class="col-3">New Users- {{users[userType.newUsers].length}}</div>
+    <div class="col-3">Deleted Users- {{users[userType.deletedUsers].length}}</div>
+  </div>
+  
+  <ng-container #userSyncResult *ngIf="selectedList.length>0">
+    <div class="row no-gutters border-bottom border-top mt-2" >
+      <div class="col-3"> First Name</div>
+      <div class="col-3"> Last name</div>
+      <div class="col-3"> Email</div>
+    </div>
+    <div class="row no-gutters" *ngFor="let user of selectedList">
+    <span class="col-md-3 text-truncate">{{user.fn}}</span>
+    <span class="col-md-3 text-truncate">{{user.ln}}</span>
+    <span class="col-md-3 text-truncate">{{user.email}}</span>
+    </div>
+  </ng-container>
+  <ng-container  *ngIf="selectedList.length==0">
+   <div class="text-center"> No data to show
+   </div>  
+  </ng-container>
+</div>
+

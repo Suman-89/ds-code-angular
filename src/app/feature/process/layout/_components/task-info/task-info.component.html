@@ -1,0 +1,184 @@
+<div class="contentWrap">
+  <div class="info-cont {{ darkTheme ? 'darkTheme' : '' }}">
+    <div
+      *ngIf="taskInfo && taskInfo.readonly && taskInfo.assigneeName"
+      class="taskAssignee"
+    >
+      The task is currently with
+      <span class="secondary-color">{{ taskInfo.assigneeName }}</span>
+    </div>
+    <div *ngIf="tasks && tasks.length > 0">
+      <div class="taskList">
+        <h6 style="margin: 5px 0px">Ongoing Tasks</h6>
+        <!-- <p style="font-size: 12px;" style="color: red">Click Ongoing Task below for entire INFO tab details</p> -->
+        <div class="tasks" *ngFor="let task of tasks">
+          <label (click)="viewTask(task)" class="infoKey">{{
+            task.name
+          }}</label>
+          <label class="infoValue" *ngIf="task.assigneeName">{{
+            task.assigneeName
+          }}</label>
+          <label class="infoValue" *ngIf="!task.assigneeName && task.groupname"
+            >{{ task.groupname }} Queue</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="profile-block" *ngIf="profileImage || candidateName">
+      <div class="image-box">
+        <div class="image-relative">
+          <img
+            *ngIf="profileImage"
+            class="profile-image"
+            src="{{ profileImage }}"
+          />
+          <strong
+            *ngIf="!profileImage"
+            class="{{ !darkTheme ? 'text-primary' : '' }} short-name"
+            >{{ shortName }}</strong
+          >
+          <div class="profile-popup" *ngIf="profileImage || candidateName">
+            <div class="image-box">
+              <img
+                *ngIf="profileImage"
+                class="profile-image-popup"
+                src="{{ profileImage }}"
+              />
+              <strong
+                *ngIf="!profileImage"
+                class="text-primary short-name"
+                style="
+                  border-width: 3px;
+                  font-size: 70px;
+                  height: 150px;
+                  width: 150px;
+                "
+                >{{ shortName }}</strong
+              >
+            </div>
+            <h6 *ngIf="candidateName" class="profile-name-popup text-secondary">
+              {{ candidateName }}
+            </h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-name">
+        <span *ngIf="candidateName" class="text-secondary candidateName">{{
+          candidateName
+        }}</span
+        ><br />
+        <span class="answered"
+          >Questions Answered : {{ psNoOfQuesAns ? psNoOfQuesAns : 0 }}/{{
+            psNoOfQues ? psNoOfQues : 0
+          }}</span
+        >
+      </div>
+
+      <div class="chart-box">
+        <circle-progress
+          [percent]="candidateScore"
+          [radius]="20"
+          [outerStrokeWidth]="4"
+          [innerStrokeWidth]="6"
+          [outerStrokeColor]="scoreColor"
+          [innerStrokeColor]="'#e4e4e4'"
+          [animation]="true"
+          [animationDuration]="300"
+          [showSubtitle]="false"
+          [space]="-5"
+          [unitsColor]="darkTheme ? '#e4e4e4' : ''"
+          [titleColor]="darkTheme ? '#e4e4e4' : ''"
+          [titleFontSize]="12"
+        ></circle-progress>
+      </div>
+    </div>
+    <div *ngFor="let variable of taskVariables; let i = index">
+      <div
+        class="addressWrap"
+        *ngIf="
+          variable &&
+          !variable.system &&
+          variable.value !== null &&
+          variable.value !== '' &&
+          variable.name !== 'initiatorname'
+        "
+      >
+        <label class="infoKey">
+          <span
+            [ngbTooltip]="variable.displaylabel"
+            placement="top"
+            container="body"
+            >{{
+              variable.displaylabel ? variable.displaylabel : variable.label
+            }}</span
+          >
+        </label>
+        <label class="infoValue" *ngIf="variable.uielementtype === 'TEXTAREA'">
+          <span
+            class="{{
+              !fullTextArea[i] && variable.value.length > 108
+                ? 'textareaElipser'
+                : ''
+            }}"
+            >{{ variable.value }}</span
+          >
+          <br *ngIf="fullTextArea[i]" />
+          <a
+            *ngIf="!fullTextArea[i] && variable.value.length > 108"
+            class="expand-collapse"
+            (click)="textAreaOpener(i)"
+          >
+            Show More
+          </a>
+          <a
+            *ngIf="fullTextArea[i] && variable.value.length > 108"
+            class="expand-collapse"
+            (click)="textAreaCollapser(i)"
+          >
+            Show Less
+          </a>
+        </label>
+        <label
+          class="infoValue"
+          *ngIf="
+            variable.datatype == 'Date' && variable.value != 'Invalid date'
+          "
+          >{{ variable.value | date : "dd-MMM-yyyy" }}</label
+        >
+        <label
+          class="infoValue"
+          *ngIf="
+            variable.datatype == 'Date' && variable.value == 'Invalid date'
+          "
+          >{{ variable.value }}</label
+        >
+        <label
+          class="infoValue"
+          *ngIf="
+            variable.datatype == 'DateTime' && variable.value != 'Invalid date'
+          "
+          >{{ variable.value | date : "dd-MMM-yyyy HH:mm:ss" }}</label
+        >
+        <label
+          class="infoValue"
+          *ngIf="
+            variable.datatype == 'DateTime' && variable.value == 'Invalid date'
+          "
+          >{{ variable.value }}</label
+        >
+        <label class="infoValue" *ngIf="variable.datatype == 'Boolean'">{{
+          variable.value ? "Yes" : "No"
+        }}</label>
+        <label
+          class="infoValue {{ variable.class }}"
+          *ngIf="
+            (variable.datatype == 'String' || variable.datatype == 'Number') &&
+            variable.uielementtype !== 'TEXTAREA'
+          "
+          >{{ variable.value }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

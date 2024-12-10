@@ -1,0 +1,45 @@
+<div class="page-wrap" *ngIf="entity">
+  <div class="pageHeaderWrap row">
+    <span (click)="back()" class="back"><i class="back fa fa-chevron-left"></i>&nbsp;Back</span>
+    <span class="pageHeader w-100">Instances of <span *ngIf="entity">{{entity.name}}<span>&nbsp;<span>(</span>{{entity.code}}<span>)</span></span></span></span>
+  </div>
+  <div class="w-100 " style="height:calc(100% - 30px)">
+    <div class="row no-gutters entityPane maxHeight">
+
+      <div class="parentInstance maxHeight">
+        <div class="secondaryheader">{{entity.name}}
+          &nbsp;<span *ngIf="instanceArr && instanceArr.length!=0">{{instanceArr.length}} instances</span>
+        </div>
+        <form class="inputRow" (ngSubmit)="postInstances(entity.id, firstLevelChild, 1)">
+          <input class="inputstyle_secondary" name="instancename" placeholder="Add more instances.." [(ngModel)]="firstLevelChild"/>
+          <!-- <input class="inputstyle_secondary" name="instancename" placeholder="Add more instances.." [(ngModel)]="firstLevelChild.name"/> -->
+          <!-- <input class="inputstyle_secondary mt-1" name="instancecode" placeholder="Add insance code" [(ngModel)]="firstLevelChild.code"/> -->
+          <!-- <button class="add btn bg-transparent" *ngIf="firstLevelChild.name.length>0 && firstLevelChild.code.length>0"> -->
+          <button class="add btn bg-transparent" *ngIf="firstLevelChild.length>0">
+            <i class="fa fa-plus"> </i>
+          </button>
+        </form>
+        <app-instance-panel [isEditable]="routecode === 'IBCE' ? false : true" [parentInstance]="entity" [instances]="instanceArr" (emitInstanceEvent)="fromInstancePanel($event, 1)"></app-instance-panel>
+      </div>
+
+      <div class="childInstance maxHeight" *ngIf="instanceChild && entity.levels>1" >
+        <div class="secondaryheader">{{selectedInstance.name}}
+          &nbsp;<span *ngIf="instanceArr && instanceArr.length!=0">{{instanceChild.length}} instances</span>
+        </div>
+        <form class="inputRow" (ngSubmit)="postInstances(selectedInstance.id, secondLevelChild, 2)">
+           <input class="inputstyle_secondary" name="instancenameChildName" placeholder="Add more instances.." [(ngModel)]="secondLevelChild"/>
+          <!-- <input class="inputstyle_secondary" name="instancenameChildName" placeholder="Add more instances.." [(ngModel)]="secondLevelChild.name"/>
+          <input class="inputstyle_secondary mt-1" name="instancenameChildCode" placeholder="Add instance code" [(ngModel)]="secondLevelChild.code"/> -->
+          <!-- <button class="add btn bg-transparent" *ngIf="secondLevelChild.name.length>0 && secondLevelChild.code.length>0"> -->
+          <button class="add btn bg-transparent" *ngIf="secondLevelChild.length>0">
+            <i class="fa fa-plus"> </i>
+          </button>
+        </form>
+        <app-instance-panel [type]="'child'" [parentInstance]="selectedInstance" [instances]="instanceChild" (emitInstanceEvent)="fromInstancePanel($event, 2)"></app-instance-panel>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

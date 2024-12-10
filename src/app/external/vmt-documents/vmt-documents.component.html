@@ -1,0 +1,10 @@
+<div class="doclist-cont pageHeaderWrap">
+  <div class="pageHeader uploadWrap inline position-relative">Documents</div>
+  <app-document-list
+    *ngIf="ready"
+    [commentList]="comments"
+    [completedContract]="false"
+    [viewType]="'task'"
+    (onSapIdAttach)="getContractInfo()"
+  ></app-document-list>
+</div>

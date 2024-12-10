@@ -1,0 +1,86 @@
+@import "variables";
+.item {
+  /* border-bottom: 1px solid rgb(98, 94, 108); */
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  font-size: 11px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  &:focus {
+    outline: none;
+  }
+  @media screen and (max-width: 1300px) {
+    font-size: 10px;
+  }
+  &:hover {
+    background-color: rgba(var(--primaryColorRGB), 0.1);
+    * {
+      color: var(--secondaryColor) !important;
+    }
+  }
+}
+
+.hoverBorder {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0px;
+  transition-property: width;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+}
+
+.childItem {
+  padding-left: 5px;
+  color: var(--primaryColor);
+}
+.activePanelIcon {
+  margin: 0 5px;
+  right: 0;
+  position: absolute;
+}
+.selectionIndicator {
+  width: 3px;
+  height: 100%;
+  background-color: var(--primaryColor);
+  position: absolute;
+  left: 0;
+}
+.preIcon {
+  padding-left: 15px;
+  color: var(--primaryColor) !important ;
+}
+.imgStyle {
+  height: 24px;
+  width: 24px;
+  margin-left: 14px;
+}
+
+.active {
+  background-color: rgba(var(--primaryColorRGB), 0.1);
+  * {
+    color: var(--secondaryColor) !important;
+    font-weight: 500;
+  }
+}
+
+.darkTheme {
+  .itemContainer {
+    * {
+      color: var(--secondaryColor) !important;
+    }
+    &:hover {
+      // text-shadow: 0 0 10px var(--secondaryColor);
+      background-color: rgba(236, 238, 250, 0.18);
+    }
+  }
+  .active {
+    background-color: rgba(236, 238, 250, 0.18);
+  }
+}

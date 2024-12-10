@@ -1,0 +1,151 @@
+<div class="initiate-form">
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+          Company <sup>*</sup>
+        </label>
+        <app-type-ahead [type]="'company'" [value]="initiation.partnerLegalName" [createAllowed]="true" [required]="true"
+          [search]="'dynamic'" (searchCleared)="clearCompany($event)" (resultEmitter)="selectCompany($event)">
+        </app-type-ahead>
+      </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+          Company Address <sup>*</sup>
+        </label>
+        <input class="inputstyle readonly form-control" [(ngModel)]="selectedPartnerAddr"
+          [placeholder]="'Select Company Address'" [ngbTypeahead]="localAddressArrayFn" [required]="true"
+          [inputFormatter]="searchAddressFormatter" readonly [resultFormatter]="searchAddressFormatter"
+          (selectItem)="selectCompanyAddr($event)" (click)="focusAddress$.next($event.target.value)" />
+      </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+          Product <sup>*</sup>
+        </label>
+        <app-type-ahead [type]="'products'" [createAllowed]="false" (resultEmitter)="selectProduct($event)">
+        </app-type-ahead>
+      </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+          Partner Type<sup>*</sup>
+        </label>
+        <app-type-ahead [type]="'partnerType'" [createAllowed]="false" (resultEmitter)="selectRefData($event, 'partnerType')">
+        </app-type-ahead>
+      </div>
+    </div>
+    <div *ngIf="initiation.partnerType === 'Customer'">
+
+        <div class="form-row no-margin">
+            <div class="form-group col-md-12 padding-left-0">
+              <label>
+                  Customer Dispute Type <sup>*</sup>
+              </label>
+              <app-type-ahead [type]="'customerDisputeType'" [createAllowed]="false" (resultEmitter)="selectRefData($event, 'customerDisputeType')">
+              </app-type-ahead>
+             </div>
+          </div>
+
+          <div class="form-row no-margin">
+            <div class="form-group col-md-12 padding-left-0">
+              <label>
+                  Customer Sap Number <sup>*</sup>
+              </label>
+              <input class="inputstyle form-control" [(ngModel)]="initiation.customerSapNumber" placeholder="Customer SAP Number"/>
+            </div>
+          </div>
+    </div>
+    <div *ngIf="initiation.partnerType === 'Vendor'">
+
+        <div class="form-row no-margin">
+            <div class="form-group col-md-12 padding-left-0">
+              <label>
+                  
+                  Vendor Dispute Type <sup>*</sup>
+              </label>
+              <app-type-ahead [type]="'vendorDisputeType'" [createAllowed]="false" (resultEmitter)="selectRefData($event, 'vendorDisputeType')">
+              </app-type-ahead>
+            </div>
+          </div>
+          
+    <div class="form-row no-margin">
+        <div class="form-group col-md-12 padding-left-0">
+          <label>
+              Vendor Sap Number<sup>*</sup>
+          </label>
+          <input class="inputstyle readonly form-control" [(ngModel)]="initiation.vendorSapNumber" placeholder="Vendor SAP number"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+            Disputed Invoice Number <sup>*</sup>
+        </label>
+        <input class="inputstyle readonly form-control" [(ngModel)]="initiation.disputedInvoiceNumber" placeholder="Disputed Invoice Number"/>
+        </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+            Disputed Invoice Date <sup>*</sup>
+        </label>
+        <!-- <input class="inputstyle readonly form-control" type="date" [(ngModel)]="initiation.disputedInvoiceDate" placeholder="Invoice Date"/> -->
+        <div class="input-group">
+            <input class="form-control" placeholder="DD-MMM-YYYY" (click)="d3.toggle()" (dateSelect)="setDates($event, 'disputedInvoiceDate')"
+            (keydown)="$event.preventDefault(); d3.open();"  ngbDatepicker #d3="ngbDatepicker" [value]="initiation.disputedInvoiceDate? initiation.disputedInvoiceDate :'' "/>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d3.toggle()" type="button"></button>
+            </div>
+          </div> 
+    </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+            Invoice Amount
+        </label>
+        <input class="inputstyle readonly form-control" [(ngModel)]="initiation.invoiceAmount" placeholder="Invoice Amount"/>
+      </div>
+     </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-12 padding-left-0">
+        <label>
+            Disputed Amount
+        </label>
+        <input class="inputstyle readonly form-control" [(ngModel)]="initiation.disputedAmount" placeholder="Disputed Amount"/>
+      </div>
+    </div>
+    <div class="form-row no-margin">
+      <div class="form-group col-md-6 padding-left-0">
+        <label>
+            Traffic Period From
+        </label>
+        <!-- <input class="inputstyle readonly form-control" [(ngModel)]="initiation.trafficPeriodFrom" type="date" placeholder="Traffic Period From"/> -->
+        <div class="input-group" >
+            <input class="form-control" placeholder="DD-MMM-YYYY" (click)="d1.toggle()"  (dateSelect)="setDates($event, 'trafficPeriodFrom')"
+            (keydown)="$event.preventDefault(); d1.open();"  ngbDatepicker #d1="ngbDatepicker" [value]="initiation.trafficPeriodFrom? initiation.trafficPeriodFrom :'' "/>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d1.toggle()" type="button"></button>
+            </div>
+          </div></div>
+     <div class="form-group col-md-6 padding-left-0">
+          <label>
+              Traffic Period To
+          </label>
+          <!-- <input class="inputstyle readonly form-control" [(ngModel)]="initiation.trafficPeriodTo" type="date" placeholder="Traffic Period to"/> -->
+          <div class="input-group" >
+            <input class="form-control" placeholder="DD-MMM-YYYY" (click)="d2.toggle()"  (dateSelect)="setDates($event, 'trafficPeriodTo')"
+            (keydown)="$event.preventDefault(); d2.open();"  ngbDatepicker #d2="ngbDatepicker" [value]="initiation.trafficPeriodTo? initiation.trafficPeriodTo :'' "/>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+  </div>

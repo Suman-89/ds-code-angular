@@ -1,0 +1,1 @@
+export * from './start-process-prescreening/start-process-prescreening.component';

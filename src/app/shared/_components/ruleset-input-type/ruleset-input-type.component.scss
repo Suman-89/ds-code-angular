@@ -1,0 +1,23 @@
+// @import "./../../_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss" ;
+@import "src/app/shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss" ;
+@import "variables" ;
+
+.optionWrap {
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    // margin-right: 5px;
+    border: 1px solid;
+    display: inline-block;
+    // margin-bottom: 5px;
+    min-width: 40px;
+    max-width: 70px;
+}
+
+.deselectedColor{
+    color: #b5b5b5 !important;
+}
+.overflow-in {
+    overflow: inherit !important;
+}

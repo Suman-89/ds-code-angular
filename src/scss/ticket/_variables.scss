@@ -1,0 +1,43 @@
+//colors
+// $brand-primary-color: #0b3a8f; //#0066ff;
+// $brand-primary-color-1: #ceebe8; //#b9c9fe;
+// $brand-secondary-color: #d13a30;
+// $brand-tertiary-color: #f8f9fa;
+// $brand-quaternary-color:#000;
+// $brand-danger-color:#c32121;
+$brand-primary-color: #2e2e2e; //#0066ff;
+$brand-primary-color-1: #ceebe8; //#b9c9fe;
+$brand-secondary-color: #ff9900;
+$brand-tertiary-color: #f8f9fa;
+$brand-quaternary-color: #000;
+$brand-danger-color: #c32121;
+$login-bg-color: linear-gradient(#d81816, #d81816, #d81816);
+
+//font-size
+$extra-large-font-size: 45px;
+$extra-large-mobile-font-size: 25px;
+$large-font-size: 25px;
+$large-mobile-font-size: 18px;
+$normal-font-size: 18px;
+$normal-mobile-font-size: 16px;
+$small-font-size: 14px;
+$small-mobile-font-size: 12px;
+$extra-small-font-size: 10px;
+
+// header style
+$header-box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+//reference data variales
+$tab-panel-bg: lightgray;
+$card-bg-color: #fff;
+$card-overlay-bg-color: rgba(0, 0, 0, 0.8);
+$instance-name-bg: rgba(0, 0, 0, 0.1);
+// $box-shadow-style:  0px 0px 151px 6px rgba(135,135,135,0.38);
+$box-shadow-style: 0px 0px 22px 0px rgba(196, 190, 196, 0.53);
+
+$card-box-shadow: 0px 0px 22px -5px rgba(196, 190, 196, 0.53);
+
+$background: #f8f9fa;
+
+$inprocess-class-color: #2aa89b;
+$terminated-class-color: red;
+$completed-class-color: blue;

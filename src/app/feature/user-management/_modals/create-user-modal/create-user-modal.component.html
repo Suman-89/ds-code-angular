@@ -1,0 +1,86 @@
+
+<form #form ="ngForm" (ngSubmit)="form.valid && save()">
+  <div class="modal-header pt-1 pb-1">
+    <button type="button" class="close btn" aria-label="Close" (click)="close()">
+        <img height="20" src="./assets/images/cross.png">
+    </button>
+   </div>
+    <div class="modal-body position-relative">
+      <div class="row no-gutters"> 
+        <div class="col-md-3 pr-1">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control inputstyle"  name="fname" #fname="ngModel" [(ngModel)]="user.fname">
+        </div>
+        <div class="col-md-3 pr-1">
+          <label class="form-label">Last Name</label>
+          <input type="text"  class="form-control inputstyle"  name="lname" #lname="ngModel" [(ngModel)]="user.lname"
+          (change)="getUserId(fname.value,lname.value)">
+        </div>
+        <div class="col-md-3 pr-1">
+          <label class="form-label">User Id</label>
+          <input type="text" readonly class="form-control inputstyle"  name="userid" #userid="ngModel" [(ngModel)]="showuserId">
+        </div>
+
+        <div class="col-md-3 pr-1">
+          <label class="form-label">Email</label>
+          <input type="text"  class="form-control inputstyle"  name="email" #email="ngModel" [(ngModel)]="user.email">
+        </div>
+
+        <div class="col-md-6 pr-1">
+          <label class="form-label">Group</label>
+          <ng-multiselect-dropdown
+          [placeholder]="'Select Groups'"
+          name="groupselect"
+          [settings]="dropdownSettings"
+          [data]="newGroups"
+          (onSelect)="onItemSelect($event, 'groupnames')"
+          (onDeSelect)="onDeSelect($event, 'groupnames')">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- [(ngModel)]="selectedGroups"   [data]="groups"-->
+        
+        <div class="col-md-6 pr-1">
+          <label class="form-label">Roles</label>
+          <ng-multiselect-dropdown 
+          [placeholder]="'Select Roles'"
+          name="roleselect"
+          [settings]="dropdownSettings"
+          [data]="newRoles"
+          [(ngModel)]="selectedRoles"
+          (onSelect)="onItemSelect($event, 'roles')"
+          (onDeSelect)="onDeSelect($event, 'roles')">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="col-md-6 pr-1">
+          <label class="w-100">Active</label>
+          <div class="toggle-switch" style="top:0">
+            <input type="checkbox" [checked]="user.active" (change)="toggleActiveStatus($event.target)">
+            <div class="knobs">
+              <span></span>
+            </div>
+            <div class="layer"></div>
+          </div>
+        </div>
+        <div class="col-md-6 pr-1">
+          <label class="w-100">External Users</label>
+          <div class="toggle-switch" style="top:0">
+            <input type="checkbox" [checked]="user.externaluser" (change)="toggleExternalUsers($event.target)">
+            <div class="knobs">
+              <span></span>
+            </div>
+            <div class="layer"></div>
+          </div>
+          </div>
+        </div>
+      </div>
+  
+    <div class="modal-footer pt-1 pb-1">
+        <button type="button" class="btn secondarybtnstyle" (click)="close()">Cancel</button>
+        <button type="submit" [disabled]="!form.valid"  class="btn primarybtnstyle">Save</button>
+    </div>
+    
+  </form>
+  
+  
+  

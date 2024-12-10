@@ -1,0 +1,50 @@
+<div id="gridCont" style="height: 100%">
+  <jqxGrid
+    class="{{ darkTheme ? 'darkTheme' : '' }}"
+    [selectionmode]="selectionMode"
+    [source]="source"
+    [theme]="'material'"
+    [pageable]="pageable"
+    [autoheight]="autoHeight"
+    [autorowheight]="autoHeight"
+    [pagesizeoptions]="pageSizeOpt"
+    [altrows]="true"
+    [autoheight]="autoHeight"
+    [filterable]="filterable"
+    [sortable]="sortable"
+    [groups]="groups"
+    [groupable]="groupable"
+    [groupsexpandedbydefault]="true"
+    [columns]="columns"
+    [columnsresize]="true"
+    [showfilterrow]="filterable"
+    [columnsreorder]="columnsreorder"
+    [sortmode]="'many'"
+    [width]="getWidth()"
+    [height]="height"
+    [ready]="readyFn"
+    [enabletooltips]="true"
+    [editable]="editable"
+    (onColumnresized)="saveGridState()"
+    (onColumnreordered)="saveGridState()"
+    (onFilter)="onFilter($event)"
+    (onSort)="saveGridState()"
+    (onRowselect)="onGridRowSelect($event)"
+    (onRowunselect)="onGridRowUnselect($event)"
+    (onRowdoubleclick)="rowdoubleclick($event)"
+    (onCelldoubleclick)="cellClickEvent($event)"
+    (onCellclick)="singleClick($event)"
+    (onCellvaluechanged)="cellValueChange($event)"
+    [rowdetails]="showRowDetails"
+    [initrowdetails]="initRowDetails"
+    [rowdetailstemplate]="rowdetailstemplate"
+    [localization]="localization"
+    id="jqgrid"
+    #grid
+  >
+  </jqxGrid>
+  <!-- (onRowclick)="singleClick($event)" -->
+</div>
+<!--
+
+ -->

@@ -1,0 +1,65 @@
+<div class="start-process-cont" id="startContainer">
+  <!-- Header Container including action buttons -->
+  <!-- <div class="header-cont">
+        <div class="header">
+            <h5>Upload Aadhaar</h5>
+        </div>
+        <div class="action-btns">
+            <button class="primarybtnstyle btn" (click)="openSelectModal()" *ngIf="showButton">Select Company Address</button>
+            <button class="primarybtnstyle btn" style="margin-left: 10px;" (click)="openEditModal()" *ngIf="showButton">Edit Company</button> 
+        </div>
+    </div> -->
+
+  <div class="process-info-cont">
+    <form #form="ngForm" class="initiate-form">
+      <div class="flex-prop">
+        <div class="doc-upload-cont">
+          <app-initiate-aadhaar
+            *ngIf="!uploadedImg"
+            [inputData]="initiationData"
+            (docDataEmitter)="saveDocChanges($event)"
+            (imgEmitter)="getImage($event)"
+          >
+          </app-initiate-aadhaar>
+          <div
+            style="
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            "
+            *ngIf="uploadedImg"
+          >
+            <img
+              [src]="uploadedImg"
+              alt="image"
+              style="height: 180px; width: 100%"
+            />
+            <button
+              class="newdoc-btn cancelbtn btn secondarybtnstyle"
+              (click)="closeImg()"
+            >
+              New Document
+            </button>
+          </div>
+        </div>
+        <div class="form-cont">
+          <app-aadhaar-extract
+            #invExtract
+            [extractedData]="extractedData"
+            [poTypeahead]="allPoData"
+            (selectAnnotation)="selectAnnotation($event)"
+            (emitExtractedDataChanges)="editExtractedData($event)"
+            (emitPoNumber)="fetchPurchaseDetails($event)"
+            (checkHistoryEmitter)="checkHistory($event)"
+            [checkHistoryData]="checkHistoryData"
+            (checkHistoryClickEmitter)="getHistoryClick($event)"
+            [checkHistoryClick]="checkHistoryClick"
+            (otpEmitter)="onOtpEmit($event)"
+          >
+          </app-aadhaar-extract>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

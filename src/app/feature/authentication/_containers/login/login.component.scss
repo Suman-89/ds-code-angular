@@ -1,0 +1,106 @@
+@import "variables";
+
+.loginpage {
+  background: #fff;
+  overflow: hidden;
+  height: 100%;
+}
+
+.logodiv {
+  font-size: 20px;
+  // color: var(--primaryColor);
+  color: var(--primaryColor);
+  // temp===============================
+  // background-image: linear-gradient(white, var(--primaryColor), white);
+  background-image: linear-gradient(white, var(--secondaryColor), white);
+  // background-color: var(--secondaryColor); //temporary for solid login bg
+  // temp===============================
+  padding: 120px 15px 0px;
+  width: 400px;
+  margin: 0px auto !important;
+  text-align: center;
+  overflow: hidden;
+  height: 100%;
+
+  .loginInput {
+    color: #fff;
+  }
+
+  .full {
+    // height: 80px;
+    max-width: 60%;
+  }
+  .loginBtn {
+    padding: 15px 60px;
+    border: 1px solid #fff;
+    border-radius: 0px;
+    color: #fff;
+    font-size: 13px;
+    margin: 65px auto;
+    width: fit-content;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  // img {
+  //   width: 60%;
+  // }
+}
+.hideAddWF {
+  padding: 50px 15px 0px !important;
+  transition: all 1s ease;
+  img {
+    transition: width 1s ease;
+    width: 50% !important;
+  }
+  .loginBtn {
+    opacity: 0;
+    padding: 0px !important;
+    margin: 0px auto !important;
+  }
+}
+
+.loginDiv {
+  margin: 50px auto;
+  width: 0px;
+  opacity: 0;
+}
+.showAddWF {
+  opacity: 1;
+  width: 80% !important;
+  transition: all 1s ease;
+}
+
+.inputstyle {
+  border: 1px solid #fff;
+  background: transparent;
+  color: black;
+  font-weight: 500;
+  height: 40px;
+  font-size: 14px;
+  padding: 0px 20px;
+  border-radius: 0px;
+  width: 100%;
+  margin: 0px 0px 15px;
+  &::placeholder {
+    color: #fff;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #fff;
+    transition: 1s all ease;
+  }
+}
+
+.btnblock {
+  margin: 10px auto;
+  width: fit-content;
+  .iconStyle {
+    cursor: pointer;
+    padding: 10px;
+    width: 55px !important;
+    &:hover {
+      transition: 1s width ease;
+    }
+  }
+}

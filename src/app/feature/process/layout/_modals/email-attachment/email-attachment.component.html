@@ -1,0 +1,93 @@
+<form #form="ngForm">
+  <div class="modal-header">
+    <h5 class="modal-title secondary-color mt-0">{{ header }}</h5>
+    <button
+      type="button"
+      class="close btn"
+      aria-label="Close"
+      (click)="close()"
+    >
+      <img height="20" src="./assets/images/cross.png" />
+    </button>
+  </div>
+  <div class="modal-body position-relative">
+    <div class="list-box">
+      <div
+        class="font-weight-normal cursor-pointer icon-style p-2"
+        *ngFor="let file of taskActionSvc.emailSelectedFiles"
+      >
+        <div class="icon-box p-2">
+          <i
+            [ngbTooltip]="'Delete'"
+            class="fa fa-close cursor- d-block delete-icon secondary-color"
+            (click)="deleteIcon(file)"
+            style="transform: translateY(-7px)"
+          ></i>
+          <div class="file-type secondary-color">
+            <div *ngFor="let type of file.type.split('/'); let id = index">
+              <div *ngIf="type; in: fileTypes">
+                <i class="fa {{ fileTypes[type] }}" style="font-size: 28px"></i>
+              </div>
+            </div>
+            <div
+              *ngIf="
+                !file.type ||
+                (!fileTypes[file.type.split('/')[0]] &&
+                  !fileTypes[file.type.split('/')[1]])
+              "
+            >
+              <i class="fa fa-file-code-o" style="font-size: 28px"></i>
+            </div>
+          </div>
+          <div class="file-name">
+            <span>{{ file.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="empty-attachment-box text-center">
+      <div *ngIf="!taskActionSvc.emailSelectedFiles.length" class="absent-box">
+        <i class="d-block fa fa-paperclip" style="font-size: 60px"></i>
+        <h4>No file Selected!</h4>
+      </div>
+      <div class="">
+        <input
+          id="emailFiles"
+          style="display: none"
+          type="file"
+          (change)="onFileChange($event)"
+          multiple
+        />
+        <label for="emailFiles" class="emailFiles mt-3">
+          Select Attachment
+        </label>
+        <div>
+          <small>
+            {{
+              this.taskActionSvc.emailSelectedFileSize / (1024 * 1024)
+                | number : "1.2-2"
+            }}MB of 15MB
+            <em style="color: rgb(202, 41, 41)">{{
+              this.taskActionSvc.emailSelectedFileSize / (1024 * 1024) > 15
+                ? "Exceeding size limit."
+                : ""
+            }}</em>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      [disabled]="!form.valid"
+      class="btn primarybtnstyle"
+      (click)="save()"
+    >
+      Done
+    </button>
+  </div>
+</form>

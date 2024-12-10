@@ -1,0 +1,158 @@
+*{
+    font-size: 0.7rem;
+}
+.rule-container{
+    padding: 5px;
+}
+.borderBottom{
+    border-bottom: 2px solid #add0f0;
+}
+.btnCont{
+    padding: 10px 15px;
+}
+.ruleName{
+    font-size: 0.9rem;
+}
+.expressionContainer{
+    padding-top: 5px;
+    font-weight: 600;
+    min-height: 40px;
+    text-overflow: ellipsis;
+    border-top: solid 2px #add0f0;
+    display: flex;
+    justify-content: space-between;
+}
+.operator{
+    width: 130px;
+}
+.operand{
+    width: 230px;;
+}
+.selectInputFlex{
+    border-radius: 5px;
+    padding: 5px;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.rowGroup{
+    align-items: center;
+    flex-grow: 1;
+}
+.inputPadding{
+    padding: 5px 10px;
+}
+.deleteIcon{
+    font-size: 1.2rem;
+    color: #f55442;
+    cursor: pointer;
+    display: none;
+}
+.selectInput{
+    height: 24px;
+    padding:3px;
+    font-size: 0.7rem;
+    // width:calc(100% - 20px);
+}
+.lastInputWidth{
+    width:calc(100% - 20px);
+}
+.inputWidth{
+    width: 100%;
+}
+.actionContainer{
+    height: 24px;
+    border-radius: 5px;
+    border: 1px solid #add0f0;
+    background-color: white;
+    font-size: 0.8rem!important;
+    cursor: pointer;
+}
+.justifyContent{
+    justify-content: space-between;
+}
+.operandBtn{
+    padding: 2px 3px;
+    border-bottom: 1px solid #add0f0;
+    cursor: pointer;
+}
+.operationGrpBtn{
+     padding: 2px 3px;
+}
+.dropDownDiv{
+    padding: 0 5px;
+}
+.newNodeBtn{
+    margin: 5px;
+    padding: 2px 3px;
+    display: inline-block;
+}
+.iconPadding{
+    padding-right: 5px;
+}
+.icon{
+    cursor: pointer;
+}
+:host ::ng-deep .node-content-wrapper{
+    box-shadow: none;
+    background: transparent;
+}
+:host ::ng-deep  .node-content-wrapper-active{
+    background: transparent;
+}
+:host ::ng-deep .node-content-wrapper:hover{
+    box-shadow: none;
+    background: transparent;
+}
+:host ::ng-deep .node-content-wrapper-active:hover{
+    background: transparent;
+}
+:host ::ng-deep div.angular-tree-component tree-node>div .toggle-children-wrapper .toggle-children {
+    display: none;
+}
+:host ::ng-deep .node-content-wrapper{
+    width: 100%;
+}
+:host ::ng-deep .tree-children{
+    padding:0; 
+    // margin:5px 15px 5px 35px;
+    margin: 15px 5px 15px 40px;
+    background-color: #cce6ff;
+    border: 1px solid #add0f0;
+    border-radius:5px;
+    cursor: default;
+}
+form{
+    padding: 0;
+    margin: 5px 15px 5px 30px;
+    // background-color: #cce6ff;
+    // border: 1px solid #add0f0;
+    border-radius:5px;
+    cursor: default;
+}
+.disabledBtn{
+   background-color: #E0E0E0;
+//    pointer-events: none;
+   cursor: default;
+}
+.hideDrpDown{
+    display: none;
+}
+:host ::ng-deep tree-node-expander{
+    display: none;
+}
+.deleteGroupBtn{
+    width: 10px;
+    float: right;
+}
+.deleteBtn{
+    font-size: 1rem;
+    margin: 0 10px;
+}
+:host ::ng-deep tree-viewport{
+    overflow: unset;
+}
+:host ::ng-deep .tree-children {
+    overflow: unset;
+}

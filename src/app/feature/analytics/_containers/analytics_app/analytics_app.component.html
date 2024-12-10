@@ -1,0 +1,24 @@
+<div class="container-fluid h-100">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{ selectedProcess?.label
+      }}<span class="secondary-color" style="font-size: 22px; padding-left: 5px"
+        >|</span
+      >
+      Analytics
+  
+    </div>
+  </div>
+  <!-- <iframe width="100%" height="560" src="https://datastudio.google.com/embed/reporting/6f1bdf18-30ba-423c-b158-201279d055cd/page/tM6zC" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+  <div id="divCanvas" class="row">
+    <div class="col-6">
+      <canvas id="canvas1"> </canvas>
+    </div>
+    <div class="col-6">
+      <canvas id="canvas2"> </canvas>
+    </div>
+    <div class="col-12">
+      <canvas id="canvas3"  width="400" height="120"> </canvas>
+    </div>
+  </div>
+</div>

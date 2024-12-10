@@ -1,0 +1,175 @@
+<nav class="navbar navbar-expand-md sticky-top navbar-light">
+  <div class="navbar-brand" (click)="routeToHome()">
+    <div *ngIf="sharedSvc.responsiveLogoChange">
+      <img
+        [src]="sharedSvc.dynamicThemeUrls.value.logoUrl"
+        class="cursor-pointer"
+      />
+    </div>
+    <div *ngIf="!sharedSvc.responsiveLogoChange">
+      <img
+        [src]="sharedSvc.dynamicThemeUrls.value.faviconUrl"
+        class="cursor-pointer"
+      />
+    </div>
+  </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Features</a>
+      </li> -->
+    </ul>
+    <!-- <form class="search-form">
+      <input class="form-control inputstyle" type="search" placeholder="Search" aria-label="Search">
+    </form> -->
+    <ul class="navbar-nav">
+      <!-- <button class="btn primarybtnstyle" (click)="toggle()">Change Theme</button> -->
+
+      <li class="dropdown nav-item">
+        <span
+          class="nav-link dropdown-toggle arrow-none noti-icon-container"
+          data-toggle="dropdown"
+          role="button"
+          aria-haspopup="false"
+          aria-expanded="false"
+          (click)="getNotifications()"
+        >
+          <span class="fa fa-bell primary-color"></span>
+          <span
+            class="badge badge-pill badge-secondary noti-icon-badge secondary-bg-color"
+          >
+            <span *ngIf="notifCount > 0">{{ notifCount }}</span>
+          </span>
+        </span>
+        <div
+          class="dropdown-menu dropdown-menu-right dropdown-menu-lg overflow-hidden"
+        >
+          <!-- item-->
+          <h6 class="dropdown-item-text">
+            Notifications
+            <!-- <span *ngIf="notifications && notifications.length>0">({{notifications.length}})</span> -->
+          </h6>
+          <div class="dropdown-divider"></div>
+          <div class="notification-item-list">
+            <!-- item-->
+            <a
+              class="dropdown-item notify-item"
+              *ngFor="let notification of notifications"
+            >
+              <div class="notify-icon primary-1-bg-color">
+                <i
+                  class="secondary-color"
+                  [ngClass]="notificationIconType(notification.type)"
+                  aria-hidden="true"
+                ></i>
+              </div>
+              <div
+                class="notify-details"
+                container="body"
+                [ngbTooltip]="transformMsg(notification.message)"
+                (click)="notificationAction(notification)"
+              >
+                <p
+                  class="fromusername m-0"
+                  *ngIf="selectedProcess.key === 'Process_initiation_impl'"
+                >
+                  {{ notification.contracttype }}
+                  <span class="secondary-color pl-1 pr-1"> | </span>
+                  {{ notification.product }}
+                  <span class="secondary-color pl-1 pr-1">|</span>
+                  {{ notification.partnerlegalname }}
+                </p>
+
+                <p
+                  class="fromusername m-0"
+                  *ngIf="selectedProcess.key === 'Initiation_vMTProcess'"
+                >
+                  Deal ID: {{ notification.dealIdFinal }}
+                </p>
+                <p
+                  class="fromusername m-0"
+                  *ngIf="
+                    selectedProcess.key !== 'Process_initiation_impl' &&
+                    selectedProcess.key !== 'Initiation_vMTProcess'
+                  "
+                >
+                  {{ notification.businesskey }}
+                </p>
+                <p
+                  class="text-muted text-truncate d-block m-0"
+                  [innerHTML]="notification.message"
+                ></p>
+                <p class="font-smaller m-0">
+                  {{ notification.createdOn | date : "dd-MMM-yyyy HH:mm" }}
+                </p>
+              </div>
+            </a>
+            <!-- item-->
+          </div>
+          <div class="dropdown-divider"></div>
+          <!-- All-->
+          <!-- <a (click)="viewAllNotification()" class="dropdown-item text-center text-primary">
+                View all <i class="fi-arrow-right"></i>
+            </a> -->
+        </div>
+      </li>
+      <li class="dropdown nav-item">
+        <div class="dropdown">
+          <div
+            class="dropdown-toggle nav-link arrow-none nav-user"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="false"
+            aria-expanded="false"
+          >
+            <i class="fa fa-user-circle primary-color"> </i>
+            <!-- <img src="./assets/images/user-default.png" alt="user" class="rounded-circle"> -->
+            <!-- <div class="avtarContainer">
+                  <div class="avtarmain">
+                    <span class="avtartext">{{user?.fname?.charAt(0)}}{{user?.lname?.charAt(0)}}</span>
+                  </div>
+                </div> -->
+            <span *ngIf="user" class="welcome-msg"
+              >Welcome, <span class="uname">{{ user.fname }}</span></span
+            >
+          </div>
+          <div class="dropdown-menu dropdown-menu-right">
+            <!-- item-->
+            <a class="dropdown-item d-block">
+              <!-- <i class="fa fa-cog mr-2" aria-hidden="true"></i>My Account <span class="badge badge-success ml-1">11</span> -->
+              <div class="name" *ngIf="user">
+                {{ user.fname }} {{ user.lname }}
+              </div>
+            </a>
+            <a class="dropdown-item d-block">
+              <!-- <i class="fa fa-cog mr-2" aria-hidden="true"></i>My Account <span class="badge badge-success ml-1">11</span> -->
+              <div class="role" *ngIf="user">
+                <div *ngFor="let role of user.roles | displayRoles">
+                  {{ role | roleName }}
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" (click)="logout()"
+              ><i class="fa fa-power-off text-danger mr-2"></i> Logout</a
+            >
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

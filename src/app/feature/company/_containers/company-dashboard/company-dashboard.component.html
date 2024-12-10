@@ -1,0 +1,51 @@
+
+<div class="container">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader text-capitalize"> 
+       {{selectedProcess}}<span class="secondary-color"  style="font-size:22px;padding-left:5px;">|</span>
+      {{mngmttype}} List
+      <span class="secondary-color" *ngIf="gridData">({{gridData.length}})</span></div>
+  </div>
+   <div class="row no-gutters" *ngIf="gridData && gridData.length>0 && mngmttype.includes('Contract')">
+    <!-- <div class="col-md-12 d-flex justify-content-end mb-2" *ngIf="!mngmttype.includes('Contract')">
+      <div *ngIf="searchMsg.length > 0" class="col-md-8 text-left">  {{searchMsg}} </div>
+      <input placeholder="Search Companies.." class="inputstyle col-md-4 float-right" (keyup)="filterCompanies($event.target.value)" />
+    </div> -->
+        <div class="btnRow">
+          <button class="float-right primarybtnstyle" (click)="addOrEditCompany(1)">Add {{mngmttype}}</button>
+          <button *ngIf="selectedComp" class="float-right primarybtnstyle" (click)="addOrEditCompany(2)">Edit {{mngmttype}}</button>
+        </div>
+   </div>
+
+     <div class="w-100" *ngIf="compGridColumns && gridData && !mngmttype.includes('Contract')">
+        <app-grid-toolbar
+          #companyGrid
+          [type]="mngmttype"
+          [data]="gridData"
+          [height]="height"
+          [selectionMode]="selectionMode"
+          [editable]="editable"
+          [automaticPageSize]="!editable"
+          [ddList]="ceList"
+          [refDataInstancesColumn]="products"
+          (emitAction)="onGridRowSelect($event)"
+          (celldblClick)="onCellDblClick($event)"
+          (cellValueChange)="cellValueChangeEvent($event)"
+          (doubleClick)="doubleClick($event)"
+        ></app-grid-toolbar>
+     </div>
+
+    <div class="w-100 contractEntitiesTable" *ngIf="gridData && mngmttype.includes('Contract')">
+    <div class="row no-gutters contrTabheaderStyle">
+      <div class="col-md-3">Serial Number</div>
+      <div class="col-md-3">ID</div>
+      <div class="col-md-6">Name</div>
+    </div>
+    <div class="row no-gutters contrRowStyle" [ngClass]="{'primary-1-bg-color': data === selectedComp}" *ngFor="let data of gridData; let i = index;" (click)="selectContEntity(data)"  (dblclick)="doubleClickContEntity(data)">
+      <div class="col-md-3"> {{i + 1}} </div>
+      <div class="col-md-3"> {{data.id}} </div>
+      <div class="col-md-6"> {{data?.name}} </div>
+    </div>
+    </div>
+</div>
+

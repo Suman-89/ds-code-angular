@@ -1,0 +1,112 @@
+@import "src/scss/default/variables";
+
+.start-process-cont {
+  padding: 0px 20px;
+  height: 100%;
+
+  .header-cont {
+    display: flex;
+    // margin-bottom: 10px;
+
+    .header {
+      flex-grow: 1;
+      max-width: 50%;
+
+      .subtitle{
+        display: flex;
+        div{
+          flex-wrap: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+  
+      .taskName {
+        h5 {
+          margin: 0px;
+          max-width: calc(100% - 40px);
+          display: inline-block;
+        }
+
+        i {
+          font-size: 15px;
+          padding: 3px;
+          margin-left: 10px;
+          border-radius: 40px;
+        }
+      }
+
+      .details {
+        .subHead {
+          border-right: 2px solid var(--primaryColor);
+          padding: 0px 8px;
+          margin: 0px;
+          min-width: 20px;
+          white-space: nowrap;
+          label {
+            margin: 0px;
+            max-width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          .link {
+            img,
+            i {
+              width: 16px;
+              margin-left: 3px;
+              cursor: pointer;
+              vertical-align: top;
+              margin-top: 2px;
+            }
+          }
+        }
+
+        .subHead:first-child {
+          padding-left: 0px;
+        }
+        .subHead:last-child {
+          border-right: 0px;
+          padding-right: 0px;
+        }
+      }
+    }
+    .action-btns {
+      flex-grow: 1;
+      max-width: 50%;
+    }
+  }
+
+  .process-info-cont {
+    display: flex;
+    height: calc(100% - 65px);
+
+    .row-cont {
+      flex-grow: 1;
+      max-width: 49%;
+      margin: 0px 1%;
+      padding: 10px;
+      height: 100%;
+      background: white;
+      box-shadow: 0 0 5px 3px #eee;
+    }
+    .row-cont:first-child {
+      margin-left: 0px;
+    }
+
+    .row-cont:last-child {
+      margin-right: 0px;
+    }
+  }
+  .width-200 {
+    max-width: 100% !important;
+    word-break: normal !important;
+    text-overflow: unset !important;
+  }
+
+  .company-edit-icon {
+    color: var(--primaryColor);
+  }
+}

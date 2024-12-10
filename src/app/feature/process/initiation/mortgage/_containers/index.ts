@@ -1,0 +1,1 @@
+export * from './start-mortgage-process/start-mortgage-process.component';

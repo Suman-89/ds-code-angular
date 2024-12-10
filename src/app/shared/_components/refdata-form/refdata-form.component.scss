@@ -1,0 +1,20 @@
+
+
+::ng-deep{
+    .multiselect-dropdown,.form-control{
+        margin-bottom: 10px;
+    }
+    .singleSelection{
+        .multiselect-item-checkbox{
+            div{
+                padding-left: 0 !important;
+                &::before{
+                    content: unset !important;
+                }
+                &::after{
+                    content: unset !important;
+                }
+            }
+        }
+    }
+}

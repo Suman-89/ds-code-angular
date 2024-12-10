@@ -1,0 +1,25 @@
+<div class="modal-header">
+  {{sharedSvc.dynamicThemeUrls.value.workflowOverlayTitle}}
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <img src="./assets/images/cross.png">
+</button>
+</div>
+<div class="modal-body bg-custom">
+   <div class="card-container row d-flex justify-content-center">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4" *ngFor="let proc of process" >
+          <div class="cursor-pointer card text-center" [style.backgroundColor]="proc.cardColor" (click)="selectedProcessEvent(proc)">  
+            <!-- <i class="iconStyle" [ngClass]="proc.iconName ? proc.iconName : 'fa fa-wpforms'"  ></i>   -->
+            <i 
+              *ngIf="proc?.iconName?.includes('fa ') || !proc?.iconName" 
+              class="iconStyle" [ngClass]="proc.iconName ? proc.iconName : 'fa fa-wpforms'"   
+            ></i>
+            <img  
+              *ngIf="proc?.iconName && !proc?.iconName?.includes('fa ')" 
+              class="imgStyle"  
+              [src]="this.sharedSvc.dmsUrl+'/file/'+proc.iconName"
+             />
+            <div class="h6 card-text" [ngbTooltip]="proc.label" container="body">{{proc.label}}</div>
+          </div>
+        </div>
+    </div>
+</div>

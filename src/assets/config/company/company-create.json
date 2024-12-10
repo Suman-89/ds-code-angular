@@ -1,0 +1,76 @@
+[
+  {
+    "key": "CompanyLegalName",
+    "type": "input",
+    "templateOptions": {
+      "type": "text"  ,
+      "required": true,
+      "label": "Enter Company Legal Name",
+      "placeholder":"Company Legal Name"
+    }
+  },
+  {
+    "key": "parentId",
+    "type": "input",
+    "templateOptions": {
+      "type": "text"  ,
+      "label": "Parent Company Name",
+      "placeholder":"Enter Parent Company Name"
+    }
+  },
+  {
+    "key": "companyUsedName",
+    "type": "input",
+    "templateOptions": {
+      "type": "text"  ,
+      "label": "Company Used Name",
+      "placeholder":"Enter Parent Company Name"
+    }
+  },
+  {
+    "key": "companyAddress",
+    "type": "input",
+    "templateOptions": {
+      "required": true ,
+      "type": "text"  ,
+      "label": "Company Address",
+      "placeholder":"Enter Company Address"
+    }
+  },
+  {
+    "key": "customer",
+    "type": "checkbox",
+    "templateOptions":{
+      "label": "Customer",
+      "value": "customer"
+    }
+  },
+  {
+    "key": "vendor",
+    "type": "checkbox",
+    "templateOptions":{
+      "label": "Vendor",
+      "value": "vendor"
+    }
+  },
+  {
+    "key": "ofacOutcome",
+    "type": "input",
+    "templateOptions": {
+    "required": true,
+    "type":"text",
+    "label": "OFAC Outcome",
+    "placeholder": "OFAC Outcome"
+    }
+  },
+  {
+    "key": "signatoryOfacOutcome",
+    "type": "input",
+    "templateOptions": {
+    "required": true,
+    "type":"text",
+    "label": "OFAC signatory Outcome",
+    "placeholder": "OFAC signatory Outcome"
+    }
+  }
+]

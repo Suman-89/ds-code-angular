@@ -1,0 +1,51 @@
+<div class="w-100">
+  <div class="w-100 position-relative">
+    <div class="selectItem w-100 d-flex justify-content-between cursor-pointer" (click)="showList()" >
+      <div class="text-truncate p-0 font-weight-normal" *ngIf="value?.length"
+       [ngClass]="type == 'primary' ? 'primaryIcon' : 'secondaryIcon'"
+       >
+        <i *ngIf="typeOfNaN(value)" class="fa close-button {{value}}" ></i>
+        <img  *ngIf="!typeOfNaN(value)" [src]="this.sharedSvc.dmsUrl+'/file/'+value" />
+      </div>
+      <div class="text-truncate p-0 font-weight-normal" *ngIf="!value?.length"  style="font-size:20px">
+      <small>{{placeholder}}</small>  
+      </div>
+      <i *ngIf="!selecting" class="fa fa-angle-down text-primary" style="font-size: 17px;font-weight: 600;"></i>
+      <i *ngIf="selecting" class="fa fa-close text-primary" style="font-size: 17px;font-weight: 300;"></i>
+    </div>
+    <div 
+      *ngIf="selecting" 
+      class="w-100 dropdown_container p-1 pl-2 mt-1" 
+      [style.top]="type == 'primary' ? '44px' : type == 'onTop' ? '-160px' : '33px'"
+      [style.right]="type == 'onTop' ? '34px':'0px'"
+     >
+      <div>
+      <input 
+      placeholder="Search here.." 
+      class="filter-input w-100 my-1" 
+      name="dropdown_search" (keyup)="applyFilter($event.target.value)" 
+      />
+      </div>
+      <div class="list-box">
+        <h6 class="w-100  innerTitle">Custom Icons</h6>
+        <div class="icon-style" *ngFor="let img of filterImageList" (click)="onSimpleSelect(img?.uniqueId)" >
+         <img 
+              [src]="this.sharedSvc.dmsUrl+'/file/'+img?.uniqueId" 
+              height="auto"
+              width="100%"
+            />
+       </div>
+       <h6 class="w-100 innerTitle">Fav Icons</h6>
+        <li class="font-weight-normal cursor-pointer" style="font-size:28px" (click)="onSimpleSelect('fa-list')" [value]="'fa-list'">
+          <i class="fa fa-close close-button fa-list text-secondary" ></i>
+        </li>
+        <li class="font-weight-normal cursor-pointer"  style="font-size:28px" *ngFor="let ele of filterList" (click)="onSimpleSelect(ele)"
+        [value]="ele">
+            <i *ngIf="!ele?.id" class="fa fa-close close-button {{ele}}  text-secondary" ></i>
+            
+        </li>
+      </div>
+    </div>
+  </div>
+  
+</div>

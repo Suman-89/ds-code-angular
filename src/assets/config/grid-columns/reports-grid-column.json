@@ -1,0 +1,17 @@
+[
+  { "text": "Report Name", "datafield": "reportName" },
+  { "text": "Source", "datafield": "sourceLabel" },
+  { "text": "Created By", "datafield": "userName" },
+  {
+    "text": "Created At",
+    "datafield": "createdAt",
+    "filtertype": "range",
+    "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+  },
+  {
+    "text": "Updated At",
+    "datafield": "updatedAt",
+    "filtertype": "range",
+    "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+  }
+]

@@ -1,0 +1,55 @@
+<form #form="ngForm">
+  <div class="modal-header">
+    <h5 class="modal-title secondary-color mt-0">{{header}}</h5>
+    <button type="button" class="close btn" aria-label="Close" (click)="close()">
+      <img height="20" src="./assets/images/cross.png">
+    </button>
+  </div>
+  <div class="modal-body position-relative">
+    <div class="row no-margin">
+      <div class="col-md-12 mt-4" *ngIf="opt == 1 || opt == 2">
+        <label class="form-label">Select User <span class="text-danger">*</span></label>
+        <ng-multiselect-dropdown [placeholder]="'Select'" name="userselect" [(ngModel)]="selectedEntity"
+          [settings]="userDropdownSettings" [data]="users" #seluser="ngModel" [required]="true">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="col-md-12" *ngIf="opt == 3">
+        <label class="form-label">Select Group <span class="text-danger">*</span></label>
+        <ng-multiselect-dropdown [placeholder]="'Select'" name="userselect" [(ngModel)]="selectedEntity"
+          [settings]="groupDropdownSettings" [data]="groups" #seluser="ngModel" [required]="true">
+        </ng-multiselect-dropdown>
+        <div class="info mt-4">
+          <div class="row">
+              <div class="col-5">
+                  <p class="mb-2"><span style="font-weight:700">@</span> = Tag another user</p>
+                  <p class="mb-2"><span style="font-weight:700">#</span> = Tag a group</p>
+                  <p class="mb-2"><span style="font-weight:700">$</span> = Tag a document</p>
+              </div>
+              <div class="col-7">
+                  <!-- <p class="mb-2"><span style="font-weight:700">'Enter'</span> key = Submit comments</p> -->
+                  <p class="mb-2"><span style="font-weight:700">'Shift+Enter'</span> key = Start a new line</p>
+                  <p class="mb-2"><span style="font-weight:700">'Ctrl+Enter'</span> key = to enter new item in list</p>
+              </div>
+          </div>  
+        </div>
+        <app-comment-box 
+          #commentBox
+          *ngIf="mentionConfig && mentionConfig.mentions.length == 3" 
+          [commentMentionConfig]="mentionConfig"
+          [commentBoxOptions]="commentBoxOpt" 
+          [showSubmitBtn]="false"
+          (submitted)="onSubmitted($event)"
+        ></app-comment-box>
+
+        <!-- <div class="commentRow" *ngFor="let comment of commentList">
+          <app-display-comment [data]="comment"></app-display-comment>
+         </div> -->
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">Cancel</button>
+    <button type="submit" [disabled]="!form.valid" class="btn primarybtnstyle" (click)="save()">Assign</button>
+  </div>
+</form>

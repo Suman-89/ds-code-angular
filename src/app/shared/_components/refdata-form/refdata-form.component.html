@@ -1,0 +1,43 @@
+
+<label class="form-label">{{selRef.name}} <sup *ngIf="options.isFirstLevelRequired" class="primary-color">*</sup> <span *ngIf="selRef.extra"><small>{{selRef.extra}}</small></span></label>
+<!-- <select class="form-control" name="doc_subcategries" [(ngModel)]="refdataFormModel.firstLevelInstance" #subcat="ngModel"
+[ngClass]="{'is-invalid': subcat.invalid && (subcat.dirty || subcat.touched || parentForm.submitted)}"
+[required]="options.isFirstLevelRequired" (change)="onFirstLevelInstanceChange()">
+    <option value="null" disabled>Select</option>
+    <option *ngFor="let cat of firstLevelInstances" [value]="cat.id">{{cat.name}}</option>
+</select> -->
+<ng-multiselect-dropdown
+        [placeholder]="'Select'"
+        name="cat_one"
+        [(ngModel)]="refdataFormModel.firstLevelInstance"
+        [data]="firstLevelInstances"
+        [settings]="dropdownSettings"
+        (onSelect)="onFirstItemSelect($event)"
+        (onSelectAll)="onFirstSelectAll($event)"
+        (onDeSelect) = "onFirstDeSelect($event)"
+        (onDeSelectAll) = "onFirstDeSelectAll($event)"
+        #cat="ngModel"
+        [ngClass]="{'is-invalid': cat.invalid && (isFirstFocusOutOnMulitiSelect || parentForm.submitted),'singleSelection':!options.isFirstLevelMultiSelect}"
+        [required]="options.isFirstLevelRequired" 
+        (focusout)="isFirstFocusOutOnMulitiSelect = true"
+        >
+    </ng-multiselect-dropdown>
+<div *ngIf="refdataFormModel.firstLevelInstance && options.showSecondLevel && !options.isFirstLevelMultiSelect ">
+    <label class="form-label">{{selFrstLvlInstance?.name || 'Select'}} <sup *ngIf="options.isSecondLevelRequired" class="primary-color">*</sup></label>
+    <ng-multiselect-dropdown
+        [placeholder]="'Select'"
+        name="prdct"
+        [(ngModel)]="refdataFormModel.secondLevelInstance"
+        [data]="secondLevelInstances"
+        [settings]="dropdownSettingsTwo"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelect) ="onDeSelect($event)"
+        (onDeSelectAll) = "onDeSelectAll($event)"
+        #pr="ngModel"
+        [ngClass]="{'is-invalid': pr.invalid && (isFirstFocusOutOnMulitiSelectTwo || parentForm.submitted),'singleSelection':!options.isSecondLevelMultiSelect}"
+        [required]="options.isSecondLevelRequired" 
+        (focusout)="isFirstFocusOutOnMulitiSelectTwo = true"
+        >
+    </ng-multiselect-dropdown>
+</div>

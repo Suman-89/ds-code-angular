@@ -1,0 +1,19 @@
+
+<div class="sidenav-container">
+  <div class="sidenav-parent" *ngFor="let parent of sidenavEl">
+    <div class="header-info cursor-pointer" [ngClass]="{'disabled-div': parent.disabled}" (click)="parent.collapsed = !parent.collapsed">
+      <h4 class="element-tag">{{parent.name}}</h4>
+      <span class="arrow-down-span">
+        <img class="arrow-down" [ngClass]="{'rotate180': !parent.collapsed}" src="./assets/images/icon-sort-down.png"/>
+      </span>
+    </div>
+    <div class="sidenav-child-container" *ngIf="parent.hasChildren" [ngClass]="{'collapse': parent.collapsed}">
+      <div class="sidenav-child" *ngFor="let child of parent.children; let i=index">
+        <div class="cursor-pointer" [ngClass]="{'disabled-div': child.disabled}" (click)="emitEvent(child)">
+          {{child.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

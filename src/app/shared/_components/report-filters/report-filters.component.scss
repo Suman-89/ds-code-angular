@@ -1,0 +1,56 @@
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.card-container {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.colName {
+  font-size: 85%;
+}
+.hiddenColumn {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(180, 180, 180, 0.3);
+}
+.primaryOperator {
+  color: grey;
+}
+.deletedOperator {
+  color: red;
+}
+.newOperator {
+  color: #2aa89b;
+}
+.primaryState {
+  color: rgb(0 195 255);
+}
+.newAddedState {
+  color: #2aa89b;
+  font-weight: bold !important;
+}
+.deletedState {
+  color: red;
+  font-weight: bold !important;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.badge {
+  font-weight: 400;
+}
+.grid-container .card-container .secondary-color.colName.mx-1:last-of-type {
+  // display: none;
+  color: blue;
+}

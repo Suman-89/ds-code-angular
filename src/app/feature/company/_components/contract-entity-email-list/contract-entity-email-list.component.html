@@ -1,0 +1,37 @@
+  <div class="w-100">
+    <form [formGroup]="emailForm" class="form-row no-margin" (ngSubmit)="emitForm()">
+      <label class="w-100">Add Emails</label>
+      <div class="col-md-4">
+        <select formControlName="type" class="inputstyle form-control" (change)="selectionChange($event.target.value)" >
+          <option value="">Select the email category</option>
+          <option *ngFor="let list of emailList" [value]="list.label"> {{list.label}} </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <input type="email" formControlName="email" (keyup)="errMsg=''" class="inputstyle form-control" placeholder="Type email" />
+          <div class="text-danger emailErrMsgStyle" *ngIf="f.email.errors && f.email.errors.email">Email must be a valid email address</div>
+          <div class="text-danger emailErrMsgStyle" *ngIf="!submit && errMsg.length>0">{{errMsg}}</div>
+      </div>
+
+      <div class="col-md-4 text-center">
+        <button type="submit" class="primarybtnstyle" [disabled]="f.email.errors.email">Add Email Type</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="row no-gutters" *ngFor="let added of emailList">
+    <div class="mt-4" *ngIf="added.emails.length>0">
+      <div class="w-100">
+        {{added.label}}
+      </div>
+      <div class="row no-gutters mt-2 custom-email-container">
+        <div class="addedList mt-1 email-list" *ngFor="let email of added.emails">
+          {{email}}
+          <span class="delIcon" (click)="removeEmail(added, email)">
+           <img height="15px" src="./assets/images/cross.png"/>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+

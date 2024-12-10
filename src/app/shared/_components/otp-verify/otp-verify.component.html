@@ -1,0 +1,41 @@
+<div class="content">
+  <div class="o-c">
+    <div>
+      <div class="card">
+        <button
+          type="button"
+          class="close"
+          aria-describedby="modal-title"
+          (click)="modal.dismiss()"
+          *ngIf="!num"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p class="a-o-i">Enter OTP</p>
+        <ng-otp-input
+          class="otp-wrapper"
+          (onInputChange)="onOtpChange($event)"
+          *ngIf="showOtpComponent"
+          [config]="config"
+        ></ng-otp-input>
+        <div class="btn-grp">
+          <p *ngIf="num" class="resend">Resend OTP: {{ num }} Seconds</p>
+          <button
+            class="otp-btn resend-btn secondarybtnstyle ml-2"
+            *ngIf="!num && !resendDisable"
+            (click)="generateOtp()"
+          >
+            Resend
+          </button>
+          <button
+            class="otp-btn submit-btn primarybtnstyle ml-2"
+            [disabled]="otp.length !== 6"
+            (click)="onOtpSubmit()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

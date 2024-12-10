@@ -1,0 +1,9 @@
+[
+  { "text": "Id", "datafield": "userid" },
+  { "text": "First Name", "datafield": "fname" },
+  { "text": "Last Name", "datafield": "lname" },
+  { "text": "Group", "datafield": "groupnames" },
+  { "text": "Role", "datafield": "roles" },
+  { "text": "Active", "datafield": "activeString" },
+  { "text": "Email Id", "datafield": "email" }
+]

@@ -1,0 +1,22 @@
+<div class="p-4 text-center">
+  <h3 class="text-dark">{{ title }}</h3>
+  <h4 class="text-dark">{{ name }}</h4>
+  <form>
+    <input
+      maxlength="2048"
+      class="w-100 mb-2 form-control"
+      (keyup)="reason = $event.target.value"
+      name="res"
+      placeholder="Reason*"
+    />
+    <div class="w-100 mb-3 text-muted text-right font-smaller font-italic pt-1">
+      {{ 2048 - reason.length }} of 2048 chars left
+    </div>
+  </form>
+  <div class="d-flex justify-content-center">
+    <button class="btn primarybtnstyle mr-1" (click)="terminate()">
+      Terminate
+    </button>
+    <button class="btn secondarybtnstyle ml-1" (click)="close()">Cancel</button>
+  </div>
+</div>

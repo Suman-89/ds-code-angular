@@ -1,0 +1,41 @@
+<div>
+  <div class="header">Initiate lead Management</div>
+</div>
+
+<div class="initiate-ddat">
+  <div class="drop">
+    <span class="drop-title">{{ isFile ? isFile : "Choose Excel File" }}</span>
+    <div class="col text-end">
+      <div class="d-inline-block float_right">
+        <input
+          #input_dom_element
+          (change)="handleFileUpload($event)"
+          type="file"
+          required
+          style="display: none"
+          id="file"
+          accept=".xlsx, .xls, .csv"
+        />
+        <label for="file" class="btn fileUpload"> Choose file </label>
+      </div>
+    </div>
+  </div>
+</div>
+<button
+  class="primarybtnstyle btn"
+  [disabled]="!excelData"
+  (click)="submitData()"
+>
+  Initiate Lead
+</button>
+
+<div class="lms-grid">
+  <app-grid
+    *ngIf="excelData"
+    #grid
+    [type]="type"
+    [columns]="columns"
+    [source]="source"
+    [ready]="ready"
+  ></app-grid>
+</div>

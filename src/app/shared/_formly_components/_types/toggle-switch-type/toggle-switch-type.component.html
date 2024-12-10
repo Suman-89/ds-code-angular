@@ -1,0 +1,12 @@
+<!-- <label class="toggle-switch">
+    <input type="checkbox" [formControl]="formControl" [formlyAttributes]="field" >
+    <div class="slider"></div>
+  </label> -->
+
+<div class="toggle-switch" [ngClass]="{'disabled-btn': to.readonly}">
+  <input type="checkbox" [formControl]="formControl" [formlyAttributes]="field">
+  <div class="knobs">
+    <span></span>
+  </div>
+  <div class="layer"></div>
+</div>

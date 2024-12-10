@@ -1,0 +1,93 @@
+<ngb-accordion
+  #nestedaccordioncollapsed
+  [closeOthers]="level == 0"
+  [activeIds]="defaultActiveId()"
+  (panelChange)="setActiveIds($event)"
+  class="{{ darkTheme ? 'darkTheme' : '' }}"
+>
+  <ngb-panel *ngFor="let childItem of childData" [id]="childItem.itemId">
+    <!-- <ng-template ngbPanelTitle> -->
+    <ng-template ngbPanelTitle *appHasPermission="childItem.forRoles">
+      <div class="itemContainer">
+        <div
+          class="item"
+          [ngStyle]="getChildItemContainerStyle(childItem)"
+          (mouseover)="itemHovered(childItem)"
+          (mouseout)="itemHoverOut(childItem)"
+          [routerLink]="childItem.routePath"
+          [routerLinkActive]="childItem.routePath ? 'active' : ''"
+          [routerLinkActiveOptions]="{ exact: childItem.isExactRouteMatch }"
+          (click)="childItem.itemChildren ? $event : onNavClick([childItem])"
+        >
+          <!-- <span *ngIf="isIndicator(childItem)" class="selectionIndicator"></span> -->
+          <!-- <img *ngIf="childItem.itemIconPath" class="preIcon" data-toggle="tooltip"
+              [ngStyle]="{'height':setHeight('icon')}" src="{{childItem.itemIconPath}}"> -->
+          <!-- <i *ngIf="childItem.itemIconPath" [ngClass]="childItem.itemIconPath" class="preIcon" aria-hidden="true"
+              [ngStyle]="{'font-size':setHeight('icon')}"></i> -->
+
+          <i
+            *ngIf="
+              childItem?.itemIconPath?.includes('fa ') ||
+              !childItem?.itemIconPath
+            "
+            class="preIcon"
+            aria-hidden="true"
+            [ngStyle]="{ 'font-size': setHeight('icon') }"
+            [ngClass]="
+              childItem.itemIconPath ? childItem.itemIconPath : 'fa fa-list'
+            "
+          ></i>
+          <img
+            *ngIf="
+              childItem?.itemIconPath &&
+              !childItem?.itemIconPath?.includes('fa ')
+            "
+            class="imgStyle"
+            height="25px"
+            width="25px"
+            aria-hidden="true"
+            [ngStyle]="{ 'font-size': setHeight('icon') }"
+            [src]="this.sharedSvc.dmsUrl + '/file/' + childItem?.itemIconPath"
+          />
+          <span
+            *ngIf="!childItem.itemIconPath && !childItem.itemIconPath"
+            class="dot"
+            [ngStyle]="{ 'background-color': setColor(childItem, 'icon') }"
+          ></span>
+          <span
+            class="childItem"
+            [ngStyle]="{ opacity: level % 2 != 0 ? 0.8 : 1 }"
+            >{{ childItem.itemName | uppercase }}</span
+          >
+          <br />
+
+          <i
+            *ngIf="childItem.itemChildren"
+            [ngStyle]="getStyleDropdown(childItem)"
+            class="fa fa-angle-down activePanelIcon"
+            aria-hidden="true"
+          ></i>
+          <div
+            *ngIf="navbarStyle.selectedBorderColor && navbarStyle.borderColor"
+            class="hoverBorder"
+            [ngStyle]="getHoverBorderStyle(childItem)"
+          ></div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <div *ngIf="childItem.itemChildren">
+        <app-side-navbar-children
+          [childData]="childItem.itemChildren"
+          [navbarStyle]="navbarStyle"
+          [level]="level + 1"
+          [selectedMenu]="_selectedMenu"
+          [openSideNav]="openSideNav"
+          (navSelection)="onNavClick($event, childItem)"
+          (summeryhoverOption)="onSummeryHover($event)"
+        >
+        </app-side-navbar-children>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

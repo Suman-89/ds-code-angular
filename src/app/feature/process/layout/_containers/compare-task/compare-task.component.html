@@ -1,0 +1,73 @@
+<div class="start-process-cont">
+  <div class="header-cont">
+    <div class="header p-2">
+      <div class="taskName">
+        <h5>
+          {{ selectedProcess?.label }}
+          <span
+            class="secondary-color"
+            style="font-size: 22px; padding-left: 5px"
+            >|</span
+          >
+          Compare Candidate
+          <i
+            class="secondary-color pl-2 fa fa-download cursor-pointer"
+            (click)="downloadExcel()"
+          ></i>
+        </h5>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 20px;
+          position: relative;
+        "
+      >
+        <div ngbDropdown>
+          <button
+            class="btn adjust-btn-size secondarybtnstyle"
+            ngbDropdownToggle
+          >
+            Choose Columns
+          </button>
+          <div ngbDropdownMenu class="dropdown-menu">
+            <div style="margin: 10px 0px">
+              <ng-container *ngIf="statePredefined">
+                <div class="items" *ngFor="let column of columns">
+                  <input
+                    class="customCheckbox"
+                    (change)="columnClicked(column)"
+                    [checked]="!column.hidden"
+                    type="checkbox"
+                  />
+                  <label>{{
+                    column.header !== " " ? column.header : column.key
+                  }}</label>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="close btn closebutton"
+          aria-label="Close"
+          (click)="close()"
+        >
+          <img height="20" src="./assets/images/cross.png" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row process-info-cont m-2">
+    <!-- <div *ngFor="let task of allContracts; let ind = index;"> -->
+    <app-compare-info
+      [tasks]="candidateList"
+      [checkedCol]="checkedCol"
+    ></app-compare-info>
+    <!-- sending columns from here -->
+    <!-- </div> -->
+  </div>
+</div>

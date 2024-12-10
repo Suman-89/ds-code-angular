@@ -1,0 +1,6 @@
+{ "data":
+  [
+    {"taskname":"task1","fieldlabel": "Variable 1", "fieldname":"var1", "datatype":"Integer"} ,
+    {"taskname":"task2","fieldlabel": "Variable 2", "fieldname":"var2", "datatype":"String"}
+    ]
+}

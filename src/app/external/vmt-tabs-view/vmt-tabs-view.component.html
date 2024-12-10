@@ -1,0 +1,27 @@
+<div class="custom-cont maxHeight">
+  <div class="btnswrap">
+    <hr />
+
+    <!-- placement="top"
+    container="body" -->
+    <div
+      class="imgWrap inline"
+      *ngFor="let action of actions"
+      [ngbTooltip]="action.name"
+      [ngClass]="{ selectedIcon: selectedAction.id === action.id }"
+      (click)="selectAction(action)"
+    >
+      <i [class]="action.icon + ' documentsicon'"></i>
+      <!-- <div class="comment-count bg-secondary" *ngIf="action.name === 'Comments' && comCount > 0">
+                {{comCount}}
+              </div> -->
+    </div>
+  </div>
+
+  <div class="contentWrap" *ngIf="selectedAction.id == 'comment'">
+    <app-vmt-comments></app-vmt-comments>
+  </div>
+  <div class="contentWrap p-0" *ngIf="selectedAction.id == 'document'">
+    <app-vmt-documents></app-vmt-documents>
+  </div>
+</div>

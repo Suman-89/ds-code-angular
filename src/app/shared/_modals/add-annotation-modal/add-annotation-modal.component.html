@@ -1,0 +1,64 @@
+
+<div class="container-fluid">
+    <div class="header">
+      <div class="pull-right">
+          <img style="width: 20px;" src="assets/images/logo_htb.svg" (click)="closeModal()" />
+      </div>
+     </div>
+    <div class="h-4 p-4">
+      <div class="secondary-color font-weight-bold"> Selected text: {{selectedText.text}} </div>
+      <div>Positions</div>
+      <div>
+        <div class="row no-gutters">
+          <div *ngFor="let quad of quads" class="col-3">
+           <b> {{quad.key}} </b>: {{quad.value.toFixed(2)}}
+          </div>
+        </div>
+          </div>
+     </div>
+     <div class="modal-body">
+        <form #addannotform="ngForm" (ngSubmit)="addannotform.valid && save()">
+          <div class="form-group">
+            <label class="w-100">Type</label>
+            <select required #type class="inputstyle w-50" ngModel name="type" [(ngModel)]="annotForm.type" (change)="toggleValueField(type.value)">
+              <option default selected>Select Type</option>
+              <option *ngFor="let t of types" [value]="t">{{t}}</option>
+             </select>
+          </div>
+          <div class="form-group position-relative">
+            <label class="w-100">Key </label>
+            <!-- <input required #key class="inputstyle w-50" ngModel name="key" [(ngModel)]="annotForm.key"/> -->
+             <select required #key class="inputstyle w-50" ngModel name="key" [(ngModel)]="annotForm.key">
+              <option default selected value=null>Select A Key</option>
+              <option *ngFor="let opt of annotkeys" [value]="opt.key">{{opt.label}}</option>
+             </select>
+             
+          <div *ngIf="!dispNewKeyForm" class="delIcon" style="bottom: 0;">
+            <button class="primarybtnstyle" (click)="toggleNewKeyForm()">Add New Key</button>
+          </div>
+          </div>
+          
+          <form *ngIf="dispNewKeyForm" #addKeyForm="ngForm" class="mb-2 border-bottom p-2">
+            <label class="w-100 border-bottom">Add New Key</label>
+            <div class="form-group">
+            <label class="w-100">Key Label</label>
+            <input required class="inputstyle w-50" placeholder="Enter Key Label" name="newkeylabel" [(ngModel)]="keyForm.label" ngModel #newkeylabel/>
+           </div>
+           <div class="form-group">
+             <label class="w-100">Key Name</label>
+             <input required class="inputstyle w-50" placeholder="Enter Key Name"  name="newkeyname" [(ngModel)]="keyForm.key" ngModel #newkeyname/>
+           </div>
+            <button class="primarybtnstyle" [disabled]="!addKeyForm.valid" (click)="addNewKey()">Add Key</button>
+            <button (click)="toggleNewKeyForm()" class="secondarybtnstyle ml-2">Cancel</button>
+          </form>
+  
+          <div class="form-group" *ngIf="dispValueField">
+            <label class="w-100">Value </label>
+            <input #value class="inputstyle w-50" ngModel name="value" [(ngModel)]="annotForm.value"/>
+          </div>
+          <button type="submit" class="primarybtnstyle ml-2">Save</button>
+          <button type="reset" (click)="closeModal()" class="secondarybtnstyle ml-2">Cancel</button>
+        </form>
+     </div>
+   </div>
+   

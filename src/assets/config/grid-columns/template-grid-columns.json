@@ -1,0 +1,7 @@
+[
+  { "text": "Id", "datafield": "id" },
+  { "text": "Name", "datafield": "name" },
+  { "text": "Code", "datafield": "code" },
+  { "text": "Workflow Task Name", "datafield": "tname" },
+  { "text": "Process Name", "datafield": "processNames" }
+]

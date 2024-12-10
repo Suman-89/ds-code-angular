@@ -1,0 +1,83 @@
+<div class="w-100">
+  <label>Workflow Task Name<span class="text-danger">*</span></label>
+  <!-- <ng-multiselect-dropdown [placeholder]="'Select Default Document Type'" name="groupselect" [(ngModel)]="procFormModel.selecteddoctypes"
+  [settings]="doctypeDropdownSettings" [data]="documentTypes" #seldoctypes="ngModel">
+  </ng-multiselect-dropdown> -->
+  <div ngbDropdown class="d-inline-block w-100" container="body">
+    <div
+      id="docdropdown"
+      class="position-relative cursor-pointer filterDocDisplay"
+      ngbDropdownToggle
+    >
+      <span *ngIf="selectedList && selectedList.length > 0">
+        {{ returnDispLabel(selectedList[0].name) }}
+        <span *ngIf="selectedList.length > 1"
+          >&nbsp;+&nbsp; {{ selectedList.length - 1 }} &nbsp; more
+        </span>
+      </span>
+      <span
+        class="filter-count"
+        *ngIf="!selectedList || selectedList.length === 0"
+      >
+        Select Task Names
+      </span>
+    </div>
+    <div
+      ngbDropdownMenu
+      class="dropdown-menu w-100"
+      aria-labelledby="docdropdown"
+    >
+      <div class="w-100 border-0 pl-2 pr-4">
+        <input
+          type="text"
+          class="inputstyle w-100"
+          placeholder="Search Tasks"
+          (keyup)="filterList($event.target.value)"
+        />
+      </div>
+      <button
+        ngbDropdownItem
+        style="width: 100%"
+        *ngFor="let l of dispList"
+        class="position-relative docRowLine"
+      >
+        <i
+          (click)="selectPoint(l)"
+          class="fa fa-check primary-color tickIcon"
+          *ngIf="checkForSelection(l)"
+        ></i>
+        <ng-container
+          *ngIf="
+            l.name === 'Process Started' || l.name === 'Process Completed';
+            else elseBlock
+          "
+          ><span (click)="selectPoint(l)" class="w-50 pl-2">
+            {{ l.name }}
+          </span>
+        </ng-container>
+        <ng-template #elseBlock>
+          <span (click)="selectPoint(l)" class="w-50 pl-2">
+            {{ l.name }} ({{ l.groupname }})</span
+          >
+        </ng-template>
+
+        <div class="custom-control custom-switch">
+          <input
+            (change)="selectWhenPoint($event.target, l)"
+            type="checkbox"
+            class="custom-control-input cursor-pointer"
+            [name]="'when' + l.name"
+            [(ngModel)]="l.when"
+            [id]="'when' + l.key"
+            [checked]="l.when"
+          />
+          <label
+            class="custom-control-label cursor-pointer"
+            [for]="'when' + l.key"
+            >After</label
+          >
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

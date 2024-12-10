@@ -1,0 +1,33 @@
+<div class="allHistory" *ngIf="isShowHistory">
+  <div
+    class="singleHistory {{ openCommentArr[i] ? 'opened' : '' }}"
+    *ngFor="let pastBusinessKey of allPastBusinessKeys; let i = index"
+  >
+    <div
+      #scrollTarget
+      class="singleHistoryHeader"
+      (click)="openComment(i, scrollTarget)"
+    >
+      Past Conversation ({{ allPastBusinessKeys.length - i }})
+      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+    </div>
+    <div [@slideDown] class="allCommentRows" *ngIf="openCommentArr[i]">
+      <div class="commentRow" *ngFor="let comment of pastBusinessKey[1]">
+        <app-display-comment
+          [data]="comment"
+          [type]="'transcription'"
+          [allowReply]="true"
+          [darkTheme]="darkTheme"
+          [businessKey]="businessKey"
+        >
+        </app-display-comment>
+      </div>
+      <button
+        class="btn primarybtnstyle close-btn"
+        (click)="openComment(i, scrollTarget)"
+      >
+        Close<i class="fa fa-chevron-up" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</div>

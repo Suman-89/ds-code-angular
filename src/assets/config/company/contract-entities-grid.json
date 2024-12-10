@@ -1,0 +1,5 @@
+[
+  { "text": "Id", "datafield": "id", "width": 200  },
+  { "text": "Name", "datafield": "name", "width": 200  }
+
+]

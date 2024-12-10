@@ -1,0 +1,63 @@
+@import "variables";
+
+.no-height {
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  transition: 0.5s ease all;
+}
+
+.height-add {
+  height: auto !important;
+  overflow: hidden;
+  transition: 0.5s ease all;
+}
+
+.custom-form-wrap {
+  padding: 20px;
+  color: var(--primaryColor);
+}
+
+.activetab {
+  font-weight: 500;
+  color: var(--secondaryColor);
+  border-bottom: 2px solid var(--secondaryColor) !important;
+}
+.checkbox-address {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+.custom-padding {
+  padding: 0 10px;
+}
+
+.custom-email-container {
+  border: 1px solid var(--primaryColor1);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.email-list {
+  padding: 5px 25px 5px 10px !important;
+  font-size: 12px;
+  text-transform: inherit;
+}
+
+.emailErrMsgStyle {
+  font-size: 14px;
+  padding: 2px 15px;
+}
+
+.bankDelIconContainer {
+  position: absolute;
+  top: -5px;
+  right: 0px;
+}
+
+.formActBtnCont {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}

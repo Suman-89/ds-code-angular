@@ -1,0 +1,620 @@
+<div class="blt-pricing-container">
+    <div class="blt-header">
+      <h3 style="text-align: center">Pricing Configuration</h3>
+    </div>
+    <div class="pricing-config-container">
+      <div class="elevator-pricing-config">
+        <div class="button-section">
+          <!-- <button class="addBtn" (click)="addRow()">Add New Pricing</button> -->
+        </div>
+        <div class="table-name">
+          <h6>Elevator Pricing Config</h6>
+        </div>
+        <div class="blt-pricing-table">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of elevatorPricingHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of elevatorPricingData; let i = index">
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.capacity"
+                    readonly
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.mrMsGearbase"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.mrMsGearless"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.mrlmsbase"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.perStopIncrease"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.highRiseStop"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.highRisePremiumPerStop"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.ssPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.ssHighRiseFloorPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.sslDoorPricePerFloor"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.mrlHighRisePremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <div class="info">
+          <div>** Base Price is for 3 stops.</div>
+          <div>
+            ** SS Means - Car Enclosure and Door for cabin and cabin door only.
+          </div>
+          <div>
+            ** SSL Means - Car Enclosure and Door for cabin , cabin door and
+            Landing Door.
+          </div>
+          <div>** Premium is per floor on top of the base price</div>
+        </div>
+      </div>
+  
+      <div class="installation-pricing-config">
+        <div class="table-name">
+          <h6>Installation Pricing Config</h6>
+        </div>
+        <div class="blt-pricing-table">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th *ngFor="let headers of installationPricingHeaders">
+                    {{ headers }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of installationPricingData; let i = index">
+                  <td>
+                    <input
+                      type="number"
+                      [(ngModel)]="row.mrgBasePrice"
+                      [class.editable]="isAdmin"
+                      [class.readonly]="!isAdmin"
+                      min="0"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      [(ngModel)]="row.mrglPremium"
+                      [class.editable]="isAdmin"
+                      [class.readonly]="!isAdmin"
+                      min="0"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      [(ngModel)]="row.mrlPremium"
+                      [class.editable]="isAdmin"
+                      [class.readonly]="!isAdmin"
+                      min="0"
+                    />
+                  </td>
+  
+                  <!-- <td (click)="removeConfig(i)">Remove</td> -->
+                </tr>
+              </tbody>
+            </table>
+  
+            <table>
+              <thead>
+                <tr>
+                  <th *ngFor="let headers of installationCapacityHeaders">
+                    {{ headers }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of installationCapacityData; let i = index">
+                  <td>
+                    <input
+                      type="number"
+                      [(ngModel)]="row.capacity"
+                      readonly
+                      [class.editable]="isAdmin"
+                      [class.readonly]="!isAdmin"
+                      min="0"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      [(ngModel)]="row.installCapacityPremium"
+                      [class.editable]="isAdmin"
+                      [class.readonly]="!isAdmin"
+                      min="0"
+                    />
+                  </td>
+  
+                  <!-- <td (click)="removeConfig(i)">Remove</td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of installLocationHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of installLocationData; let i = index">
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="row.location"
+                    readonly
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.installLocationPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <div class="freight-pricing-config">
+        <div class="table-name">
+          <h6>Frieght Pricing Config</h6>
+        </div>
+        <div class="blt-pricing-table">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of freightPricingHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of freightPricingData; let i = index">
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.basePrice"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.highRiseStop"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.highRisePremiumPerStop"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.mrlPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+  
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of freightCapacityHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of freightCapacityData; let i = index">
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.capacity"
+                    readonly
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.freightCapacityPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+  
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of freightLocationHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of freightLocationData; let i = index">
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="row.location"
+                    readonly
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.freightLocationPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <div class="unloading-pricing-config">
+        <div class="table-name">
+          <h6>Unloading Pricing Config</h6>
+        </div>
+        <div class="blt-pricing-table">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of unloadingChargesHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of unloadingChargesData; let i = index">
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.basePrice"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.highRiseStops"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.highRisePremiumPerStop"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+  
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of unloadingCapacityHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of unloadingCapacityData; let i = index">
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.capacity"
+                    readonly
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.unloadingCapacityPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+  
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let headers of unloadingLocationHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of unloadingLocationData; let i = index">
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="row.location"
+                    readonly
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="row.unloadingLocationPremium"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+  
+                <!-- <td (click)="removeConfig(i)">Remove</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <div class="additional-pricing-config">
+        <div class="table-name">
+          <h6>Additional Feature Pricing Config</h6>
+        </div>
+        <div class="blt-pricing-table">
+          <table *ngIf="additionalFeaturePricingData.length > 0">
+            <thead>
+              <tr>
+                <th *ngFor="let headers of additionalFeaturePricingHeaders">
+                  {{ headers }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of additionalFeaturePricingData; let i = index">
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="row.additionalFeatureType"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="row.additionalFeatureBasePrice"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="row.additionalFeaturePremiumPerStop"
+                    [class.editable]="isAdmin"
+                    [class.readonly]="!isAdmin"
+                    min="0"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6 mt-4">
+        <label class="form-label">GST %</label>
+        <input
+          type="text"
+          [readonly]="!isAdmin"
+          class="form-control"
+          name="gst"
+          [(ngModel)]="pricingMiscellaneousObj.gstPercentage"
+        />
+      </div>
+      <div class="col-md-6 mt-4">
+        <label class="form-label">Commission %</label>
+        <input
+          type="text"
+          [readonly]="!isAdmin"
+          class="form-control"
+          name="commission"
+          [(ngModel)]="pricingMiscellaneousObj.commissionPercentage"
+        />
+      </div>
+      <div class="col-md-6 mt-4">
+        <label class="form-label">Annual Warranty Cost %</label>
+        <input
+          type="text"
+          [readonly]="!isAdmin"
+          class="form-control"
+          name="annualWarrantyCost"
+          [(ngModel)]="pricingMiscellaneousObj.annualWarrantyPercentage"
+        />
+      </div>
+      <div class="col-md-6 mt-4">
+        <label class="form-label">Target Profit Margin %</label>
+        <input
+          type="text"
+          [readonly]="!isAdmin"
+          class="form-control"
+          name="targetProfitMargin"
+          [(ngModel)]="pricingMiscellaneousObj.profitMarginPercentage"
+        />
+      </div>
+    </div>
+  
+    <div class="row justify-content-center mt-4 mb-4">
+      <div class="modal-footer">
+        <button type="button" class="btn secondarybtnstyle">Cancel</button>
+        <button type="submit" class="btn primarybtnstyle"
+        [disabled]="!isAdmin"
+        (click)="save()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  

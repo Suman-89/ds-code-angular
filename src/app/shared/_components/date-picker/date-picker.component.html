@@ -1,0 +1,18 @@
+<div class="flex">
+  <input
+    matInput
+    ngxDaterangepickerMd
+    name="daterange"
+    [locale]="{ format: 'DD-MMM-yyyy' }"
+    [singleDatePicker]="!range"
+    [(ngModel)]="value"
+    (change)="onDateSelect()"
+  />
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-secondary fa fa-calendar ngx-daterangepicker-action"
+      type="button"
+      (click)="openDatepicker()"
+    ></button>
+  </div>
+</div>

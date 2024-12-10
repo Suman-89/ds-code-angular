@@ -1,0 +1,1 @@
+export { ViewAnchorElementsComponent } from './view-anchor-elements/view-anchor-elements.component'; 

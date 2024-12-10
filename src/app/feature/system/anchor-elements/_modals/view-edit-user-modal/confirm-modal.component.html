@@ -1,0 +1,17 @@
+<form #form ="ngForm" (ngSubmit)="form.valid && save()">
+  <div class="modal-header pt-1 pb-1">
+      <h5 class="modal-title secondary-color mt-0">Confirm</h5>
+      <button type="button" class="close btn" aria-label="Close" (click)="close()">
+        <i class="fa fa-close iconAdd custom-label"></i>
+      </button>
+  </div>
+  <div class="modal-body position-relative">
+   <label class="font-weight-normal">Do you want to delete {{element.label?element.label:element.itemName}} ?</label> 
+  </div>
+  <div class="modal-footer pt-1 pb-1">
+      <button type="button" class="btn secondarybtnstyle" (click)="close()">Cancel</button>
+      <button type="submit" [disabled]="!form.valid"  class="btn primarybtnstyle">Delete</button>
+  </div>
+</form>
+
+

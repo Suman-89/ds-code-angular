@@ -1,0 +1,670 @@
+<div class="container-fluid" style="overflow-y: hidden;min-height: 100vh;">
+  <div class="pageHeaderWrap w-100 d-flex justify-content-center">
+    <div class="pageHeader">{{ header }} 
+      <span *ngIf="anchorFormModel.anchorConfigId">
+        <span class="secondary-color"  style="font-size:22px;padding-left:5px;">|</span> 
+        {{anchorFormModel.anchorConfigId}}
+      </span>
+    </div>
+  </div>
+  <div class="w-100 d-flex justify-content-center" *ngIf="procFormModel">
+    
+    <form #form="ngForm" class="addProcForm mt-2">
+      <div class="col-12">
+       <h5 class="secondary-color pb-1 mb-3 border-bottom">Basic Details</h5> 
+      </div>
+      <div class="col-md-12 mb-3">
+        <label class="w-100 font-weight-normal"
+          >Process Names<span class="text-danger">*</span></label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Select Process Name'"
+          name="processname"
+          [settings]="doctypeDropdownSettings"
+          [data]="allProcesses"
+          [(ngModel)]="anchorFormModel.processNames"
+          #toolbarbutton="ngModel"
+          (onDropDownClose)="onDropDownClose($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div
+        class="row no-margin"
+        *ngIf="routeId || anchorFormModel?.processNames?.length"
+      >
+        <div class="col-md-6 form-group">
+          <label>Anchor Entity Id<span class="text-danger">*</span> </label>
+          <!-- <select
+            class="inputstyle form-control"
+            name="anchorentitytype"
+            #labelalignment="ngModel"
+            [(ngModel)]="anchorFormModel.anchorType"
+          >
+            <option
+              *ngFor="let align of anchorTypesList"
+              [value]="align.value"
+            >
+              {{ align.name }}
+            </option>
+          </select> -->
+          <input
+            required
+            [readonly]="true"
+            class="inputstyle form-control"
+            placeholder="Anchor Id"
+            name="anchorId"
+            #key="ngModel"
+            [(ngModel)]="anchorFormModel.anchorConfigId"
+          />
+        </div>
+
+        <div class="form-group col-md-6">
+          <label>Anchor Entity Display Name<span class="text-danger">*</span> </label>
+          <input
+            required
+            class="inputstyle form-control"
+            placeholder="Enter Anchor Entity Name"
+            name="anchorEntityName"
+            #formname="ngModel"
+            [(ngModel)]="anchorFormModel.anchorConfigDisplayName"
+            (blur)="trimFields(anchorFormModel.anchorConfigDisplayName)"
+          />
+        </div>
+        <div class="form-group col-md-6" *ngIf="anchorFormModel.processNames">
+          <label class="w-100">Unique ID</label>
+           <app-non-local-comment-box
+              #contentBox
+              *ngIf="multiMentionConfig.mentions.length >= 0"
+              [commenttype]="'Unique Id'"
+              [commentMentionConfig]="multiMentionConfig"
+              [clearAfterSubmit]="false"
+              [isTemplate]="true"
+              [value]="anchorFormModel.identifierGenParams.varHtml"
+              [templateType]="'uniqueId'"
+              (submitted)="onUniqueIdSubmitted($event)"
+            >
+            </app-non-local-comment-box>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label class="w-100">Description</label>
+          <textarea
+            class="form-control inputstyle pt-2 w-100"
+            style="height: 128px;"
+            name="description"
+            #description="ngModel"
+            placeholder="Enter Form Description"
+            [(ngModel)]="anchorFormModel.description"
+          >
+          </textarea>
+        </div>
+
+        <form #variableForm="ngForm" class="form-row no-margin col-md-12">
+          <div class="w-100"><h5 class="secondary-color pb-1 mb-3 border-bottom">Basic Settings</h5></div>
+          <div class="col-md-6 form-group p-0 m-0 mb-3">
+            <label class="w-100">Display Type</label>
+            <select
+              class="inputstyle form-control"
+              name="labelalignment"
+              #labelalignment="ngModel"
+              [(ngModel)]="anchorFormModel.basicVarsDisplayType"
+            >
+              <option
+                *ngFor="let align of labelAlignmentTypes"
+                [value]="align.value"
+              >
+                {{ align.name }}
+              </option>
+            </select>
+          </div>
+          <label class="w-100 border-bottom" style="font-weight: 400">
+            Settings Variable
+          </label>
+          <div class="form-group col-md-3 no-padding" *ngIf="ddvars">
+            <app-dropdown-search
+              [value]="formVariable.variableName"
+              [placeholder]="'Select Variable Name'"
+              [dataList]="ddvars"
+              [id]="''"
+              [setting]="variableSetting"
+              ($onSelectItem)="fetchDefault($event)"
+            ></app-dropdown-search>
+          </div>
+          <!-- <div class="form-group col-md-2 text-center" *ngIf="formVariable.defaultvalue !== null">
+            <div
+              class="custom-control custom-switch"
+              
+            >
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                [disabled]="selectedVariable.system !== null"
+                checked="true"
+                id="default"
+                name="default"
+                #default
+                [(ngModel)]="formVariable.defaultvalue"
+              />
+              <label class="custom-control-label cursor-pointer" for="default"
+                >Default</label
+              >
+            </div>
+          </div> -->
+          <div class="form-group col-md-2 text-center">
+            <input
+              required
+              class="inputstyle form-control mr-1"
+              style="width: 70%;display: inline-block;"
+              placeholder="Enter Expiry"
+              name="settingExpiry"
+              id="expiry"
+              #formname="ngModel"
+               [(ngModel)]="formVariable.expiryTerm"
+            />
+            <label class="cursor-pointer" style="position: relative;margin-bottom: 0;vertical-align: middle;font-size: 13px;"  for="expiry">Month</label>
+          </div>
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="true"
+                id="settingVisible"
+                #visible="ngModel"
+                name="settingVisible"
+                [(ngModel)]="formVariable.isVisible"
+              />
+              <label class="custom-control-label cursor-pointer" for="settingVisible"
+                >Visible</label
+              >
+            </div>
+          </div>
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="true"
+                id="settingMandatory"
+                name="settingMandatory"
+                #mandatory
+                [(ngModel)]="formVariable.isMandatory"
+              />
+              <label class="custom-control-label cursor-pointer" for="settingMandatory"
+                >Mandatory</label
+              >
+            </div>
+          </div>
+
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="false"
+                id="settingReadonly"
+                #readonly="ngModel"
+                name="settingReadonly"
+                [(ngModel)]="formVariable.isReadOnly"
+              />
+              <label class="custom-control-label cursor-pointer" for="settingReadonly"
+                >Readonly</label
+              >
+            </div>
+          </div>
+          <div class="col-md-1">
+            <button
+              class="primarybtnstyle"
+              [disabled]="!variableForm.valid"
+              (click)="addVariables()"
+              type="submit"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+         
+        </form>
+
+        <div
+          *ngIf="anchorFormModel.basicSettingsVars && anchorFormModel.basicSettingsVars.length > 0"
+          class="col-md-12"
+        >
+          <h6 class="border-bottom">Added Variables</h6>
+          <div
+            *ngFor="let addedVars of anchorFormModel.basicSettingsVars; let i = index"
+            class="row no-margin addedVariablesRow"
+          >
+            <div class="col-md-4 position-relative">
+              <div
+                *ngIf="i > 0"
+                ngbTooltip="Move Up"
+                class="mr-1 moveicon"
+                (click)="moveup(i, addedVars)"
+              >
+                <i class="fa fa-arrow-up secondary-color"></i>
+              </div>
+              <div class="formname text-truncate" [ngbTooltip]="addedVars.variableName">
+                <b>Name:</b> {{ addedVars.variableName }}
+              </div>
+            </div>
+            <div class="col-md-2">
+              <small class="text-truncate" [ngbTooltip]="addedVars.expiryTerm">
+                <b>Expiry:</b> {{ addedVars.expiryTerm }} Month(s)
+              </small>
+            </div>
+            <!-- <div class="col-md-2">
+              <div
+                class="custom-control custom-switch"
+                *ngIf="
+                  addedVars.defaultvalue !== null ||
+                  addedVars.datatype === 'Boolean'
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.value || addedVars.defaultvalue"
+                  [id]="'defaultvalue' + i"
+                  [name]="'defaultvalue' + i"
+                  (change)="changeVarField($event.target, 'defaultvalue', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'defaultvalue' + i"
+                  >Default</label
+                >
+              </div>
+            </div> -->
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.isVisible"
+                  [id]="'visibledisplay' + i"
+                  [name]="'visibledisplay' + i"
+                  (change)="changeVarField($event.target, 'visible', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'visibledisplay' + i"
+                  >Visible</label
+                >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  id="mandatorydisplay"
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [name]="'mandatorydisplay' + i"
+                  [id]="'mandatorydisplay' + i"
+                  [checked]="addedVars.mandetory || addedVars.isMandatory"
+                  (change)="changeVarField($event.target, 'ismandatory', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'mandatorydisplay' + i"
+                  >Mandatory</label
+                >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.isReadOnly"
+                  [name]="'readonly' + i"
+                  [id]="'readonly' + i"
+                  (change)="changeVarField($event.target, 'readonly', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'readonly' + i"
+                  >Readonly</label
+                >
+              </div>
+            </div>
+            <span class="delIcon" (click)="deleteVariable(addedVars)">
+              <img height="15px" src="./assets/images/cross.png" />
+            </span>
+            <div class="col-12" *ngIf="addedVars.uielementtype == 'DROPDOWN'">
+              <app-ref-data-selector
+                [value]="addedVars.varValues"
+                [placeholder]="'Select Reference Data'"
+                [id]="addedVars.variableName"
+                [code]="addedVars.refdatacode"
+                ($onSelectItem)="onSelectProcessRef($event)"
+              ></app-ref-data-selector>
+            </div>
+            
+          </div>
+        
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="w-100">DMS Folder Display Attribute</label>
+          <app-dropdown-search
+            [value]="anchorFormModel.folderDisplayVar?.variableName"
+            [placeholder]="'Select display Attribute'"
+            [dataList]="anchorFormModel.basicSettingsVars"
+            [id]="'folder'"
+            [setting]="tabSettings"
+            ($onSelectItem)="selectDisplayTab($event)"
+          ></app-dropdown-search>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="w-100">Workflow Default Display Attribute</label>
+          <app-dropdown-search
+            [value]="anchorFormModel.workflowDisplayVar?.variableName"
+            [placeholder]="'Select display Attribute'"
+            [dataList]="anchorFormModel.basicSettingsVars"
+            [id]="'workflow'"
+            [setting]="tabSettings"
+            ($onSelectItem)="selectDisplayTab($event)"
+          ></app-dropdown-search>
+        </div>
+        <div class="col-md-6 form-group">
+        <label class="w-100"
+          >Search Metadata<span class="text-danger">*</span></label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          name="searchMetadataVars"
+          [settings]="metaDataSetting"
+          [data]="metaDataVars"
+          [(ngModel)]="anchorFormModel.searchMetadataVars"
+          #toolbarbutton="ngModel"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="col-md-6 form-group">
+        <label class="w-100">Tooltip Display Metadata<span class="text-danger">*</span></label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          name="tooltipMetadata"
+          [settings]="metaDataSetting"
+          [data]="metaDataVars"
+          [(ngModel)]="anchorFormModel.toolTipMetaData"
+          #toolbarbutton="ngModel"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="sections-container w-100 col-12 ">
+       <div class="d-flex justify-content-between mb-3 mt-2 border-bottom">
+         <h5 class="secondary-color mb-0" style="line-height: 0;">Sections</h5>
+            <button
+              class="secondarybtnstyle"
+              style="transform: translateY(-6px);"
+              (click)="addSection()"
+              type="submit"
+            >
+              ADD SECTION
+            </button>
+       </div> 
+       
+       <div class="d-flex flex-column flex-column-reverse">
+        <div class="row border rounded mx-0 my-2 py-2" *ngFor="let section of anchorFormModel.sections;let sectionId = index">
+        <div class="form-group col-md-6">
+          <label>Section Name<span class="text-danger">*</span> </label>
+          <input
+            required
+            class="inputstyle form-control"
+            placeholder="Enter Section Name"
+            name="formname{{section.sectionId}}"
+            #formname="ngModel"
+            [(ngModel)]="section.sectionName"
+          />
+        </div>
+         <div class="col-md-6 form-group">
+          <label class="w-100">Section Display Type</label>
+          <select
+            class="inputstyle form-control"
+            name="section_labelalignment{{section.sectionId}}"
+            #labelalignment="ngModel"
+            [(ngModel)]="section.displayType"
+          >
+            <option
+              *ngFor="let align of labelAlignmentTypes"
+              [value]="align.value"
+            >
+              {{ align.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <form #variableForm="ngForm" class="form-row no-margin">
+          
+          <label class="w-100 border-bottom" style="font-weight: 400">
+            Section Variables
+          </label>
+          <div class="form-group col-md-3 no-padding" *ngIf="ddvars">
+            <app-dropdown-search
+              [value]="sectionVariable.variableName"
+              [placeholder]="'Select Variable Name'"
+              [dataList]="ddvars"
+              [id]="''"
+              [setting]="variableSetting"
+              ($onSelectItem)="fetchSelectionDefault($event)"
+            ></app-dropdown-search>
+          </div>
+          <!-- <div class="form-group col-md-2 text-center" *ngIf="sectionVariable.defaultvalue !== null">
+            <div
+              class="custom-control custom-switch"
+              
+            >
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                [disabled]="selectedVariable.system !== null"
+                checked="true"
+                id="default"
+                name="default"
+                #default
+                [(ngModel)]="sectionVariable.defaultvalue"
+              />
+              <label class="custom-control-label cursor-pointer" for="default"
+                >Default</label
+              >
+            </div>
+          </div> -->
+          <div class="form-group col-md-2 text-center">
+            <input
+              required
+              class="inputstyle form-control mr-1"
+              style="width: 70%;display: inline-block;"
+              placeholder="Enter Expiry"
+              name="expiryTerm_{{sectionId}} "
+              id="expiryTerm"
+              #formname="ngModel"
+              [(ngModel)]="sectionVariable.expiryTerm"
+            />
+            <label class="cursor-pointer" style="position: relative;margin-bottom: 0;vertical-align: middle;font-size: 13px;"  for="expiryTerm">Month</label>
+          </div>
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="true"
+                id="visible"
+                #visible="ngModel"
+                name="visible"
+                [(ngModel)]="sectionVariable.isVisible"
+              />
+              <label class="custom-control-label cursor-pointer" for="visible"
+                >Visible</label
+              >
+            </div>
+          </div>
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="true"
+                id="mandatory"
+                name="mandatory"
+                #mandatory
+                [(ngModel)]="sectionVariable.isMandatory"
+              />
+              <label class="custom-control-label cursor-pointer" for="mandatory"
+                >Mandatory</label
+              >
+            </div>
+          </div>
+
+          <div class="form-group col-md-2 text-center">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input cursor-pointer"
+                checked="false"
+                id="readonly"
+                #readonly="ngModel"
+                name="readonly"
+                [(ngModel)]="sectionVariable.isReadOnly"
+              />
+              <label class="custom-control-label cursor-pointer" for="readonly"
+                >Readonly</label
+              >
+            </div>
+          </div>
+          <div class="col-md-1">
+            <button
+              class="primarybtnstyle"
+              [disabled]="!variableForm.valid"
+              (click)="addSectionVariables(sectionId)"
+              type="submit"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+         
+        </form>
+
+        <div
+            *ngFor="let addedVars of section.sectionVariables; let i = index"
+            class="row no-margin addedVariablesRow"
+          >
+            <div class="col-md-4 position-relative">
+              <div
+                *ngIf="i > 0"
+                ngbTooltip="Move Up"
+                class="mr-1 moveicon"
+                (click)="moveup(i, addedVars)"
+              >
+                <i class="fa fa-arrow-up secondary-color"></i>
+              </div>
+              <div class="formname text-truncate" [ngbTooltip]="addedVars.variableName">
+                <b>Name:</b> {{ addedVars.variableName }}
+              </div>
+            </div>
+            <div class="col-md-2">
+              <small class="text-truncate" [ngbTooltip]="addedVars.expiryTerm">
+                <b>Expiry:</b> {{ addedVars.expiryTerm }} Month(s)
+              </small>
+            </div>
+            <!-- <div class="col-md-2">
+              <div
+                class="custom-control custom-switch"
+                *ngIf="
+                  addedVars.defaultvalue !== null ||
+                  addedVars.datatype === 'Boolean'
+                "
+              >
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.value || addedVars.defaultvalue"
+                  [id]="'defaultvalue' + i"
+                  [name]="'defaultvalue' + i"
+                  (change)="changeVarField($event.target, 'defaultvalue', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'defaultvalue' + i"
+                  >Default</label
+                >
+              </div>
+            </div> -->
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.isVisible"
+                  [id]="'visibledisplay' + i"
+                  [name]="'visibledisplay' + i"
+                  (change)="changeVarField($event.target, 'visible', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'visibledisplay' + i"
+                  >Visible</label
+                >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  id="mandatorydisplay"
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [name]="'mandatorydisplay' + i"
+                  [id]="'mandatorydisplay' + i"
+                  [checked]="addedVars.mandetory || addedVars.isMandatory"
+                  (change)="changeVarField($event.target, 'ismandatory', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'mandatorydisplay' + i"
+                  >Mandatory</label
+                >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [checked]="addedVars.isReadOnly"
+                  [name]="'readonly' + i"
+                  [id]="'readonly' + i"
+                  (change)="changeVarField($event.target, 'readonly', i)"
+                />
+                <label
+                  class="custom-control-label cursor-pointer"
+                  [for]="'readonly' + i"
+                  >Readonly</label
+                >
+              </div>
+            </div>
+            <span class="delIcon" (click)="deleteVariable(addedVars)">
+              <img height="15px" src="./assets/images/cross.png" />
+            </span>
+            <div class="col-12" *ngIf="addedVars.uielementtype == 'DROPDOWN'">
+              <app-ref-data-selector
+                [value]="addedVars.varValues"
+                [placeholder]="'Select Reference Data'"
+                [id]="addedVars.variableName"
+                [code]="addedVars.refdatacode"
+                ($onSelectItem)="onSelectProcessRef($event)"
+              ></app-ref-data-selector>
+            </div>
+          </div>
+        </div>
+       </div>
+       </div>
+        
+      </div>
+      </div>
+      <div class="w-100 text-center mt-4">
+        <button class="secondarybtnstyle mr-1" (click)="back()">Back</button>
+        <button class="primarybtnstyle ml-1 btn" type="submit" (click)="save()">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

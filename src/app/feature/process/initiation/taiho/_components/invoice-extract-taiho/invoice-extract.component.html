@@ -1,0 +1,96 @@
+
+
+
+<!-- <div>
+  <form>
+    <form [formGroup]="form" (onchange)="emitData()">
+      <formly-form [model]="model" [fields]="fields">
+      </formly-form>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </form>
+</div> -->
+
+<div class="w-100" *ngIf="extractedData">
+  <div class="h5">
+    Extracted Data
+  </div>
+  <div *ngIf="info.render" [ngStyle]="{color: info.color}" style="font: 400 11px;">{{info.text}} </div>
+
+  <form class="row no-gutters" #extractionForm (change)="emitData()">
+    <div class="col-12 form-group" (click)="emitForAnnotation('purchase_order')">
+     <label class="w-100">Purchase Order Number</label>
+     <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.purchase_order" 
+     name="ponum" ngModel required [ngbTypeahead]="searchPoNumber" (selectItem)="emitSelectedPoNumber($event)"
+     [inputFormatter]="searchFormatter" [resultFormatter]="searchFormatter"  (click)="emitForAnnotation('purchase_order')"
+       />
+    </div>
+    <div class="col-12 form-group" (click)="emitForAnnotation('invoice_id')">
+     <label class="w-100">Invoice Number</label>
+     <input type="text" class="inputstyle w-100" (click)="emitForAnnotation('invoice_id')" [(ngModel)]="extractedData.invoice_id" name="invoicenum" ngModel/>
+    </div>
+    <div class="col-12 form-group" (click)="emitForAnnotation('invoice_date')">
+        <label class="w-100" >Invoice Date</label>
+        <!-- <input type="date" placeholder="dd-mm-yyyy" class="inputstyle" [(ngModel)]="extractedData.invoicedate" name="invdate" ngModel/> -->
+        <div class="input-group pl-0">
+            <input class="form-control" placeholder="DD-MMM-YYYY" (click)="d2.toggle()" (dateSelect)="dateSelectEvent($event)"
+            (keydown)="$event.preventDefault(); d2.open();" ngbDatepicker #d2="ngbDatepicker" [value]="extractedData.invoice_date"/>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 form-group" (click)="emitForAnnotation('total_amount')">
+     <label class="w-100">Invoice Amount</label>
+     <!-- <input type="text" class="inputstyle w-50"  name="totamtt" ngModel/> -->
+      <div class="input-group pl-0">
+      <input type="text" class="inputstyle w-100" 
+        [(ngModel)]="extractedData.total_amount" 
+        name="totalamt"  (click)="emitForAnnotation('total_amount')"
+        ngModel/>
+
+        <!-- <input class="form-control" placeholder="DD-MMM-YYYY" (click)="d2.toggle()" (dateSelect)="dateSelectEvent($event, 2)"
+        (keydown)="$event.preventDefault(); d2.open();" ngbDatepicker #d2="ngbDatepicker" [value]="extractedData.total_amount"/>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+        </div> -->
+      </div>
+    </div>  
+
+    
+    <div class="col-12 form-group">
+      <label class="w-100">Vendor Name</label>
+      <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.vendor_name" name="vname" ngModel/>
+    </div>
+
+    <div class="col-12 form-group">
+      <label class="w-100">PO Date</label>
+      <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.po_date" name="podate" ngModel/>
+    </div>
+
+
+    <div class="col-12 form-group">
+      <label class="w-100">Amount Consumed Till Date</label>
+      <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.amt_consumed_till_date" name="amttilldate" ngModel/>
+    </div>
+    <div class="col-12 form-group">
+      <label class="w-100">Amount Left</label>
+      <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.amount_left" name="amtleft" ngModel/>
+    </div>
+    <div class="col-12 form-group">
+      <label class="w-100">PO Total Value</label>
+      <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.total_po_value" name="totalpoamt" ngModel/>
+    </div>
+
+    <div class="col-12 form-group">
+      <label class="w-100">Business Owner</label>
+      <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.business_owner" name="bowner" ngModel/>
+    </div>
+
+    <div class="col-12 form-group">
+      <label class="w-100">Business Group</label>
+      <input type="text" class="inputstyle w-100" [(ngModel)]="extractedData.business_group" name="brp" ngModel/>
+    </div>
+</form>
+</div>
+

@@ -1,0 +1,11 @@
+<div style="margin-bottom: 0px;" class="form-group">
+    <div class="input-group">
+        <input class="form-control" [ngClass]="{'disabled-btn': to.readonly}" [minDate]="allowPastDate?'':minDate" container="body" 
+            placeholder="DD-MMM-YYYY" name="dp" (keydown)="$event.preventDefault(); d.open();" 
+            ngbDatepicker #d="ngbDatepicker" [formControl]="formControl" [formlyAttributes]="field"
+            (click)="d.toggle()">
+        <div class="input-group-append" [ngClass]="{'disabled-btn': to.readonly}">
+            <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="company-det-cont" *ngIf="viewData">
+  <div class="company-det-header" *ngIf="showDetails.company && viewData.companyLegalName">
+    <p>
+      {{viewData.companyLegalName}}
+      <span class="link" (click)="companyAction('editCompany')">
+        <img src="./assets/images/icon-edit.png" />
+      </span>
+    </p>
+  </div>
+  <div class="company-det">
+    <div class="comp-det" *ngIf="showDetails.company && viewData.companyLegalName">
+      <label class="attribute">Legal Name: </label>
+      <label class="value" placement="top" [ngbTooltip]="viewData.companyLegalName"
+        container="body">{{viewData.companyLegalName}}</label>
+    </div>
+    <div class="comp-det" *ngIf="showDetails.company && viewData.companyGroup">
+      <label class="attribute">Group: </label>
+      <label class="value" placement="top" [ngbTooltip]="viewData.companyGroup"
+        container="body">{{viewData.companyGroup}}</label>
+    </div>
+    <div class="comp-det" *ngIf="showDetails.company && viewData.aliases">
+      <label class="attribute">Aliases: </label>
+      <span class="value" *ngFor="let alias of viewData.aliases; let l = last">{{alias}} <span class="pipe"
+          *ngIf="!l">|</span></span>
+    </div>
+    <div class="comp-det" *ngIf="showDetails.company && viewData.companyPrincipalAddr">
+      <label class="attribute">Address: </label>
+      <label class="value" placement="top" [ngbTooltip]="viewData.companyPrincipalAddr.friendlyaddress"
+        container="body">{{viewData.companyPrincipalAddr.friendlyaddress}}</label>
+    </div>
+    <div class="comp-det" *ngIf="showDetails.company && viewData.companyCountry">
+      <label class="attribute">Country: </label>
+      <label class="value" placement="top" [ngbTooltip]="viewData.companyCountry"
+        container="body">{{viewData.companyCountry}}</label>
+    </div>
+  </div>
+  <div class="company-docs" *ngIf="showDetails.docs && documentMatrix && documentMatrix.length > 0">
+    <div *ngFor="let documentType of documentMatrix">
+      <div class="docs-head">
+        <p>{{documentType.key}} <span class="secondary-color">({{documentType.list.length}})</span></p>
+      </div>
+      <div class="docs">
+        <div class="documentRow position-relative" *ngFor="let doc of documentType.list">
+          <div *ngIf="checkConfidentiality(doc)" [ngClass]="{'confidential-fade': doc.confidential }">
+            <app-document-icon class="documenticon inline" (click)="download(doc)" [MIMEType]="doc.mimetype">
+            </app-document-icon>
+            <div class="docname inline" (click)="download(doc)">
+              {{doc.logicaldocname}}
+              <span class="comment inline" *ngIf="doc.version">&nbsp;({{doc.version}})</span>
+              <div>
+                <div class="secondary-color inline" *ngIf="doc.metadata && doc.metadata.products && doc.metadata.products.length > 0">
+                  <span class="pipe" *ngFor="let product of doc.metadata.products">
+                    {{product.name}} 
+                    <span style="font-weight: 600; margin: 0px 3px;" class="primary-color">|</span>
+                  </span>
+                </div>
+                <div class="secondary-color inline" *ngIf="doc.metadata.ibasisContractingEntity">
+                  {{doc.metadata.ibasisContractingEntity}}
+                </div>
+              </div>
+              <div class="comment" *ngIf="doc.metadata">
+                <span>Document Type: {{ getDocTypefromFolder(doc.foldername,doc)}}</span>
+              </div>
+              <div class="comment">Created on: {{doc.createddate | date:'dd-MMM-yyyy HH:mm'}}</div>
+            </div>
+            <img src="assets/images/icon-eye.png" (click)="download(doc)" class="downloadicon inline pull-right" />
+          </div>
+          <i *ngIf="doc.confidential" class="fa fa-lock lockIcon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="company-docs" *ngIf="showDetails.docs && documentMatrix && documentMatrix.length == 0">
+    <div class="docs-head">
+      <p>No Executed Contracts in DMS</p>
+      <p *ngIf="viewData.historicalMSAExists || viewData.historicalNDAExists"
+        class="secondary-color"  
+        style="font-size: 14px;"
+      >
+        An executed {{viewData.historicalMSAExists ? 'MSA' : ''}}{{viewData.historicalMSAExists && viewData.historicalNDAExists ? ',' : ''}}
+        {{viewData.historicalNDAExists ? 'NDA' : ''}} exists for this company. After the contract workflow is initiated, a request will be 
+        sent to upload the executed {{viewData.historicalMSAExists ? 'MSA' : ''}}{{viewData.historicalMSAExists && viewData.historicalNDAExists ? ',' : ''}}
+        {{viewData.historicalNDAExists ? 'NDA' : ''}} into the DMS.
+      </p>
+      <p *ngIf="viewData.historicalMSAExists || viewData.historicalNDAExists" 
+        class="secondary-color"  
+        style="font-size: 14px;"
+      >
+        For Contract Type “Amendment”, if you are confident of the MSA Contracting Entity, then please select it from the “Contracting Entity” drop down.
+        If you are not certain, please contact Legal before hitting submit. 
+      </p>
+    </div>
+  </div>
+</div>

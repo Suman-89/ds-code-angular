@@ -1,0 +1,86 @@
+<div class="contentWrap p-0 mt-2 {{ darkTheme ? 'darkTheme' : '' }}">
+  <div class="inputblock" [hidden]="!showCommentBox">
+    <div class="info mb-2">
+      <div class="row">
+        <div class="col-5">
+          <p class="mb-2">
+            <span style="font-weight: 700">@</span> = Tag another user
+          </p>
+          <p class="mb-2">
+            <span style="font-weight: 700">#</span> = Tag a group
+          </p>
+          <p class="mb-2">
+            <span style="font-weight: 700">$</span> = Tag a document
+          </p>
+        </div>
+        <div class="col-7">
+          <!-- <p class="mb-2"><span style="font-weight:700">'Enter'</span> key = Submit comments</p> -->
+          <p class="mb-2">
+            <span style="font-weight: 700">'Shift+Enter'</span> key = Start a
+            new line
+          </p>
+          <p class="mb-2">
+            <span style="font-weight: 700">'Alt+F'</span> key = Full screen
+            comment
+          </p>
+          <p class="mb-2">
+            <span style="font-weight: 700">'Ctrl+Enter'</span> key = to enter
+            new item in list
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="demoInput" *ngIf="multiMentionConfig.mentions.length >= 3">
+      <app-comment-box
+        #commentBox
+        [commentMentionConfig]="multiMentionConfig"
+        (submitted)="onSubmitted($event)"
+        [maxChar]="1024"
+      ></app-comment-box>
+    </div>
+    <!-- <button class="primarybtnstyle send-btn" style="margin-top: 10px;" (click)="sendComment()">Send</button> -->
+  </div>
+
+  <div class="separator">
+    <hr />
+    <div class="iconbtn">
+      <i
+        *ngIf="showCommentBox"
+        (click)="showCommentBox = false"
+        class="fa fa-chevron-circle-up fa-lg"
+        aria-hidden="true"
+      ></i>
+      <i
+        *ngIf="!showCommentBox"
+        (click)="showCommentBox = true"
+        class="fa fa-chevron-circle-down fa-lg"
+        aria-hidden="true"
+      ></i>
+    </div>
+  </div>
+  <div class="w-100 border-0">
+    <input
+      type="text"
+      class="inputstyle w-100 {{ darkTheme ? 'inputstyle_primary' : '' }}"
+      placeholder="Search Comments"
+      (keyup)="filterComments($event.target.value)"
+    />
+  </div>
+  <div
+    class="commentsCont"
+    [ngClass]="{ commentArea: showCommentBox, noCommentArea: !showCommentBox }"
+    *ngIf="commentList && commentList.length > 0"
+  >
+    <div class="commentRow" *ngFor="let comment of displayCommentList">
+      <app-display-comment
+        [data]="comment"
+        [allowReply]="true"
+        [userList]="tagUsers"
+        [groupList]="tagGroups"
+        [docList]="docList"
+        [darkTheme]="darkTheme"
+      ></app-display-comment>
+    </div>
+  </div>
+</div>

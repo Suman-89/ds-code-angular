@@ -1,0 +1,120 @@
+<div class="w-100" [id]="elementRefId">
+  <div class="w-100 position-relative" *ngIf="setting">
+    <div
+      class="selectItem w-100 d-flex justify-content-between cursor-pointer"
+      (click)="showList()"
+    >
+      <div class="text-truncate p-0 font-weight-normal" *ngIf="value?.length">
+        {{ displayValue ? displayValue : value }}
+      </div>
+      <div class="text-truncate p-0 font-weight-normal" *ngIf="!value?.length">
+        {{ placeholder }}
+      </div>
+      <i
+        *ngIf="!selecting && !disabled"
+        class="fa fa-angle-down text-primary"
+        style="font-size: 17px; font-weight: 600"
+      ></i>
+      <i
+        *ngIf="selecting && !disabled"
+        class="fa fa-close text-primary"
+        style="font-size: 17px; font-weight: 300"
+      ></i>
+    </div>
+    <div
+      *ngIf="selecting && !disabled"
+      class="w-100 dropdown_container p-1 mt-1"
+      [style.top]="top"
+    >
+      <!-- [style.top]="setting?.position == 'top' ? '-227px' : '28px'" -->
+      <div>
+        <input
+          placeholder="Search here.."
+          class="filter-input w-100 my-1"
+          name="dropdown_search"
+          (keyup)="applyFilter($event.target.value)"
+          [(ngModel)]="filterStr"
+          [disabled]="disabled"
+        />
+      </div>
+      <div class="list-box">
+        <li
+          class="font-weight-normal cursor-pointer"
+          style="font-size: 13px"
+          (click)="onSelect('')"
+          [value]=""
+        >
+          Clear field
+        </li>
+        <li
+          class="font-weight-normal cursor-pointer"
+          style="font-size: 13px"
+          *ngFor="let ele of filterList"
+          (click)="onSelect(ele[setting.value])"
+          [value]="ele[setting.value]"
+        >
+          {{ ele[setting.label] }}
+        </li>
+      </div>
+    </div>
+  </div>
+  <div class="w-100 position-relative" *ngIf="!setting">
+    <div
+      class="selectItem w-100 d-flex justify-content-between cursor-pointer"
+      (click)="showList()"
+    >
+      <div class="text-truncate p-0 font-weight-normal" *ngIf="value?.length">
+        {{ displayValue ? displayValue : value }}
+      </div>
+      <div class="text-truncate p-0 font-weight-normal" *ngIf="!value?.length">
+        {{ placeholder }}
+      </div>
+      <i
+        *ngIf="!selecting && !disabled"
+        class="fa fa-angle-down text-primary"
+        style="font-size: 17px; font-weight: 600"
+      ></i>
+      <i
+        *ngIf="selecting && !disabled"
+        class="fa fa-close text-primary"
+        style="font-size: 17px; font-weight: 300"
+      ></i>
+    </div>
+
+    <div
+      *ngIf="selecting && !disabled"
+      class="w-100 dropdown_container p-1 pl-2 mt-1"
+      [style.top]="setting?.position == 'top' ? '-227px' : '28px'"
+    >
+      <div>
+        <input
+          placeholder="Search here.."
+          class="filter-input w-100 my-1"
+          name="dropdown_search"
+          (keyup)="applyFilter($event.target.value)"
+          [(ngModel)]="filterStr"
+          [disabled]="disabled"
+        />
+      </div>
+      <div class="list-box" ng>
+        <li
+          class="font-weight-normal cursor-pointer"
+          style="font-size: 13px"
+          (click)="onSimpleSelect('')"
+          [value]=""
+        >
+          Clear field
+        </li>
+        <li
+          class="font-weight-normal cursor-pointer"
+          style="font-size: 13px"
+          *ngFor="let ele of filterList"
+          (click)="onSimpleSelect(ele)"
+          [value]="ele"
+        >
+          {{ ele }}
+        </li>
+      </div>
+    </div>
+  </div>
+</div>

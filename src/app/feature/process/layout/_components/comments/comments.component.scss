@@ -1,0 +1,102 @@
+@import "variables";
+
+.contentWrap {
+  height: calc(100% - 35px);
+  padding: 10px 0 0 10px;
+  /* overflow: hidden; */
+  position: relative;
+
+  .inputblock {
+    margin-bottom: 0px;
+
+    // .demoInput {
+    //   //max-width: 400px;
+    //   //height: 100px;
+    // }
+    .info {
+      color: var(--secondaryColor);
+      font-style: italic;
+      font-size: 11px;
+      line-height: 11px;
+      margin-top: 5px;
+      //max-width: 400px;
+    }
+
+    .send-btn {
+      margin-top: 10px;
+      display: block;
+    }
+  }
+
+  .commentsCont {
+    overflow: auto;
+    margin-top: 10px;
+    &.commentArea {
+      height: calc(100% - 260px);
+    }
+    &.noCommentArea {
+      height: calc(100% - 15px);
+    }
+
+    .commentRow {
+      padding: 5px 0px;
+      font-size: 12px;
+
+      &:first-child {
+        padding-top: 0px;
+      }
+    }
+  }
+
+  .fullHeight {
+    height: calc(100% - 30px);
+  }
+
+  .separator {
+    position: relative;
+    hr {
+      border-color: #e6eceb;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .iconbtn {
+      color: var(--secondaryColor);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      i {
+        background-color: var(--primaryColor);
+        border-radius: 50%;
+        position: absolute;
+        z-index: 1;
+        transform: translateY(-30%) translateX(-50%);
+        left: 50%;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mention {
+    &.user-mention {
+      color: var(--secondaryColor) !important;
+    }
+    &.group-mention {
+      color: var(--primaryColor) !important;
+    }
+    &.doc-mention {
+      color: var(--tertiarycolor) !important;
+    }
+  }
+  .darkTheme {
+    .mention {
+      &.group-mention {
+        color: var(--secondaryColor) !important;
+      }
+    }
+  }
+}

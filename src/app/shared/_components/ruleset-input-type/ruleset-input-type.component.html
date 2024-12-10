@@ -1,0 +1,49 @@
+<div class="w-100" *ngIf="variable">
+     <div *ngIf="variable.uielementtype !== 'DROPDOWN' && variable.datatype !== 'Date' && variable.datatype !== 'Boolean'">
+      <input [type]="returnType()" class="inputstyle w-100" [(ngModel)]="rulesetValue" (keyup)="emitValue()"/>      
+     </div>
+    <div *ngIf="variable.uielementtype === 'DROPDOWN' && variable.datatype !== 'Date' && variable.datatype !== 'Boolean'">
+     
+      <div *ngIf="checkOptLength(options) && variable.operator !=='Between'" class="row no-gutters align-items-center">
+
+        <div *ngFor="let opt of options" (click)="setBubbleOption(opt)" class="m-1">
+          <div class="optionWrap text-truncate text-center" [ngClass]="{'primary-color': rulesetValue.includes(opt), 'deselectedColor':  !rulesetValue.includes(opt) }" container="body" placement="top" [ngbTooltip]="opt && opt.name? opt.name : opt ? opt :''">
+           {{opt && opt.name? opt.name : opt ? opt : ''}}
+          </div> 
+        </div>
+      </div>
+    <div *ngIf="!checkOptLength(options) || variable.operator ==='Between'">
+      <ng-multiselect-dropdown
+         class="container overflow-in" 
+         [placeholder]="'Select'"
+         name="ddselect"
+         [settings]="dropdownSettings"
+         [data]="options"
+         [(ngModel)]="rulesetValue"
+         (onSelect)="emitValue()"
+         (onDeSelect) ="emitValue()"
+         >
+      </ng-multiselect-dropdown>
+    </div>
+
+    </div>
+     
+
+    <div class="input-group" *ngIf="variable.datatype === 'Date'" >
+        <input required class="form-control" placeholder="DD-MMM-YYYY" name="dp" (click)="d.toggle()"
+        (keydown)="$event.preventDefault(); d.open();" ngbDatepicker #d="ngbDatepicker" 
+        [(ngModel)]="rulesetValue"
+        (dateSelect)="setDate($event)">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+    </div>
+   
+    <div class="toggle-switch" style="top:-5px" *ngIf="variable.datatype === 'Boolean'" >
+        <input type="checkbox" [(ngModel)]="rulesetValue" (change)="emitValue()">
+        <div class="knobs">
+          <span></span>
+        </div>
+        <div class="layer"></div>
+      </div>
+</div>

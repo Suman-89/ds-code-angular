@@ -1,0 +1,35 @@
+@import "variables";
+
+.form-container {
+  width: 90%;
+  height: 90%;
+  box-shadow: $card-box-shadow;
+  padding: 40px 40px;
+  background: white;
+  border-radius: 5px;
+  margin: 0 auto 3%;
+  overflow: scroll;
+  position: relative;
+}
+
+.companyform {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.radio-container {
+  width: 50%;
+  padding: 0 20px 0 0;
+  input {
+    margin: 0 15px 0 0;
+  }
+}
+.padding-left-0 {
+  padding-left: 0;
+}
+
+.group-header-label {
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom: 1px solid;
+}

@@ -1,0 +1,138 @@
+<div
+  #sideNav
+  *ngIf="!!navbarStyle"
+  id="sidenav"
+  class="maxHeight sidenavContainer {{ darkTheme ? 'darkTheme' : '' }}"
+  [ngStyle]="{
+    'background-color': navbarStyle.backgroundColor,
+    'box-shadow': navbarStyle.boxshadow,
+    'overflow-y': openSideNav ? 'auto' : 'visible'
+  }"
+>
+  <div class="sidenav relative" (mouseleave)="childHoverOut()">
+    <!--logo-->
+    <!-- <div [ngStyle]="{'padding': openSideNav ? '15px 20px 10px 20px' : '10px' }">
+      <img class="logo" *ngIf="openSideNav && navData.logoPath" src="{{navData.logoPath}}">
+      <img class="logo" *ngIf="!openSideNav && navData.collapsedLogoPath" src="{{navData.collapsedLogoPath}}">
+    </div> -->
+
+    <!--nav items-->
+
+    <div class="listGroup">
+      <div *ngIf="!openSideNav">
+        <div *ngFor="let item of navData.navOptions">
+          <div
+            class="itemContainer"
+            [ngStyle]="{ maxHeight: setHeight() }"
+            *appHasPermission="item.forRoles"
+          >
+            <div
+              class="itemIconContainer"
+              [ngStyle]="getItemContainerStyle(item)"
+              [routerLink]="item.routePath"
+              [routerLinkActive]="item.routePath ? 'active' : ''"
+              [routerLinkActiveOptions]="{ exact: item.isExactRouteMatch }"
+              (click)="item.itemChildren ? $event : onNavClick([], item)"
+              (mouseover)="itemHovered(item)"
+              (mouseout)="itemHoverOut(item)"
+            >
+              <!-- <span *ngIf="!item.itemChildren && selectedMenu.itemId == item.itemId" class="selectionIndicator"></span> -->
+              <div class="iconContainer" [ngStyle]="{ width: setWidth() }">
+                <!-- <img *ngIf="item.itemIconPath" class="itemIcon" data-toggle="tooltip"
+                  src="{{item.itemIconPath}}" [ngStyle]="setIconStyle(item)"> -->
+                <i
+                  *ngIf="item.itemIconPath"
+                  [ngClass]="item.itemIconPath"
+                  class="itemIcon"
+                  aria-hidden="true"
+                  [ngStyle]="setIconStyle(item)"
+                ></i>
+              </div>
+              <div
+                *ngIf="
+                  navbarStyle.selectedBorderColor && navbarStyle.borderColor
+                "
+                class="hoverBorder"
+                [ngStyle]="getHoverBorderStyle(item)"
+              ></div>
+            </div>
+
+            <!--show hovered name-->
+            <div class="transparentContainer" [ngStyle]="show(item)">
+              <div
+                class="childContainer"
+                [ngStyle]="setContainerBackground(item)"
+                (mouseleave)="childHoverOut()"
+              >
+                <div
+                  class="upperRow"
+                  (click)="
+                    item.itemChildren
+                      ? $event.stopPropagation()
+                      : onNavClick([], item)
+                  "
+                >
+                  <div
+                    class="tip"
+                    [ngStyle]="{
+                      'border-right-color': navbarStyle.floatbackgroundColor
+                        ? navbarStyle.floatbackgroundColor
+                        : 'black'
+                    }"
+                  ></div>
+                  <span class="hoverName"
+                    >{{ item.itemName | uppercase }}
+                  </span>
+                </div>
+                <div *ngIf="item.itemChildren">
+                  <app-side-navbar-children
+                    [childData]="item.itemChildren"
+                    [navbarStyle]="navbarStyle"
+                    [level]="level + 1"
+                    [selectedMenu]="selectedMenu"
+                    [openSideNav]="openSideNav"
+                    (navSelection)="onNavClick($event, item)"
+                    (summeryhoverOption)="onSummeryHover($event)"
+                    [darkTheme]="darkTheme"
+                  ></app-side-navbar-children>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="openSideNav">
+        <app-side-navbar-children
+          [childData]="navData.navOptions"
+          [navbarStyle]="navbarStyle"
+          [level]="level"
+          [selectedMenu]="selectedMenu"
+          [openSideNav]="openSideNav"
+          (navSelection)="onNavClick($event)"
+          (summeryhoverOption)="onSummeryHover($event)"
+          [darkTheme]="darkTheme"
+        >
+        </app-side-navbar-children>
+      </div>
+    </div>
+
+    <!--bottom panel-->
+    <div class="bottomPanel">
+      <div class="expandedBottom">
+        <div class="collapseContainer">
+          <i
+            *ngIf="navbarStyle.collapseIconPath"
+            class="itemIcon fa fa-chevron-left"
+            [ngClass]="{ collapseIcon: openSideNav, expandIcon: !openSideNav }"
+            data-toggle="tooltip"
+            (click)="toggleNavBar()"
+          >
+          </i>
+          <!-- <i *ngIf="navbarStyle.collapseIconClass" [ngClass]="navbarStyle.collapseIconClass" class="itemIcon collapseIcon"
+              aria-hidden="true" (click)="toggleNavBar()"></i> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

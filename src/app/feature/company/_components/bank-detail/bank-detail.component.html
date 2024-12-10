@@ -1,0 +1,134 @@
+<form class="form-group custom-form-wrap" [formGroup]="bankDetails">
+  <label class="group-header-label" *ngIf="!patchVal"
+    >Bank Details
+    <div class="float-right cursor-pointer">
+      <button class="secondarybtnstyle btn mr-2" (click)="cancel()">
+        Cancel
+      </button>
+      <button
+        [disabled]="!bankDetails.valid"
+        class="primarybtnstyle btn"
+        type="submit"
+        (click)="addBankDetails()"
+      >
+        Add Bank Details
+        <!-- <i class="fa fa-plus"></i> -->
+      </button>
+    </div>
+  </label>
+  <div class="form-row no-margin custom-padding">
+    <div class="form-group col-md-6">
+      <label>Beneficiary Name <span class="text-danger">*</span></label>
+      <input
+        (blur)="emitOnchange()"
+        required
+        class="inputstyle form-control"
+        formControlName="bankbenficiaryname"
+        placeholder="Enter Beneficiary Name"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label>Bank Alias</label>
+      <input
+        (blur)="emitOnchange()"
+        class="inputstyle form-control"
+        formControlName="bankalias"
+        placeholder="Enter Bank Alias"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label>Bank Name</label>
+      <input
+        (blur)="emitOnchange()"
+        class="inputstyle form-control"
+        formControlName="bankname"
+        placeholder="Enter Bank name"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label>Branch</label>
+      <input
+        (blur)="emitOnchange()"
+        class="inputstyle form-control"
+        formControlName="bankbranch"
+        placeholder="Enter Branch name"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label>Bank Account Number</label>
+      <input
+        (blur)="emitOnchange()"
+        class="inputstyle form-control"
+        formControlName="bankaccountnumber"
+        placeholder="Enter Account Number"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label>Bank Account Currency</label>
+      <!-- <input (blur)="emitOnchange()" class="inputstyle form-control" formControlName="bankaccountcurrency" placeholder="Enter Bank Account Currency"/> -->
+      <select
+        class="inputstyle form-control"
+        formControlName="bankaccountcurrency"
+      >
+        <option value="">Select Currency</option>
+        <option *ngFor="let curr of currencyList" [value]="curr?.name">
+          {{ curr?.name }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label>IBN/ABA Code</label>
+      <input
+        (blur)="emitOnchange()"
+        class="inputstyle form-control"
+        formControlName="bankibancode"
+        placeholder="Enter IBN/ABA Code"
+      />
+    </div>
+    <div class="form-group col-md-6">
+      <label>Swift</label>
+      <input
+        (blur)="emitOnchange()"
+        class="inputstyle form-control"
+        formControlName="bankswift"
+        placeholder="Enter Swift Code"
+      />
+    </div>
+    <div class="col-md-12 d-flex justify-content-end" *ngIf="!showAddressForm">
+      <button class="btn primarybtnstyle" (click)="showHideAddressForm()">
+        Add An Address
+      </button>
+    </div>
+    <div class="col-md-12" *ngIf="showAddressForm && countries">
+      <app-address-form
+        #bankAddressForm
+        [showCancel]="true"
+        [showAddBtn]="true"
+        [type]="false"
+        [addressname]="'Bank Address'"
+        [editAddress]="bankAddress"
+        [countries]="countries"
+        (addressObjectEmitter)="addAddress($event)"
+        (cancelAddress)="showHideAddressForm()"
+      >
+      </app-address-form>
+    </div>
+    <div
+      *ngIf="
+        bankDetails &&
+        bankDetails.value.bankaddress &&
+        bankDetails.value.bankaddress.length > 0
+      "
+      class="addedFormPanel col-md-12"
+    >
+      <app-added-address
+        [showAddBtn]="true"
+        [header]="'Bank Address'"
+        [addresses]="bankDetails.value.bankaddress"
+        (addressAction)="addressAction($event)"
+        (isediting)="emitAddressEdit($event)"
+      >
+      </app-added-address>
+    </div>
+  </div>
+</form>

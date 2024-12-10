@@ -1,0 +1,12 @@
+@import "../../../../../shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.readonly {
+  background: transparent;
+  pointer-events: auto;
+}
+
+.helper {
+  padding-top: 0.5em;
+  font-size: 0.7rem;
+  font-style: italic;
+}

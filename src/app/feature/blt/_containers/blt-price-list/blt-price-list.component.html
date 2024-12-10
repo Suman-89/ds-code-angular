@@ -1,0 +1,243 @@
+<div class="blt-price-list-container">
+  <div class="blt-header">
+    <h3 style="text-align: center">Price List</h3>
+  </div>
+
+
+  <div class="price-list-containor">
+    <div class="blt-price-list-table">
+      <div class="info">
+        <div>** Base Price is for 3 stops.</div>
+        <div>
+          ** SS Means - Car Enclosure and Door for cabin and cabin door only.
+        </div>
+        <div>
+          ** SSL Means - Car Enclosure and Door for cabin , cabin door and Landing
+          Door.
+        </div>
+        <div>** Premium is per floor on top of the base price</div>
+        <div style="font-weight: bold">** All Price is in INR .</div>
+      </div>
+      <div class="table-name">
+        <h6>Elevator Pricing List</h6>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+            <th colspan="6">Machine Room</th>
+            <th colspan="3">Machine Room Less</th>
+          </tr>
+          <tr>
+            <th colspan="2"></th>
+            <th colspan="3">Geared</th>
+            <th colspan="3">Gearless</th>
+            <th colspan="3"></th>
+          </tr>
+          <tr>
+            <th>Capacity</th>
+            <th>Stops</th>
+            <th>MS</th>
+            <th>SS</th>
+            <th>SSL</th>
+            <th>MS</th>
+            <th>SS</th>
+            <th>SSL</th>
+            <th>MS</th>
+            <th>SS</th>
+            <th>SSL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let price of elevatorPrices">
+            <ng-container
+              *ngFor="let stopPrice of price.stopWisePrices; let i = index"
+            >
+              <tr>
+                <td
+                  *ngIf="i === 0"
+                  [attr.rowspan]="price.stopWisePrices.length"
+                >
+                  {{ price.capacity }}
+                </td>
+                <td>{{ stopPrice.stop }}</td>
+                <td class="blt-price">{{ stopPrice.mrgMsElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrgSsElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrgSslElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrglMsElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrglSsElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrglSslElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrlMsElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrlSsElevatorPrice }}</td>
+                <td class="blt-price">{{ stopPrice.mrlSslElevatorPrice }}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="install-pricing-table">
+      <div class="table-name">
+        <h6>Installation Pricing List</h6>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+            <th colspan="6">Machine Room</th>
+            <th colspan="3">Machine Room Less</th>
+          </tr>
+
+          <tr>
+            <th colspan="1">Location</th>
+            <th colspan="1">Capacity</th>
+            <th colspan="3">Geared</th>
+            <th colspan="3">Gearless</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let installPrice of installPrices; let i = index"
+          >
+            <tr>
+              <td colspan="1">{{ installPrice.location }}</td>
+              <td colspan="1">{{ installPrice.capacity }}</td>
+              <td colspan="3" class="blt-price">
+                {{ installPrice.mrgInstallPrice }}
+              </td>
+              <td colspan="3" class="blt-price">
+                {{ installPrice.mrglInstallPrice }}
+              </td>
+              <td colspan="3" class="blt-price">
+                {{ installPrice.mrlInstallPrice }}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="freight-pricing-table">
+      <div class="table-name">
+        <h6>Freight Pricing List</h6>
+      </div>
+      <div class="info">
+        <div> ** Upto G + {{freightHighRiseStop}} , there after Rs {{freightRisePremiumPerStop}} for every successive stage.</div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+          </tr>
+
+          <tr>
+            <th colspan="1">Location</th>
+            <th colspan="1">Capacity</th>
+            <th colspan="3">Machine Room</th>
+            <th colspan="3">Machine Room Less</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let freightPrice of freightPrices; let i = index"
+          >
+            <tr>
+              <td colspan="1">{{ freightPrice.location }}</td>
+              <td colspan="1">{{ freightPrice.capacity }}</td>
+              <td colspan="3" class="blt-price">
+                {{ freightPrice.mrFreightPrice }}
+              </td>
+              <td colspan="3" class="blt-price">
+                {{ freightPrice.mrlFreightPrice }}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="unloading-pricing-table">
+      <div class="table-name">
+        <h6>Unloading Pricing List</h6>
+      </div>
+      <div class="info">
+        <div> ** Upto G + {{unloadingHighRiseStop}} , there after Rs {{unloadingRisePremiumPerStop}} for every successive stage.</div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+            <th colspan="6">Machine Room</th>
+            <th colspan="3">Machine Room Less</th>
+          </tr>
+          <tr>
+            <th colspan="2"></th>
+            <th colspan="3">Geared</th>
+            <th colspan="3">Gearless</th>
+            <th colspan="3"></th>
+          </tr>
+          <tr>
+            <th>Unloading</th>
+            <th>Capacity</th>
+            <th>MS</th>
+            <th>SS</th>
+            <th>SSL</th>
+            <th>MS</th>
+            <th>SS</th>
+            <th>SSL</th>
+            <th>MS</th>
+            <th>SS</th>
+            <th>SSL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let unloadingPrice of unloadingPrices; let i = index"
+          >
+            <tr>
+              <td colspan="1">{{ unloadingPrice.location }}</td>
+              <td colspan="1">{{ unloadingPrice.capacity }}</td>
+              <td colspan="9" class="blt-price">
+                {{ unloadingPrice.unloadIngPrice }}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="additional-pricing-table">
+      <div class="table-name">
+        <h6>Additional Pricing List</h6>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="3">Additional Feature</th>
+            <th colspan="4">Base Cost</th>
+            <th colspan="4">Premium Per Stop</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <ng-container
+            *ngFor="
+              let additionaalFeature of additionalFeaturePrices;
+              let i = index
+            "
+          >
+            <tr>
+              <td colspan="3">
+                {{ additionaalFeature.additionalFeatureType }}
+              </td>
+              <td colspan="4" class="blt-price">
+                {{ additionaalFeature.additionalFeatureBasePrice }}
+              </td>
+              <td colspan="4" class="blt-price">
+                {{ additionaalFeature.additionalFeaturePremiumPerStop }}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

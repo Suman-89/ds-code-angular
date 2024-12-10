@@ -1,0 +1,281 @@
+<div class="row no-gutters border-bottom py-1 w-100" style="display: flex; flex-wrap: nowrap;">
+  <div
+    class="pr-1 col-1-5"
+    *ngIf="gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <app-dropdown-search
+      [value]="column.key"
+      [placeholder]="'Select variable'"
+      [dataList]="variables"
+      [setting]="variableSetting"
+      [id]="index"
+      [disabled]="column.common"
+      ($onSelectItem)="assignVariable($event)"
+    ></app-dropdown-search>
+  </div>
+  <div
+    class="col-3 pr-1"
+    *ngIf="gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    {{ column.key }}
+  </div>
+  <div class="pr-1 col-1-5">
+    <input
+      [name]="'headerinput' + index"
+      [(ngModel)]="column.header"
+      (change)="assignValue({ value: $event.target.value }, column, 'header')"
+      class="inputstyle w-100"
+      placeholder="Enter Header"
+    />
+  </div>
+  <div
+    class="pr-1"
+    [ngClass]="{
+      'col-1': gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC,
+      'col-2': gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC
+    }"
+  >
+    <div
+      *ngIf="column.filtertype == 'date' || column.filtertype == 'range'"
+      class="w-100"
+    >
+      <app-dropdown-search
+        [value]="column.cellsformat"
+        [placeholder]="'Select Format'"
+        [dataList]="gridConfigValues?.cellFormat"
+        [setting]="dateFormatSetting"
+        [id]="index"
+        ($onSelectItem)="assignValue($event, column, 'cellsformat')"
+      ></app-dropdown-search>
+    </div>
+  </div>
+  <div
+    class="pr-1"
+    [ngClass]="{
+      'col-1': gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC,
+      'col-2': gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC
+    }"
+  >
+    <app-dropdown-search
+      [value]="column.filtertype"
+      [placeholder]="'Select Filter Type'"
+      [dataList]="gridConfigValues?.filterTypes"
+      [setting]="dateFormatSetting"
+      [id]="index"
+      ($onSelectItem)="assignValue($event, column, 'filtertype')"
+    ></app-dropdown-search>
+  </div>
+  <div
+    class="pr-1 col-1"
+    *ngIf="gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <app-dropdown-search
+      [value]="column.mobile"
+      [placeholder]="'Select Column Line'"
+      [dataList]="mobileInpOptions"
+      [setting]="mobile"
+      [id]="index"
+      ($onSelectItem)="assignValue($event, column, 'mobile')"
+    ></app-dropdown-search>
+  </div>
+  <div
+    class="pr-1 col-1"
+    *ngIf="gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <app-dropdown-search
+      [value]="column.tablet"
+      [placeholder]="'Select Column Line'"
+      [dataList]="tabletInpOptions"
+      [setting]="tablet"
+      [id]="index"
+      ($onSelectItem)="assignValue($event, column, 'tablet')"
+    ></app-dropdown-search>
+  </div>
+  <div
+    class="col-1"
+    *ngIf="gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <input
+      [name]="'width' + index"
+      [(ngModel)]="column.width"
+      (change)="assignValue({ value: $event.target.value }, column, 'width')"
+      class="inputstyle w-100"
+      placeholder="Enter Width"
+    />
+  </div>
+  <ng-container
+    *ngIf="gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <div class="custom-col move-center">
+      <div class="custom-control custom-switch q-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [id]="'myq' + index"
+          [name]="'myq' + index"
+          [checked]="checkForColInGrid(column.key, gridTypeSetterEnum.MYQ)"
+          (change)="
+            queueToggle(
+              $event.target.checked,
+              column.key,
+              gridTypeSetterEnum.MYQ
+            )
+          "
+        />
+        <label
+          class="custom-control-label cursor-pointer font-small custom-label"
+          [for]="'myq' + index"
+        ></label>
+      </div>
+    </div>
+    <div class="custom-col move-center">
+      <div class="custom-control custom-switch q-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [id]="'grp' + index"
+          [name]="'grp' + index"
+          [checked]="checkForColInGrid(column.key, gridTypeSetterEnum.GROUPQ)"
+          (change)="
+            queueToggle(
+              $event.target.checked,
+              column.key,
+              gridTypeSetterEnum.GROUPQ
+            )
+          "
+        />
+        <label
+          class="custom-control-label cursor-pointer font-small custom-label"
+          [for]="'grp' + index"
+        ></label>
+      </div>
+    </div>
+
+    <div class="custom-col move-center">
+      <div class="custom-control custom-switch q-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [id]="'alltask' + index"
+          [name]="'alltask' + index"
+          [checked]="checkForColInGrid(column.key, gridTypeSetterEnum.ALLTASKS)"
+          (change)="
+            queueToggle(
+              $event.target.checked,
+              column.key,
+              gridTypeSetterEnum.ALLTASKS
+            )
+          "
+        />
+        <label
+          class="custom-control-label cursor-pointer font-small custom-label"
+          [for]="'alltask' + index"
+        ></label>
+      </div>
+    </div>
+    <div class="custom-col move-center">
+      <div class="custom-control custom-switch q-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [id]="'allp' + index"
+          [name]="'allp' + index"
+          [checked]="
+            checkForColInGrid(column.key, gridTypeSetterEnum.ALLPROCESS)
+          "
+          (change)="
+            queueToggle(
+              $event.target.checked,
+              column.key,
+              gridTypeSetterEnum.ALLPROCESS
+            )
+          "
+        />
+        <label
+          class="custom-control-label cursor-pointer font-small custom-label"
+          [for]="'allp' + index"
+        ></label>
+      </div>
+    </div>
+    <div class="custom-col move-center">
+      <div class="custom-control custom-switch q-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [id]="'compare' + index"
+          [name]="'compare' + index"
+          [checked]="checkForColInGrid(column.key, gridTypeSetterEnum.COMPARE)"
+          (change)="
+            queueToggle(
+              $event.target.checked,
+              column.key,
+              gridTypeSetterEnum.COMPARE
+            )
+          "
+        />
+        <label
+          class="custom-control-label cursor-pointer font-small custom-label"
+          [for]="'compare' + index"
+        ></label>
+      </div>
+    </div>
+    <div class="custom-col move-center">
+      <div class="custom-control custom-switch q-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [id]="'info' + index"
+          [name]="'info' + index"
+          [checked]="checkForColInGrid(column.key, gridTypeSetterEnum.INFO)"
+          (change)="
+            queueToggle(
+              $event.target.checked,
+              column.key,
+              gridTypeSetterEnum.INFO
+            )
+          "
+        />
+        <label
+          class="custom-control-label cursor-pointer font-small custom-label"
+          [for]="'info' + index"
+        ></label>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container
+    *ngIf="gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <div class="col-1 move-center">
+      <div class="custom-control custom-switch q-switch">
+        <input
+          type="checkbox"
+          class="custom-control-input cursor-pointer"
+          [id]="column.key + 'hidden' + index"
+          [name]="column.key + 'hidden' + index"
+          [checked]="column.hidden"
+          (change)="
+            assignValue({ value: $event.target.checked }, column, 'hidden')
+          "
+        />
+
+        <label
+          class="custom-control-label cursor-pointer font-small custom-label"
+          [for]="column.key + 'hidden' + index"
+        ></label>
+      </div>
+    </div>
+  </ng-container>
+
+  <div
+    class="custom-col d-flex"
+    *ngIf="gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <i
+      *ngIf="!column.common"
+      class="fa fa-close custom-label"
+      [ngbTooltip]="'Remove'"
+      (click)="removeColumn(index, column)"
+    ></i>
+  </div>
+</div>

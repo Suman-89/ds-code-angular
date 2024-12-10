@@ -1,0 +1,15 @@
+export const environment = {
+  production: true,
+  userManagementApiUrl: 'https://people.ds-iflow.com/userapi/',
+  referenceDataUrl: 'https://people.ds-iflow.com/refapi/',
+  dataUrl: 'https://people.ds-iflow.com/compapi/',
+  bpmUrl: 'https://people.ds-iflow.com/bpmnapi/',
+  dmsUrl: 'https://people.ds-iflow.com/dmsapi/dms',
+  whatsappUrl: 'https://messeging.reca.ai',
+  logoUrl: './assets/images/logo_iBASIS-pbt.png',
+  dmslink: 'https://dms-dev.ibasis.net',
+  loginLogoUrl: './assets/images/logo_iBASIS-pbt.png',
+  faviconUrl: './assets/icons/ibasis.ico',
+  documentTitle: 'IBASIS | CONTRACT WF',
+  uploadUrl: 'http://14.98.251.126:5002/file',
+};

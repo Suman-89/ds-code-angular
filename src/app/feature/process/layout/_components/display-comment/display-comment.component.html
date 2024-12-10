@@ -1,0 +1,202 @@
+<div class="position-relative {{ darkTheme ? 'darkTheme' : '' }}">
+  <div class="comment pr-1" *ngIf="type != 'transcription'">
+    <div class="username">
+      {{ data?.name }}
+    </div>
+    <div
+      [id]="data?.id"
+      [line-truncation]="3"
+      [disabled]="disabled"
+      (hasTruncated)="handler($event)"
+      class="commentText"
+      [innerHTML]="data?.santizedMessage"
+    ></div>
+    <a class="more" *ngIf="isTruncateNeeded" (click)="toggleFullText()">
+      Show <span *ngIf="!disabled">more</span><span *ngIf="disabled">less</span>
+    </a>
+    <div>
+      <p class="datetime m-0" *ngIf="data?.levelInfo">{{ data.levelInfo }}</p>
+      <span class="datetime">{{
+        data?.createdtime | date : "dd-MMM-yyyy HH:mm"
+      }}</span>
+      <a
+        *ngIf="allowReply && data?.replycount"
+        class="replyIcon"
+        (click)="toggleReply()"
+      >
+        {{ data?.replycount }}
+        <span *ngIf="data?.replycount == 1">Reply</span>
+        <span *ngIf="data?.replycount > 1">Replies</span>
+      </a>
+      <a *ngIf="allowReply" class="replyIcon" (click)="replyComment()">
+        <i class="fa fa-reply" aria-hidden="true"></i> Reply
+      </a>
+    </div>
+    <div
+      class="replyContainer"
+      *ngIf="data?.showReply && data?.replies?.length"
+    >
+      <app-display-comment
+        *ngFor="let reply of data?.replies"
+        [data]="reply"
+      ></app-display-comment>
+    </div>
+  </div>
+
+  <!-- =============for transcript======== -->
+  <div
+    class="chat-comment pr-1"
+    *ngIf="type == 'transcription'"
+    [ngClass]="data.isBot ? 'chat-right' : 'chat-left'"
+    style="padding-top: 15px"
+  >
+<div style="display: flex;justify-content: space-between;align-items: center;">
+  <div class="username" *ngIf="data.isBot; else other_content">
+    {{ data?.userFullName ? data.userFullName : data.uniqueUserIdentifier }}
+    <i
+      class="fa fa-telegram"
+      [style.fontSize]="'14px'"
+      *ngIf="data.messageSource == 'telegram'"
+    ></i>
+    <i
+      class="fa fa-whatsapp"
+      [style.fontSize]="'17px'"
+      *ngIf="data.messageSource == 'whatsapp'"
+    ></i>
+    <i class="fa fa-envelope" *ngIf="data.messageSource == 'email'"></i>
+   
+    
+  </div>
+  <div *ngIf="isDownloadableDoc" style="display: flex;justify-content: center;align-items: center;">
+    <i 
+    style="color:white;margin-top: 7px;"
+     class="fa fa-download cursor-pointer"
+     (click)="downloadLink()"
+   ></i>
+  </div>
+</div>
+    <ng-template #other_content
+      >
+        <div class="username">
+          {{
+            data?.userFullName ? data.userFullName : data.uniqueUserIdentifier
+          }}
+          ({{ data.uniqueUserIdentifier }})
+          <i
+            class="fa fa-telegram"
+            [style.fontSize]="'14px'"
+            *ngIf="data.messageSource == 'telegram'"
+          ></i>
+          <i
+            class="fa fa-whatsapp"
+            [style.fontSize]="'17px'"
+            *ngIf="data.messageSource == 'whatsapp'"
+          ></i>
+          <i
+            class="fa fa-envelope"
+            *ngIf="data.messageSource == 'email'"
+          ></i>
+          </div
+      >
+    
+  </ng-template>
+
+    <div class="datetime" *ngIf="data?.subject">
+      Subject : {{ data?.subject }}
+    </div>
+    <div 
+    *ngIf="isUrl"
+    >
+    <app-display-preview
+    [url]="urlLink"
+    (isDownloadable)="onIsVarChanged($event)"
+    ></app-display-preview>
+  </div>
+    <div
+      *ngIf="!isUrl"
+      [id]="data?.id"
+      [line-truncation]="3"
+      [disabled]="disabled"
+      (hasTruncated)="handler($event)"
+      class="commentText"
+      [innerHTML]="data?.sentText"
+    ></div>
+    <span class="option-text datetime" *ngFor="let option of data.options">
+      {{ option }}
+    </span>
+
+    <div class="attachment-box">
+      <div *ngFor="let file of data.attachments">
+        <div class="attachment-icon">
+          <app-document-icon
+            class="documenticon"
+            (click)="download(file)"
+            [MIMEType]="file.mimetype"
+          ></app-document-icon>
+          <div class="docname inline" (click)="download(file)">
+            {{ file.logicaldocname }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="more-box pr-2">
+      <span class="d-block">
+        <a class="more" *ngIf="isTruncateNeeded" (click)="toggleFullText()">
+          Show <span *ngIf="!disabled">more</span
+          ><span *ngIf="disabled">less</span>
+        </a>
+      </span>
+      <!-- <p class="datetime m-0" *ngIf="data?.levelInfo">{{data.levelInfo}}</p> -->
+
+      <span
+        class="datetime d-block"
+        style="
+          padding: 3px 3px 0 0;
+          position: absolute;
+          z-index: 1;
+          right: 0;
+          top: 0;
+        "
+        >{{ data?.timestamp | date : "dd-MMM-yyyy HH:mm" }}</span
+      >
+
+      <!-- black single tick -->
+      <span *ngIf="data?.status === 'SENT'"
+        ><img src="assets\icons\send.svg" alt="sent" width="14" />
+      </span>
+
+      <!-- black double tick -->
+      <span *ngIf="data?.status === 'DELIVERED'"
+        ><img src="assets\icons\received.svg" alt="sent" width="14" />
+      </span>
+
+      <!-- blue double tick -->
+      <span *ngIf="data?.status === 'READ'"
+        ><img src="assets\icons\read.svg" alt="sent" width="14" />
+      </span>
+    </div>
+
+    <!-- replies starts here -->
+
+    <!-- <div class="show-reply" *ngIf="data?.messageSource === 'email'">
+      <span (click)="showReplies()">
+        {{ !isShowReplies ? "Show Replies" : "Hide Replies" }}
+      </span>
+      <a class="replyIcon" (click)="emailReply()">
+        <i class="fa fa-reply" aria-hidden="true"></i> Reply
+      </a>
+      <ul class="all-replies" *ngIf="isShowReplies">
+        <li *ngFor="let reply of allReplies" [innerHtml]="reply.sentText"></li>
+      </ul>
+    </div> -->
+    <div
+      class="replyContainer"
+      *ngIf="data?.showReply && data?.replies?.length"
+    >
+      <app-display-comment
+        *ngFor="let reply of data?.replies"
+        [data]="reply"
+      ></app-display-comment>
+    </div>
+  </div>
+</div>

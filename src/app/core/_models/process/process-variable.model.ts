@@ -1,0 +1,44 @@
+import { RuleSetModel } from 'src/app/feature/system/content-management/_models';
+import { TypeAheadModel } from '../shared';
+
+export interface ProcessVariableModel {
+  parentDropdownName?: string;
+  isDropdownDependent?: boolean;
+  refDataLevel?: any;
+  id?: number;
+  label: string;
+  displaylabel: string;
+  name: string;
+  priority?: string;
+  datatype: string;
+  categoryname: string;
+  uielementtype: string;
+  value?: any;
+  options?: TypeAheadModel[];
+  valuesource: string;
+  parentid?: string;
+  parentname?: string;
+  refdatacode?: string;
+  linkedtometadata?: boolean;
+  linkedbookmark?: string;
+  description?: string;
+  varValues?: [];
+  values?: [];
+  expression?: any;
+  system?: boolean;
+  readonly?: boolean;
+  visible?: boolean;
+  reserved?: boolean;
+  mandetory?: boolean;
+  defaultvalue?: string;
+  selectedUrl?: string;
+  ismandatory?: boolean;
+  allowPastDate?: boolean;
+  emailtemplatevariable?: boolean;
+  reviewvariable?: boolean;
+  mappedgroupwithreview?: string;
+  applicableToAll?: boolean;
+  processNames?: string[];
+  isDependantVar?: boolean;
+  parentVars?: RuleSetModel[];
+}

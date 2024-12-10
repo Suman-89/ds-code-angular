@@ -1,0 +1,158 @@
+<form
+  autocomplete="off"
+  *ngIf="companyAddress"
+  class="form-group"
+  [formGroup]="companyAddress"
+  (ngSubmit)="emitAddress()"
+>
+  <label class="group-header-label">
+    {{ addressname }}
+    <div class="float-right" *ngIf="!bindonchange">
+      <button
+        (click)="cancel()"
+        *ngIf="showCancel"
+        type="reset"
+        class="btn secondarybtnstyle mb-1 mr-1"
+      >
+        Cancel
+      </button>
+      <button
+        [disabled]="!companyAddress.valid"
+        (click)="emitAddress(1)"
+        type="submit"
+        class="btn primarybtnstyle mb-1"
+        *ngIf="showAddBtn"
+      >
+        <!-- <span class="" *ngIf="addressname !== 'Edit Address'">Add Address</span>
+                <i class="fa fa-check" *ngIf="addressname === 'Edit Address'"></i> -->
+        {{ addressname === "Bank Address" ? "Save Address" : "Save" }}
+      </button>
+    </div>
+  </label>
+  <div class="form-row no-margin">
+    <div class="col-md-12" *ngIf="type">
+      <div class="form-group col-md-3 no-padding">
+        <label>Type</label>
+        <select
+          name="companytype"
+          id="addresstype"
+          formControlName="type"
+          class="inputstyle form-control"
+          (change)="emitForm()"
+        >
+          <option disabled selected value="">Select Address Type</option>
+          <option *ngFor="let type of addressType" [ngValue]="type">
+            {{ returnAddressType(type) }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label> Address Line </label>
+      <input
+        (blur)="emitForm()"
+        maxlength="255"
+        autocomplete="off"
+        class="inputstyle form-control"
+        formControlName="line"
+        placeholder="Enter Company Address"
+      />
+      <div
+        *ngIf="companyAddress.value.line"
+        class="text-muted text-right font-smaller font-italic pt-1"
+      >
+        {{ 255 - companyAddress.value.line.length }} of 255 chars left
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label> Country* </label>
+      <input
+        class="inputstyle form-control"
+        required
+        formControlName="country"
+        placeholder="Enter Country"
+        [ngbTypeahead]="searchCountry"
+        autocomplete="new-password"
+        [inputFormatter]="countryformatter"
+        [resultFormatter]="countryformatter"
+        (selectItem)="assignStates($event)"
+        (keyup)="preventNumber($event, 'country')"
+        (blur)="checkSelection('country')"
+      />
+      <!-- <div class="text-danger font-smaller"*ngIf="companyAddress.get('country').hasError('pattern') && !companyAddress.value.country">Please enter only alphabets</div> -->
+    </div>
+    <div class="form-group col-md-4">
+      <label> State </label>
+      <input
+        [readonly]="!states"
+        autocomplete="new-password"
+        class="inputstyle form-control"
+        formControlName="state"
+        placeholder="Enter State"
+        [ngbTypeahead]="searchStates"
+        [inputFormatter]="stateformatter"
+        [resultFormatter]="stateformatter"
+        (selectItem)="setStateValue($event)"
+        (keyup)="preventNumber($event, 'state')"
+        (blur)="checkSelection('state')"
+      />
+      <!-- <div class="text-danger font-smaller"*ngIf="companyAddress.get('state').hasError('pattern') && !companyAddress.value.state">Please enter only alphabets</div> -->
+    </div>
+    <div class="form-group col-md-4">
+      <label> City </label>
+      <input
+        (blur)="emitForm()"
+        autocomplete="off"
+        class="inputstyle form-control"
+        formControlName="city"
+        placeholder="Enter City"
+      />
+      <div
+        class="text-danger font-smaller"
+        *ngIf="companyAddress.get('city').hasError('pattern')"
+      >
+        Please enter only alphabets
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label> ZIP Code/ Postal Code </label>
+      <input
+        (blur)="emitForm()"
+        autocomplete="off"
+        type="text"
+        class="inputstyle form-control"
+        formControlName="postalcode"
+        placeholder="Enter ZIP Code"
+      />
+      <div
+        class="text-danger font-smaller"
+        *ngIf="companyAddress.get('postalcode').hasError('pattern')"
+      >
+        Please enter only numbers
+      </div>
+      <div
+        class="text-danger font-smaller"
+        *ngIf="companyAddress.get('postalcode').hasError('minlength')"
+      >
+        Please enter at least 4 Characters
+      </div>
+      <div
+        class="text-danger font-smaller"
+        *ngIf="companyAddress.get('postalcode').hasError('maxlength')"
+      >
+        Only 12 characters allowed
+      </div>
+    </div>
+    <div class="form-group col-md-9">
+      <label>Full Address</label>
+      <input
+        formControlName="friendlyaddress"
+        (blur)="emitForm(1)"
+        autocomplete="off"
+        type="text"
+        class="inputstyle form-control"
+        placeholder="Enter Friendly Address"
+      />
+    </div>
+  </div>
+</form>

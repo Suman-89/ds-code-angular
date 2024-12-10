@@ -1,0 +1,119 @@
+.start-process-cont {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0px 20px;
+
+  .header-cont {
+    display: flex;
+    margin: 0px;
+    position: relative;
+
+    .header {
+      flex-grow: 1;
+      margin-bottom: 15px;
+      h5 {
+        margin: 0px;
+        text-align: center;
+      }
+    }
+    .action-btns {
+      position: absolute;
+      right: 0px;
+    }
+  }
+
+  // .aadhaar-info-cont {
+  //   margin-bottom: -50px !important;
+  // }
+
+  .process-info-cont {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    padding: 15px 30px;
+    background: white;
+    box-shadow: 0 0 5px 3px #eee;
+
+    .initiate-form {
+      margin-bottom: 10px;
+
+      .btn-cont {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .flex-prop {
+      display: flex;
+
+      .doc-upload-cont {
+        flex-grow: 1;
+        max-width: 50%;
+        padding: 0px 0px 0px 20px;
+      }
+      .form-cont {
+        flex-grow: 1;
+        max-width: 50%;
+        padding: 0px 20px 0px 0px;
+      }
+    }
+  }
+}
+
+.blackList-text {
+  color: red;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .flex-prop {
+    flex-direction: column;
+    gap: 20px;
+
+    .doc-upload-cont,
+    .form-cont {
+      max-width: 100% !important;
+    }
+
+    // .doc-upload-cont {
+    //   text-align: center;
+    // }
+  }
+}
+
+.heading-employee-details {
+  border-bottom: 1px solid #cccccc;
+  h2 {
+    font-size: 20px;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.boolean-grp {
+  display: flex;
+  gap: 15px;
+  padding: 10px 5px 0;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 15px;
+  .boolean {
+    font-size: 14px;
+  }
+}
+
+.boolean-green,
+.boolean-red {
+  font-weight: 700;
+  font-size: 14px;
+}
+.boolean-green {
+  color: green;
+}
+.boolean-red {
+  color: red;
+}

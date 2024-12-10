@@ -1,0 +1,44 @@
+<!-- <div style="max-height: 100px;margin: 2px 0;"  *ngIf="isImgFile"> -->
+  <div  *ngIf="isImgFile" style="width: 100%;max-width: 300px;position: relative;" >
+    <img width="100%" style="margin-bottom: 5px;" src={{isImgUrl}} alt="img" />
+    <!-- <div style="display: flex;justify-content: flex-end; position:absolute;bottom: 5px;right: 5px;">
+        <button id="downloadPDF"
+        (click)="download()"
+        >Download</button>
+        <div 
+        style="width: 30px;height: 30px;background-color: var(--secondaryColor);display: flex;justify-content: center;
+        align-items: center;border-radius: 100%;"
+        >
+       <i 
+       style="color: var(--primaryColor);"
+        class="fa fa-download cursor-pointer"
+        (click)="download()"
+      ></i>
+    </div>
+      </div> -->
+</div>
+<div *ngIf="isPdfFile" style="width: 100%; max-width: 300px;">
+        <div style="width: 100%;max-width: 300px;height: 100px;display: flex;flex-direction: column;justify-content: center;gap: 5px; margin: 2px 0;overflow: hidden;margin-bottom: 5px;">
+            <iframe class="pdf-cont" [src]="isPdfUrl" width="115%" height="100%" style="overflow: hidden;" scrolling="no" ></iframe>
+          <!-- <ng2-pdfjs-viewer [src]="isPdfUrl" #pdfViewer></ng2-pdfjs-viewer> -->
+        </div>
+        <!-- <div style="display: flex;justify-content: flex-end; position:absolute;bottom: 5px;right: 5px;">
+          <button id="downloadPDF"
+          (click)="download()"
+          >Download</button>
+          <div 
+          style="width: 30px;height: 30px;background-color: var(--secondaryColor);display: flex;justify-content: center;
+          align-items: center;border-radius: 100%;"
+          >
+         <i 
+         style="color: var(--primaryColor);"
+          class="fa fa-download cursor-pointer"
+          (click)="download()"
+        ></i>
+      </div>
+        </div> -->
+</div>
+
+<a *ngIf="isDiffFile" href={{isDiffUrl}} target="_blank" class="preview-link" >
+    {{isDiffUrl}}
+</a>

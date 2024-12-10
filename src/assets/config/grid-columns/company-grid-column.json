@@ -1,0 +1,29 @@
+{
+  "company": [
+    { "text": "Name", "datafield": "name", "width": 200 },
+    { "text": "ID", "datafield": "id", "width": 80 },
+    { "text": "Code", "datafield": "code", "width": 200 },
+    { "text": "Company Short Name", "datafield": "friendlyname" },
+    { "text": "Aadhaar ID", "datafield": "aadhaarId" },
+    { "text": "Carrier Type", "datafield": "carriertype" },
+    { "text": "Aliases", "datafield": "aliases" },
+    { "text": "Vendor Sap Id", "datafield": "vendorsapid" },
+    { "text": "Customer Sap Id", "datafield": "customersapid" },
+    { "text": "Other Emails", "datafield": "otherEmails" },
+    { "text": "Account Manager", "datafield": "accountManagers" },
+    { "text": "Partner Level", "datafield": "partnerLevel" },
+    { "text": "Group", "datafield": "groupname" },
+    { "text": "Parent", "datafield": "parentname" },
+    { "text": "Countries", "datafield": "countries" },
+    { "text": "Registered Country", "datafield": "registeredCountry" },
+    { "text": "Status", "datafield": "status" },
+    { "text": "Active", "datafield": "isactive", "hidden": true },
+    { "text": "Process Name", "datafield": "processName" },
+    { "text": "Phone Number", "datafield": "primaryPhoneNumber" }
+  ],
+  "country": [
+    { "text": "Country Name", "datafield": "countryname" },
+    { "text": "Country Code", "datafield": "countrycode", "hidden": true },
+    { "text": "Code", "datafield": "code", "hidden": true }
+  ]
+}

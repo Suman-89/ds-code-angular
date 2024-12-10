@@ -1,0 +1,71 @@
+<div class="modal-header pb-0">
+  <div class="text-center w-100" *ngIf="docVersions">
+    <p class="m-0">{{ docVersions[0].logicaldocname }}</p>
+    <p class="m-0 comment">
+      <span>
+        {{
+          docInfo.foldername === "In Process"
+            ? "Contract Document"
+            : docInfo.foldername
+        }}
+      </span>
+      <span class="secondary-color font-weight-bold"> &nbsp;|&nbsp; </span>
+      <span> {{ docInfo.type }} </span>
+      <ng-container *ngIf="isContentCreationProcess">
+        <span> {{ docInfo.course }} </span>
+        <span class="secondary-color font-weight-bold"> &nbsp;|&nbsp; </span>
+        <span> {{ docInfo.module }} </span>
+      </ng-container>
+    </p>
+    <p class="comment m-0">
+      <b>Created:</b>&nbsp;
+      {{ docVersions[docVersions.length - 1].createdbyname }}
+      <span class="secondary-color font-weight-bold"> &nbsp;|&nbsp; </span>
+      {{
+        docVersions[docVersions.length - 1].createddate
+          | date: "dd-MMM-yyyy HH:mm"
+      }}
+    </p>
+  </div>
+  <button type="button" class="close btn" aria-label="Close" (click)="close()">
+    <img height="20" src="./assets/images/cross.png" />
+  </button>
+</div>
+<div class="modal-body" *ngIf="docVersions">
+  <div class="row m-0">
+    <div class="col-md-6 secondary-color">Versions</div>
+    <div class="col-md-6 secondary-color">Comments for Upload / Check-in</div>
+  </div>
+  <div
+    class="documentRow row m-0 position-relative p-2"
+    *ngFor="let doc of docVersions"
+  >
+    <div class="d-flex col-md-6 mb-2">
+      <app-document-icon
+        class="documenticon inline"
+        [MIMEType]="doc.mimetype"
+      ></app-document-icon>
+      <div class="docname inline ml-3">
+        <!-- <div class="w-100 text-truncate" (click)="download(doc)">{{doc.logicaldocname}}</div> -->
+        <div
+          class="secondary-color inline cursor-pointer"
+          (click)="download(doc)"
+        >
+          Version {{ doc.version }}
+        </div>
+        <!-- <div class="comment" *ngIf="doc.updatebyname"><b>Updated By:</b>&nbsp;{{doc.updatebyname}} <span class="secondary-color font-weight-bold">&nbsp; | </span>{{doc.modifieddate  | date:'dd-MMM-yyyy HH:mm'}}</div> -->
+        <div class="comment mt-1 mb-1">
+          <b>Created:</b>&nbsp; {{ doc.createdbyname }}
+          <span class="secondary-color font-weight-bold"> &nbsp;|&nbsp; </span>
+          {{ doc.createddate | date: "dd-MMM-yyyy HH:mm" }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 comment">
+      <!-- <span [innerHTML]="doc.comment"></span> -->
+      <div class="w-100 commentContainer">
+        <app-display-comment [data]="doc.comment"></app-display-comment>
+      </div>
+    </div>
+  </div>
+</div>

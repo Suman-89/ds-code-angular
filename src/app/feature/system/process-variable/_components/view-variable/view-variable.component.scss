@@ -1,0 +1,37 @@
+@import "variables";
+
+.headerRowVar {
+  background-color: var(--primaryColor) !important;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 14px;
+  height: 36px;
+  border-bottom: 1px solid lightgray;
+  th {
+    border: 1px solid lightgray;
+  }
+}
+td,
+th {
+  padding: 0 10px;
+}
+th {
+  font-weight: 500;
+}
+tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.dataRowCell {
+  border: 1px solid lightgray;
+  color: var(--quaternaryColor);
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 13px;
+  padding: 5px 10px;
+  font-weight: 500;
+}
+
+// .gridCont{
+// max-height:85%;
+// overflow: scroll;
+// }

@@ -1,0 +1,4 @@
+<div class="w-100 form-group">
+  <label>Friendly Address-<span *ngIf="frndAddrnum">{{frndAddrnum}} </span> </label>
+  <input class="inputstyle w-100" (keyup)="emitChange()" name="friendlyaddress" [(ngModel)]="addressText"/>
+</div>

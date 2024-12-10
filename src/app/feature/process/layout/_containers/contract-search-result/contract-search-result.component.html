@@ -1,0 +1,49 @@
+<div class="tasklist-cont" style="width: 100%">
+  <div class="header row m-0 pb-2">
+    <h5 class="col-md-12">
+      {{ selectedProcess?.label
+      }}<span class="secondary-color" style="font-size: 22px; padding-left: 5px"
+        >|</span
+      >
+      All Tasks
+    </h5>
+    <div class="col-md-12">
+      <app-contract-search
+        [searchParams]="searchParams"
+        (searchObj)="search($event)"
+      ></app-contract-search>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <!--
+         <div class="w-100" *ngIf="searchData">
+            Showing Result for -
+            Group: <span class="font-weight-bold secondary-color">{{searchParams.group ? retGrpName(searchParams.group):'All'}}</span> 
+            User: <span class="font-weight-bold secondary-color">{{searchParams.user  ? retUsrName(searchParams.user): 'All'}}</span> 
+            and Task Status: <span class="font-weight-bold secondary-color"> {{retStatus(searchParams.inprocess)}}</span> 
+        </div>
+     -->
+
+    <!-- [groups]="groupsArr" -->
+
+    <!-- [groups]="groupsArr" -->
+    <div class="grid-cont pb-4" id="searchGridCont">
+      <app-grid-toolbar
+        #gridToolbar
+        [groups]="groupsArr"
+        [type]="gridType.allProcess"
+        [data]="searchData"
+        [pageable]="false"
+        [selectionMode]="'radio'"
+        [showRowNum]="false"
+        [automaticPageSize]="true"
+        [showRowDetails]="false"
+        (emitAction)="toolbarAction($event)"
+        (doubleClick)="doubleClick($event)"
+        [localization]="localization"
+      >
+      </app-grid-toolbar>
+    </div>
+  </div>
+</div>

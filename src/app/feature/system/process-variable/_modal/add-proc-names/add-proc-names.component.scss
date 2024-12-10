@@ -1,0 +1,55 @@
+.main-form {
+  padding: 10px;
+  .main-dropdown {
+    margin-bottom: 20px;
+  }
+  .map {
+    .map-container {
+      padding: 0 10px 5px 10px;
+    }
+    .displaylabel {
+      display: inline-block;
+      color: var(--primaryColor);
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .fa-caret-down {
+      transition: 300ms;
+    }
+  }
+}
+
+.show-processess {
+  max-height: 200px;
+  overflow: auto;
+  border: 1px dashed #858282;
+  .process {
+    display: inline-block;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    &:first-child {
+      margin-top: 10px;
+    }
+    p {
+      color: #ffffff;
+      display: inline-block;
+      position: relative;
+      padding: 7px 35px 7px 15px;
+      background-color: var(--primaryColor);
+      cursor: default;
+      transition: 200ms;
+    }
+    i {
+      position: absolute;
+      z-index: 1;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  }
+}
+
+.opened {
+  transform: rotate(180deg);
+}

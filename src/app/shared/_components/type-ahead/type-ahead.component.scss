@@ -1,0 +1,29 @@
+@import "variables";
+.readonly {
+  background: transparent;
+  pointer-events: auto;
+}
+
+.spinner {
+  position: absolute;
+  right: -40px;
+  top: 27px;
+}
+.inlineInput {
+  padding: 7px 15px;
+  margin-left: 18px;
+  width: 100%;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--primaryColor);
+  &::placeholder {
+    color: rgba(var(--primaryColorRGB), 0.8);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}

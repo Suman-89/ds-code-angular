@@ -1,0 +1,29 @@
+<!-- <div class="container">
+    <h3>Reference Data {{dataType}} </h3>
+    <div class="w-100">
+      <app-grid [columns]="columns" [source]="source"></app-grid>
+    </div>
+</div> -->
+<div class="maxHeight">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{selectedProcess}}<span class="secondary-color"  style="font-size:22px;padding-left:5px;">|</span>
+      Reference Data Types
+    </div>
+    <div class="col-md-12 d-flex justify-content-end">
+      <div class="col-md-8 text-left" *ngIf="searchResult.length > 0 ">
+          {{searchResult}}
+      </div>
+      <input autocomplete="off" placeholder="Search for Reference Data.." (keyup)="searchRefData($event.target.value)" class="col-md-4 inputstyle float-right"/>
+    </div>
+  </div>
+
+  <div class="row no-gutters dashboard-wrap">
+     <div class="col-md-3">
+        <app-card [addData]=true (clickEventEmit)="cardEvent($event)"></app-card>
+     </div>
+     <div class="col-md-3" *ngFor="let type of refDataTypes">
+        <app-card [data]="type" (clickEventEmit)="cardEvent($event)"></app-card>
+     </div>
+   </div>
+</div>

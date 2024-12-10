@@ -1,0 +1,30 @@
+<div class="initiate-form">
+
+  <div class="">
+    <div class="row">
+      <div class="col-12">
+          <div class="uploadContainer"  [ngClass]="{'is-invalid': !inputData.selectedDocument}">
+              <div style="text-align: center;color: #9a9a9a;">
+                  <div *ngIf="inputData.selectedDocument;else chooseFileTemplate" class="fileInfo">
+                      <i class="fa fa-file" style="font-size: 32px;"></i>
+                      <div>{{inputData.selectedDocument.name}}</div>
+                  </div>
+                  <ng-template #chooseFileTemplate>
+                      <i class="fa fa-file" style="font-size: 32px;"></i>
+                      <div style="font-size: 18px;">Drop files here</div>
+                      <div style="font-size: 16px;">or click here to upload.</div>
+                  </ng-template>
+              </div>
+              <input type="file" [accept]="acceptList" (change)="handleFileInput($event)">
+          </div>
+
+          <!-- <div *ngIf="inputData.selectedDocument">
+              <label class="form-label">Document Name</label>
+              <input class="form-control" name="cname" [(ngModel)]="inputData.selectedDocument.name"  type="text" placeholder="">
+              <div class="edit-info">You may change the document name in the box above.</div>
+          </div> -->
+
+      </div>
+   </div>
+  </div>
+</div> 

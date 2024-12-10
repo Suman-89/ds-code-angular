@@ -1,0 +1,11 @@
+
+<div class="tagUserInput">
+    <div class="tagUserInputDiv" contenteditable="true" (focus)="storeEvent($event)" (keyup)="onSearch($event)">
+        <div class="taggedUserInputSpan" contenteditable="true" placeholder="Enter Comments ..." 
+            [ngbPopover]="popUsers" placement="right" [autoClose]="false" triggers="manual" #p="ngbPopover" 
+            container="body" [innerHTML]="bindHTML" ></div>
+    </div>
+    <ng-template #popUsers>
+        <div class="user" *ngFor="let u of users_tmp" (click)="selectUser(u)">{{u.fname}} {{u.lname}}</div>
+    </ng-template>
+</div>

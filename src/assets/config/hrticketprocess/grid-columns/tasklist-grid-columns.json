@@ -1,0 +1,191 @@
+{
+  "work_list": [
+    {
+      "text": "Priority",
+      "filtertype": "input",
+      "datafield": "casePriority",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Last Updated Date",
+      "datafield": "created",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "Employee Manager",
+      "filtertype": "input",
+      "datafield": "manager",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Task Name",
+      "filtertype": "input",
+      "datafield": "name",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "HR Ticket Type",
+      "filtertype": "checkedlist",
+      "datafield": "hrTicketType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Employee",
+      "filtertype": "input",
+      "datafield": "initiator",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Initiation Date",
+      "datafield": "contractInitiationTime",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "HR Ticket Number",
+      "filtertype": "input",
+      "datafield": "businessKey",
+      "width": "auto",
+      "minwidth": 200
+    }
+  ],
+  "work_basket": [
+    {
+      "text": "Priority",
+      "filtertype": "input",
+      "datafield": "casePriority",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Last Updated Date",
+      "datafield": "created",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "Employee Manager",
+      "filtertype": "input",
+      "datafield": "manager",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Task Name",
+      "filtertype": "input",
+      "datafield": "name",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "HR Ticket Type",
+      "filtertype": "checkedlist",
+      "datafield": "hrTicketType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Employee",
+      "filtertype": "input",
+      "datafield": "initiator",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Initiation Date",
+      "datafield": "contractInitiationTime",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "HR Ticket Number",
+      "filtertype": "input",
+      "datafield": "businessKey",
+      "width": "auto",
+      "minwidth": 200
+    }
+  ],
+  "contract_list": [
+    {
+      "text": "Priority",
+      "filtertype": "input",
+      "datafield": "casePriority",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Overall Status",
+      "filtertype": "input",
+      "datafield": "overallStats",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Employee Manager",
+      "filtertype": "input",
+      "datafield": "manager",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "HR Ticket Type",
+      "filtertype": "checkedlist",
+      "datafield": "hrTicketType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Employee",
+      "filtertype": "input",
+      "datafield": "initiatedbyfullname",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Elapsed Time (Hours)",
+      "datafield": "elapsedhour",
+      "width": "auto",
+      "cellsformat": "d2"
+    },
+    {
+      "text": "Elapsed Time (Days)",
+      "datafield": "elapseddays",
+      "width": "auto",
+      "cellsformat": "d2"
+    },
+    {
+      "text": "Initiation Date",
+      "datafield": "initiationdate",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "HR Ticket Number",
+      "filtertype": "input",
+      "datafield": "contractid",
+      "width": "auto",
+      "minwidth": 200
+    },
+    { "text": "Sort Order", "hidden": "true", "datafield": "sortorder" }
+  ],
+  "comments": [
+    { "text": "Comment", "datafield": "comment" },
+    { "text": "User", "datafield": "name" },
+    {
+      "text": "Date",
+      "datafield": "createdDate",
+      "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+    }
+  ]
+}

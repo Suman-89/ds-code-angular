@@ -1,0 +1,120 @@
+@import "variables";
+.expandedLeftPanel {
+  width: 17%;
+}
+.collapsedmainPanel {
+  width: 96%;
+}
+.collapsedLeftPanel {
+  width: 70px;
+}
+.expandedmainPanel {
+  width: 96%;
+}
+.mainPanel {
+  overflow: auto;
+  max-height: calc(100%) !important;
+}
+
+.sidePanel {
+  height: calc(100% - 10px) !important;
+  margin: 0px 10px 0px 5px;
+  transition: 0.5s width ease;
+}
+
+.bodyWrap {
+  height: calc(100% - 60px);
+  overflow: hidden;
+  // background: var(--background);
+}
+
+.chatButtonContainer {
+  width: max-content;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure the button is above other elements */
+}
+
+.fa.fa-comment::before {
+  border: none; /* Hide the border */
+}
+.chatButton:focus {
+  outline: none;
+}
+.chatButton {
+  // background-color: #007bff;
+  background-color: var(--secondaryColor);
+  // background-color: var(--primaryColor);
+
+  // color: white;
+  // color: var(--secondaryColor);
+  color: var(--primaryColor);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chatButton:hover {
+  // background-color: #0056b3;
+  background-color: var(--secondaryColor);
+  color: var(--primaryColor);
+  // background-color: var(--primaryColor);
+  border: none;
+}
+
+
+.chatPage {
+  position: fixed;
+  bottom: 0;
+  right: -400px; /* Initial position is outside the viewport */
+  width: 400px;
+  height: 85%;
+  background-color: white;
+  box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out; /* Animation for sliding in/out */
+  z-index: 10000; /* Ensure the chat page is above other elements */
+}
+
+.chatPage.show {
+  right: 0; /* Slide the chat page into view */
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.closeButton i {
+  color: white;
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+#banner {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  align-items: center;
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
+  display: flex;
+  height: 50px;
+  z-index: 10000;
+  align-items: center;
+}
+
+

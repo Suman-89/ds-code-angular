@@ -1,0 +1,21 @@
+
+@import "../../../../../shared/_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.modal-body{
+    overflow-y: hidden;
+    // max-height: 65vh;
+    // min-height:60vh;
+    height: 16vh;
+}
+
+.form-label{
+    font-size: small;
+    margin: 0.25rem 0;
+    font-weight: 400;
+}
+
+::ng-deep{
+    .multiselect-dropdown {
+        font-size: small !important;
+    }
+}

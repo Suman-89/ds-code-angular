@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{selectedProcess}}<span class="secondary-color"  style="font-size:22px;padding-left:5px;">|</span>
+      Email Templates</div>
+
+    <!-- <div class="row no-gutters">
+   
+    <div class="d-flex justify-content-end mb-2">
+      <button class="primarybtnstyle ml-1" (click)="addEditProcVar()">
+        Add Variable
+      </button>
+      <button class="primarybtnstyle ml-1" (click)="syncMetadata()">
+        Sync Metadata
+      </button>
+      <button
+        class="primarybtnstyle ml-1"
+        *ngIf="varDataSelected"
+        (click)="deleteVar(varDataSelected)"
+      >
+        Delete Variable
+      </button>
+      <button
+        class="primarybtnstyle ml-1"
+        *ngIf="varDataSelected"
+        (click)="addEditProcVar(varDataSelected)"
+      >
+        Edit Variable
+      </button>
+    </div>
+  </div> -->
+  </div>
+  <div class="w-100 gridCont" *ngIf="emailTemplate">
+      <app-grid-toolbar #gridinstance
+      [selectionMode]="'radio'"
+      [type]="toolbartype.contentmanagement"
+      [data]="emailTemplate"
+      (emitAction)="selectRow($event)"
+      (doubleClick)="doubleClick($event)"
+      >
+      </app-grid-toolbar>
+     </div>
+ </div>
+

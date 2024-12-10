@@ -1,0 +1,15 @@
+@import "variables" ;
+
+.addrsacticon{
+  position: absolute;
+  right: 25px;
+  margin-right: auto;
+  top:0;
+}
+
+.delete-icon{
+  position: absolute;
+  right: 0;
+  top:0;
+  color: var(--primaryColor);
+}

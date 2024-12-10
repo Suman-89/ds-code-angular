@@ -1,0 +1,104 @@
+<div class="container h-100 overflow-hidden">
+  <h5 class="">
+    {{ selectedProcess.label
+    }}<span class="secondary-color" style="font-size: 22px; padding-left: 5px"
+      >|</span
+    >
+    Notifications
+  </h5>
+  <div
+    class="row no-gutters text-muted font-weight-bold col-md-6 position-relative"
+  >
+    <div class="position-absolute" style="left: 25px">
+      <input
+        type="checkbox"
+        [checked]="checkAllSelection()"
+        (change)="selectAll(selCatg, $event.target)"
+      />
+    </div>
+    <div
+      class="col-md-3 catgName"
+      *ngFor="let cat of categories"
+      (click)="filterNotification(cat)"
+    >
+      <span [ngClass]="{ 'secondary-color': cat === selCatg }">{{ cat }}</span>
+    </div>
+    <div
+      class="col-md-3 cursor-pointer text-center"
+      container="body"
+      [ngbTooltip]="
+        multiSelected
+          ? 'Delete Selected Notifications'
+          : 'Delete All Notifications'
+      "
+    >
+      <i
+        class="fa fa-trash secondary-color"
+        (click)="deleteNotification(notifications, 0)"
+      ></i>
+    </div>
+  </div>
+
+  <div class="notificationCont p-4">
+    <div
+      class="row no-gutters p-4 notification-row"
+      *ngFor="let note of notifications"
+    >
+      <div class="notify-details position-relative">
+        <div
+          class="delIcon cursor-pointer"
+          *ngIf="!note.selected"
+          container="body"
+          ngbTooltip="Delete This Notification"
+          (click)="deleteNotification(note, 1)"
+        >
+          <i class="fa fa-trash secondary-color"></i>
+        </div>
+        <div class="typeIconContainer">
+          <input
+            class="secondary-color iconType mr-4 cursor-pointer"
+            type="checkbox"
+            [checked]="note.selected"
+            (change)="selectNotification(note.id, $event.target)"
+          />
+          <i
+            class="primary-1-bg-color secondary-color iconType"
+            [ngClass]="notificationIconType(note.type)"
+          ></i>
+        </div>
+        <p
+          class="fromusername m-0"
+          *ngIf="selectedProcess.key === 'Process_initiation_impl'"
+        >
+          {{ note.contracttype }}
+          <span class="secondary-color pl-1 pr-1"> | </span> {{ note.product }}
+          <span class="secondary-color pl-1 pr-1">|</span>
+          {{ note.partnerlegalname }}
+        </p>
+        <p
+          class="fromusername m-0"
+          *ngIf="selectedProcess.key === 'Initiation_vMTProcess'"
+        >
+          Deal ID: {{ note.dealIdFinal }}
+        </p>
+        <p
+          class="fromusername m-0"
+          *ngIf="
+            selectedProcess.key !== 'Process_initiation_impl' &&
+            selectedProcess.key !== 'Initiation_vMTProcess'
+          "
+        >
+          {{ note.businesskey }}
+        </p>
+        <p
+          (click)="notificationAction(note)"
+          class="text-muted cursor-pointer text-truncate details-row"
+          [innerHTML]="note.message"
+        ></p>
+        <span class="color-secondary font-smaller">
+          {{ note.createdOn | date: "dd-MMM-yyyy HH:mm" }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+{
+  "process_form":[
+  {"text": "Name", "datafield": "name" } ,
+  {"text": "Key", "datafield": "key" } ,
+  {"text": "Description", "datafield": "description" },
+  {"text": "Group Name", "datafield": "groupname"},
+  {"text": "Default Tab", "datafield": "defaulttab"},
+  {"text": "Comment Required", "datafield": "commentsneeded"},
+  {"text": "Task has Review", "datafield": "reviewable"},
+  {"text": "Review Task", "datafield": "isreviewtask" }
+],
+"process_definition":[
+  {"text": "Process Name", "datafield": "processname" } ,
+  {"text": "Description", "datafield": "description" } 
+]
+}

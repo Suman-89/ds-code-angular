@@ -1,0 +1,18 @@
+@import "variables";
+
+/* @mixin font-face{
+    font-family: 'Century Gothic';
+    src: url("https://cdn2.hubspot.net/hubfs/297370/fonts/CenturyGothic.woff") format("woff2"),url("https://cdn2.hubspot.net/hubfs/297370/fonts/CenturyGothic.woff") format("woff");
+    font-weight: normal;
+    font-style: normal 
+} */
+
+@mixin link-text {
+  color: var(--primaryColor);
+  /* font-weight: bold; */
+  cursor: pointer;
+  &:hover {
+    color: var(--secondaryColor);
+    border-bottom: 1px dotted;
+  }
+}

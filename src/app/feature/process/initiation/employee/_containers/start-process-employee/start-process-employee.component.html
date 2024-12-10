@@ -1,0 +1,95 @@
+<div class="start-process-cont">
+  <!-- Header Container including action buttons -->
+  <div class="header-cont">
+    <div class="header">
+      <h5>Initiate Employee Onboarding</h5>
+    </div>
+    <!-- <div class="action-btns">
+            <button class="primarybtnstyle btn" (click)="openSelectModal()" *ngIf="showButton">Select Company Address</button>
+            <button class="primarybtnstyle btn" style="margin-left: 10px;" (click)="openEditModal()" *ngIf="showButton">Edit Company</button>
+        </div> -->
+  </div>
+
+  <div class="aadhaar-info-cont">
+    <app-start-process-aadhaar
+      (checkHistoryEmitter)="aadhaarImgHandler($event)"
+      [checkHistoryData]="checkHistoryData"
+      (otpEmitter)="onOtpEmit($event)"
+    ></app-start-process-aadhaar>
+  </div>
+  <!-- <div>
+    <app-otp-verify (otpEmitter)="onOtpChange($event)"></app-otp-verify>
+  </div> -->
+  <div class="process-info-cont" *ngIf="checkHistoryData">
+    <p class="blackList-text" *ngIf="checkHistoryData.blackList">
+      Employee blacklisted! Cannot proceed further
+    </p>
+
+    <form #form="ngForm" class="initiate-form" (ngSubmit)="formSubmit()">
+      <div class="heading-employee-details"><h2>Employee Details</h2></div>
+
+      <div class="boolean-grp">
+        <div class="comp-det">
+          <label class="attribute boolean">Aadhaar Verified:&nbsp;</label>
+          <label class="value" placement="top" container="body"
+            ><span class="boolean-green">
+              {{ checkHistoryData.isAadhaarVerified ? "Yes" : "" }}
+            </span>
+            <span class="boolean-red">
+              {{ !checkHistoryData.isAadhaarVerified ? "No" : "" }}
+            </span></label
+          >
+        </div>
+
+        <div class="comp-det">
+          <label class="attribute boolean">Blacklisted:&nbsp;</label>
+          <label class="value" placement="top" container="body">
+            <span class="boolean-red">
+              {{ checkHistoryData.blackList ? "Yes" : "" }}
+            </span>
+            <span class="boolean-green">
+              {{ !checkHistoryData.blackList ? "No" : "" }}
+            </span></label
+          >
+        </div>
+      </div>
+
+      <div class="flex-prop">
+        <div class="form-cont">
+          <app-initiate-employee
+            [initiation]="initiationData"
+            [extractedAadhaarObj]="checkHistoryData"
+            [noHistory]="noHistory"
+            [form]="form"
+          ></app-initiate-employee>
+        </div>
+        <div class="doc-upload-cont">
+          <app-company-details-employee
+            [checkHistoryData]="checkHistoryData"
+          ></app-company-details-employee>
+        </div>
+      </div>
+      <div class="text-center btn-cont">
+        <button
+          type="submit"
+          class="btn primarybtnstyle"
+          [disabled]="
+            checkHistoryData.blackList ||
+            !checkHistoryData.employeeName ||
+            !checkHistoryData.employeeAddress
+          "
+        >
+          Submit
+        </button>
+
+        <button
+          type="reset"
+          (click)="back()"
+          class="cancelbtn btn secondarybtnstyle"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

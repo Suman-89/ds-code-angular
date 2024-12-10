@@ -1,0 +1,238 @@
+@import "src/scss/default/variables";
+@import "./../../_formly_components/_types/toggle-switch-type/toggle-switch-type.component.scss";
+
+.addContactBtn {
+  display: flex;
+  align-items: center;
+  color: var(--secondaryColor);
+  font-size: $normal-font-size;
+  cursor: pointer;
+  &:focus {
+    outline: none !important;
+  }
+}
+
+.selected-item {
+  font-size: 13px;
+}
+.inputstyle {
+  width: 80%;
+}
+.fileuploader {
+  position: relative;
+  .hidden {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+  }
+}
+
+.addedList {
+  // background: #ceebe8;
+  color: var(--primaryColor);
+  border-radius: 25px;
+  padding: 2px 10px;
+  text-align: left;
+  margin-right: 10px;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid var(--secondaryColor);
+}
+.defaultText {
+  text-transform: none !important;
+}
+
+.sectionactionpanel {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  z-index: 100;
+}
+
+.addnewAddStyle {
+  position: absolute;
+  top: -22px;
+  right: 0;
+}
+
+.formWrapper {
+  height: 95%;
+  overflow-y: scroll;
+  padding: 40px 40px 0px 40px;
+}
+
+.formBtnStyle {
+  position: sticky;
+  bottom: -40px;
+  background: white;
+  padding: 1rem;
+}
+
+.addedFormActionBtnCont {
+  position: absolute;
+  right: 0;
+}
+
+.radio-input {
+  display: flex;
+  justify-content: center;
+}
+
+.aadhaar-img {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  img {
+    width: 100px;
+    height: auto;
+    // border-radius: 50%;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border: 3px double var(--primaryColor);
+  }
+}
+.tab-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.tab-item {
+  flex: 1;
+  font-size: 18;
+  font-weight: 500;
+  text-align: center;
+  border-bottom: 2px solid var(--primaryColor1);
+  padding: 5px;
+  background-color: var();
+}
+.tab-item:hover {
+  background-color: var(--primaryColor1);
+}
+
+.active {
+  flex: 1;
+  background-color: var(--primaryColor1);
+  color: var(--secondaryColor);
+  font-weight: 600;
+  border-bottom: 2px solid black;
+}
+
+.connected {
+  color: green;
+}
+.not-connected {
+  color: red;
+}
+
+.kyc-all {
+  display: flex;
+  justify-content: space-between;
+  .kyc-doc {
+    width: 50%;
+  }
+  .kyc-info {
+    width: 50%;
+    padding: 10px 10px 0;
+    .tab-container {
+      margin-bottom: 15px;
+    }
+  }
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+    .kyc-doc,
+    .kyc-info {
+      width: 100%;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      padding: 20px;
+    }
+    .kyc-info:nth-child(2) {
+      order: -1;
+      margin-bottom: 30px;
+    }
+    .kyc-doc:nth-child(1) {
+      margin-top: 30px;
+    }
+  }
+}
+
+.key {
+  font-size: 14px;
+  white-space: nowrap;
+  display: flex;
+  .value {
+    display: inline-block;
+    font-weight: 500;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    // width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: bottom;
+    white-space: nowrap;
+  }
+}
+
+.gst-key {
+  font-size: 14px;
+  display: flex;
+  // flex-direction: column;
+  .gst-value {
+    font-weight: 500;
+    margin-bottom: 0px;
+    margin-left: 30px;
+    margin-top: 10px;
+  }
+}
+
+.kyc-forms {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  @media (max-width: 820px) {
+    flex-direction: column !important;
+    & > * {
+      width: 100% !important;
+    }
+  }
+  &.add-convert > * {
+    width: 50%;
+    padding: 0 5px;
+    margin-bottom: 16px;
+  }
+}
+
+.kyc-sub-label {
+  border: 0;
+}
+
+.kyc-labels {
+  width: 100%;
+}
+
+.label-btns {
+  position: absolute;
+  z-index: 1;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.readonly {
+  background-color: #ffffff;
+}
+
+.border-form {
+  border: 1px solid var(--secondaryColor);
+  border-radius: 6px;
+}
+
+.row {
+  justify-content: flex-start;
+}

@@ -1,0 +1,1677 @@
+{
+  
+"sideNav":[
+  {
+    "itemId": "process", "itemName": "Process Explorer", "itemIconPath":"fa fa-pie-chart" ,
+    "forRoles": ["LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER","LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL-OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER" ,
+        "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/process/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "", "itemName": "My queue", "itemIconPath": "fa fa-tasks"  , 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL-OPS_ADMIN", "COMMERCIAL-OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN",
+          "IIS_USER", "IIS_ADMIN"], 
+        "routePath": "/landing/process/my-queue", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue",  "itemIconPath": "fa fa-object-group"  ,
+        "forRoles": [
+          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL-OPS_ADMIN", "COMMERCIAL-OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN",
+          "IIS_USER", "IIS_ADMIN"], 
+        "routePath": "/landing/process/group", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate Contract", "itemIconPath": "fa fa-plus-circle" ,
+        "forRoles": [
+          "SALES_USER"
+        ], 
+        "routePath": "/landing/process/initiate/ibasis", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "contracts", "itemName": "All Contracts", "itemIconPath": "fa fa-file-text-o",
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL-OPS_ADMIN", "COMMERCIAL-OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/contracts", 
+        "isExactRouteMatch":true 
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks", "itemIconPath": "fa fa-database", 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL-OPS_ADMIN", "COMMERCIAL-OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN",
+          "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/all-tasks", 
+        "isExactRouteMatch":true 
+      }
+    ]
+  },
+  {
+    "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN",
+      "LEGAL_ADMIN"
+    ], 
+    "routePath": "/landing/company/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/companies", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/contracting-entities", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+        "forRoles": [
+          "SUPER_ADMIN",          "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/country-management", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+    "forRoles": [
+      "SUPER_ADMIN",          "SYSTEM_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath":  "/landing/user-management/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+        "forRoles": [
+          "SUPER_ADMIN",
+          "SYSTEM_ADMIN"
+        ],  
+        "routePath":  "/landing/user-management/users", 
+        "isExactRouteMatch":true
+      }
+      ]
+  },
+  {
+    "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+    "forRoles": [
+      "SUPER_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath": "/landing/system/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-variable", 
+        "isExactRouteMatch":true
+      } ,
+      {
+        "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+        "forRoles": [
+          "SYSTEM_ADMIN","SUPER_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-forms", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+        "forRoles": [
+            "SYSTEM_ADMIN","SUPER_ADMIN"
+        ],
+        "routePath": "/landing/system/reference-data", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+        "forRoles": [
+          "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/content-management", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+        "forRoles": [
+            "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/process-def-forms/definition-forms", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+    "forRoles": [
+      "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN",
+      "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/notifications", 
+    "isExactRouteMatch":true
+  }
+], 
+"sideNavTaiho" :[
+  {
+    "itemId": "process", "itemName": "Process Explorer", "itemIconPath":"fa fa-pie-chart" ,
+    "forRoles": ["LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER","LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", 
+      "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/process/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "", "itemName": "My queue", "itemIconPath": "fa fa-tasks"  , 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/my-queue", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue",  "itemIconPath": "fa fa-object-group"  ,
+        "forRoles": [
+          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/group", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate Invoice", "itemIconPath": "fa fa-plus-circle" ,
+        "forRoles": [
+          "SALES_USER"
+        ], 
+        "routePath": "/landing/process/initiate/taiho", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "contracts", "itemName": "All Invoices", "itemIconPath": "fa fa-file-text-o",
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/contracts", 
+        "isExactRouteMatch":true 
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks", "itemIconPath": "fa fa-database", 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/all-tasks", 
+        "isExactRouteMatch":true 
+      }
+    ]
+  },
+  {
+    "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN",
+      "LEGAL_ADMIN"
+    ], 
+    "routePath": "/landing/company/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/companies", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/contracting-entities", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+        "forRoles": [
+          "SUPER_ADMIN",          "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/country-management", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+    "forRoles": [
+      "SUPER_ADMIN",          "SYSTEM_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath":  "/landing/user-management/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+        "forRoles": [
+          "SUPER_ADMIN",
+          "SYSTEM_ADMIN"
+        ],  
+        "routePath":  "/landing/user-management/users", 
+        "isExactRouteMatch":true
+      }
+      ]
+  },
+  {
+    "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+    "forRoles": [
+      "SUPER_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath": "/landing/system/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-variable", 
+        "isExactRouteMatch":true
+      } ,
+      {
+        "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-forms", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+        "forRoles": [
+            "SYSTEM_ADMIN","SUPER_ADMIN"
+        ],
+        "routePath": "/landing/system/reference-data", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+        "forRoles": [
+          "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/content-management", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+        "forRoles": [
+            "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/process-def-forms/definition-forms", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+    "forRoles": [
+      "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/notifications", 
+    "isExactRouteMatch":true
+  }
+],
+"sideNavLeaveApplication": [
+{
+  "itemId": "process", "itemName": "Process Explorer", "itemIconPath":"fa fa-pie-chart" ,
+  "forRoles": ["LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER","LEGAL_USER", "SYSTEM_ADMIN",
+    "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+    "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+    "INTERCONNECT-DESIGN_ADMIN", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+    "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+    "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+    "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+    , "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+  ],
+  "routePath": "/landing/process/", 
+  "isExactRouteMatch":false,
+  "itemChildren": [
+    {
+      "itemId": "", "itemName": "My queue", "itemIconPath": "fa fa-tasks"  , 
+      "forRoles": [
+        "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+        "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+        "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+        "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+        "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+        "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+        "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER",
+        "EMTSALES_ADMIN", "EMTSALES_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+      ], 
+      "routePath": "/landing/process/my-queue", 
+      "isExactRouteMatch":true
+    },
+    { 
+      "itemId": "group", "itemName": "My group queue",  "itemIconPath": "fa fa-object-group"  ,
+      "forRoles": [
+        "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+        "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+        "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+        "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+        "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+        "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+        "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+        "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+      ], 
+      "routePath": "/landing/process/group", 
+      "isExactRouteMatch":true
+    },
+    {
+      "itemId": "initiate", "itemName": "Initiate Leave Application", "itemIconPath": "fa fa-plus-circle" ,
+      "forRoles": [
+        "SALES_USER"
+      ], 
+      "routePath": "/landing/process/initiate/leave", 
+      "isExactRouteMatch":true
+    },
+    { 
+      "itemId": "contracts", "itemName": "All Leave Application", "itemIconPath": "fa fa-file-text-o",
+      "forRoles": [
+        "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+        "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+        "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+        "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+        "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+        "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+        "EMTCFO_USER", "EMTCFO_ADMIN",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+      ], 
+      "routePath": "/landing/process/contracts", 
+      "isExactRouteMatch":true 
+    },
+    { 
+      "itemId": "alltasks", "itemName": "All Tasks", "itemIconPath": "fa fa-database", 
+      "forRoles": [
+        "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+        "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+        "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+        "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+        "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+        "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+        "EMTCFO_USER", "EMTCFO_ADMIN",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+      ], 
+      "routePath": "/landing/process/all-tasks", 
+      "isExactRouteMatch":true 
+    }
+  ]
+},
+{
+  "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+  "forRoles": [
+    "SUPER_ADMIN", 
+    "SYSTEM_ADMIN",
+    "LEGAL_ADMIN"
+  ], 
+  "routePath": "/landing/company/", 
+  "isExactRouteMatch":false,
+  "itemChildren": [
+    {
+      "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+      "forRoles": [
+        "SUPER_ADMIN",  "SYSTEM_ADMIN",
+        "LEGAL_ADMIN"
+      ],  
+      "routePath":  "/landing/company/companies", 
+      "isExactRouteMatch":true
+    },
+    {
+      "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+      "forRoles": [
+        "SUPER_ADMIN",  "SYSTEM_ADMIN",
+        "LEGAL_ADMIN"
+      ],  
+      "routePath":  "/landing/company/contracting-entities", 
+      "isExactRouteMatch":true
+    },
+    {
+      "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+      "forRoles": [
+        "SUPER_ADMIN",          "SYSTEM_ADMIN",
+        "LEGAL_ADMIN"
+      ],  
+      "routePath":  "/landing/company/country-management", 
+      "isExactRouteMatch":true
+    }
+  ]
+},
+{
+  "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+  "forRoles": [
+    "SUPER_ADMIN",          "SYSTEM_ADMIN",
+    "SYSTEM_ADMIN"
+  ], 
+  "routePath":  "/landing/user-management/", 
+  "isExactRouteMatch":false,
+  "itemChildren": [
+    {
+      "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+      "forRoles": [
+        "SUPER_ADMIN",
+        "SYSTEM_ADMIN"
+      ],  
+      "routePath":  "/landing/user-management/users", 
+      "isExactRouteMatch":true
+    }
+    ]
+},
+{
+  "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+  "forRoles": [
+    "SUPER_ADMIN",
+    "SYSTEM_ADMIN"
+  ], 
+  "routePath": "/landing/system/", 
+  "isExactRouteMatch":false,
+  "itemChildren": [
+    {
+      "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+      "forRoles": [
+        "SYSTEM_ADMIN"
+      ], 
+      "routePath": "/landing/system/process-variable", 
+      "isExactRouteMatch":true
+    } ,
+    {
+      "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+      "forRoles": [
+    
+        "SYSTEM_ADMIN"
+      ], 
+      "routePath": "/landing/system/process-forms", 
+      "isExactRouteMatch":true
+    },
+    {
+      "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+      "forRoles": [
+          "SYSTEM_ADMIN",          "SUPER_ADMIN"
+      ],
+      "routePath": "/landing/system/reference-data", 
+      "isExactRouteMatch":true
+    },
+    {
+      "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+      "forRoles": [
+        "SUPER_ADMIN", 
+        "SYSTEM_ADMIN"
+      ],
+      "routePath": "/landing/system/content-management", 
+      "isExactRouteMatch":true
+    },
+    {
+      "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+      "forRoles": [
+          "SYSTEM_ADMIN"
+      ],
+      "routePath": "/landing/system/process-def-forms/definition-forms", 
+      "isExactRouteMatch":true
+    }
+  ]
+},
+{
+  "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+  "forRoles": [
+    "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+    "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+    "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+    "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+    "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+    "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+    "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+    "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+  ],
+  "routePath": "/landing/notifications", 
+  "isExactRouteMatch":true
+}
+],
+"sideNavHRTicketProcess":[
+  {
+    "itemId": "process", "itemName": "Process Explorer", "itemIconPath":"fa fa-pie-chart" ,
+    "forRoles": ["LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER","LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER",
+      "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+       "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+       ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"  ],
+    "routePath": "/landing/process/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "", "itemName": "My queue", "itemIconPath": "fa fa-tasks"  , 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/my-queue", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue",  "itemIconPath": "fa fa-object-group"  ,
+        "forRoles": [
+          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+        ], 
+        "routePath": "/landing/process/group", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate Ticket", "itemIconPath": "fa fa-plus-circle" ,
+        "forRoles": [
+          "SALES_USER",
+          "EMPLOYEE_USER", "EMPLOYEE_ADMIN"
+        ], 
+        "routePath": "/landing/process/initiate/ticket", 
+        "isExactRouteMatch":true
+      },
+     { 
+        "itemId": "contracts", "itemName": "All Tickets", "itemIconPath": "fa fa-file-text-o",
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/contracts", 
+        "isExactRouteMatch":true 
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks", "itemIconPath": "fa fa-database", 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/all-tasks", 
+        "isExactRouteMatch":true 
+      }
+    ]
+  },
+  {
+    "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN",
+      "LEGAL_ADMIN"
+    ], 
+    "routePath": "/landing/company/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/companies", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/contracting-entities", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+        "forRoles": [
+          "SUPER_ADMIN",          "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/country-management", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+    "forRoles": [
+      "SUPER_ADMIN",          "SYSTEM_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath":  "/landing/user-management/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+        "forRoles": [
+          "SUPER_ADMIN",
+          "SYSTEM_ADMIN"
+        ],  
+        "routePath":  "/landing/user-management/users", 
+        "isExactRouteMatch":true
+      }
+     ]
+  },
+  {
+    "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+    "forRoles": [
+      "SUPER_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath": "/landing/system/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-variable", 
+        "isExactRouteMatch":true
+      } ,
+      {
+        "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+        "forRoles": [
+      
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-forms", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+        "forRoles": [
+           "SYSTEM_ADMIN",          "SUPER_ADMIN"
+        ],
+        "routePath": "/landing/system/reference-data", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+        "forRoles": [
+          "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/content-management", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+        "forRoles": [
+           "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/process-def-forms/definition-forms", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+    "forRoles": [
+      "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+      "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+      ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/notifications", 
+    "isExactRouteMatch":true
+  }
+],
+"sideNavIDGenerate":[
+  {
+    "itemId": "process", "itemName": "Process Explorer", "itemIconPath":"fa fa-pie-chart" ,
+    "forRoles": ["LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER","LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER",
+      "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+       "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+       ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER" , "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN" ],
+    "routePath": "/landing/process/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "", "itemName": "My queue", "itemIconPath": "fa fa-tasks"  , 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/my-queue", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue",  "itemIconPath": "fa fa-object-group"  ,
+        "forRoles": [
+          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/group", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate Ticket", "itemIconPath": "fa fa-plus-circle" ,
+        "forRoles": [
+          "SALES_USER"
+        ], 
+        "routePath": "/landing/process/initiate/ticket", 
+        "isExactRouteMatch":true
+      },
+     { 
+        "itemId": "contracts", "itemName": "All Tickets", "itemIconPath": "fa fa-file-text-o",
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/contracts", 
+        "isExactRouteMatch":true 
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks", "itemIconPath": "fa fa-database", 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/all-tasks", 
+        "isExactRouteMatch":true 
+      }
+    ]
+  },
+  {
+    "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN",
+      "LEGAL_ADMIN"
+    ], 
+    "routePath": "/landing/company/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/companies", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/contracting-entities", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+        "forRoles": [
+          "SUPER_ADMIN",          "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/country-management", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+    "forRoles": [
+      "SUPER_ADMIN",          "SYSTEM_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath":  "/landing/user-management/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+        "forRoles": [
+          "SUPER_ADMIN",
+          "SYSTEM_ADMIN"
+        ],  
+        "routePath":  "/landing/user-management/users", 
+        "isExactRouteMatch":true
+      }
+     ]
+  },
+  {
+    "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+    "forRoles": [
+      "SUPER_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath": "/landing/system/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-variable", 
+        "isExactRouteMatch":true
+      } ,
+      {
+        "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+        "forRoles": [
+      
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-forms", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+        "forRoles": [
+           "SYSTEM_ADMIN",          "SUPER_ADMIN"
+        ],
+        "routePath": "/landing/system/reference-data", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+        "forRoles": [
+          "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/content-management", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+        "forRoles": [
+           "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/process-def-forms/definition-forms", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+    "forRoles": [
+      "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+      "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+      ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER" , "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/notifications", 
+    "isExactRouteMatch":true
+  }
+],
+"sideNavCreditRisk":[
+  {
+    "itemId": "process", "itemName": "Process Explorer", "itemIconPath":"fa fa-pie-chart" ,
+    "forRoles": ["LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER","LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER",
+      "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+       "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN",
+       "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER" , "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+          ],
+    "routePath": "/landing/process/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "", "itemName": "My queue", "itemIconPath": "fa fa-tasks"  , 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+         
+        ], 
+        "routePath": "/landing/process/my-queue", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue",  "itemIconPath": "fa fa-object-group"  ,
+        "forRoles": [
+          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN" ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+          , "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/group", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate New Loan", "itemIconPath": "fa fa-plus-circle" ,
+        "forRoles": [
+          "SALES_USER"
+        ], 
+        "routePath": "/landing/process/initiate/ticket", 
+        "isExactRouteMatch":true
+      },
+     { 
+        "itemId": "contracts", "itemName": "All Loan Applications", "itemIconPath": "fa fa-file-text-o",
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN" ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+          , "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/contracts", 
+        "isExactRouteMatch":true 
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks", "itemIconPath": "fa fa-database", 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+        ], 
+        "routePath": "/landing/process/all-tasks", 
+        "isExactRouteMatch":true 
+      }
+    ]
+  },
+  {
+    "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN",
+      "LEGAL_ADMIN"
+    ], 
+    "routePath": "/landing/company/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/companies", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/contracting-entities", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+        "forRoles": [
+          "SUPER_ADMIN",          "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/country-management", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+    "forRoles": [
+      "SUPER_ADMIN",          "SYSTEM_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath":  "/landing/user-management/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+        "forRoles": [
+          "SUPER_ADMIN",
+          "SYSTEM_ADMIN"
+        ],  
+        "routePath":  "/landing/user-management/users", 
+        "isExactRouteMatch":true
+      }
+     ]
+  },
+  {
+    "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+    "forRoles": [
+      "SUPER_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath": "/landing/system/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-variable", 
+        "isExactRouteMatch":true
+      } ,
+      {
+        "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+        "forRoles": [
+      
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-forms", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+        "forRoles": [
+           "SYSTEM_ADMIN",          "SUPER_ADMIN"
+        ],
+        "routePath": "/landing/system/reference-data", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+        "forRoles": [
+          "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/content-management", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+        "forRoles": [
+           "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/process-def-forms/definition-forms", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+    "forRoles": [
+      "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+      "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+      ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/notifications", 
+    "isExactRouteMatch":true
+  }
+],
+"sideNavDisputeProcess": [
+  {
+    "itemId": "process", "itemName": "Process Explorer", "itemIconPath":"fa fa-pie-chart" ,
+    "forRoles": [          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+      "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN" ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+      ,"CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN",
+      "FRAUD_USER","FRAUD_ADMIN","DEALMANAGEMENT_USER","DEALMANAGEMENT_ADMIN","BILLINGIS_USER","BILLINGIS_ADMIN","DEALRATES_USER",
+      "DEALRATES_ADMIN","FINANCEAP_USER","FINANCEAP_ADMIN","FINANCECS_USER","FINANCECS_ADMIN","DISPUTES_USER","DISPUTES_ADMIN",
+      "RATES_USER","RATES_ADMIN"
+          ],
+    "routePath": "/landing/process/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "", "itemName": "My queue", "itemIconPath": "fa fa-tasks"  , 
+        "forRoles": [
+          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN" ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+          ,"CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN",
+          "FRAUD_USER","FRAUD_ADMIN","DEALMANAGEMENT_USER","DEALMANAGEMENT_ADMIN","BILLINGIS_USER","BILLINGIS_ADMIN","DEALRATES_USER",
+          "DEALRATES_ADMIN","FINANCEAP_USER","FINANCEAP_ADMIN","FINANCECS_USER","FINANCECS_ADMIN","DISPUTES_USER","DISPUTES_ADMIN",
+          "RATES_USER","RATES_ADMIN"
+          
+        ], 
+        "routePath": "/landing/process/my-queue", 
+        "isExactRouteMatch":true
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue",  "itemIconPath": "fa fa-object-group"  ,
+        "forRoles": [
+          "LEGAL_ADMIN", "LEGAL_USER", "SYSTEM_ADMIN",  "SALES_USER", 
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+          "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN" ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+          ,"CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN",
+          "FRAUD_USER","FRAUD_ADMIN","DEALMANAGEMENT_USER","DEALMANAGEMENT_ADMIN","BILLINGIS_USER","BILLINGIS_ADMIN","DEALRATES_USER",
+          "DEALRATES_ADMIN","FINANCEAP_USER","FINANCEAP_ADMIN","FINANCECS_USER","FINANCECS_ADMIN","DISPUTES_USER","DISPUTES_ADMIN",
+          "RATES_USER","RATES_ADMIN"
+        ], 
+        "routePath": "/landing/process/group", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "initiate", "itemName": "Raise New Dispute", "itemIconPath": "fa fa-plus-circle" ,
+        "forRoles": [
+          "FINANCEAP_USER","FINANCEAP_ADMIN","FINANCECS_USER","FINANCECS_ADMIN","DISPUTES_USER","DISPUTES_ADMIN"
+        ], 
+        "routePath": "/landing/process/initiate/dispute", 
+        "isExactRouteMatch":true
+      },
+     { 
+        "itemId": "contracts", "itemName": "All Disputes", "itemIconPath": "fa fa-file-text-o",
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN" ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER"
+          , "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN",
+"FRAUD_USER","FRAUD_ADMIN","DEALMANAGEMENT_USER","DEALMANAGEMENT_ADMIN","BILLINGIS_USER","BILLINGIS_ADMIN","DEALRATES_USER",
+"DEALRATES_ADMIN","FINANCEAP_USER","FINANCEAP_ADMIN","FINANCECS_USER","FINANCECS_ADMIN","DISPUTES_USER","DISPUTES_ADMIN",
+"RATES_USER","RATES_ADMIN"
+        ], 
+        "routePath": "/landing/process/contracts", 
+        "isExactRouteMatch":true 
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks", "itemIconPath": "fa fa-database", 
+        "forRoles": [
+          "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER",
+          "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+          "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+          "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN", "GUEST_USER",
+          "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER", "PMVOICE_USER", "PMVOICE_ADMIN",
+          "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+          "EMTCFO_USER", "EMTCFO_ADMIN",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+          "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+          ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN",
+          "FRAUD_USER","FRAUD_ADMIN","DEALMANAGEMENT_USER","DEALMANAGEMENT_ADMIN","BILLINGIS_USER","BILLINGIS_ADMIN","DEALRATES_USER",
+          "DEALRATES_ADMIN","FINANCEAP_USER","FINANCEAP_ADMIN","FINANCECS_USER","FINANCECS_ADMIN","DISPUTES_USER","DISPUTES_ADMIN",
+          "RATES_USER","RATES_ADMIN"
+
+        ], 
+        "routePath": "/landing/process/all-tasks", 
+        "isExactRouteMatch":true 
+      }
+    ]
+  },
+  {
+    "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN",
+      "LEGAL_ADMIN"
+    ], 
+    "routePath": "/landing/company/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/companies", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/contracting-entities", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+        "forRoles": [
+          "SUPER_ADMIN",          "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/country-management", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+    "forRoles": [
+      "SUPER_ADMIN",          "SYSTEM_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath":  "/landing/user-management/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+        "forRoles": [
+          "SUPER_ADMIN",
+          "SYSTEM_ADMIN"
+        ],  
+        "routePath":  "/landing/user-management/users", 
+        "isExactRouteMatch":true
+      }
+     ]
+  },
+  {
+    "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+    "forRoles": [
+      "SUPER_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath": "/landing/system/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-variable", 
+        "isExactRouteMatch":true
+      } ,
+      {
+        "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+        "forRoles": [
+      
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-forms", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+        "forRoles": [
+           "SYSTEM_ADMIN",          "SUPER_ADMIN"
+        ],
+        "routePath": "/landing/system/reference-data", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+        "forRoles": [
+          "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/content-management", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+        "forRoles": [
+           "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/process-def-forms/definition-forms", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+    "forRoles": [
+      "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "EMPLOYEE_USER", "EMPLOYEE_ADMIN", "MANAGER_USER", "MANAGER_ADMIN", "HR_USER", "HR_ADMIN", 
+      "EMT_HR_USER","EMT_HR_ADMIN","EMT_BUSINESS_USER","EMT_BUSINESS_ADMIN",  "FINANCE_USER","FINANCE_ADMIN"
+      ,  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN", "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN",
+      "FINANCEAP_USER","FINANCEAP_ADMIN","FINANCECS_USER","FINANCECS_ADMIN","DISPUTES_USER","DISPUTES_ADMIN"
+
+      
+    ],
+    "routePath": "/landing/notifications", 
+    "isExactRouteMatch":true
+  }
+],
+"sideNavadmin":[
+  {
+    "itemId": "company", "itemName": "Company", "itemIconPath": "fa fa-building",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN",
+      "LEGAL_ADMIN"
+    ], 
+    "routePath": "/landing/company/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "companies", "itemName": "Company Management","itemIconPath": "fa fa-building",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/companies", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "contracting-entities", "itemName": "Contracting Entities", "itemIconPath": "fa fa-life-ring",
+        "forRoles": [
+          "SUPER_ADMIN",  "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/contracting-entities", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "country-management", "itemName": "Country Management", "itemIconPath": "fa fa-globe" ,
+        "forRoles": [
+          "SUPER_ADMIN",          "SYSTEM_ADMIN",
+          "LEGAL_ADMIN"
+        ],  
+        "routePath":  "/landing/company/country-management", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "user-management", "itemName": "User Management", "itemIconPath": "fa fa-id-badge",
+    "forRoles": [
+      "SUPER_ADMIN", 
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath":  "/landing/user-management/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "users", "itemName": "Users", "itemIconPath": "fa fa-users",
+        "forRoles": [
+          "SUPER_ADMIN",
+          "SYSTEM_ADMIN"
+        ],  
+        "routePath":  "/landing/user-management/users", 
+        "isExactRouteMatch":true
+      }
+     ]
+  },
+  {
+    "itemId": "system", "itemName": "System", "itemIconPath":"fa fa-cogs" ,
+    "forRoles": [
+      "SUPER_ADMIN",
+      "SYSTEM_ADMIN"
+    ], 
+    "routePath": "/landing/system/", 
+    "isExactRouteMatch":false,
+    "itemChildren": [
+      {
+        "itemId": "process-variable", "itemName": "Process Variable", "itemIconPath": "fa fa-subscript",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-variable", 
+        "isExactRouteMatch":true
+      } ,
+      {
+        "itemId": "process-forms", "itemName": "Process Forms", "itemIconPath": "fa fa-wpforms",
+        "forRoles": [
+          "SYSTEM_ADMIN"
+        ], 
+        "routePath": "/landing/system/process-forms", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "reference-data", "itemName": "Reference Data", "itemIconPath": "fa fa-th",
+        "forRoles": [
+           "SYSTEM_ADMIN",          "SUPER_ADMIN"
+        ],
+        "routePath": "/landing/system/reference-data", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "content-management", "itemName": "Email Content", "itemIconPath": "fa fa-file-text", 
+        "forRoles": [
+          "SUPER_ADMIN", 
+          "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/content-management", 
+        "isExactRouteMatch":true
+      },
+      {
+        "itemId": "processdefition", "itemName": "Process Definiton", "itemIconPath": "fa fa-list-alt", 
+        "forRoles": [
+           "SYSTEM_ADMIN"
+        ],
+        "routePath": "/landing/system/process-def-forms/definition-forms", 
+        "isExactRouteMatch":true
+      }
+    ]
+  },
+  {
+    "itemId": "notifications", "itemName": "Notifications", "itemIconPath": "fa fa-bell",
+    "forRoles": [
+      "LEGAL_ADMIN", "SUPER_ADMIN", "SALES_USER", "LEGAL_USER", "SYSTEM_ADMIN",
+      "BILLING_USER", "BILLING_ADMIN", "COMMERCIAL_OPS_ADMIN", "COMMERCIAL_OPS_USER",
+      "CREDIT_ADMIN", "CREDIT_USER", "FPA_USER", "FPA_ADMIN", "INTERCONNECT-DESIGN_USER",
+      "INTERCONNECT-DESIGN_ADMIN", "DEPLOYMENT_ADMIN", "DEPLOYMENT_USER", "PRODUCT_MANAGEMENT_USER", "PRODUCT_MANAGEMENT_ADMIN",
+      "PMIOT_USER", "PMIOT_ADMIN", "PMSMS_USER", "PMSMS_ADMIN", "PMMOBILE_USER",
+      "PMMOBILE_ADMIN", "EMTIOT_USER", "EMTIOT_ADMIN", "EMTMOBILE_USER", "EMTMOBILE_ADMIN",
+      "EMTCFO_USER", "EMTCFO_ADMIN", "GUEST_USER", "PMGRMOBILE_ADMIN", "PMGRMOBILE_USER", 
+      "EMTSALES_ADMIN", "EMTSALES_USER",  "ASSETFINANCE_ADMIN", "ASSETFINANCE_USER", "CREDITRISK_USER","CREDITRISK_ADMIN",
+      "DEVFINANCE_USER","DEVFINANCE_ADMIN", "IIS_USER", "IIS_ADMIN"
+    ],
+    "routePath": "/landing/notifications", 
+    "isExactRouteMatch":true
+  }
+]
+}

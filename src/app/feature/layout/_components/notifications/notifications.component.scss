@@ -1,0 +1,53 @@
+@import "variables";
+@import "../header/header.component.scss";
+
+.notificationCont {
+  height: 85%;
+  overflow: auto;
+}
+
+.notify-details {
+  width: 100%;
+  display: block;
+  padding-left: 6rem;
+  .details-row {
+    display: block;
+    line-height: 30px;
+    font-size: $small-font-size;
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
+.notification-row {
+  background: white;
+  border-radius: 10px;
+  box-shadow: $box-shadow-style;
+  margin-bottom: 20px;
+}
+
+.fromusername {
+  font-weight: 500;
+}
+
+.typeIconContainer {
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+.iconType {
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.catgName {
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    color: var(--primaryColor);
+  }
+}
+
+.input:checked {
+  background-color: var(--primaryColor);
+}

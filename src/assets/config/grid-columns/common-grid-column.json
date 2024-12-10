@@ -1,0 +1,76 @@
+{
+  "common": [
+    {
+      "text": "Created Date",
+      "filtertype": "date",
+      "datafield": "created",
+      "minwidth": "100px",
+      "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+    },
+
+    {
+      "text": "Contract Elapsed Time (Days)",
+      "filtertype": "input",
+      "datafield": "elapseddays",
+      "minwidth": "120px",
+      "cellsalign": "center",
+      "cellsformat": "f2"
+    },
+    {
+      "text": "Contract Elapsed Time (Hours)",
+      "filtertype": "input",
+      "datafield": "elapsedhour",
+      "minwidth": "120px",
+      "cellsalign": "center",
+      "cellsformat": "f2"
+    }
+  ],
+  "MYQ": [
+    {
+      "text": "Task Name",
+      "filtertype": "input",
+      "datafield": "taskname",
+      "minwidth": "120px",
+      "cellsformat": ""
+    },
+    {
+      "text": "Group",
+      "filtertype": "input",
+      "datafield": "groupname",
+      "cellsalign": "center",
+      "cellsformat": "f2"
+    }
+  ],
+  "GROUPQ": [
+    {
+      "text": "Task Name",
+      "filtertype": "input",
+      "datafield": "taskname",
+      "minwidth": "120px",
+      "cellsformat": ""
+    },
+    {
+      "text": "Group",
+      "filtertype": "input",
+      "datafield": "groupname",
+      "cellsalign": "center",
+      "cellsformat": "f2"
+    }
+  ],
+  "ALLTASKS": [
+    {
+      "text": "Overall status",
+      "filtertype": "input",
+      "datafield": "overallStats",
+      "minwidth": "120px",
+      "cellsformat": ""
+    },
+    {
+      "text": "Contract Completion Time",
+      "filtertype": "input",
+      "datafield": "completiondatetime",
+      "minwidth": "120px",
+      "cellsformat": "dd-MMM-yyyy HH:mm:ss"
+    }
+  ]
+}

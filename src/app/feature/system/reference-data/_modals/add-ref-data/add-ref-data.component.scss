@@ -1,0 +1,38 @@
+@import "variables";
+
+.refDataContainer {
+  padding: 30px 50px;
+}
+
+.modal-close-btn {
+  float: right;
+  color: var(--quaternaryColor);
+  cursor: pointer;
+}
+
+.right-float {
+  float: right;
+}
+
+.adbtn {
+  margin: 20px 0 0;
+  width: 100px;
+}
+
+textarea,
+input {
+  width: 70%;
+}
+textarea {
+  padding-top: 5px;
+  min-height: 40px;
+}
+.cust-form-marg {
+  margin: 20px 0;
+  div {
+    margin-bottom: 10px;
+    color: var(--quaternaryColor);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+}

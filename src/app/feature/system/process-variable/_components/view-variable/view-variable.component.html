@@ -1,0 +1,51 @@
+<div class="container-fluid h-100">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{ selectedProcess
+      }}<span class="secondary-color" style="font-size: 22px; padding-left: 5px"
+        >|</span
+      >
+      Process Variables
+    </div>
+  </div>
+  <!-- <div class="row no-gutters">
+    <div class="col-md-12 d-flex justify-content-end mb-2">
+          <div *ngIf="searchResult.show" class="col-md-8 text-left">  {{searchResult.msg}} </div>
+          <input placeholder="Search Variable Names.." class="inputstyle col-md-4 float-right" (keyup)="filterVariables($event.target.value)" />
+        </div>
+    <div class="d-flex justify-content-end mb-2">
+      <button class="primarybtnstyle ml-1" (click)="addEditProcVar()">
+        Add Variable
+      </button>
+      <button class="primarybtnstyle ml-1" (click)="syncMetadata()">
+        Sync Metadata
+      </button>
+      <button
+        class="primarybtnstyle ml-1"
+        *ngIf="varDataSelected"
+        (click)="deleteVar(varDataSelected)"
+      >
+        Delete Variable
+      </button>
+      <button
+        class="primarybtnstyle ml-1"
+        *ngIf="varDataSelected"
+        (click)="addEditProcVar(varDataSelected)"
+      >
+        Edit Variable
+      </button>
+    </div>
+  </div> -->
+
+  <div class="w-100" *ngIf="varData">
+    <app-grid-toolbar
+      #gridinstance
+      [selectionMode]="'checkbox'"
+      [type]="gridType"
+      [data]="varData"
+      (emitAction)="selectRow($event)"
+      (doubleClick)="doubleClick($event)"
+    >
+    </app-grid-toolbar>
+  </div>
+</div>

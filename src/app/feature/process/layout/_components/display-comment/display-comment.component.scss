@@ -1,0 +1,260 @@
+@import "variables";
+.comment {
+  .username {
+    font-weight: 500;
+    font-size: 14px;
+
+    .rolename {
+      font-weight: 400;
+    }
+    .rightarrow {
+      width: 20px;
+    }
+    .statusStyle {
+      font-size: 12px;
+    }
+    .CapCase {
+      text-transform: capitalize;
+    }
+  }
+  .commentText {
+    color: #4e4e4e;
+    font-size: 13px;
+    ::ng-deep {
+      p {
+        margin-bottom: 0;
+      }
+      b,
+      strong {
+        font-weight: 500;
+      }
+      // br{
+      // content: "";
+      // display: block;
+      // margin-top: 10px;
+      // // border-bottom: 20px solid transparent;
+      // }
+    }
+  }
+  .option-text {
+    color: #9a9a9a;
+    border: 1px solid #9a9a9a;
+    padding: 2px 5px;
+    margin-right: 6px;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+  .datetime {
+    color: #9a9a9a;
+    font-size: 11px;
+  }
+  .more {
+    float: right;
+    color: var(--secondaryColor);
+    &:hover {
+      color: var(--primaryColor);
+    }
+  }
+  .replyIcon {
+    font-size: 11px;
+    margin-left: 10px;
+    color: var(--secondaryColor);
+    &:hover {
+      color: var(--primaryColor);
+    }
+  }
+}
+
+.replyContainer {
+  padding: 0 0 0 20px;
+  .comment {
+    margin-top: 5px;
+    .username {
+      font-size: 12px;
+      .statusStyle {
+        font-size: 10px;
+      }
+    }
+    .commentText {
+      font-size: 11px;
+    }
+    .datetime {
+      font-size: 10px;
+    }
+    .replyIcon {
+      font-size: 10px;
+    }
+  }
+}
+
+.chat-left {
+  margin: 0 30px 0 13px;
+  border: 1px solid var(--secondaryColor);
+  border-radius: 0px 20px 20px 20px;
+}
+
+.chat-right {
+  margin: 0 13px 0 30px;
+  border: 1px solid var(--primaryColor);
+  border-radius: 20px 0px 20px 20px;
+}
+
+.darkTheme {
+  .more {
+    &:hover {
+      color: #bbbaba !important;
+    }
+  }
+  .comment {
+    color: #e4e4e4;
+  }
+  .chat-left {
+    margin: 0 30px 0 13px;
+    border: 1px solid var(--secondaryColor);
+    border-radius: 0px 20px 20px 20px;
+    color: #bbbaba;
+    border: 1px solid #eceefa;
+  }
+  .chat-right {
+    margin: 0 13px 0 30px;
+    border: 1px solid var(--secondaryColor);
+    border-radius: 20px 0px 20px 20px;
+    color: #bbbaba;
+  }
+  .commentText {
+    color: #bbbaba !important;
+    font-weight: 400;
+  }
+  .datetime {
+    color: var(--secondaryColor) !important;
+    font-weight: 500;
+  }
+  .username {
+    color: #ffffff;
+    font-weight: 500;
+  }
+}
+
+.chat-comment {
+  padding: 5px 12px;
+  overflow-y: scroll;
+  position: relative;
+  .username {
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0px;
+    margin-top: 5px;
+    max-width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    .rolename {
+      font-weight: 400;
+    }
+    .rightarrow {
+      width: 20px;
+    }
+    .statusStyle {
+      font-size: 12px;
+    }
+    .CapCase {
+      text-transform: capitalize;
+    }
+  }
+  .commentText {
+    color: #4e4e4e;
+    font-size: 13px;
+    ::ng-deep {
+      p {
+        margin-bottom: 0;
+      }
+      b,
+      strong {
+        font-weight: 500;
+      }
+      // br{
+      // content: "";
+      // display: block;
+      // margin-top: 10px;
+      // // border-bottom: 20px solid transparent;
+      // }
+    }
+  }
+  .attachment-icon {
+    display: flex;
+    cursor: pointer;
+  }
+  .documenticon {
+    display: inline-block;
+    width: 20px !important;
+    margin-right: 10px;
+  }
+  .option-text {
+    color: #9a9a9a;
+    border: 1px solid #9a9a9a;
+    padding: 2px 5px;
+    margin-right: 6px;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+  .datetime {
+    color: #9a9a9a;
+    font-size: 11px;
+  }
+  .more-box {
+    display: flex;
+    justify-content: space-between;
+  }
+  .more {
+    // float: right;
+    color: var(--secondaryColor);
+    font-weight: 400;
+    &:hover {
+      color: var(--primaryColor);
+    }
+  }
+  .replyIcon {
+    font-size: 11px;
+    margin-left: 10px;
+    color: var(--secondaryColor);
+    &:hover {
+      color: var(--primaryColor);
+    }
+  }
+  .show-reply {
+    // margin-top: 5px;
+    color: var(--secondaryColor);
+    span {
+      font-weight: 400;
+      cursor: pointer;
+      &:hover {
+        color: var(--primaryColor);
+      }
+    }
+    p {
+      margin: 0;
+      // margin-bottom: 5px;
+    }
+    // .all-replies {
+    //   // margin-top: 5px;
+    //   // margin-left: 10px;
+    // }
+  }
+}
+
+.darkTheme {
+  .replyIcon {
+    &:hover {
+      color: #bbbaba;
+    }
+  }
+  .show-reply {
+    color: var(--secondaryColor);
+    span {
+      &:hover {
+        color: #bbbaba;
+      }
+    }
+  }
+}

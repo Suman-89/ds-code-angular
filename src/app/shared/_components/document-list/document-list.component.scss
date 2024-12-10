@@ -1,0 +1,145 @@
+@import "variables";
+
+.contentWrap {
+  height: 100%;
+  padding: 10px 0 0 10px;
+  overflow: auto;
+  position: relative;
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #ff990012;
+    box-shadow: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--primaryColorRGB), 0.6);
+    border: 1px solid var(--primaryColor);
+    border-radius: 10px;
+  }
+  .documentsCont {
+    overflow: auto;
+    margin-top: 15px;
+    padding: 5px 25px 5px 5px;
+    height: calc(100% - 63px);
+    .documentRow {
+      padding: 10px 0px 0px 0px;
+      font-size: 12px;
+      color: #7e7d7d;
+      &:hover {
+        color: var(--primaryColor);
+        transition: 1s all ease;
+      }
+      .documenticon {
+        vertical-align: top;
+        cursor: pointer;
+        width: 20px;
+      }
+      .docname {
+        width: calc(100% - 130px);
+        padding: 0px 0px 0px 5px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .comment {
+        color: #b5b5b5;
+        font-size: 11px;
+      }
+      .downloadicon {
+        height: 20px;
+        font-size: 20px;
+        margin: 0px 0px 0px 6px;
+        cursor: pointer;
+        color: var(--secondaryColor);
+      }
+      .checkBtns {
+        width: 100%;
+        text-align: right;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.inline {
+  display: inline-block;
+}
+
+.disabledBtn {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.tickIcon {
+  position: absolute;
+  top: 7px;
+  left: 8px;
+}
+
+.filterIconContainer {
+  float: right;
+  // margin-right: 20px;
+  margin-top: -5px;
+}
+.filterIcon {
+  position: absolute;
+  background: white;
+  top: 2px;
+  right: 0px;
+  font-size: 20px;
+}
+
+.filterResults {
+  font-size: 14px;
+  font-weight: bold;
+  width: 80%;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.filter-count {
+  padding: 2px 8px;
+  border-radius: 25px;
+  position: absolute;
+  right: -17px;
+  top: -1px;
+  background: rgba(var(--primaryColorRGB), 0.3);
+  color: var(--primaryColor);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge {
+  font-weight: 300 !important;
+}
+
+.nofilter {
+  color: var(--secondaryColor);
+}
+
+.checkoutinfo {
+  font-size: 11px;
+  color: black !important;
+  background: lightgray;
+}
+
+.overlay-conf {
+  opacity: 0.4;
+}
+
+.darkTheme {
+  .filterIcon {
+    background-color: var(--primaryColor);
+  }
+  .filterResults {
+    color: #e4e4e4;
+  }
+  .documentRow {
+    color: #b5b5b5 !important;
+    &:hover {
+      color: var(--secondaryColor) !important;
+    }
+  }
+}

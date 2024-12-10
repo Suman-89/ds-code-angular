@@ -1,0 +1,110 @@
+<div>
+    <div class="modal-header">
+      <div>
+        <h5 class="modal-title mt-0">
+         {{country.countryname}}
+        </h5>
+      </div>
+        
+      <button type="button" class="close" aria-label="Close" (click)="close()">
+        <img src="./assets/images/cross.png" height="20">
+      </button>
+    </div>
+    <div class="modal-body" >
+     <form class="row no-gutters" #countryForm>
+       <div class="col-md-6">
+        <label>Country name</label>
+        <input readonly [(ngModel)]="country.countryname" name="countryname" class="inputstyle form-control"/>
+       </div> 
+       <div class="col-md-6">
+        <label>Country Code</label>
+        <input readonly [(ngModel)]="country.countrycode" name="countrycode" class="inputstyle form-control"/>
+       </div> 
+
+    <div class="col-md-6">
+      <label>iBasis Contracting Entity</label>
+      <select name="ibce" class="inputstyle form-control" [(ngModel)]="country.contractingentity" (change)="saveCEChange(1)">
+        <option *ngFor="let ce of ceList" [value]="ce.name">
+        {{ce.name}}
+        </option>
+      </select>
+    </div>
+    <!-- <div class="col-md-6">
+      <label>iBasis Contracting Entity IOT</label>
+      <select name="ibceiot" class="inputstyle form-control" [(ngModel)]="country.ceiot" (change)="saveCEChange(2)">
+        <option *ngFor="let ce of ceList" [value]="ce.name">
+        {{ce.name}}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label>iBasis Contracting Entity SMS</label>
+      <select name="ibcesms" class="inputstyle form-control" [(ngModel)]="country.cesms" (change)="saveCEChange(3)">
+        <option *ngFor="let ce of ceList" [value]="ce.name">
+        {{ce.name}}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label>iBasis Contracting Entity Mobile</label>
+      <select name="ibcemobile" class="inputstyle form-control" [(ngModel)]="country.cemobile" (change)="saveCEChange(4)">
+        <option *ngFor="let ce of ceList" [value]="ce.name">
+        {{ce.name}}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label>iBasis Contracting Entity Voice</label>
+      <select name="ibcevoice" class="inputstyle form-control" [(ngModel)]="country.cevoice" (change)="saveCEChange(5)">
+        <option *ngFor="let ce of ceList" [value]="ce.name">
+        {{ce.name}}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label>iBasis Contracting Entity Other</label>
+      <select name="ibceother" class="inputstyle form-control" [(ngModel)]="country.ceother" (change)="saveCEChange(6)">
+        <option *ngFor="let ce of ceList" [value]="ce.name">
+        {{ce.name}}
+        </option>
+      </select>
+    </div> -->
+    <div class="col-md-6">
+      <label>Region</label>
+      <select name="region" class="inputstyle form-control" [(ngModel)]="country.region" >
+        <option *ngFor="let re of regions" [value]="re.name">
+        {{re.name}}
+        </option>
+      </select>
+    </div>
+       <div class="col-md-6">
+        <label>ISD Code</label>
+        <input type="tel" [(ngModel)]="country.isd" class="inputstyle form-control" name="isdcode" [pattern]="pattern.phonePattern" maxlength="4"/>  
+       </div> 
+       <form class="col-md-12" #synForm (submit)="addSynonym()">
+        <div class="col-md-6 p-0">
+        <label>Alternate Name</label>
+        <input type="text" class="inputstyle form-control" [(ngModel)]="inputSynonym" name="synforminput" [pattern]="pattern.onlyCharPattern" #syn/>
+        
+        <!-- <div class="text-danger w-100 font-smaller" *ngIf="synForm.get('syn').hasError('pattern')">Please enter a valid Contact Number</div> -->
+       </div> 
+      </form> 
+       <div class="col-md-12 row no-gutters mt-2">
+         <div *ngFor="let syn of country.synonyms" class="col-md-3">
+           <div class="addedList">      {{syn}}
+            <span class="delIcon" (click)="deleteSyn(syn)">
+              <img height="15px" src="./assets/images/cross.png"/>
+             </span>
+          </div>
+         </div>
+       </div> 
+    </form>
+    
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn secondarybtnstyle" (click)="close()">Cancel</button>
+        <button type="submit" class="btn primarybtnstyle" (click)="save()">Save</button>
+    </div>
+</div>
+  
+  

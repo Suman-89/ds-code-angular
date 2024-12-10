@@ -1,0 +1,376 @@
+<div class="container h-100">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">Contracting Entities</div>
+  </div>
+  <div class="form-container w-100 pl-4 pr-4" *ngIf="contractEntity">
+    <form
+      class="companyform position-relative"
+      [formGroup]="contractEntity"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="row no-gutters custom-form-wrap">
+        <div class="col-md-6 text-center" *ngFor="let tab of tabnames">
+          <div
+            class="w-100 border-bottom cursor-pointer"
+            (click)="selectTab(tab)"
+            [ngClass]="{ activetab: selectedTab === tab }"
+          >
+            {{ tab }}
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab"
+        [ngClass]="{ 'd-none': selectedTab !== 'General Information' }"
+      >
+        <div class="form-group custom-form-wrap">
+          <label class="group-header-label">
+            Basic Details
+            <div class="float-right cursor-pointer" (click)="togglePanel(1)">
+              <img
+                class="icon"
+                src="./assets/images/icon-expand-arrow.png"
+                [ngClass]="{ rotate180: expandPanel.includes(1) }"
+                alt="toggle panel img"
+              />
+            </div>
+          </label>
+          <div
+            id="1"
+            class="form-row no-margin no-height custom-padding"
+            [ngClass]="{ 'height-add': expandPanel.includes(1) }"
+          >
+            <div class="form-group col-md-6">
+              <label> Entity Name<span class="text-danger">*</span> </label>
+              <input
+                type="text"
+                required
+                name="entityname"
+                formControlName="entityname"
+                class="inputstyle form-control"
+                placeholder="Enter Entity Name"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label>
+                Entity Legal Name<span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                name="entitylegalname"
+                formControlName="entitylegalname"
+                class="inputstyle form-control"
+                placeholder="Enter Entity Legal Name"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label> Registration Country </label>
+              <input
+                type="text"
+                name="registration"
+                formControlName="registration"
+                class="inputstyle form-control"
+                placeholder="Enter Registration"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label> Company Type </label>
+              <input
+                name="companytype"
+                id="companttype"
+                formControlName="companytype"
+                class="inputstyle form-control"
+                placeholder="Enter Company Type"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label> Corporate ID Number </label>
+              <input
+                type="text"
+                name="corporateidnumber"
+                formControlName="corporateidnumber"
+                class="inputstyle form-control"
+                placeholder="Enter Corporate Id"
+              />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label> Alias </label>
+              <input
+                type="text"
+                name="alias"
+                formControlName="alias"
+                class="inputstyle form-control"
+                placeholder="Enter Alias"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label> Code </label>
+              <input
+                type="text"
+                name="alias"
+                formControlName="code"
+                class="inputstyle form-control"
+              />
+            </div>
+            <div class="w-100" *ngIf="countries">
+              <app-address-form
+                #principalAddressForm
+                [bindonchange]="true"
+                [editAddress]="contractEntity.value.principaladdress"
+                [addressname]="'Principal Address'"
+                [countries]="countries"
+                (addressObjectEmitter)="addAddress($event, 1)"
+              >
+              </app-address-form>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group custom-form-wrap">
+          <label class="group-header-label font-bold"
+            >Notice Contact Information
+            <div class="float-right cursor-pointer" (click)="togglePanel(3)">
+              <!-- {{expandPanel.includes(3)? 'Collapse': 'Expand'}} -->
+              <img
+                class="icon"
+                src="./assets/images/icon-expand-arrow.png"
+                [ngClass]="{ rotate180: expandPanel.includes(3) }"
+                alt="toggle panel img"
+              />
+            </div>
+          </label>
+          <form
+            id="3"
+            [formGroup]="noticeForm"
+            class="form-row no-margin no-height custom-padding"
+            [ngClass]="{ 'height-add': expandPanel.includes(3) }"
+          >
+            <div class="form-group col-md-6">
+              <label> Email </label>
+              <input
+                type="email"
+                name="entityname"
+                formControlName="email"
+                class="inputstyle form-control"
+                placeholder="Enter email"
+              />
+              <div
+                class="text-danger font-smaller"
+                *ngIf="noticeForm.get('email').hasError('pattern')"
+              >
+                Please enter valid email
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label> Telephone </label>
+              <div class="row no-margin">
+                <!-- <select name="phoneext" formControlName="countryCode" class="inputstyle col-md-2 no-padding form-control">
+                        <option *ngFor="let type of phoneCountryCode" [ngValue]="type">{{type}}</option>
+                      </select> -->
+                <!-- <input formControlName="countryCode" class="inputstyle col-md-2 form-control"/> -->
+                <input
+                  type="tel"
+                  name="tel"
+                  formControlName="tel"
+                  class="inputstyle form-control col-md-12"
+                  placeholder="Enter telephone beginning with country code(e.g. +12904302083 )"
+                />
+                <div
+                  class="text-danger font-smaller"
+                  *ngIf="noticeForm.get('tel').hasError('pattern')"
+                >
+                  Please enter a valid telephone number
+                </div>
+                <div
+                  class="text-danger font-smaller"
+                  *ngIf="noticeForm.get('tel').hasError('minlength')"
+                >
+                  Please enter at least 5 Characters
+                </div>
+                <div
+                  class="text-danger font-smaller"
+                  *ngIf="noticeForm.get('tel').hasError('maxlength')"
+                >
+                  Only 15 characters allowed
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label> Fax </label>
+              <div class="row no-margin">
+                <!-- <select name="phoneext" formControlName="countryCode" class="inputstyle col-md-2 no-padding form-control">
+                        <option *ngFor="let type of phoneCountryCode" [ngValue]="type">{{type}}</option>
+                      </select> -->
+                <!-- <input formControlName="countryCode" class="inputstyle col-md-2 form-control"/> -->
+                <input
+                  type="text"
+                  name="fax"
+                  formControlName="fax"
+                  class="inputstyle col-md-12 form-control"
+                  placeholder="Enter fax beginning with country code(e.g. +112909102083 )"
+                />
+                <div
+                  class="text-danger font-smaller"
+                  *ngIf="noticeForm.get('fax').hasError('pattern')"
+                >
+                  Please enter a valid fax
+                </div>
+                <div
+                  class="text-danger font-smaller"
+                  *ngIf="noticeForm.get('fax').hasError('minlength')"
+                >
+                  Please enter at least 5 Characters
+                </div>
+                <div
+                  class="text-danger font-smaller"
+                  *ngIf="noticeForm.get('fax').hasError('maxlength')"
+                >
+                  Only 15 characters allowed
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label> Addressed to </label>
+              <input
+                type="text"
+                name="fax"
+                formControlName="attn"
+                class="inputstyle form-control"
+                placeholder="Enter Addressed To"
+              />
+            </div>
+            <div class="col-md-12 position-relative">
+              <div class="checkbox-address">
+                <input
+                  type="checkbox"
+                  [checked]="addressCheck"
+                  (change)="checkForAddress()"
+                />
+                Same As Principal Address
+              </div>
+
+              <app-address-form
+                #noticeAddress
+                *ngIf="!addressCheck && countries"
+                [type]="false"
+                [editAddress]="noticeForm.value.noticeAddress"
+                [bindonchange]="true"
+                [addressname]="'Notice Address'"
+                [countries]="countries"
+                (addressObjectEmitter)="addAddress($event, 3)"
+              >
+              </app-address-form>
+
+              <app-added-address
+                *ngIf="addressCheck"
+                [singleAddr]="noticeForm.value.noticeAddress"
+                [header]="'Notice Address'"
+              >
+              </app-added-address>
+            </div>
+          </form>
+        </div>
+
+        <div class="form-group custom-form-wrap">
+          <label class="group-header-label font-bold"
+            >Customer Service Email
+            <div class="float-right cursor-pointer">
+              <span (click)="togglePanel(4)">
+                <img
+                  class="icon"
+                  src="./assets/images/icon-expand-arrow.png"
+                  [ngClass]="{ rotate180: expandPanel.includes(4) }"
+                  alt="toggle panel img"
+                />
+                <!-- {{expandPanel.includes(4)? 'Collapse': 'Expand'}} -->
+              </span>
+            </div>
+          </label>
+          <!-- EMAIL COMPONENT ADDED -->
+          <div
+            class="w-100 no-height custom-padding"
+            [ngClass]="{ 'height-add': expandPanel.includes(4) }"
+          >
+            <app-contract-entity-email-list
+              [isEdit]="entId ? 1 : 0"
+              [emailList]="emailList"
+              (emailListEmitter)="addEmailList($event)"
+            ></app-contract-entity-email-list>
+          </div>
+        </div>
+      </div>
+      <div class="tab" [ngClass]="{ 'd-none': selectedTab !== 'Bank Details' }">
+        <div
+          class="w-100 d-flex justify-content-end"
+          *ngIf="!showBankForm"
+          style="padding-right: 20px"
+        >
+          <button class="primarybtnstyle btn" (click)="toggleBankForm()">
+            Add New Bank Details
+          </button>
+        </div>
+        <div class="w-100" *ngIf="showBankForm">
+          <app-bank-detail
+            #bankform
+            [bankDetails]="bankDetails"
+            (bankAddressEmit)="addBankDetails($event)"
+            (cancelEmit)="toggleBankForm()"
+          ></app-bank-detail>
+        </div>
+        <div
+          class="custom-form-wrap"
+          *ngIf="
+            contractEntity.value.bankdetails &&
+            contractEntity.value.bankdetails.length > 0
+          "
+        >
+          <div
+            *ngFor="
+              let bankdet of contractEntity.value.bankdetails;
+              let id = index
+            "
+          >
+            <div class="border-bottom h6 secondary-color position-relative">
+              Bank Details of {{ bankdet.bankname }}
+              <div class="bankDelIconContainer">
+                <!-- <img src="./assets/images/icon-edit.png" class="action-icon bg-transparent" (click)="editbankDetails(bankdet, id)"/> -->
+                <img
+                  src="./assets/images/icon-remove.png"
+                  class="action-icon bg-transparent"
+                  (click)="deleteBankDetails(bankdet)"
+                />
+              </div>
+            </div>
+            <app-bank-detail
+              [addedBankDetails]="bankdet"
+              [patchVal]="true"
+              (bankAddressEmit)="saveEditBank($event, id)"
+              (addeditBankAddress)="setEditAddBankaddress($event, id)"
+            >
+            </app-bank-detail>
+          </div>
+        </div>
+      </div>
+      <div class="formActBtnCont">
+        <div class="text-center p-3 bg-white">
+          <button
+            type="menu"
+            (click)="back()"
+            class="btn secondarybtnstyle mr-1"
+          >
+            Back
+          </button>
+          <button
+            type="submit"
+            class="btn primarybtnstyle"
+            [disabled]="editAddAddress.length > 0"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

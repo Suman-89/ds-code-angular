@@ -1,0 +1,931 @@
+<div class="container-fluid px-0">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{ selectedProcess
+      }}<span
+        class="secondary-color"
+        style="font-size: 22px; padding-left: 5px; padding-right: 5px"
+        >|</span
+      >
+      <span></span>General Settings
+    </div>
+  </div>
+
+  <div class="w-100" *ngIf="procDefForm">
+    <div class="tab-container">
+      <div
+        (click)="setVisibleTab(tab.id)"
+        class="tab-item"
+        [class.active]="activeTab == tab.id"
+        *ngFor="let tab of settingTabs"
+      >
+        <span>{{ tab.name }}</span>
+      </div>
+    </div>
+    <form #form="ngForm" class="mt-2" (ngSubmit)="save()">
+      <div class="row no-gutters procDefForm">
+        <div *ngIf="activeTab == 'email-configuration'" class="w-100">
+          <div class="col-12 p-0 p-1 text-right">
+            <small
+              class="primarybtnstyle cursor-pointer mr-2"
+              (click)="setDefaultEmailConfig()"
+            >
+              Add Default Configurations
+            </small>
+          </div>
+          <div
+            class="row no-gutters notification-row p-4 m-4"
+            *ngIf="generalSettings.emailConfiguration"
+          >
+            <div class="col-6 px-1">
+              <label class="selected-item font-weight-normal" container="body"
+                >From</label
+              >
+              <input
+                class="inputstyle w-100"
+                name="from"
+                [(ngModel)]="generalSettings.emailConfiguration.from"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">App Url</label>
+              <input
+                class="inputstyle w-100"
+                name="appurl"
+                [(ngModel)]="generalSettings.emailConfiguration.appurl"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">From Name</label>
+              <input
+                class="inputstyle w-100"
+                name="formname"
+                [(ngModel)]="generalSettings.emailConfiguration.fromname"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Mail Domain</label>
+              <input
+                class="inputstyle w-100"
+                name="maildomain"
+                [(ngModel)]="generalSettings.emailConfiguration.maildomain"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Host</label>
+              <input
+                class="inputstyle w-100"
+                name="host"
+                [(ngModel)]="generalSettings.emailConfiguration.host"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Port</label>
+              <input
+                class="inputstyle w-100"
+                name="port"
+                [(ngModel)]="generalSettings.emailConfiguration.port"
+              />
+            </div>
+
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body"
+                >URL Parameter Name</label
+              >
+              <input
+                class="inputstyle w-100"
+                name="queryParamName"
+                [(ngModel)]="generalSettings.emailConfiguration.queryParam"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body"
+                >URL Parameter Value</label
+              >
+              <!-- (change)="fetchDefault()" -->
+              <div *ngIf="allVars">
+                <app-dropdown-search
+                  [value]="
+                    generalSettings.emailConfiguration.queryParamVariableName
+                  "
+                  [placeholder]="'Select Variable Name'"
+                  [dataList]="allVars"
+                  [id]="''"
+                  [setting]="businessKeySetting"
+                  ($onSelectItem)="setQueryParamVariableName($event)"
+                ></app-dropdown-search>
+              </div>
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Password</label>
+              <div class="password-container">
+                <input
+                  class="inputstyle w-100"
+                  name="password"
+                  [(ngModel)]="generalSettings.emailConfiguration.password"
+                  [type]="obscurePassword ? 'password' : 'text'"
+                />
+                <i
+                  class="fa fa-eye pw-eye-icon"
+                  *ngIf="obscurePassword"
+                  (click)="obscurePassword = false"
+                  aria-hidden="true"
+                >
+                </i>
+                <i
+                  class="fa fa-eye-slash pw-eye-icon"
+                  *ngIf="!obscurePassword"
+                  (click)="obscurePassword = true"
+                  aria-hidden="true"
+                >
+                </i>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'dms-settings'" class="w-100">
+          <div class="col-12 p-0 p-1 text-right">
+            <small
+              class="primarybtnstyle cursor-pointer mr-2"
+              (click)="setDefaultDmsSettings()"
+            >
+              Add Default Settings
+            </small>
+            <small
+              *ngIf="generalSettings.dmsSettings"
+              class="secondarybtnstyle cursor-pointer"
+              (click)="addNewFolder()"
+              >Add New Folder</small
+            >
+          </div>
+          <div *ngIf="generalSettings.dmsSettings">
+            <div
+              class="row no-gutters p-4 notification-row m-4"
+              *ngFor="
+                let navItem of generalSettings.dmsSettings;
+                let id = index
+              "
+            >
+              <div class="text-right w-100 px-1 mt-1">
+                <i
+                  [ngbTooltip]="'Remove Menu'"
+                  class="fa fa-close cursor-pointer close-button"
+                  (click)="removeFolder(id)"
+                ></i>
+              </div>
+              <h4 class="col-12">
+                {{ navItem.itemName }}
+                <i class="{{ navItem.itemIconPath }} p-1"></i>
+              </h4>
+              <div class="='form-group col-6 mb-2">
+                <small
+                  class="selected-item"
+                  [ngbTooltip]="'PATH TO ROUTE'"
+                  container="body"
+                >
+                  Root Folder
+                </small>
+                <input
+                  class="inputstyle w-100"
+                  name="{{ navItem.itemId + 'folder' + id }}"
+                  [(ngModel)]="navItem.itemName"
+                />
+              </div>
+              <div class="col-6 pl-2">
+                <small class="selected-item" container="body"
+                  >Storage settings</small
+                >
+
+                <app-dropdown-search
+                  [value]="navItem.itemName"
+                  [placeholder]="'Select Option'"
+                  [dataList]="procDefs"
+                  [setting]="storageSetting"
+                  [id]="''"
+                  ($onSelectItem)="assignProcNameAndKey($event)"
+                ></app-dropdown-search>
+              </div>
+
+              <div class="pb-2 mb-2 w-100">
+                <div class="row col-12 mx-0 px-0">
+                  <div class="col-6 mx-0 px-0">
+                    <h6 class="d-inline">Sub Folder</h6>
+                  </div>
+                  <div class="text-right col-6 mx-0 px-0">
+                    <small
+                      class="secondarybtnstyle cursor-pointer"
+                      (click)="addSubFolder(id)"
+                      >Add Sub Folder</small
+                    >
+                  </div>
+                </div>
+                <div class="row no-gutters">
+                  <div
+                    class="col-sm-6"
+                    *ngFor="
+                      let sVars of navItem.itemChildren;
+                      let sub_id = index
+                    "
+                  >
+                    <div class="text-right px-2">
+                      <i
+                        [ngbTooltip]="'Remove'"
+                        class="fa fa-close cursor-pointer close-button"
+                        (click)="removeSubFolder(id, sub_id)"
+                      ></i>
+                    </div>
+                    <div class="m-1 arrow">
+                      <small
+                        class="selected-item"
+                        [ngbTooltip]="sVars.itemName"
+                        container="body"
+                      >
+                        Sub Folder Name
+                      </small>
+                      <input
+                        class="inputstyle w-100"
+                        name="{{ sVars.itemId + 'name' + sub_id }}"
+                        [(ngModel)]="sVars.itemName"
+                      />
+
+                      <small
+                        class="selected-item"
+                        [ngbTooltip]="sVars.itemName"
+                        container="body"
+                      >
+                        Sub Folder Id
+                      </small>
+                      <input
+                        class="inputstyle w-100"
+                        name="{{ sVars.itemId + 'id' + sub_id }}"
+                        [(ngModel)]="sVars.itemId"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'active-directory-settings'" class="w-100">
+          <div class="col-12 p-0 p-1 text-right">
+            <small
+              class="primarybtnstyle cursor-pointer mr-2"
+              (click)="setDefaultActiveDirectorySettings()"
+            >
+              Add Default Directory Settings
+            </small>
+          </div>
+
+          <div
+            class="row no-gutters p-4 notification-row m-4"
+            *ngIf="generalSettings.activeDirectorySettings"
+          >
+            <div class="col-6 px-1">
+              <label class="selected-item font-weight-normal" container="body"
+                >Url</label
+              >
+              <input
+                class="inputstyle w-100"
+                name="dir_url"
+                [(ngModel)]="generalSettings.activeDirectorySettings.url"
+              />
+            </div>
+            <div class="col-6 px-1">
+              <label class="selected-item" container="body">Base</label>
+              <input
+                class="inputstyle w-100"
+                name="dir_base"
+                [(ngModel)]="generalSettings.activeDirectorySettings.base"
+              />
+            </div>
+            <div class="col-6 px-1">
+              <label class="selected-item" container="body">User DN</label>
+              <input
+                class="inputstyle w-100"
+                name="dir_user_dn"
+                [(ngModel)]="generalSettings.activeDirectorySettings.userDN"
+              />
+            </div>
+            <div class="col-6 px-1">
+              <label class="selected-item" container="body">Password</label>
+              <input
+                type="password"
+                class="inputstyle w-100"
+                name="dir_password"
+                [(ngModel)]="generalSettings.activeDirectorySettings.password"
+              />
+            </div>
+            <div class="col-6 px-1">
+              <label class="selected-item" container="body">Auth</label>
+              <input
+                class="inputstyle w-100"
+                name="dir_auth"
+                [(ngModel)]="generalSettings.activeDirectorySettings.auth"
+              />
+            </div>
+            <div class="col-6 px-1">
+              <label class="selected-item" container="body">Domain</label>
+              <input
+                class="inputstyle w-100"
+                name="dir_domain"
+                [(ngModel)]="generalSettings.activeDirectorySettings.domain"
+              />
+            </div>
+            <div class="col-6 px-1">
+              <label class="selected-item" container="body">User Id</label>
+              <input
+                class="inputstyle w-100"
+                name="dir_userid"
+                [(ngModel)]="generalSettings.activeDirectorySettings.userid"
+              />
+            </div>
+            <br />
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'theme'" class="w-100">
+          <div class="row no-gutters p-4 notification-row m-4 themeTab">
+            <div class="col-12 py-2">
+              <h5 class="d-inline">Color Scheme</h5>
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Primary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="primaryColor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].primaryColor"
+              />
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Secondary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="secondaryColor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].secondaryColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Highlighting Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="primaryColor1"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].primaryColor1"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Tertiary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="tertiarycolor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].tertiarycolor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Quaternary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="quaternaryColor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].quaternaryColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Error Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="dangerColor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].dangerColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >SideNav Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="sideNavColor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].sideNavColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Tab Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="tabColor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].tabColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Text Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="textColor"
+                type="color"
+                [(ngModel)]="generalSettings.themes[0].textColor"
+              />
+            </div>
+
+            <div class="col-12 py-2 pt-5">
+              <h5 class="d-inline">File Assets</h5>
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Logo (ideal height 50px, ideal width 150px )</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('logoUploader')"
+                >
+                  {{
+                    files.logo?.name && files.logo?.name !== "File"
+                      ? files.logo?.name
+                      : "Upload Logo"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-100 hidden"
+                  name="logoUrl"
+                  id="logoUploader"
+                  (change)="onFileChange($event, 'logo')"
+                  accept="image/*"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.logo"
+                *ngIf="previewImageUrls.logo"
+              />
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Login Banner</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('loginLogoUploader')"
+                >
+                  {{
+                    files.loginLogo?.name && files.loginLogo?.name !== "File"
+                      ? files.loginLogo?.name
+                      : "Upload Logo"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="loginLogoUrl"
+                  id="loginLogoUploader"
+                  accept="image/*"
+                  (change)="onFileChange($event, 'loginLogo')"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.loginLogo"
+                *ngIf="previewImageUrls.loginLogo"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Icon</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('iconUploader')"
+                >
+                  {{
+                    files.favicon?.name && files.favicon?.name !== "File"
+                      ? files.favicon?.name
+                      : "Upload Icon"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="logoUrl"
+                  id="iconUploader"
+                  accept=".ico"
+                  (change)="onFileChange($event, 'favicon')"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.favicon"
+                *ngIf="previewImageUrls.favicon"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Document Icon</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('documentIconUploader')"
+                >
+                  {{
+                    files.favicon?.name && files.favicon?.name !== "File"
+                      ? files.favicon?.name
+                      : "Upload Dcoument Icon"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="reportLogoUrl"
+                  id="documentIconUploader"
+                  accept=".png,.jpg"
+                  (change)="onFileChange($event, 'reportLogo')"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.reportLogo"
+                *ngIf="previewImageUrls.reportLogo"
+              />
+            </div>
+            <div class="col-12 py-2 pt-5">
+              <h5 class="d-inline">Document Titles</h5>
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Workflow Document Title</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="documentTitle"
+                [(ngModel)]="generalSettings.themes[0].documentTitle"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Workflow Overlay Title</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="workflowOverlayTitle"
+                [(ngModel)]="generalSettings.themes[0].workflowOverlayTitle"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <!-- <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >DMS Document Title</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="documentTitle"
+                [(ngModel)]="generalSettings.themes[0].documentTitle"
+              /> -->
+            </div>
+            <div class="col-4"></div>
+          </div>
+          <div class="row no-gutters p-4 notification-row m-4">
+            <div class="list-box w-100">
+              <div class="row col-12 p-0 mt-3 mx-1 mb-1 border-bottom">
+                <div class="w-100 p-0 col-6">
+                  <h5 class="d-inline">Custom Icons</h5>
+                </div>
+                <div class="col-6 p-0 text-right">
+                  <input
+                    type="file"
+                    class="inputstyle w-30 hidden"
+                    style="display: none"
+                    name="uploadIcon"
+                    id="uploadIcon"
+                    accept="image/*"
+                    (change)="onIconFile($event)"
+                  />
+                  <label
+                    class="primarybtnstyle cursor-pointer mr-2"
+                    (click)="onLogoInputClick('uploadIcon')"
+                  >
+                    Add Icon
+                  </label>
+                </div>
+              </div>
+
+              <div
+                class="font-weight-normal cursor-pointer icon-style p-2"
+                *ngFor="let ele of iconList"
+              >
+                <div class="icon-box p-2">
+                  <i
+                    [ngbTooltip]="'Delete'"
+                    class="fa fa-close cursor- d-block delete-icon text-secondary"
+                    (click)="deleteIcon(ele)"
+                    style="transform: translateY(-7px)"
+                  ></i>
+                  <img
+                    [src]="
+                      this.generalSettingsSvc.dmsUrl + '/file/' + ele.uniqueId
+                    "
+                    class="d-block"
+                    title="ele.fileName"
+                    height="auto"
+                    width="100%"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="activeTab == 'dms-theme'" class="w-100">
+          <div class="row no-gutters p-4 notification-row m-4">
+            <div class="col-12 py-2">
+              <h5 class="d-inline">Color Scheme</h5>
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Primary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="primaryColor"
+                type="color"
+                [(ngModel)]="generalSettings.dmsThemes[0].primaryColor"
+              />
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Secondary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="secondaryColor"
+                type="color"
+                [(ngModel)]="generalSettings.dmsThemes[0].secondaryColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Highlighting Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="primaryColor1"
+                type="color"
+                [(ngModel)]="generalSettings.dmsThemes[0].primaryColor1"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Tertiary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="tertiarycolor"
+                type="color"
+                [(ngModel)]="generalSettings.dmsThemes[0].tertiarycolor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Quaternary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="quaternaryColor"
+                type="color"
+                [(ngModel)]="generalSettings.dmsThemes[0].quaternaryColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Error Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="dangerColor"
+                type="color"
+                [(ngModel)]="generalSettings.dmsThemes[0].dangerColor"
+              />
+            </div>
+
+            <div class="col-12 py-2 pt-5">
+              <h5 class="d-inline">File Assets</h5>
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Logo
+              </label>
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('dmslogoUploader')"
+                >
+                  {{
+                    DMSfiles.dmsLogo?.name && DMSfiles.dmsLogo?.name != "File"
+                      ? DMSfiles.dmsLogo?.name
+                      : "Upload Logo"
+                  }}
+                </div>
+
+                <input
+                  type="file"
+                  class="inputstyle w-100 hidden"
+                  name="dmslogoUrl"
+                  id="dmslogoUploader"
+                  (change)="onFileChange($event, 'dmsLogo', 'dms')"
+                  accept="image/*"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="DMSpreviewImageUrls.dmsLogo"
+                *ngIf="DMSpreviewImageUrls.dmsLogo"
+              />
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Login Banner</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('dmsloginLogoUploader')"
+                >
+                  {{
+                    DMSfiles.dmsLoginLogo?.name &&
+                    DMSfiles.dmsLoginLogo?.name !== "File"
+                      ? DMSfiles.dmsLoginLogo?.name
+                      : "Upload Logo"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="dmsloginLogoUrl"
+                  id="dmsloginLogoUploader"
+                  accept="image/*"
+                  (change)="onFileChange($event, 'dmsLoginLogo', 'dms')"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="DMSpreviewImageUrls.dmsLoginLogo"
+                *ngIf="DMSpreviewImageUrls.dmsLoginLogo"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Icon</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('dmsiconUploader')"
+                >
+                  {{
+                    DMSfiles.dmsFavicon?.name &&
+                    DMSfiles.dmsFavicon?.name !== "File"
+                      ? DMSfiles.dmsFavicon?.name
+                      : "Upload Logo"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="dmslogoUrl"
+                  id="dmsiconUploader"
+                  accept=".ico"
+                  (change)="onFileChange($event, 'dmsFavicon', 'dms')"
+                />
+              </div>
+
+              <img
+                width="50"
+                [src]="DMSpreviewImageUrls.dmsFavicon"
+                *ngIf="DMSpreviewImageUrls.dmsFavicon"
+              />
+            </div>
+            <div class="col-12 py-2 pt-5">
+              <h5 class="d-inline">Document Titles</h5>
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Workflow Document Title</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="documentTitle"
+                [(ngModel)]="generalSettings.dmsThemes[0].documentTitle"
+              />
+            </div>
+
+            <div class="col-4 px-1">
+              <!-- <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >DMS Document Title</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="documentTitle"
+                [(ngModel)]="generalSettings.themes[0].documentTitle"
+              /> -->
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+        <div *ngIf="activeTab == 'gridSettings'" class="w-100">
+          <app-general-grid-settings
+            [variables]="allVars"
+            [gridsettings]="generalSettings.gridsettings"
+          ></app-general-grid-settings>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <button class="primarybtnstyle">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

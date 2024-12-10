@@ -1,0 +1,85 @@
+@import "variables";
+.procNamesStyle {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.bg-custom {
+  background-color: var(--primaryColor);
+}
+.modal-body {
+ padding: 1rem 1.8rem;
+ @media screen and (max-width:1050px) {
+    padding: 1rem 2.2rem;
+  }
+  @media screen and (max-width:968px) {
+    padding: 1rem 0.6rem;
+  }
+  @media screen and (max-width:768px) {
+    padding: 2rem 0.5rem;
+  }
+}
+.card-container{
+  
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.card {
+  padding: 1.8rem 0.5rem;
+  border-radius: 10px;
+  @media screen and (max-width:1400px) {
+    padding: 2.4rem 0.5rem;
+    margin: 0rem 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+  @media screen and (max-width:1200px) {
+    padding: 1.5rem 0.5rem;
+    margin: 0rem 0.4rem;
+    margin-bottom: 0.8rem;
+  }
+  @media screen and (max-width:1050px) {
+    padding: 1.5rem 0.5rem;
+    margin: 0rem 0.4rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  @media screen and (max-width:576px) {
+    padding: 1.6rem 0.6rem;
+    margin: 0rem 0rem;
+    margin-bottom: 0.5rem;
+  }
+  @media screen and (max-width:456px) {
+    padding: 1.4rem 0.6rem;
+  }
+}
+.card-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.col-sm-4{
+  width: 33.33%;
+  padding:4px,
+}
+.iconStyle{
+  padding-bottom: 0.7rem;
+  font-size: 43px;
+  @media screen and (max-width:600px) {
+    font-size: 35px;
+  }
+}
+.imgStyle{
+  padding-bottom: 0.7rem;
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  @media screen and (max-width:600px) {
+    height: 41px;
+    width: auto;
+  }
+}
+

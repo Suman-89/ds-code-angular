@@ -1,0 +1,53 @@
+{
+  "lms": [
+    { "text": "Company Name", "datafield": "Company Name" },
+    { "text": "Client Contact Name", "datafield": "Client Contact Name" },
+    {
+      "text": "Client Contact Mobile Number",
+      "datafield": "Client Contact Mobile Number"
+    },
+    { "text": "Client Contact Email", "datafield": "Client Contact Email" },
+    {
+      "text": "Client Contact Designation",
+      "datafield": "Client Contact Designation"
+    },
+    { "text": "Source of Lead", "datafield": "Source of Lead" },
+    { "text": "Lead Status", "datafield": "Lead Status" },
+    { "text": "Region of Sales", "datafield": "Region of Sales" },
+    { "text": "Industry", "datafield": "Industry" },
+    { "text": "Country", "datafield": "Country" },
+    { "text": "City", "datafield": "City" },
+    {
+      "text": "Client Contact Profile URL",
+      "datafield": "Client Contact Profile URL"
+    },
+    { "text": "Company Listing Status", "datafield": "Company Listing Status" },
+    { "text": "Connected On LinkedIn", "datafield": "Connected On LinkedIn" },
+    { "text": "Opportunity ID", "datafield": "Opportunity ID" },
+    { "text": "Next Review Date", "datafield": "Next Review Date" },
+    { "text": "Sales Person", "datafield": "Sales Person" },
+    {
+      "text": "Opportunity Description",
+      "datafield": "Opportunity Description"
+    },
+    { "text": "Opportunity Value", "datafield": "Opportunity Value" },
+    { "text": "Currency", "datafield": "Currency" },
+    { "text": "Offering", "datafield": "Offering" },
+    { "text": "Revenue Model", "datafield": "Revenue Model" },
+    { "text": "Monthly License Fees", "datafield": "Monthly License Fees" },
+    { "text": "Services Fees", "datafield": "Services Fees" },
+    {
+      "text": "Monthly Subscription Volume",
+      "datafield": "Monthly Subscription Volume"
+    },
+    {
+      "text": "Monthly Subscription Fee",
+      "datafield": "Monthly Subscription Fee"
+    },
+    {
+      "text": "Critical Success Factors",
+      "datafield": "Critical Success Factors"
+    },
+    { "text": "Expected Closure Date", "datafield": "Expected Closure Date" }
+  ]
+}

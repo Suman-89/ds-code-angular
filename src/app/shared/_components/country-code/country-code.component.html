@@ -1,0 +1,63 @@
+<div class="countryCode">
+
+  
+  <!-- <input type="text" name="" 
+  [(ngModel)]="searchText"
+   placeholder="search" (input)="searchCountries()">
+
+  <select
+    class="form-control inputstyle select"
+    name="country"
+    id="country"
+    [(ngModel)]="selectedCountry"
+    (change)="selectCountry()"
+    (focus)="toggleDropDown()"
+    (blur)="toggleDropDown()"
+  >
+    <div>
+      
+  <input type="text" name="" 
+  [(ngModel)]="searchText"
+   placeholder="search" (input)="searchCountries()">
+
+    </div>
+    <option value="">Deselect Country Code</option>
+    <option *ngFor="let country of allCountries" [value]="country.dial_code">
+      {{ country.name }} | {{ country.dial_code }}
+    </option>
+  </select> -->
+  
+  <app-country-dropdown
+[value]="selectedCountry"
+[placeholder]="'Search for country'"
+[dataList]="allCountries"
+[setting]="{ value: 'dial_code', label: 'name' }"
+[id]="dropDown"
+[disabled]="dropDown"
+($onSelectItem)="selectCountryCode($event)"
+>
+
+</app-country-dropdown>
+    
+
+  <input
+    class="form-control inputstyle number"
+    type="number"
+    name="phoneNumber"
+    [(ngModel)]="rawNumber"
+    (change)="getNumber()"
+  />
+  <i
+    *ngIf="savedNumber"
+    class="fa fa-close fa-lg crossEdit"
+    aria-hidden="true"
+    (click)="editMode(false)"
+    ngbTooltip="Cancel Edit"
+  ></i>
+</div>
+
+
+   
+
+
+

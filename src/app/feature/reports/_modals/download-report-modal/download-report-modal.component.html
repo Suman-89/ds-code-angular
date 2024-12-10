@@ -1,0 +1,74 @@
+<button
+  type="button"
+  class="close"
+  aria-describedby="modal-title"
+  (click)="modal.dismiss()"
+>
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<div class="confirm_modal">
+  <div class="modal-header">
+    <div class="pageHeader" *ngIf="ready">
+      <span class="secondary-color">
+        {{ sourceLabel }}
+      </span>
+      <span>|</span>
+      <span class="secondary-color">
+        {{ reportName }}
+      </span>
+      <!-- <span> ({{ dataLength || 0 }}) </span> -->
+    </div>
+  </div>
+  <div class="height10"></div>
+  <app-report-filters
+    *ngIf="ready"
+    [columnsList]="columns"
+    [primaryState]="filterConditions"
+    [readOnly]="true"
+    [previewOnly]="true"
+  >
+  </app-report-filters>
+  <div>
+    <div *ngFor="let mod of model; let i = index">
+      <div class="col-md-12">
+        <div class="input-group dateRangerContainer">
+          <label class="dateLabel">{{ mod.colLabel }}</label>
+          <app-date-picker
+            [range]="mod.range"
+            [value]="
+              mod.range
+                ? {
+                    startDate: mod.dateRange.GREATER_THAN_OR_EQUAL,
+                    endDate: mod.dateRange.LESS_THAN_OR_EQUAL
+                  }
+                : {
+                    startDate: mod.value,
+                    endDate: mod.value
+                  }
+            "
+            (onDateChange)="onDateChange(mod, $event)"
+          ></app-date-picker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn adjust-btn-size secondarybtnstyle"
+        (click)="modal.dismiss()"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn adjust-btn-size primarybtnstyle"
+        (click)="modal.close(conditions)"
+      >
+        OK
+      </button>
+    </div>
+  </div>
+</div>

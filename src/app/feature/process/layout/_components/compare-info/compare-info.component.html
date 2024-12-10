@@ -1,0 +1,56 @@
+<div class="contentWrap position-relative" >
+        <div class="row-block" *ngFor="let row of tableData" > 
+            <div class="td-block" *ngFor="let data of row;let id = index">
+                <div class="profile-container" *ngIf="data.type =='image'|| data.type =='short-name'">
+                    <div class="profile-block"  >
+                        <div class="image-box">
+                            <img *ngIf="data.type == 'image'" class="profile-image" src="{{data.value}}"/>
+                            <strong *ngIf="data.type == 'short-name'" class="text-primary short-name">{{data.value}}</strong>
+                            <div class="profile-popup">
+                                <div class="image-box">
+                                    <img *ngIf="data.type == 'image'" class="profile-image-popup" src="{{data.metaData.image}}"/>
+                                    <strong 
+                                    *ngIf="data.type == 'short-name'"
+                                    class="text-primary short-name" 
+                                    style="border-width:3px;font-size: 70px;height: 150px;width: 150px;"
+                                    >{{data.metaData.shortname}}</strong>
+                                </div>
+                                <h5 class="profile-name-popup secondary-color">{{data.metaData.name}}</h5>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <h6  *ngIf="data.type=='name'" class="profile-name secondary-color mt-1 mb-0">{{data.value}}</h6>
+                <p  class="answered" *ngIf="data.type=='questions'"><span >Answered : {{data.value}}</span></p>
+                <div class="chart-box" *ngIf="data.type=='score'">
+                    <circle-progress
+                        [percent]="data.value"
+                        [radius]="20"
+                        [outerStrokeWidth]="4"
+                        [innerStrokeWidth]="6"
+                        [outerStrokeColor]="data.color"
+                        [innerStrokeColor]="'#e4e4e4'"
+                        [animation]="true"
+                        [animationDuration]="300"
+                        [showSubtitle]="false" 
+                        [space]="-5"
+                        [titleFontSize]="12"
+                    ></circle-progress>
+                </div>
+                <div class="addressWrap" *ngIf="data.type =='label'|| data.type=='string'">
+                    <label class="infoKey" *ngIf="data.type =='label'" >
+                        <span [ngbTooltip]="data.value" placement="top" container="body"> {{data.value}}</span>
+                    </label>
+                    <label class="infoValue" *ngIf="data.type =='string'">{{data.value}}</label>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- FOR DATE TYPE VALUES -->
+<!-- 
+    <label class="infoValue" *ngIf="!variable.label.includes(' Time') && !variable.label.includes(' Date')">{{task[variable.name]?task[variable.name]:"--"}}</label>
+    <label class="infoValue" *ngIf="variable.label.includes('Time')||variable.label.includes('Date')">{{task[variable.name] | date:'dd-MMM-yyyy HH:mm'}}</label> 
+-->
+
+

@@ -1,0 +1,6 @@
+[
+  { "text": "Group Name", "datafield": "name" },
+  { "text": "Group Id", "datafield": "groupid" },
+  { "text": "Description", "datafield": "description" },
+  { "text": "Roles", "datafield": "rolevm" }
+]

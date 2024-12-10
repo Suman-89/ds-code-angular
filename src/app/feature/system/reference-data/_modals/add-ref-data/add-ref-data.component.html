@@ -1,0 +1,70 @@
+<div class="refDataContainer">
+  <div class="h4 border-bottom text-center">
+    Add Reference Data
+    <span (click)="close()" class="modal-close-btn"
+      ><img height="20" src="./assets/images/cross.png" aria-hidden="true"
+    /></span>
+  </div>
+  <form class="form-group" name="addRefDataForm">
+    <div class="form-row cust-form-marg">
+      <div class="w-100">Reference Data Name</div>
+      <input
+        class="inputstyle"
+        name="refDataName"
+        required
+        [(ngModel)]="refDataForm.name"
+        placeholder="Type Reference Data Name.."
+      />
+    </div>
+    <div class="form-row cust-form-marg">
+      <div class="w-100">Code</div>
+      <input
+        class="inputstyle"
+        name="refDataCode"
+        required
+        [(ngModel)]="refDataForm.code"
+        placeholder="Type Code.."
+      />
+    </div>
+    <div class="form-row cust-form-marg">
+      <div class="w-100">Level</div>
+      <input
+        class="inputstyle"
+        name="refDataLevel"
+        required
+        [(ngModel)]="refDataForm.levels"
+        placeholder="Type Level.."
+      />
+    </div>
+    <div class="form-row cust-form-marg">
+      <div class="w-100">Description</div>
+      <textarea
+        class="inputstyle"
+        name="refDataDesc"
+        [(ngModel)]="refDataForm.description"
+        placeholder="Description"
+      ></textarea>
+    </div>
+    <!-- <button
+      class="primarybtnstyle right-float"
+      *ngIf="refDataForm.name.length > 1 && refDataForm.code.length > 1"
+      (click)="addRefData()"
+    >
+      Add
+    </button> -->
+
+    <div class="modal-footer">
+      <button type="button" class="btn secondarybtnstyle" (click)="close()">
+        Cancel
+      </button>
+      <!-- <button type="submit" [disabled]="!form.valid"  class="btn primarybtnstyle">Save</button> -->
+      <button
+        [disabled]="refDataForm.name.length < 2 || refDataForm.code.length < 2"
+        class="btn primarybtnstyle"
+        (click)="addRefData()"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,38 @@
+<div class="comment pr-1">
+  <div class="username">
+    {{ data?.name }}
+  </div>
+  <div
+    [id]="data?.id"
+    [line-truncation]="3"
+    [disabled]="disabled"
+    (hasTruncated)="handler($event)"
+    class="commentText"
+    [innerHTML]="data?.santizedMessage"
+  ></div>
+  <a class="more" *ngIf="isTruncateNeeded" (click)="toggleFullText()">
+    Show <span *ngIf="!disabled">more</span><span *ngIf="disabled">less</span>
+  </a>
+  <div>
+    <p class="datetime m-0" *ngIf="data?.levelInfo">{{ data.levelInfo }}</p>
+    <span class="datetime">{{
+      data?.createdtime | date: "dd-MMM-yyyy HH:mm"
+    }}</span>
+    <a
+      *ngIf="allowReply && data?.replycount"
+      class="replyIcon"
+      (click)="toggleReply()"
+    >
+      {{ data?.replycount }}
+      <span *ngIf="data?.replycount == 1">Reply</span>
+      <span *ngIf="data?.replycount > 1">Replies</span>
+    </a>
+    <a *ngIf="allowReply" class="replyIcon" (click)="replyComment()">
+      <i class="fa fa-reply" aria-hidden="true"></i> Reply
+    </a>
+  </div>
+  <div class="replyContainer" *ngIf="data?.showReply && data?.replies?.length">
+    <app-vmt-display-comment *ngFor="let reply of data?.replies" [data]="reply">
+    </app-vmt-display-comment>
+  </div>
+</div>

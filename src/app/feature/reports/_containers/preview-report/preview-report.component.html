@@ -1,0 +1,43 @@
+<div class="report-grid-toolbar-cont">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader" *ngIf="ready">
+      <span class="secondary-color">
+        {{ sourceLabel }}
+      </span>
+      <span>|</span>
+      <span class="secondary-color">
+        {{ reportName }}
+      </span>
+      <span> ({{ data?.length || 0 }}) </span>
+    </div>
+  </div>
+
+  <app-report-filters
+    *ngIf="ready"
+    [columnsList]="columns"
+    [primaryState]="filterConditions"
+    [readOnly]="true"
+  >
+  </app-report-filters>
+
+  <div class="grid-cont" *ngIf="ready">
+    <app-grid-toolbar
+      #groupGrid
+      [type]="type"
+      [data]="data"
+      [selectionMode]="false"
+      [automaticPageSize]="true"
+      [pageable]="false"
+      [localization]="localization"
+      [preCalculatedColumns]="columns"
+      [statePredefined]="true"
+      [filterable]="false"
+      [predefinedState]="state"
+      [groupable]="false"
+      [columnsreorder]="false"
+      [showfixedBtns]="false"
+      [showRowNum]="true"
+      [sortable]="false"
+    ></app-grid-toolbar>
+  </div>
+</div>

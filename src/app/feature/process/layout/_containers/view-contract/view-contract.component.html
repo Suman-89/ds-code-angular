@@ -1,0 +1,111 @@
+<div class="start-process-cont">
+  <!-- Header Container including action buttons -->
+  <div class="header-cont">
+    <div class="header" *ngIf="contractInfo">
+      <div class="taskName">
+        <h5>
+          {{ selectedProcess?.label }}
+          <i
+            *ngIf="contractInfo.casePriority"
+            [ngbTooltip]="contractInfo.casePriority + ' priority'"
+            placement="top"
+            container="body"
+            [ngStyle]="getFlagStyle()"
+            class="fa fa-flag"
+          ></i>
+        </h5>
+        <h5>
+          <!-- <span id="title">{{ selectedProcess?.label}}</span>
+          <span
+          *ngIf="selectedProcess.key === 'Initiation_contentCreationProcess'||selectedProcess.key === 'Initiation_vMTProcess'||contractInfo.partnerlegalname"
+            class="secondary-color"
+            style="font-size: 22px; padding-left: 5px; padding-right: 5px"
+          >|</span>
+          <span>
+          {{
+            selectedProcess.key === "Initiation_contentCreationProcess"
+              ? contractInfo?.processvariables?.courseDomain
+              : selectedProcess.key === "Initiation_vMTProcess"
+              ? "Deal ID: " +
+                (contractInfo?.processvariables["amendmentId"]
+                  ? (contractInfo?.processvariables["parentId"] || "") +
+                    ("." + contractInfo?.processvariables?.amendmentId)
+                  : contractInfo?.processvariables?.dealId)
+              : contractInfo.partnerlegalname
+          }}
+          </span> -->
+          <!-- <span id="title" *ngIf="candidateName">{{candidateName}}</span>
+          <span id="title" *ngIf="emailTicketId &&isEmailProcess"><span
+            class="secondary-color"
+            style="font-size: 22px; padding-left: 5px; padding-right: 5px"
+            >|</span
+          >{{emailTicketId}}</span>
+          <span id="title" *ngIf="patientName">{{patientName}}</span>
+          <span
+            class="secondary-color"
+            *ngIf="doctorName"
+            style="font-size: 22px; padding-left: 5px; padding-right: 5px"
+            >|</span>
+          <span id="title" *ngIf="doctorName" >{{doctorName}}</span> -->
+
+          <span id="title" *ngFor="let title of taskTitles; let id = index">
+            {{ title }}
+          </span>
+        </h5>
+      </div>
+      <!-- <div
+        class="h6 secondary-color row no-gutters mt-2 details"
+        *ngIf="selectedProcess.key === 'Process_initiation_impl'"
+      >
+        <label
+          class="max-width-50 text-truncate"
+          [ngbTooltip]="returnSecondLevel(contractInfo.product, 2)"
+          placement="top"
+          container="body"
+        >
+          {{ returnSecondLevel(contractInfo.product, 2) }}
+        </label>
+        <label
+          class="max-width-50 text-truncate"
+          [ngbTooltip]="returnSecondLevel(contractInfo.contracttype, 1)"
+          placement="top"
+          container="body"
+          >{{ returnSecondLevel(contractInfo.contracttype, 1) }}</label
+        >
+      </div> -->
+    </div>
+    <!-- <div class="action-btns" style="margin-top: 20px;">
+            <app-toolbar [buttons]="toolbarButtons" [type]="'view'" (actionEmit)="toolbarEmit($event)"></app-toolbar>
+        </div> -->
+  </div>
+
+  <div
+    class="process-info-cont"
+    *ngIf="actions1.length > 0 && actions2.length > 0"
+  >
+    <div class="row-cont">
+      <app-task-actions
+        [actions]="actions1"
+        [tasks]="tasks"
+        [taskId]="contractId"
+        [viewtype]="'contract'"
+        [darkTheme]="true"
+      >
+      </app-task-actions>
+    </div>
+    <div class="row-cont" #viewtaskaction>
+      <app-task-actions
+        [actions]="actions2"
+        [taskId]="contractId"
+        [viewtype]="'contract'"
+        [comments]="commentList"
+        [transcriptions]="transcriptionList"
+        [completedContract]="!contractInfo.inprogress"
+        [businessKey]="contractInfo.businessKey"
+        [taskDetails]="contractInfo"
+        [darkTheme]="true"
+      >
+      </app-task-actions>
+    </div>
+  </div>
+</div>

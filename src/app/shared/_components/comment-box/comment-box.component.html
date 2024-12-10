@@ -1,0 +1,177 @@
+<div>
+  <div
+    *ngIf="commenttype == 'email'"
+    class="{{ darkTheme ? 'darkTheme' : '' }}"
+  >
+    <!-- <app-email-box
+    #commentBox
+    commenttype=""
+    [commentMentionConfig]="commentMentionConfig"
+    [value]="subject"
+    (submitted)="onSubmitted($event)"
+  ></app-email-box> -->
+    <div
+      *ngIf="receivers && !fromFullScreen"
+      class="comment-container position-relative pb-1"
+    >
+      <small class="subject-style" style="right: 6px; top: -20px">To</small>
+      <div
+        class="subject-wrap font-weight-normal border-primary text-primary border rounded bg-light px-2"
+        placement="bottom"
+        [ngbTooltip]="receivers"
+      >
+        <small class="primary-color">{{ receivers }}</small>
+      </div>
+    </div>
+    <div *ngIf="subject" class="comment-container position-relative pb-1 mt-3">
+      <small class="subject-style" style="right: 6px; top: -20px"
+        >Subject</small
+      >
+      <div
+        class="subject-wrap font-weight-normal border-primary text-primary border rounded bg-light px-2"
+        [ngbTooltip]="subject"
+      >
+        <small class="primary-color">{{ subject }}</small>
+      </div>
+    </div>
+  </div>
+  <div class="comment-container">
+    <small *ngIf="commenttype == 'email'" class="subject-style">Body</small>
+    <ng-template #list let-item="item" let-labelProp="labelProp">
+      <div
+        [ngbTooltip]="item[labelProp]"
+        container="body"
+        class="text-truncate"
+      >
+        {{ item[labelProp] }}
+      </div>
+    </ng-template>
+    <div class="form-group p-0 m-0 pb-1">
+      <div
+        #comment
+        [mentionListTemplate]="list"
+        [mentionConfig]="commentMentionConfig"
+        (mouseenter)="showFullScreenIcon = true"
+        (mouseleave)="showFullScreenIcon = false"
+      ></div>
+      <div>
+        <textarea
+          class="hidden"
+          cols="60"
+          rows="4"
+          [id]="_commentBoxOptions?.id"
+        ></textarea>
+        <!-- previously the conition is based on txtAreaLen now replaced by txtContentLen and in send button also-->
+        <div
+          class="text-muted text-right font-smaller font-italic pt-1"
+          *ngIf="txtContentLen > 50 && maxChar > 0"
+        >
+          {{ maxChar - txtContentLen >= 0 ? maxChar - txtContentLen : 0 }}
+          of {{ maxChar }} chars left
+        </div>
+      </div>
+    </div>
+
+    <i
+      *ngIf="_commentBoxOptions?.allowFullScreen"
+      class="fa fa-arrows-alt full-screen-icon"
+      aria-hidden="true"
+      (click)="showFullCommentBoxModal()"
+    ></i>
+  </div>
+</div>
+
+<!-- previously the class name for whatsapp is set to buttonContainerForTimer now changed to buttonContainer -->
+<!-- class="{{
+  commenttype == 'whatsapp' ? 'buttonContainerForTimer' : 'buttonContainer'
+}}" -->
+<div
+  class="buttonContainer 
+  {{ darkTheme ? 'darkTheme' : '' }}"
+  *ngIf="showSubmitBtn"
+>
+  <div class="d-flex align-items-center">
+    <i
+      class="fa fa-paperclip attachmentButton"
+      style="font-size: 18px"
+      (click)="openEmailAttachment()"
+      *ngIf="commenttype == 'email' || commenttype == 'whatsapp'"
+    ></i>
+    <!-- // previous email file selected for email only -->
+    <!-- *ngIf="commenttype == 'email' && taskActionSvc.emailSelectedFiles.length" -->
+    <span
+      class="d-block pl-2 font-weight-normal"
+      style="font-size: 12px"
+      *ngIf="taskActionSvc.emailSelectedFiles.length"
+    >
+      {{ taskActionSvc.emailSelectedFiles.length }} Files Selected
+      <span
+        class="secondary-color"
+        style="font-size: 18px; padding-left: 5px; padding-right: 5px"
+        >|</span
+      >
+      <small style="font-size: 12px">
+        {{
+          this.taskActionSvc.emailSelectedFileSize / (1024 * 1024)
+            | number : "1.2-2"
+        }}MB of 15MB
+        <em style="color: rgb(202, 41, 41)">{{
+          this.taskActionSvc.emailSelectedFileSize / (1024 * 1024) > 15
+            ? "Exceeding size limit."
+            : ""
+        }}</em>
+      </small>
+    </span>
+  </div>
+  <div>
+    <button
+      (click)="save()"
+      class="btn primarybtnstyle"
+      [disabled]="
+        (commenttype === 'email' && !receivers?.length) ||
+        (commenttype === 'email' &&
+          this.taskActionSvc.emailSelectedFileSize / (1024 * 1024) > 15) ||
+        (txtContentLen > maxChar && maxChar > 0)
+      "
+      [disabled]="
+        (commenttype === 'whatsapp' && this.countTimeInSec < 0) ||
+        (commenttype === 'whatsapp' &&
+          taskDetails?.processvariables?.psStoppedByCandidate) ||  this.taskActionSvc.emailSelectedFileSize / (1024 * 1024) > 15
+      "
+    >
+      Send
+    </button>
+  </div>
+  <div
+    *ngIf="
+      commenttype == 'whatsapp' &&
+      countTimeInSec > 0 &&
+      !taskDetails.processvariables?.psStoppedByCandidate &&
+      taskDetails.processvariables?.psWaEnabledUpto
+    "
+  >
+    <app-countdown seconds="{{ countTimeInSec }}"></app-countdown>
+  </div>
+  <div
+    *ngIf="
+      commenttype == 'whatsapp' &&
+      countTimeInSec < 0 &&
+      !taskDetails.processvariables?.psStoppedByCandidate &&
+      taskDetails.processvariables?.psWaEnabledUpto
+    "
+  >
+    <span class="message-style"
+      >Message on whatsapp was allowed untill {{ enabledUpTo }}</span
+    >
+  </div>
+  <div
+    *ngIf="
+      commenttype == 'whatsapp' &&
+      taskDetails?.processvariables?.psStoppedByCandidate
+    "
+  >
+    <span class="message-style" style="color: red"
+      >Candidate has stopped the conversation</span
+    >
+  </div>
+</div>

@@ -1,0 +1,115 @@
+@import "variables";
+
+span {
+  font-weight: 400;
+  font-size: 12px;
+  vertical-align: middle;
+  padding: 5px 10px;
+  background: transparent;
+  border-radius: 5px;
+  color: white;
+  animation: cssAnimation 10s forwards;
+}
+
+@keyframes cssAnimation {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@-webkit-keyframes cssAnimation {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.task-form-container {
+  padding: 0px 10px 0px;
+  font-size: 13px;
+  height: calc(100% - 35px);
+  overflow: auto;
+
+  .task-desc {
+    border: 1px solid var(--secondaryColor);
+    padding: 13px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+}
+.btnswrap {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin-bottom: 15px;
+
+  .inline {
+    display: inline-block;
+  }
+  hr {
+    margin: 15px 0px 0px 0px;
+    border-top: 1px solid #eee;
+    width: 100%;
+  }
+  .uploadWrap {
+    left: 20px;
+    top: 0px;
+    padding: 2px 5px;
+    background: white;
+    position: absolute;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--primaryColor);
+  }
+}
+::ng-deep {
+  formly-form {
+    .horizontalLabel {
+      font-weight: 300 !important;
+      font-size: 13px !important;
+      overflow: hidden;
+      margin-top: 10px;
+      padding: 0px !important;
+      max-width: calc(100% - 20px);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .verticalLabel {
+      font-weight: 300 !important;
+      font-size: 13px !important;
+      margin: 0px;
+      padding: 0px;
+    }
+    .inputField {
+      padding: 0px !important;
+    }
+  }
+}
+
+.disabledForm {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.horizontalLabel{
+  padding-left: 5px;
+  padding-top: 10px;
+  max-width: calc(100% - 20px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

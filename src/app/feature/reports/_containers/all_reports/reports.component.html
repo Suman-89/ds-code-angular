@@ -1,0 +1,24 @@
+<div class="container-fluid h-100">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      {{ selectedProcess}}<span class="secondary-color" style="font-size: 22px; padding-left: 5px">|</span>
+      All Reports
+       <span
+        class="secondary-color"
+        *ngIf="reportsData"
+        >({{ reportsData?.length }})</span
+      >
+    </div>
+  </div>
+  <div class="w-100" *ngIf="reportsData">
+    <app-grid-toolbar
+      #gridinstance
+      [selectionMode]="'radio'"
+      [type]="gridType"
+      [data]="reportsData"
+      (emitAction)="selectRow($event)"
+      (doubleClick)="previewReport()"
+    >
+    </app-grid-toolbar>
+  </div>
+</div>

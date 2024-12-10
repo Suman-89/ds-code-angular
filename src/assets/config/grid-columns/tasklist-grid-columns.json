@@ -1,0 +1,370 @@
+{
+  "work_list": [
+    {
+      "text": "Status",
+      "filtertype": "input",
+      "datafield": "status",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Priority",
+      "filtertype": "input",
+      "datafield": "casePriority",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Last Updated Date",
+      "datafield": "created",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "Company Name",
+      "filtertype": "input",
+      "datafield": "partnerLegalName",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Task Name",
+      "filtertype": "input",
+      "datafield": "name",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Product",
+      "filtertype": "checkedlist",
+      "datafield": "product",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Type",
+      "filtertype": "checkedlist",
+      "datafield": "contractType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Type (2nd Level)",
+      "filtertype": "checkedlist",
+      "datafield": "contractTypeSecondLevel",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "iBasis Contracting Entity",
+      "filtertype": "input",
+      "datafield": "ibasisContractingEntity",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Country",
+      "filtertype": "input",
+      "datafield": "country",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Group",
+      "filtertype": "input",
+      "datafield": "groupname",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Group Id",
+      "filtertype": "input",
+      "hidden": "true",
+      "datafield": "groupid",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Assignee",
+      "filtertype": "input",
+      "hidden": "true",
+      "datafield": "assigneeName",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Assignee Id",
+      "filtertype": "input",
+      "hidden": "true",
+      "datafield": "assignee",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Initiator",
+      "filtertype": "input",
+      "datafield": "initiator",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Sub Product",
+      "filtertype": "checkedlist",
+      "datafield": "productSecondLevel",
+      "width": "auto",
+      "hidden": "true",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Initiation Date",
+      "datafield": "contractInitiationTime",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "Contract Id",
+      "filtertype": "input",
+      "datafield": "businessKey",
+      "width": "auto",
+      "minwidth": 200
+    }
+  ],
+
+  "work_basket": [
+    {
+      "text": "Priority",
+      "filtertype": "input",
+      "datafield": "casePriority",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Last Updated Date",
+      "datafield": "created",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "Company Name",
+      "filtertype": "input",
+      "datafield": "partnerLegalName",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Task Name",
+      "filtertype": "input",
+      "datafield": "name",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Product",
+      "filtertype": "checkedlist",
+      "datafield": "product",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Type",
+      "filtertype": "checkedlist",
+      "datafield": "contractType",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Type (2nd Level)",
+      "filtertype": "checkedlist",
+      "datafield": "contractTypeSecondLevel",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "iBasis Contracting Entity",
+      "filtertype": "input",
+      "datafield": "ibasisContractingEntity",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Country",
+      "filtertype": "input",
+      "datafield": "country",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Initiator",
+      "filtertype": "input",
+      "datafield": "initiator",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Sub Product",
+      "filtertype": "checkedlist",
+      "datafield": "productSecondLevel",
+      "hidden": "true",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Initiation Date",
+      "datafield": "contractInitiationTime",
+      "filtertype": "date",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "Contract Id",
+      "filtertype": "input",
+      "datafield": "businessKey",
+      "width": "auto",
+      "minwidth": 200
+    }
+  ],
+  "contract_list": [
+    {
+      "text": "Company Name",
+      "filtertype": "input",
+      "datafield": "partnerlegalname",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Initiator",
+      "filtertype": "input",
+      "datafield": "initiatedbyfullname",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Product",
+      "filtertype": "checkedlist",
+      "datafield": "product",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Type",
+      "filtertype": "checkedlist",
+      "datafield": "contracttype",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Contract Type (2nd Level)",
+      "filtertype": "checkedlist",
+      "datafield": "contractTypeSecondLevel",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Sub Product",
+      "filtertype": "checkedlist",
+      "datafield": "productSecondLevel",
+      "width": "auto",
+      "hidden": "true",
+      "minwidth": 100
+    },
+    {
+      "text": "Priority",
+      "filtertype": "input",
+      "datafield": "casePriority",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Overall Status",
+      "filtertype": "checkedlist",
+      "datafield": "overallStats",
+      "width": "auto",
+      "minwidth": 100
+    },
+    {
+      "text": "Country",
+      "filtertype": "input",
+      "datafield": "country",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "iBasis Contracting Entity",
+      "filtertype": "input",
+      "datafield": "cename",
+      "width": "auto",
+      "minwidth": 150
+    },
+
+    {
+      "text": "Contract Initiation Time",
+      "datafield": "initiationdate",
+      "filtertype": "range",
+      "cellsformat": "dd-MMM-yyyy HH:mm:ss",
+      "width": "15%"
+    },
+    {
+      "text": "Processed Date",
+      "datafield": "processedDate",
+      "filtertype": "range",
+      "cellsformat": "dd-MMM-yyyy",
+      "width": "15%"
+    },
+    {
+      "text": "Contract Completion Time",
+      "datafield": "completiondatetime",
+      "filtertype": "range",
+      "cellsformat": "dd-MMM-yyyy HH:mm:ss",
+      "width": "15%"
+    },
+
+    {
+      "text": "Contract Elapsed Time (Hours)",
+      "datafield": "elapsedhour",
+      "width": "auto",
+      "cellsformat": "d2"
+    },
+    {
+      "text": "Contract Elapsed Time (Days)",
+      "datafield": "elapseddays",
+      "width": "auto",
+      "cellsformat": "d2"
+    },
+    {
+      "text": "Contract Id",
+      "filtertype": "input",
+      "datafield": "contractid",
+      "width": "auto",
+      "minwidth": 200
+    },
+    {
+      "text": "Currency",
+      "hidden": "true",
+      "datafield": "currency",
+      "width": "auto"
+    },
+    { "text": "Sort Order", "hidden": "true", "datafield": "sortorder" },
+    {
+      "text": "Status",
+      "filtertype": "input",
+      "datafield": "status",
+      "width": "auto",
+      "minwidth": 150
+    },
+    {
+      "text": "Region",
+      "filtertype": "input",
+      "datafield": "region",
+      "width": "auto",
+      "hidden": "true",
+      "minwidth": 150
+    }
+  ],
+  "comments": [
+    { "text": "Comment", "datafield": "comment" },
+    { "text": "Contract ID", "datafield": "contractid" }
+  ]
+}

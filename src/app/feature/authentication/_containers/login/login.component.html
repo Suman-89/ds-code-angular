@@ -1,0 +1,32 @@
+<div class="noPadding noMargin fullHeight relative loginpage">
+  <div class="logodiv">
+    <img [src]="sharedSvc.dynamicThemeUrls.value.loginLogoUrl" class="full" />
+    <div class="loginDiv showAddWF">
+      <input
+        class="inputstyle form-control loginInput"
+        type="text"
+        placeholder="Username"
+        [(ngModel)]="loginModel.userid"
+      />
+      <input
+        class="inputstyle form-control loginInput"
+        type="password"
+        placeholder="Password"
+        (keydown.enter)="login()"
+        [(ngModel)]="loginModel.password"
+      />
+    </div>
+    <div class="btnblock">
+      <img
+        class="iconStyle pull-right"
+        (click)="login()"
+        src="assets/images/icon-login.png"
+      />
+      <img
+        class="iconStyle pull-right"
+        (click)="cancel()"
+        src="assets/images/icon-cancel.png"
+      />
+    </div>
+  </div>
+</div>

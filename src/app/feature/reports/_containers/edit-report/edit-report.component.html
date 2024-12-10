@@ -1,0 +1,55 @@
+<div class="report-grid-toolbar-cont">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader" *ngIf="ready">
+      <span class="secondary-color">
+        {{ sourceLabel }}
+      </span>
+      <span>|</span>
+      <span class="secondary-color">
+        {{ reportName }}
+      </span>
+      <i class="fa fa-pencil pointer" (click)="toggleEditReportName(true)"></i>
+    </div>
+    <div *ngIf="showEditReportName" class="flex">
+      <input
+        class="inputstyle form-control customInput"
+        type="text"
+        [(ngModel)]="editedReportName"
+      />
+      <button
+        class="btn adjust-btn-size secondarybtnstyle"
+        (click)="toggleEditReportName(false)"
+      >
+        OK
+      </button>
+    </div>
+    <div class="error">
+      {{ gridInst?.editedReportDetails?.editedReportNameError || "" }}
+    </div>
+  </div>
+  <app-report-filters
+    *ngIf="ready"
+    [columnsList]="columns"
+    [filtersList]="filters"
+    [primaryState]="conditions"
+  >
+  </app-report-filters>
+  <div class="grid-cont" *ngIf="ready">
+    <app-grid-toolbar
+      #groupGrid
+      [type]="type"
+      [data]="data"
+      [statePredefined]="true"
+      [predefinedState]="state"
+      [selectionMode]="false"
+      [automaticPageSize]="true"
+      [pageable]="false"
+      [groupable]="false"
+      [localization]="localization"
+      (filterChange)="onFilterChange($event)"
+      [preCalculatedColumns]="columns"
+      (onColumnVisibilityChange)="onColumnVisibilityChange($event)"
+    ></app-grid-toolbar>
+    <!-- [showfixedBtns]="false" -->
+  </div>
+</div>

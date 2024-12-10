@@ -1,0 +1,115 @@
+@import "variables";
+
+.company-det-cont {
+  .link {
+    img {
+      width: 20px;
+      margin-left: 5px;
+      vertical-align: top;
+      cursor: pointer;
+    }
+  }
+  .company-det-header {
+    margin-bottom: 15px;
+
+    p {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+  }
+  .company-det {
+    margin-bottom: 20px;
+
+    .comp-det {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: flex;
+
+      .attribute {
+        margin-bottom: 0px;
+        max-width: 100px;
+      }
+
+      .value {
+        font-weight: 500;
+        margin-left: 5px;
+        margin-bottom: 0px;
+        max-width: 285px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        vertical-align: bottom;
+        white-space: nowrap;
+
+        .pipe {
+          font-size: 15px;
+          font-weight: 600;
+          color: var(--secondaryColor);
+        }
+      }
+    }
+  }
+  .company-docs {
+    .docs-head {
+      margin-bottom: 5px;
+
+      p {
+        font-weight: 500;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+    }
+
+    .docs {
+      max-height: 300px;
+      overflow: auto;
+      padding: 0px 10px 0px 0px;
+
+      .inline {
+        display: inline-block;
+      }
+      .documentRow {
+        padding: 10px 0px 0px 0px;
+        font-size: 12px;
+        color: #7e7d7d;
+        &:hover {
+          color: #2aa89b;
+          transition: 1s all ease;
+        }
+        .documenticon {
+          vertical-align: top;
+          cursor: pointer;
+          width: 22px;
+        }
+        .docname {
+          width: calc(100% - 80px);
+          padding: 0px 0px 0px 5px;
+          cursor: pointer;
+        }
+        .comment {
+          color: #b5b5b5;
+
+          .pipe {
+            border-right: 2px solid var(--secondaryColor);
+            padding: 0px 2px 0px 5px;
+
+            &:last-child {
+              border-right: 0px;
+            }
+          }
+        }
+        .downloadicon {
+          height: 18px;
+          margin: 5px 0px 0px 6px;
+          cursor: pointer;
+        }
+        .checkBtns {
+          width: 100%;
+          text-align: right;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

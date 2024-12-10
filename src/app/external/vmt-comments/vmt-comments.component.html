@@ -1,0 +1,134 @@
+<div class="comments_container pageHeaderWrap">
+  <div class="pageHeader uploadWrap inline position-relative">
+    Comments
+    <i class="secondary-color pl-2 fa fa-download cursor-pointer">
+      <!-- (click)="downloadPDF()" -->
+    </i>
+  </div>
+  <div class="contentWrap p-0 mt-2">
+    <!-- *ngIf="multiMentionConfig.mentions.length == 1" -->
+    <div class="inputblock" [hidden]="!showCommentBox">
+      <div class="info mb-2">
+        <div class="row">
+          <div class="col-5">
+            <p class="mb-2">
+              <span style="font-weight: 700">@</span> = Tag another user
+            </p>
+            <p class="mb-2">
+              <span style="font-weight: 700">#</span> = Tag a group
+            </p>
+            <p class="mb-2">
+              <span style="font-weight: 700">$</span> = Tag a document
+            </p>
+          </div>
+          <div class="col-7">
+            <p class="mb-2">
+              <span style="font-weight: 700">'Shift+Enter'</span> key = Start a
+              new line
+            </p>
+            <p class="mb-2">
+              <span style="font-weight: 700">'Alt+F'</span> key = Full screen
+              comment
+            </p>
+            <p class="mb-2">
+              <span style="font-weight: 700">'Ctrl+Enter'</span> key = to enter
+              new item in list
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="demoInput">
+        <!-- <app-comment-box 
+              *ngIf="multiMentionConfig.mentions.length == 3" 
+              #commentBox
+              [commentMentionConfig]="multiMentionConfig" 
+              (submitted)="onSubmitted($event)"
+            ></app-comment-box> -->
+
+        <div class="comment-container">
+          <ng-template #list let-item="item" let-labelProp="labelProp">
+            <div
+              [ngbTooltip]="item[labelProp]"
+              container="body"
+              class="text-truncate"
+            >
+              {{ item[labelProp] }}
+            </div>
+          </ng-template>
+          <div class="form-group">
+            <div
+              #comment
+              [mentionListTemplate]="list"
+              [mentionConfig]="multiMentionConfig"
+              (mouseenter)="showFullScreenIcon = true"
+              (mouseleave)="showFullScreenIcon = false"
+            ></div>
+            <div>
+              <textarea
+                class="w-100"
+                cols="60"
+                rows="4"
+                [id]="_commentBoxOptions?.id"
+              ></textarea>
+            </div>
+          </div>
+
+          <i
+            *ngIf="_commentBoxOptions?.allowFullScreen"
+            class="fa fa-arrows-alt full-screen-icon"
+            aria-hidden="true"
+            (click)="showFullCommentBoxModal()"
+          ></i>
+        </div>
+        <div class="d-block text-right" *ngIf="showSubmitBtn">
+          <button (click)="save()" class="btn primarybtnstyle">Submit</button>
+        </div>
+      </div>
+      <!-- <button class="primarybtnstyle send-btn" style="margin-top: 10px;" (click)="sendComment()">Send</button> -->
+    </div>
+
+    <div class="separator">
+      <hr />
+      <div class="iconbtn">
+        <i
+          *ngIf="showCommentBox"
+          (click)="showCommentBox = false"
+          class="fa fa-chevron-circle-up"
+          aria-hidden="true"
+        ></i>
+        <i
+          *ngIf="!showCommentBox"
+          (click)="showCommentBox = true"
+          class="fa fa-chevron-circle-down"
+          aria-hidden="true"
+        ></i>
+        <div class="w-100 border-0 my-2">
+          <input
+            type="text"
+            class="inputstyle w-100"
+            placeholder="Search Comments"
+            (keyup)="filterComments($event.target.value)"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="commentsCont"
+      [ngClass]="{
+        commentArea: showCommentBox,
+        noCommentArea: !showCommentBox
+      }"
+      *ngIf="displayCommentList && displayCommentList.length > 0"
+    >
+      <div class="commentRow" *ngFor="let comment of displayCommentList">
+        <app-vmt-display-comment
+          [data]="comment"
+          [allowReply]="true"
+          [docList]="docList"
+        ></app-vmt-display-comment>
+      </div>
+    </div>
+  </div>
+</div>

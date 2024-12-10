@@ -1,0 +1,47 @@
+<div class="d-flex flex-container">
+  <div>
+    <div *ngIf="!!width">
+      Width:
+      <mv-slider
+        [(value)]="width"
+        [min]="minWidth"
+        [max]="maxWidth"
+        tooltip="show"
+      ></mv-slider>
+    </div>
+    <div *ngIf="!!height">
+      Height:
+      <mv-slider
+        [(value)]="height"
+        [min]="minHeight"
+        [max]="maxHeight"
+        tooltip="show"
+      ></mv-slider>
+    </div>
+  </div>
+  <div class="image-container">
+    <img
+      [src]="imageUrl"
+      [width]="width"
+      [height]="height"
+      *ngIf="!!imageUrl"
+      alt=""
+    />
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn adjust-btn-size secondarybtnstyle"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn adjust-btn-size primarybtnstyle"
+      (click)="uploadImage()"
+    >
+      OK
+    </button>
+  </div>
+</div>

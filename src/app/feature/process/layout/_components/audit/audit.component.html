@@ -1,0 +1,89 @@
+<div class="contentWrap">
+  <div
+    class="commentsCont {{ darkTheme ? 'darkTheme' : '' }}"
+    #audittable
+    id="audittable"
+  >
+    <!-- <div class="border-bottom" *ngFor="let view of trailView"> -->
+    <div class="actionRow" *ngFor="let action of auditTrailView">
+      <div
+        class="fromCont"
+        [ngClass]="{ completedClass: action.fromTask.endtime }"
+        *ngIf="action.fromTask"
+      >
+        <div class="taskName">{{ action.fromTask.taskname }}</div>
+        <div>
+          <span *ngIf="action.fromTask.assignedusername">{{
+            action.fromTask.assignedusername
+          }}</span>
+          <span
+            *ngIf="
+              action.fromTask.assignedusername &&
+              !ifProcessStartOrCompleteStep(action.fromTask)
+            "
+            class="boundary secondary-color"
+            >|</span
+          >
+          <span *ngIf="!ifProcessStartOrCompleteStep(action.fromTask)"
+            >{{ action.fromTask.assignedgroupname }}
+            <span *ngIf="!action.fromTask.assignedusername">Queue</span></span
+          >
+        </div>
+        <p
+          class="m-0"
+          *ngIf="action.fromTask.decision && action.fromTask.assignedusername"
+        >
+          Task Decision: {{ action.fromTask.decision }}
+        </p>
+        <span class="rolename">{{
+          action.fromTask.starttime | date : "dd-MMM-yyyy HH:mm"
+        }}</span>
+      </div>
+
+      <img
+        src="assets/images/right-arrow.png"
+        class="rightarrow"
+        *ngIf="action.toTask"
+      />
+
+      <div
+        class="fromCont"
+        [ngClass]="{
+          completedClass: action.toTask.endtime,
+          inprocessClass: !action.toTask.endtime
+        }"
+        style="text-align: right"
+        *ngIf="action.toTask"
+      >
+        <div class="taskName">{{ action.toTask.taskname }}</div>
+        <div>
+          <span *ngIf="action.toTask.assignedusername">{{
+            action.toTask.assignedusername
+          }}</span>
+          <span
+            *ngIf="
+              action.toTask.assignedusername &&
+              !ifProcessStartOrCompleteStep(action.toTask)
+            "
+            class="boundary secondary-color"
+            >|</span
+          >
+          <span *ngIf="!ifProcessStartOrCompleteStep(action.toTask)"
+            >{{ action.toTask.assignedgroupname }}
+            <span *ngIf="!action.toTask.assignedusername">Queue</span></span
+          >
+        </div>
+        <p
+          class="m-0"
+          *ngIf="action.toTask.decision && action.toTask.assignedusername"
+        >
+          Task Decision: {{ action.toTask.decision }}
+        </p>
+        <span class="rolename">{{
+          action.toTask.starttime | date : "dd-MMM-yyyy HH:mm"
+        }}</span>
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>

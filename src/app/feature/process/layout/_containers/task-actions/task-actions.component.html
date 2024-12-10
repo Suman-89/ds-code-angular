@@ -1,0 +1,114 @@
+<div
+  class="custom-cont position-relative maxHeight {{
+    darkTheme ? 'darkTheme' : ''
+  }}"
+>
+  <div class="btnswrap">
+    <div class="uploadWrap inline position-relative">
+      {{ selectedAction?.name }}
+      <!-- <i
+        *ngIf="selectedAction.id !== 'document'"
+        class="secondary-color pl-2 fa fa-download cursor-pointer"
+        (click)="downloadPDF()"
+      ></i> -->
+      <!-- <i
+      *ngIf="selectedAction.id === 'transcript' && !isAgro_AdvisoryProcess"
+      class="secondary-color pl-2 fa fa-list-alt cursor-pointer"
+      (click)="showSummery()"
+    ></i> -->
+      <i
+        *ngIf="selectedAction?.isDownloadable"
+        class="secondary-color pl-2 fa fa-download cursor-pointer"
+        (click)="downloadPDF()"
+      ></i>
+      <i
+        *ngIf="selectedAction?.generateSummary"
+        class="secondary-color pl-2 fa fa-list-alt cursor-pointer"
+        (click)="showSummery()"
+      ></i>
+
+      <!-- && selectedAction.id !== 'transcript' -->
+    </div>
+    <div
+      class="imgWrap inline"
+      *ngFor="let action of actions"
+      placement="top"
+      container="body"
+      [ngClass]="{ selectedIcon: selectedAction.id === action.id }"
+      (click)="selectAction(action)"
+    >
+      <i
+        class="tooltip-init"
+        [class]="action.icon + ' documentsicon'"
+        *ngIf="action?.icon?.includes('fa ')"
+      ></i>
+      <img
+        *ngIf="
+          action?.icon &&
+          !action?.icon?.includes('fa ') &&
+          !action?.icon?.includes('fa-')
+        "
+        class="imgStyle"
+        height="25px"
+        width="25px"
+        aria-hidden="true"
+        [src]="this.sharedSvc.dmsUrl + '/file/' + action?.icon"
+      />
+      <!-- <div class="comment-count bg-secondary" *ngIf="action.name === 'Comments' && comCount > 0">
+              {{comCount}}
+            </div> -->
+      <div class="custom-tooltip">
+        <span class="tooltip-text">{{ action.name }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="contentWrap" *ngIf="selectedAction?.id == 'info'">
+    <app-task-info
+      #info
+      id="info"
+      [tasks]="tasks"
+      [darkTheme]="darkTheme"
+    ></app-task-info>
+  </div>
+  <div class="contentWrap" *ngIf="selectedAction?.id == 'audit'">
+    <app-audit #audit id="audit" [darkTheme]="darkTheme"></app-audit>
+  </div>
+  <div class="contentWrap" *ngIf="selectedAction?.id == 'comment'">
+    <app-comments
+      #comment
+      id="comment"
+      [commentList]="comments"
+      [darkTheme]="darkTheme"
+    ></app-comments>
+  </div>
+  <div class="contentWrap" *ngIf="selectedAction?.id == 'transcript'">
+    <app-transcriptions
+      #decision
+      id="comment"
+      [transcriptionList]="transcriptions"
+      [transcriptChannels]="transcriptChannels"
+      [taskDetails]="taskDetails"
+      [darkTheme]="darkTheme"
+      [isShowHistory]="isShowHistory"
+    ></app-transcriptions>
+  </div>
+  <div
+    class="contentWrapapp-document-list p-0"
+    style="height: 93%"
+    *ngIf="selectedAction?.id == 'document'"
+  >
+    <app-document-list
+      [commentList]="comments"
+      [viewType]="viewtype"
+      [completedContract]="completedContract"
+      [darkTheme]="darkTheme"
+    ></app-document-list>
+  </div>
+  <div class="pop-up" *ngIf="summaryBool && selectedAction?.id === 'transcript'">
+    <i class="fa fa-times fa-lg" aria-hidden="true" (click)="hideSummery()"></i>
+    <button class="btn secondarybtnstyle" (click)="generateAgainSummaryFn()">
+      Generate Again
+    </button>
+    <span>{{ summary }}</span>
+  </div>
+</div>

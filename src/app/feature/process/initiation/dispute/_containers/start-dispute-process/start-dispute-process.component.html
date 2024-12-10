@@ -1,0 +1,25 @@
+<div class="start-process-cont">
+
+    <!-- Header Container including action buttons -->
+    <div class="header-cont">
+        <div class="header">
+            <h5>Initiate Dispute Process</h5>
+        </div>
+       
+    </div>
+
+    <div class="process-info-cont">
+        <form #form="ngForm" class="initiate-form" (ngSubmit)="formSubmit()">
+            <div class="flex-prop">
+                <div>
+                    <app-initiate-dispute [initiation]="initiationData" [form]="form"></app-initiate-dispute>
+                </div>
+            </div>
+            <div class="text-center btn-cont">
+                <button type="submit" [disabled]="!formValid()" class="btn primarybtnstyle">Submit</button>
+                <button type="reset" (click)="back()" class="cancelbtn btn secondarybtnstyle">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</div>

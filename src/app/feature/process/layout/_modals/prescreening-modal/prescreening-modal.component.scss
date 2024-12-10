@@ -1,0 +1,21 @@
+@import "variables";
+
+.modal-body{
+  max-height: 500px;
+  min-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-left: 70px;
+  height: 50vh;
+}
+
+.recruiters {
+    padding: 20px;
+    width: 350px;
+  }
+
+  .prescreenig-title{
+  font-weight: 300;
+  color: var(--secondaryColor);
+  margin-left: 140px;
+  }

@@ -1,0 +1,114 @@
+<div class="row no-gutters border-top border-bottom pt-1 pb-0" style="display: flex;flex-wrap: nowrap;">
+  <div
+    class="d-flex justify-content-center align-items-center"
+    [ngClass]="{
+      'col-1': gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC,
+      'col-3': gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC
+    }"
+  >
+    <label class="font-small custom-label">Variable</label>
+  </div>
+  <div
+    class="pr-1"
+    [ngClass]="{
+      'col-2': gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC,
+      'col-1': gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC
+    }"
+  >
+    <label class="font-small custom-label"
+      >Column <br />
+      Header</label
+    >
+  </div>
+  <div
+    [ngClass]="{
+      'col-1': gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC,
+      'col-2': gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC
+    }"
+  >
+    <label class="font-small custom-label"
+      >Cell <br />
+      Format</label
+    >
+  </div>
+  <div
+    [ngClass]="{
+      'col-1': gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC,
+      'col-2': gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC
+    }"
+  >
+    <label class="font-small custom-label"
+      >Filter <br />
+      Type</label
+    >
+  </div>
+  <div
+    class="col-1 "
+    *ngIf="gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <label class="font-small custom-label">Mobile</label>
+  </div>
+  <div
+    class="col-1"
+    *ngIf="gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <label class="font-small custom-label">Tablet</label>
+  </div>
+  <div
+    class="col-1"
+    *ngIf="gridSettingType === gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <label class="font-small custom-label">Hidden</label>
+  </div>
+  <ng-container
+    *ngIf="gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <div class="col-1 d-flex justify-content-center align-items-center">
+      <label class="font-small custom-label">Width</label>
+    </div>
+    <div class="custom-col">
+      <label class="font-small custom-label"
+        >My <br />
+        Queue</label
+      >
+    </div>
+    <div class="custom-col">
+      <label class="font-small custom-label"
+        >Group <br />
+        Queue</label
+      >
+    </div>
+    <div class="custom-col">
+      <label class="font-small custom-label"
+        >All<br />
+        Processes</label
+      >
+    </div>
+    <div class="custom-col">
+      <label class="font-small custom-label"
+        >All<br />
+        Tasks</label
+      >
+    </div>
+    <div class="custom-col">
+      <label class="font-small custom-label">Compare</label>
+    </div>
+    <div class="custom-col">
+      <label class="font-small custom-label">Info</label>
+    </div>
+    
+  </ng-container>
+  <div
+    class="custom-col d-flex justify-content-center align-items-center plusCon"
+    *ngIf="gridSettingType !== gridSettingTypeEnum.PROC_DEF_SPECIFIC"
+  >
+    <i
+      class="fa fa-plus iconAdd custom-label"
+      [ngbTooltip]="'Add Column'"
+      placement="bottom"
+      style="font-size: 20px"
+      (click)="addNewCol()"
+    ></i>
+  </div>
+</div>
+ <!-- //previously column 1 was using now replaced with custom-col -->

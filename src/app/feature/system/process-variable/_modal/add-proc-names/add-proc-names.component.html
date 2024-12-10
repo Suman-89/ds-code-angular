@@ -1,0 +1,72 @@
+<form class="main-form" #form="ngForm" (ngSubmit)="save()">
+  <div class="modal-header">
+    <h5 class="modal-title secondary-color mt-0">Update Process Names</h5>
+    <button
+      type="button"
+      class="close btn"
+      aria-label="Close"
+      (click)="close()"
+    >
+      <img height="20" src="./assets/images/cross.png" />
+    </button>
+  </div>
+
+  <div class="main-dropdown">
+    <ng-multiselect-dropdown
+      [placeholder]="'Select'"
+      name="processname"
+      [settings]="doctypeDropdownSettings"
+      [data]="allProcesses"
+      (onSelect)="itemSelect($event)"
+    >
+    </ng-multiselect-dropdown>
+  </div>
+
+  <!-- to view selected processess for specific process variables -->
+
+  <div class="map" *ngFor="let singleVar of vars; let i = index">
+    <div class="map-container" *ngIf="singleVar.processNames">
+      <p
+        class="m-0 displaylabel"
+        (click)="processOpener(i)"
+        *ngIf="singleVar.processNames.length"
+      >
+        {{ singleVar.displaylabel }}
+        <i
+          class="fa fa-caret-down fa-lg {{
+            isopenProcessess[i] ? 'opened' : ''
+          }}"
+          aria-hidden="true"
+        ></i>
+      </p>
+    </div>
+
+    <div
+      class="show-processess"
+      *ngIf="isopenProcessess[i] && singleVar.processNames.length"
+    >
+      <div
+        class="process"
+        *ngFor="let process of singleVar.processNames; let j = index"
+      >
+        <p class="m-0">
+          {{ process }}
+          <i
+            class="fa fa-times"
+            aria-hidden="true"
+            (click)="deleteProcess(process, singleVar)"
+          ></i>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- save and cancel button  -->
+  <div class="modal-footer">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">
+      Cancel
+    </button>
+
+    <button type="submit" class="btn primarybtnstyle">Save</button>
+  </div>
+</form>

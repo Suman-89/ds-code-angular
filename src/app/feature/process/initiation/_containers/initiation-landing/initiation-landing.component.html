@@ -1,0 +1,44 @@
+<ng-container [ngSwitch]="param">
+  <div *ngSwitchCase="'ibasis'">
+    <app-start-process-ibasis></app-start-process-ibasis>
+  </div>
+  <div *ngSwitchCase="'employee-onboarding'">
+    <app-start-process-employee></app-start-process-employee>
+  </div>
+  <div *ngSwitchCase="'prescreening'">
+    <app-start-process-prescreening></app-start-process-prescreening>
+  </div>
+  <div *ngSwitchCase="'taiho'">
+    <app-start-process-taiho></app-start-process-taiho>
+  </div>
+  <div *ngSwitchCase="'leave'">
+    <app-start-process></app-start-process>
+  </div>
+  <div *ngSwitchCase="'ticket'">
+    <app-start-process></app-start-process>
+  </div>
+  <div *ngSwitchCase="'deal'">
+    <app-start-voice-deal></app-start-voice-deal>
+  </div>
+  <div *ngSwitchCase="'dispute'">
+    <app-start-dispute-process></app-start-dispute-process>
+  </div>
+  <div *ngSwitchCase="'voice'">
+    <app-start-voice-deal></app-start-voice-deal>
+  </div>
+  <div *ngSwitchCase="'dispute'">
+    <app-start-dispute-process></app-start-dispute-process>
+  </div>
+  <div *ngSwitchCase="'voice'">
+    <app-start-voice-deal></app-start-voice-deal>
+  </div>
+  <div *ngSwitchCase="'snow'">
+    <app-start-snow-deal></app-start-snow-deal>
+  </div>
+  <div *ngSwitchCase="'mortgage'">
+    <app-start-mortgage-process></app-start-mortgage-process>
+  </div>
+  <div *ngSwitchDefault>
+    <app-start-process></app-start-process>
+  </div>
+</ng-container>

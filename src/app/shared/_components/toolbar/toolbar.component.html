@@ -1,0 +1,24 @@
+<div class="actions">
+  <div class="action-btn" *ngFor="let button of buttons">
+    <div
+      style="height: 100%"
+      *ngIf="
+        !button.dontShow &&
+        (!button.forScreens ||
+          button.forScreens == type ||
+          button.forScreens == 'all')
+      "
+    >
+      <!-- *appHasPermission="button.forRoles" -->
+      <button
+        [disabled]="button.disabled"
+        class="btn adjust-btn-size {{
+          button.cssClass ? button.cssClass : 'primarybtnstyle'
+        }}"
+        (click)="action(button.action)"
+      >
+        {{ button.label }}
+      </button>
+    </div>
+  </div>
+</div>

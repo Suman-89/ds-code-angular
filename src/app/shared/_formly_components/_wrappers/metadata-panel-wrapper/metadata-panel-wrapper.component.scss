@@ -1,0 +1,30 @@
+@import "variables";
+.card {
+  border: none !important;
+  margin-bottom: 15px;
+
+  .card-header {
+    background: #fff;
+    border-bottom: 1px solid rgba(var(--primaryColorRGB), 0.2);
+    margin-bottom: 0;
+    padding: 5px 0;
+  }
+  .card-body {
+    padding: 7px 0;
+  }
+
+  .collapse-header {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--secondaryColor);
+  }
+
+  .expandBtn {
+    background: transparent;
+    border: none;
+    padding: 2px;
+    img {
+      width: 20px;
+    }
+  }
+}

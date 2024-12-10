@@ -1,0 +1,79 @@
+{
+  "dms_settings":[
+      {
+    "itemId": "process", "itemName": "Folder 1",
+    "storageSetting":"Setting Value",
+    "itemChildren": [
+      {
+        "itemId": "myqueue", "itemName": "My Queue"
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue"
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate Contract"
+       
+      },
+      { 
+        "itemId": "contracts", "itemName": "All Contracts"
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks"
+      }
+    ]
+  }, {
+    "itemId": "process", "itemName": "Folder 2",
+    "storageSetting":"Setting Value",
+    "itemChildren": [
+      {
+        "itemId": "myqueue", "itemName": "My queue"
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue"
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate Contract"
+       
+      },
+      { 
+        "itemId": "contracts", "itemName": "All Contracts"
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks"
+      }
+    ]
+  }, {
+    "itemId": "process", "itemName": "Folder 3",
+    "storageSetting":"Setting Value",
+    "itemChildren": [
+      {
+        "itemId": "myqueue", "itemName": "My queue"
+      },
+      { 
+        "itemId": "group", "itemName": "My group queue"
+      },
+      {
+        "itemId": "initiate", "itemName": "Initiate Contract"
+       
+      },
+      { 
+        "itemId": "contracts", "itemName": "All Contracts"
+      },
+      { 
+        "itemId": "alltasks", "itemName": "All Tasks"
+      }
+    ]
+  }
+],
+"active_directory_settings":{
+  "itemId":"kaf",
+  "url":"abckd@agiam.com" ,
+  "base": "abcd",
+  "userDN": "lkfajsdl",
+  "password": "ldflaks",
+  "auth": "sdlfasd",
+  "domain":"sldfklas",
+  "userid": "OPPPOJ"
+}
+}
+

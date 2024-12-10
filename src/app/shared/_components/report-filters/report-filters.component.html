@@ -1,0 +1,208 @@
+<button
+  type="button"
+  class="btn adjust-btn-size secondarybtnstyle my-2"
+  data-toggle="collapse"
+  href="#filterspanel"
+  *ngIf="!previewOnly"
+>
+  All Filters
+</button>
+<div [ngClass]="!previewOnly ? 'collapse' : ''" id="filterspanel">
+  <div class="grid-container">
+    <div
+      class="card-container"
+      *ngFor="let column of columnsList; let i = index"
+    >
+      <ng-container
+        *ngIf="
+          column.primaryOperator ||
+          column.newOperator ||
+          (column.newValues?.length && column.newValues[0] !== null)
+        "
+      >
+        <!-- <div class="font-weight-bold mb-2"> -->
+        <span class="pl-2 colName">{{ column.text }}</span>
+        <!-- </div> -->
+
+        <!-- if something to show start-->
+
+        <ng-container *ngIf="!!column.primaryOperator || !!column.newOperator">
+          <!-- IF date RANGE start-->
+          <ng-container *ngIf="column.filtertype === 'range'">
+            <ng-container *ngIf="column.rangeFields?.length">
+              <div
+                class="p-1 flex"
+                *ngFor="let rangeField of column.rangeFields; let i = index"
+              >
+                <div class="font-weight-normal font-italic">
+                  <span
+                    class="primaryOperator badge badge-light font-weight-normal"
+                  >
+                    {{ rangeField[0] }}
+                  </span>
+                </div>
+                <div>
+                  <span class="badge badge-light">
+                    <span
+                      [ngClass]="{
+                        primaryState:
+                          !column?.newRangeFields?.length ||
+                          rangeField[1] === column.newRangeFields[i][1],
+                        deletedState:
+                          !!column.removed ||
+                          (column?.newRangeFields?.length &&
+                            rangeField[1] !== column.newRangeFields[i][1])
+                      }"
+                    >
+                      {{ rangeField[1] }}
+                    </span>
+                  </span>
+                  <span
+                    *ngIf="
+                      column?.newRangeFields?.length === 2 &&
+                      rangeField[1] !== column.newRangeFields[i][1]
+                    "
+                    class="badge badge-light newAddedState"
+                  >
+                    {{ column.newRangeFields[i][1] }}
+                  </span>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container
+              *ngIf="
+                !column.rangeFields?.length && column.newRangeFields?.length
+              "
+            >
+              <div
+                class="p-1 flex"
+                *ngFor="let rangeField of column.newRangeFields"
+              >
+                <div
+                  class="newAddedState badge badge-light font-weight-normal font-italic"
+                >
+                  {{ rangeField[0] }}
+                </div>
+                <div class="newAddedState badge badge-light">
+                  {{ rangeField[1] }}
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <!-- IF date RANGE end-->
+
+          <!-- IF NOT date RANGE start-->
+          <ng-container *ngIf="column.filtertype !== 'range'">
+            <!-- operator/condition start -->
+            <div>
+              <span
+                class="badge badge-light font-weight-normal font-italic"
+                [ngClass]="{
+                  primaryOperator:
+                    !column.newOperator || column.newOperator?.length == 0,
+                  deletedOperator:
+                    column.newOperator && column.newOperator?.length > 0
+                }"
+                >{{ column.primaryOperator }}</span
+              >
+              <span
+                class="badge badge-light newOperator font-weight-normal font-italic"
+                >{{ column.newOperator }}</span
+              >
+            </div>
+            <!-- operator/condition end -->
+
+            <!-- values start -->
+            <div class="flex">
+              <ng-container
+                *ngIf="
+                  column?.filtertype !== 'checkedlist' ||
+                  column?.filtertype === 'date'
+                "
+              >
+                <div *ngFor="let value of column?.actualValues; let i = index">
+                  <span
+                    class="badge badge-light"
+                    [ngClass]="{
+                      primaryState:
+                        !column.newValues || column.newValues?.length == 0,
+                      deletedState:
+                        column.newValues && column.newValues?.length > 0
+                    }"
+                    >{{ value }}</span
+                  >
+                </div>
+                <div *ngFor="let value of column?.newValues; let i = index">
+                  <span class="badge badge-light newAddedState">{{
+                    value
+                  }}</span>
+                </div>
+              </ng-container>
+            </div>
+            <!-- values end -->
+          </ng-container>
+          <!-- if something to show end-->
+
+          <!--checkedlist For preview reports start-->
+          <ng-container
+            *ngIf="column?.filtertype === 'checkedlist' && readOnly"
+          >
+            <div class="flex">
+              <div *ngFor="let value of column?.actualValues; let i = index">
+                <span class="badge badge-light primaryState"
+                  >{{ value }}
+                  <span
+                    *ngIf="i < column?.actualValues.length - 1"
+                    class="secondary-color"
+                    >|</span
+                  >
+                </span>
+              </div>
+            </div>
+          </ng-container>
+          <!--checkedlist For preview reports end-->
+
+          <!--checkedlist For Edit reports start-->
+          <ng-container
+            *ngIf="column?.filtertype === 'checkedlist' && !readOnly"
+          >
+            <div class="flex">
+              <div *ngFor="let value of column?.dropDownValues; let i = index">
+                <span
+                  class="badge badge-light"
+                  [ngClass]="{
+                    primaryState:
+                      column.actualValues &&
+                      column.actualValues?.includes(value) &&
+                      column.newValues?.includes(value),
+                    newAddedState:
+                      !column.actualValues ||
+                      (!column.actualValues?.includes(value) &&
+                        column.newValues?.includes(value)),
+                    deletedState:
+                      column.actualValues &&
+                      column.actualValues?.includes(value) &&
+                      !column.newValues?.includes(value)
+                  }"
+                  >{{ value }}
+                </span>
+                <span
+                  *ngIf="i < column?.dropDownValues.length - 1"
+                  class="seperator"
+                  >|</span
+                >
+              </div>
+            </div>
+          </ng-container>
+          <!--checkedlist For Edit reports end-->
+        </ng-container>
+        <div [ngClass]="{ hiddenColumn: column.hidden }"></div>
+        <!-- <span
+          *ngIf="i < columnsList.length - 1"
+          class="secondary-color colName mx-1"
+          >AND</span
+        > -->
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,2347 @@
+<div class="container-fluid px-0">
+  <div class="pageHeaderWrap">
+    <div class="pageHeader">
+      <span [innerHtml]="editId ? 'Edit' : 'Add'"></span> Process Definition
+      <span class="secondary-color" *ngIf="editId" style="font-size: 22px"
+        >|</span
+      >
+      {{ editId }}
+    </div>
+  </div>
+
+  <div class="w-100" *ngIf="procDefForm">
+    <div class="tab-container">
+      <div
+        (click)="setVisibleTab(tab.id)"
+        class="tab-item"
+        [class.active]="activeTab == tab.id"
+        *ngFor="let tab of settingTabs"
+      >
+        <span>{{ tab.name }}</span>
+      </div>
+    </div>
+    <form #form="ngForm" class="mt-2" (ngSubmit)="save()">
+      <div class="row no-gutters procDefForm">
+        <div
+          *ngIf="activeTab == 'descriptions'"
+          class="col-12"
+          style="overflow-x: hidden"
+        >
+          <div class="row no-gutters col-12">
+            <div class="form-group col-md-6 pr-3">
+              <label class="w-100">Name</label>
+              <app-dropdown-search
+                [value]="procDefForm.processname"
+                [placeholder]="'Select Process Name'"
+                [dataList]="procDefs"
+                [id]="''"
+                [setting]="processNameSetting"
+                ($onSelectItem)="selectProcessName($event)"
+              ></app-dropdown-search>
+            </div>
+            <div class="form-group col-md-6">
+              <label class="w-100">Label</label>
+              <input
+                class="inputstyle w-100"
+                name="procdeflabel"
+                [(ngModel)]="procDefForm.processlabel"
+              />
+            </div>
+          </div>
+          <div class="row no-gutters col-12">
+            <div class="form-group col-md-6">
+              <label class="w-100">Process Type</label>
+              <input
+                class="inputstyle w-100"
+                name="procdefProcesstype"
+                [(ngModel)]="procDefForm.processtype"
+              />
+            </div>
+          </div>
+
+          <div class="row px-3">
+            <div class="form-group col-md-6">
+              <label class="w-100">Process Key</label>
+              <input
+                class="inputstyle w-100"
+                name="procdefkey"
+                [(ngModel)]="procDefForm.processkey"
+              />
+            </div>
+            <div class="form-group col-md-6 pl-0">
+              <label class="font-weight-normal">Card Color</label>
+              <input
+                class="inputstyle w-100"
+                name="cardColor"
+                type="color"
+                [(ngModel)]="procDefForm.cardColor"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label class="w-100">Description</label>
+              <textarea
+                name="procdesc"
+                class="inputstyle w-100"
+                style="height: 120px"
+                [(ngModel)]="procDefForm.description"
+              ></textarea>
+            </div>
+            <div class="form-group col-6 pl-0">
+              <label class="w-100">Overlay Card Icon</label>
+              <app-custom-icon-picker
+                [iconList]="iconList"
+                [type]="'primary'"
+                [value]="procDefForm.iconColor"
+                [placeholder]="'Select Card Icon'"
+                [id]=""
+                ($onSelectItem)="selectProcessIcon($event)"
+              ></app-custom-icon-picker>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+              <label class="w-100">Visible In Overlay Card</label>
+              <div class="custom-control custom-switch q-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [id]="'is_active_card'"
+                  [name]="'is_active_card'"
+                  [checked]="
+                    procDefForm.isVisible ? procDefForm.isVisible : false
+                  "
+                  (change)="isVisibleToggle()"
+                />
+                <label
+                  [for]="'is_active_card'"
+                  class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                >
+                  Card Visible
+                </label>
+              </div>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+              <label class="w-100">OFAC Check Required</label>
+              <div class="custom-control custom-switch q-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [id]="'is_active_ofac'"
+                  [name]="'is_active_ofac'"
+                  [checked]="
+                    procDefForm.ofacCheck ? procDefForm.ofacCheck : false
+                  "
+                  (change)="isOfacCheckToggle()"
+                />
+                <label
+                  [for]="'is_active_ofac'"
+                  class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                >
+                  OFAC Check
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 row mt-1 ml-0">
+            <div class="col-6 p-0 pr-2">
+              <div class="mt-1">
+                <label class="font-weight-normal">Initiating Group</label>
+              </div>
+              <ng-multiselect-dropdown
+                [placeholder]="'Select'"
+                name="initiatingselect"
+                [settings]="groupDropdownSettings"
+                [data]="groups"
+                [(ngModel)]="procDefForm.accessProcessGroups"
+                #selgroupqueue="ngModel"
+                (onDropDownClose)="getApplicableRoles()"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-6 p-0 pl-2">
+              <div class="mt-1">
+                <label class="font-weight-normal">Participating Group</label>
+              </div>
+              <ng-multiselect-dropdown
+                [placeholder]="'Select'"
+                name="participatingselect"
+                [settings]="groupDropdownSettings"
+                [data]="groups"
+                [(ngModel)]="procDefForm.participatingGroups"
+                #selgroupqueue="ngModel"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row col-12 p-0 mt-3 mx-2 pb-2 mb-1 border-bottom">
+              <div class="w-100 p-0 col-6 font-weight-bold">Task Titles</div>
+              <div class="col-6 p-0 text-right">
+                <small
+                  class="primarybtnstyle cursor-pointer mr-2"
+                  (click)="setDefaultTaskTitle()"
+                >
+                  Add Default Task Titles
+                </small>
+              </div>
+            </div>
+            <div
+              *ngIf="!procDefForm.titleSettings"
+              class="py-3 col-12 font-weight-normal text-center"
+            >
+              <h4 class="text-secondary">Task Title Not Added</h4>
+            </div>
+          </div>
+          <div class="row col-12 pb-2 pt-1 mb-1 mx-0 pr-0">
+            <div
+              class="col-6 pl-1 pt-0"
+              *ngFor="
+                let titleType of procDefForm.titleSettings;
+                let id = index
+              "
+            >
+              <div class="form-group mx-1">
+                <small class="w-100 font-weight-normal text-primary">{{
+                  titleType.titleId == "taskTitle" ? "Task Title" : "Case Title"
+                }}</small>
+                <div class="inputblock" [hidden]="!showCommentBox">
+                  <div class="demoInput">
+                    <app-non-local-comment-box
+                      #contentBox
+                      *ngIf="multiMentionConfig.mentions.length > 0"
+                      [commenttype]="'Title'"
+                      [commentMentionConfig]="multiMentionConfig"
+                      [clearAfterSubmit]="false"
+                      [isTemplate]="true"
+                      [value]="titleType.titleHTML"
+                      [templateType]="templateType.body"
+                      (submitted)="onTaskTitleSubmitted($event, id)"
+                    >
+                    </app-non-local-comment-box>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 mt-1">
+            <div class="w-100 mt-3 my-2 font-weight-bold border-bottom">
+              Business Key Configuration
+            </div>
+            <div class="row mb-2 no-gutters">
+              <label class="mr-2">Business Key Variable:</label>
+              <div class="col-5">
+                <app-dropdown-search
+                  [value]="procDefForm.key.variablename"
+                  [placeholder]="'Select Variable'"
+                  [dataList]="businessKeyVariable"
+                  [setting]="businessKeySetting"
+                  [id]="''"
+                  ($onSelectItem)="selectBusinessKey($event)"
+                ></app-dropdown-search>
+              </div>
+            </div>
+            <div class="row no-gutters">
+              <div class="col-1">Prefix:</div>
+              <div class="col-2 pr-1">
+                <input
+                  (keyup)="
+                    procDefForm.key.prefix.prefixconst = $event.target.value
+                  "
+                  placeholder="Enter Business key Prefix"
+                  class="inputstyle w-100"
+                  [(ngModel)]="procDefForm.key.prefix.prefixconst"
+                  name="preconst"
+                />
+              </div>
+              <div class="col-3 pr-1">
+                <app-dropdown-search
+                  [value]="procDefForm.key.prefix.variable1"
+                  [placeholder]="'Select 1st Variable'"
+                  [dataList]="businessKeyVariable"
+                  [setting]="businessKeySetting"
+                  [id]="'1'"
+                  ($onSelectItem)="assignVariable($event)"
+                ></app-dropdown-search>
+              </div>
+              <div class="col-3 pr-1">
+                <app-dropdown-search
+                  [value]="procDefForm.key.prefix.variable2"
+                  [placeholder]="'Select 2nd Variable'"
+                  [dataList]="businessKeyVariable"
+                  [setting]="businessKeySetting"
+                  [id]="'2'"
+                  ($onSelectItem)="assignVariable($event)"
+                ></app-dropdown-search>
+              </div>
+              <div class="col-3 pr-1">
+                <app-dropdown-search
+                  [value]="procDefForm.key.prefix.variable3"
+                  [id]="'3'"
+                  [placeholder]="'Select 3rd Variable'"
+                  [dataList]="businessKeyVariable"
+                  [setting]="businessKeySetting"
+                  ($onSelectItem)="assignVariable($event)"
+                ></app-dropdown-search>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 p-2">
+            <div class="row col-12 p-0 mt-3 mx-2 pb-2 mb-1 border-bottom">
+              <div class="w-100 p-0 col-6 font-weight-bold">
+                Email Configurations
+              </div>
+              <div class="col-6 p-0 text-right">
+                <small
+                  class="primarybtnstyle cursor-pointer mr-2"
+                  (click)="setDefaultEmailConfig()"
+                >
+                  Add Default Configurations
+                </small>
+              </div>
+            </div>
+            <div
+              class="py-3 col-12 font-weight-normal text-center"
+              *ngIf="!procDefForm.emailConfiguration"
+            >
+              <h4 class="text-secondary">Email Configurations Not Added</h4>
+            </div>
+          </div>
+          <div
+            class="row col-12 no-gutters"
+            *ngIf="procDefForm.emailConfiguration"
+          >
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item font-weight-normal" container="body"
+                >From</label
+              >
+              <input
+                class="inputstyle w-100"
+                name="from"
+                [(ngModel)]="procDefForm.emailConfiguration.from"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">App Url</label>
+              <input
+                class="inputstyle w-100"
+                name="appurl"
+                [(ngModel)]="procDefForm.emailConfiguration.appurl"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">From Name</label>
+              <input
+                class="inputstyle w-100"
+                name="formname"
+                [(ngModel)]="procDefForm.emailConfiguration.fromname"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Mail Domain</label>
+              <input
+                class="inputstyle w-100"
+                name="maildomain"
+                [(ngModel)]="procDefForm.emailConfiguration.maildomain"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Host</label>
+              <input
+                class="inputstyle w-100"
+                name="host"
+                [(ngModel)]="procDefForm.emailConfiguration.host"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Port</label>
+              <input
+                class="inputstyle w-100"
+                name="port"
+                [(ngModel)]="procDefForm.emailConfiguration.port"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body"
+                >URL Parameter Name</label
+              >
+              <input
+                class="inputstyle w-100"
+                name="queryParamName"
+                [(ngModel)]="procDefForm.emailConfiguration.queryParam"
+              />
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body"
+                >URL Parameter Value</label
+              >
+              <app-dropdown-search
+                [value]="procDefForm.emailConfiguration.queryParamVariableName"
+                [id]="''"
+                [placeholder]="'Select Value'"
+                [dataList]="variables.allvars"
+                [setting]="businessKeySetting"
+                ($onSelectItem)="setQueryParamVariableName($event)"
+              ></app-dropdown-search>
+            </div>
+            <div class="col-6 px-1 py-1">
+              <label class="selected-item" container="body">Password</label>
+              <div class="password-container">
+                <input
+                  class="inputstyle w-100"
+                  name="password"
+                  type="password"
+                  [(ngModel)]="procDefForm.emailConfiguration.password"
+                  [type]="obscurePassword ? 'password' : 'text'"
+                />
+                <i
+                  class="fa fa-eye pw-eye-icon"
+                  *ngIf="obscurePassword"
+                  (click)="obscurePassword = false"
+                  aria-hidden="true"
+                >
+                </i>
+                <i
+                  class="fa fa-eye-slash pw-eye-icon"
+                  *ngIf="!obscurePassword"
+                  (click)="obscurePassword = true"
+                  aria-hidden="true"
+                >
+                </i>
+              </div>
+            </div>
+            <br />
+          </div>
+          <div class="col-12">
+            <div class="row col-12 p-0 mt-3 mx-2 pb-2 mb-1 border-bottom">
+              <div class="w-100 p-0 col-6 font-weight-bold">Tab Settings</div>
+              <div class="col-6 p-0 text-right">
+                <small
+                  class="primarybtnstyle cursor-pointer mr-2"
+                  (click)="setDefaultTabSettings()"
+                >
+                  Add Default Tab Settings
+                </small>
+              </div>
+            </div>
+            <div
+              *ngIf="!procDefForm.tabSettings"
+              class="py-3 col-12 font-weight-normal text-center"
+            >
+              <h4 class="text-secondary">Tab Settings Not Added</h4>
+            </div>
+          </div>
+          <div class="p-2 tabSettings" *ngIf="procDefForm.tabSettings">
+            <div class="row col-12 pb-1">
+              <div class="row col-4 pb-1">
+                <small class="selected-item col-4" container="body"
+                  >Tab Name</small
+                >
+              </div>
+              <div class="row col-8 pb-1">
+                <small
+                  class="selected-item d-block text-center"
+                  style="width: 70px"
+                  container="body"
+                  >Tab Icon</small
+                >
+                <small class="selected-item col text-right" container="body"
+                  >Download</small
+                >
+                <small class="selected-item col text-right" container="body"
+                  >Summary</small
+                >
+                <small class="selected-item col text-right" container="body"
+                  >Tab Visible</small
+                >
+              </div>
+            </div>
+            <div
+              *ngFor="let tab of procDefForm.tabSettings; let id = index"
+              class="ml-3"
+            >
+              <div class="row col-sm-12">
+                <div class="row col-sm-4">
+                  <input
+                    class="inputstyle w-100"
+                    name="{{ tab.id + 'name' + tab.id }}"
+                    [(ngModel)]="tab.name"
+                  />
+                </div>
+                <div class="row col-sm-8">
+                  <div class="m-0 p-0 tabIconBox" style="width: 76px">
+                    <app-custom-icon-picker
+                      [iconList]="iconList"
+                      [value]="tab.icon"
+                      [type]="'onTop'"
+                      [placeholder]="tab.icon"
+                      [id]="id + '**' + tab.id"
+                      ($onSelectItem)="selectTabSettingIcon($event)"
+                    ></app-custom-icon-picker>
+                  </div>
+                  <div class="row-col-sm-4">
+                    <div
+                      class="custom-control custom-switch q-switch"
+                      style="width: 70px"
+                    >
+                      <input
+                        type="checkbox"
+                        class="custom-control-input cursor-pointer"
+                        [id]="'isDownloadable' + tab.id + id"
+                        [name]="'isDownloadable-id' + tab.id + id"
+                        [checked]="tab.isDownloadable"
+                        [(ngModel)]="tab.isDownloadable"
+                      />
+                      <label
+                        class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                        [for]="'isDownloadable' + tab.id + id"
+                      ></label>
+                    </div>
+                  </div>
+                  <div class="row-col-sm-4">
+                    <div
+                      class="custom-control custom-switch q-switch"
+                      style="width: 70px"
+                    >
+                      <input
+                        type="checkbox"
+                        class="custom-control-input cursor-pointer"
+                        [id]="'generateSummary' + tab.id + id"
+                        [name]="'generateSummary-id' + tab.id + id"
+                        [checked]="tab.generateSummary"
+                        [(ngModel)]="tab.generateSummary"
+                      />
+                      <label
+                        class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                        [for]="'generateSummary' + tab.id + id"
+                      ></label>
+                    </div>
+                  </div>
+                  <div class="row-col-sm-4">
+                    <div
+                      class="custom-control custom-switch q-switch"
+                      style="width: 70px"
+                    >
+                      <input
+                        type="checkbox"
+                        class="custom-control-input cursor-pointer"
+                        [id]="'disabled' + tab.id + id"
+                        [name]="'disabled-id' + tab.id + id"
+                        [checked]="tab.isVisible"
+                        [(ngModel)]="tab.isVisible"
+                      />
+                      <label
+                        class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                        [for]="'disabled' + tab.id + id"
+                      ></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- show history start -->
+
+              <div
+                *ngIf="tab.name === 'Transcript' && tab.isVisible"
+                class="mb-2"
+              >
+                <div class="selected-item">Channels Settings</div>
+                <div class="showHistory pt-1 border rounded mb-3">
+                  <label class="selected-item">Show History</label>
+                  <div class="toggle-switch" style="top: 0">
+                    <input
+                      type="checkbox"
+                      name="showHistory"
+                      [(ngModel)]="tab.showHistory"
+                    />
+                    <div class="knobs">
+                      <span></span>
+                    </div>
+                    <div class="layer"></div>
+                  </div>
+                </div>
+
+                <!-- show history end -->
+
+                <div
+                  class="pt-1 border rounded mb-3"
+                  *ngFor="let channel of tab.channels; let ch_id = index"
+                >
+                  <div class="row col-sm-12 pr-0">
+                    <div class="col-3">
+                      <small class="selected-item" container="body"
+                        >Channel Name</small
+                      ><br />
+                      <input
+                        class="inputstyle w-100"
+                        disabled
+                        name="{{ ch_id + 'name' + channel.name }}"
+                        [(ngModel)]="channel.name"
+                      />
+                    </div>
+                    <div class="col-4">
+                      <small class="selected-item" container="body"
+                        >Default Sender Name</small
+                      >
+                      <input
+                        class="inputstyle w-100"
+                        name="{{ ch_id + 'title' + channel.name }}"
+                        [(ngModel)]="channel.defaultWhatsappName"
+                      />
+                    </div>
+                    <div class="m-0 p-0 tabIconBox col-2">
+                      <small
+                        class="selected-item"
+                        style="position: relative; top: 11px"
+                        container="body"
+                        >Channel Icon</small
+                      >
+                      <app-custom-icon-picker
+                        [iconList]="iconList"
+                        [value]="channel.icon"
+                        [type]="'onTop'"
+                        [placeholder]="channel.icon"
+                        [id]="id + '**' + ch_id"
+                        ($onSelectItem)="selectChannelSettingIcon($event)"
+                      ></app-custom-icon-picker>
+                    </div>
+                    <div class="col-3 text-right">
+                      <small class="selected-item" container="body"
+                        >Is Visible</small
+                      >
+                      <div class="custom-control custom-switch q-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input cursor-pointer"
+                          [id]="'disabled' + channel.id + ch_id"
+                          [name]="'disabled-id' + channel.id + ch_id"
+                          [checked]="channel.isVisible"
+                          [(ngModel)]="channel.isVisible"
+                        />
+                        <label
+                          class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                          [for]="'disabled' + channel.id + ch_id"
+                        ></label>
+                      </div>
+                    </div>
+                    <div class="col-6 pr-0">
+                      <div class="form-group mx-1">
+                        <p class="text-secondary">
+                          <small
+                            class="w-100 font-weight-normal text-primary"
+                            >{{
+                              channel.id == "whatsapp"
+                                ? "Phone Number and Variables"
+                                : "Email Id and Variables"
+                            }}</small
+                          >
+                        </p>
+                        <div class="inputblock" [hidden]="!showCommentBox">
+                          <div class="demoInput">
+                            <app-non-local-comment-box
+                              #contentBox
+                              *ngIf="multiMentionConfig.mentions.length > 0"
+                              [commenttype]="channel.name"
+                              [commentMentionConfig]="multiMentionConfig"
+                              [clearAfterSubmit]="false"
+                              [isTemplate]="true"
+                              [value]="channel.channelText"
+                              [templateType]="templateType.body"
+                              (submitted)="
+                                onChannelTextSubmitted(
+                                  $event,
+                                  id,
+                                  ch_id,
+                                  'channelText'
+                                )
+                              "
+                            >
+                            </app-non-local-comment-box>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 pr-0" *ngIf="channel.id == 'email'">
+                      <div class="form-group mx-1">
+                        <p class="text-secondary">
+                          <small class="w-100 font-weight-normal text-primary"
+                            >Email Subject</small
+                          >
+                        </p>
+                        <div class="inputblock" [hidden]="!showCommentBox">
+                          <div class="demoInput">
+                            <app-non-local-comment-box
+                              #contentBox
+                              *ngIf="multiMentionConfig.mentions.length > 0"
+                              [commenttype]="channel.name"
+                              [commentMentionConfig]="multiMentionConfig"
+                              [clearAfterSubmit]="false"
+                              [isTemplate]="true"
+                              [value]="channel.emailSubjectHtml"
+                              [templateType]="templateType.body"
+                              (submitted)="
+                                onChannelTextSubmitted(
+                                  $event,
+                                  id,
+                                  ch_id,
+                                  'emailSubject'
+                                )
+                              "
+                            >
+                            </app-non-local-comment-box>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row col-12 p-0 mt-1 mx-3 pb-1 mb-1 border-bottom"
+                      *ngIf="channel.id == 'email'"
+                    >
+                      <div class="w-100 p-0 col-6 font-weight-bold">
+                        <h6>Channel Email configurations</h6>
+                      </div>
+                      <div class="col-6 p-0 text-right">
+                        <small
+                          class="secondarybtnstyle cursor-pointer mr-2"
+                          (click)="setDefaultChannelEmailConfig(id, ch_id)"
+                          >Default Email Settings</small
+                        >
+                      </div>
+                      <div
+                        *ngIf="
+                          channel.id == 'email' && !channel.emailConfiguration
+                        "
+                        class="py-3 col-12 font-weight-normal text-center"
+                      >
+                        <h6 class="secondary-color">
+                          Channel Email Settings Not Added
+                        </h6>
+                      </div>
+                    </div>
+                    <div
+                      class="row col-12 pb-2 no-gutters"
+                      *ngIf="
+                        channel.id == 'email' && channel.emailConfiguration
+                      "
+                    >
+                      <div class="col-6 px-1 py-1">
+                        <label
+                          class="selected-item font-weight-normal"
+                          container="body"
+                          >From</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'from'+ch_id+channel.name}"
+                          [(ngModel)]="channel.emailConfiguration.from"
+                        />
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >App Url</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'appurl'+ch_id+channel.name}"
+                          [(ngModel)]="channel.emailConfiguration.appurl"
+                        />
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >From Name</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'formname'+ch_id+channel.name}"
+                          [(ngModel)]="channel.emailConfiguration.fromname"
+                        />
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >Mail Domain</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'maildomain'+ch_id+channel.name}"
+                          [(ngModel)]="channel.emailConfiguration.maildomain"
+                        />
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >Host</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'host'+ch_id+channel.name}"
+                          [(ngModel)]="channel.emailConfiguration.host"
+                        />
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >Port</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'port'+ch_id+channel.name}"
+                          [(ngModel)]="channel.emailConfiguration.port"
+                        />
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >URL Parameter Name</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'queryParamName'+ch_id+channel.name}"
+                          [(ngModel)]="channel.emailConfiguration.queryParam"
+                        />
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >URL Parameter Value</label
+                        >
+                        <app-dropdown-search
+                          [value]="
+                            channel.emailConfiguration.queryParamVariableName
+                          "
+                          [id]="ch_id"
+                          [placeholder]="'Select Value'"
+                          [dataList]="variables.allvars"
+                          [setting]="businessKeySetting"
+                          ($onSelectItem)="
+                            setQueryParamVariableNameChannel($event)
+                          "
+                        ></app-dropdown-search>
+                      </div>
+                      <div class="col-6 px-1 py-1">
+                        <label class="selected-item" container="body"
+                          >Password</label
+                        >
+                        <input
+                          class="inputstyle w-100"
+                          name="{'password'+ch_id+channel.name}"
+                          type="password"
+                          [(ngModel)]="channel.emailConfiguration.password"
+                        />
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="activeTab == 'variables'" class="row no-gutters col-12">
+          <div class="col-6" *ngIf="variables.allvars.length > 0">
+            <label class="w-100 border-bottom"
+              >Column Variables &nbsp;
+              <span class="secondary-color"
+                >({{ variables.allvars.length }})</span
+              ></label
+            >
+            <input
+              placeholder="Search for variables here"
+              class="inputstyle mb-1"
+              (keyup)="searchVariables($event.target.value, 1)"
+            />
+            <div class="row no-gutters varsection">
+              <div
+                *ngFor="let vars of variables.filteredvars; let i = index"
+                class="col-sm-4"
+              >
+                <div
+                  class="addedList m-1 cursor-pointer"
+                  [ngClass]="{
+                    selectedVariable: selectedVars.all.includes(vars)
+                  }"
+                  (click)="addProcDefVars(vars)"
+                >
+                  <span
+                    class="text-truncate w-100"
+                    [ngbTooltip]="vars.displaylabel + '-' + vars.datatype"
+                    container="body"
+                  >
+                    {{ vars.displaylabel }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="w-100 border-bottom"
+              >Common Varriables &nbsp;
+              <span class="secondary-color"
+                >({{ applicableToAll.length }})</span
+              >
+            </label>
+            <div class="row no-gutters">
+              <div
+                class="col-sm-4"
+                *ngFor="let sVars of applicableToAll; let id = index"
+              >
+                <div
+                  class="addedList m-1"
+                  [style.backgroundColor]="
+                    !sVars.applicableToAll ? '' : '#ceebe8'
+                  "
+                >
+                  <span
+                    [ngbTooltip]="sVars.displaylabel + '-' + sVars.datatype"
+                    container="body"
+                  >
+                    {{ sVars.displaylabel }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <label class="w-100 border-bottom pl-1"
+              >Selected Variables &nbsp;<span class="secondary-color">
+                ({{ selectedVars.displaySelectedVars.length }})</span
+              ></label
+            >
+            <div class="w-100 pl-1">
+              <input
+                class="inputstyle"
+                placeholder="Search for selected variables"
+                (keyup)="searchVariables($event.target.value, 2)"
+              />
+            </div>
+
+            <div class="row no-gutters">
+              <div
+                class="col-sm-4"
+                *ngFor="
+                  let sVars of selectedVars.displaySelectedVars;
+                  let id = index
+                "
+              >
+                <div
+                  class="addedList m-1"
+                  [style.backgroundColor]="
+                    !sVars?.applicableToAll ? '' : '#ceebe8'
+                  "
+                >
+                  <span
+                    [ngbTooltip]="sVars?.displaylabel + '-' + sVars?.datatype"
+                    container="body"
+                  >
+                    {{ sVars?.displaylabel }}
+                  </span>
+                  <span
+                    *ngIf="!sVars?.applicableToAll"
+                    class="delIcon"
+                    (click)="removeVariables(sVars)"
+                  >
+                    <i class="fa fa-times p-1 bg-light"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          [style.display]="activeTab == 'grids' ? 'block' : 'none'"
+          class="w-100"
+        >
+          <app-proc-def-grid-setter
+            [gridsettings]="procDefForm.gridsettings"
+            [variables]="selectedVars.all"
+          >
+          </app-proc-def-grid-setter>
+        </div>
+
+        <div *ngIf="activeTab == 'notification_content'" class="w-100">
+          <div class="col-12 px-1 py-2">
+            <div class="text-right w-100 px-1">
+              <small
+                class="primarybtnstyle cursor-pointer mr-2"
+                (click)="defaultNotificationForm()"
+                >Add Default Notification Content</small
+              >
+              <small
+                class="secondarybtnstyle cursor-pointer"
+                [style.display]="showAddNotificationButton ? 'inline' : 'none'"
+                (click)="showNotificationForm()"
+                >Add Notification Content</small
+              >
+            </div>
+            <div
+              class="notification-row p-3 m-3 my-1"
+              [style.display]="!showAddNotificationButton ? 'block' : 'none'"
+            >
+              <label class="w-100 font-weight-normal"
+                >Notification Content Name</label
+              >
+              <input
+                class="inputstyle w-100 mb-2"
+                name="new_category"
+                [(ngModel)]="newButtonNotificationCategory"
+              />
+              <small
+                class="secondarybtnstyle cursor-pointer"
+                (click)="addNotificationContent()"
+                >Add Notification Content</small
+              >
+              <small
+                class="secondarybtnstyle cursor-pointer ml-2"
+                (click)="showNotificationForm()"
+                >Cancel</small
+              >
+            </div>
+          </div>
+          <!-- i add this id field here  let id=index;-->
+          <div *ngIf="procDefForm.notificationTemplateSettings">
+            <div
+              class="row no-gutters p-4 notification-row"
+              *ngFor="let type of notificationButtonTypes; let id = index"
+            >
+              <div class="text-right px-2 w-100">
+                <i
+                  [ngbTooltip]="'Remove'"
+                  class="fa fa-close cursor-pointer close-button"
+                  (click)="removeNotificationContent(type)"
+                  style="transform: translateY(2px)"
+                ></i>
+              </div>
+              <h4 class="w-100">{{ type }}</h4>
+              <div class="row w-100">
+                <div class="col-4">
+                  <div class="form-group mx-1">
+                    <small class="w-100 font-weight-normal"
+                      >Default Template</small
+                    >
+                    <input
+                      class="inputstyle w-100"
+                      name="{{
+                        type +
+                          procDefForm.notificationTemplateSettings[type]
+                            .defaulttemplate
+                      }}"
+                      [(ngModel)]="
+                        procDefForm.notificationTemplateSettings[type]
+                          .defaulttemplate
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group mx-1 my-3">
+                    <div class="custom-control custom-switch q-switch">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input cursor-pointer"
+                        [id]="'enabled' + type"
+                        [name]="'enabled-id' + type"
+                        [checked]="
+                          procDefForm.notificationTemplateSettings[type]
+                            .isEmailActive
+                        "
+                        [(ngModel)]="
+                          procDefForm.notificationTemplateSettings[type]
+                            .isEmailActive
+                        "
+                      />
+                      <label
+                        class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                        [for]="'enabled' + type"
+                        >Enabled</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group mx-1 my-3">
+                    <div class="custom-control custom-switch q-switch">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input cursor-pointer"
+                        [id]="'initiator' + type"
+                        [name]="'initiator-id' + type"
+                        [checked]="
+                          procDefForm.notificationTemplateSettings[type]
+                            .excludeinitiator
+                        "
+                        [(ngModel)]="
+                          procDefForm.notificationTemplateSettings[type]
+                            .excludeinitiator
+                        "
+                      />
+                      <label
+                        class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                        [for]="'initiator' + type"
+                        >Exclude Initiator</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right p-2 w-100">
+                  <small
+                    class="secondarybtnstyle cursor-pointer mr-2"
+                    (click)="setDefaultNotificationEmailConfig(type)"
+                    >Default Email Settings</small
+                  >
+                </div>
+                <div class="col-4">
+                  <div class="form-group mx-1">
+                    <small class="w-100 font-weight-normal">App URL</small>
+                    <input
+                      class="inputstyle w-100"
+                      name="{{ type + 'appurl' }}"
+                      [(ngModel)]="
+                        procDefForm.notificationTemplateSettings[type]
+                          .emailConfiguration.appurl
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group mx-1">
+                    <small class="w-100 font-weight-normal"
+                      >App URL Parameter Name</small
+                    >
+                    <input
+                      class="inputstyle w-100"
+                      name="{{
+                        type +
+                          procDefForm.notificationTemplateSettings[type]
+                            .emailConfiguration.queryParam
+                      }}"
+                      [(ngModel)]="
+                        procDefForm.notificationTemplateSettings[type]
+                          .emailConfiguration.queryParam
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group mx-1">
+                    <small class="w-100 font-weight-normal"
+                      >App Url Parameter Value</small
+                    >
+                    <app-dropdown-search
+                      [value]="
+                        procDefForm.notificationTemplateSettings[type]
+                          .emailConfiguration.queryParamVariableName
+                      "
+                      [id]="type"
+                      [placeholder]="'Select Value'"
+                      [dataList]="variables.allvars"
+                      [setting]="businessKeySetting"
+                      ($onSelectItem)="setQueryParamVariableNameNotify($event)"
+                    ></app-dropdown-search>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group mx-1">
+                    <p class="text-secondary">
+                      <small class="w-100 font-weight-normal text-primary"
+                        >Sub Prefix Text</small
+                      >
+                      <span style="font-size: 11px">
+                        (
+                        <i
+                          ><span style="font-weight: 600">@</span> = Tag another
+                          user</i
+                        >
+                        <i
+                          ><span style="font-weight: 600">, $</span> = Tag a
+                          variable</i
+                        >
+                        <i class="ml-2"
+                          ><i class="fa fa-save" style="font-weight: 600"></i>
+                          click submit & save </i
+                        >)
+                      </span>
+                    </p>
+                    <div class="inputblock" [hidden]="!showCommentBox">
+                      <div class="demoInput">
+                        <app-non-local-comment-box
+                          #contentBox
+                          *ngIf="multiMentionConfig.mentions.length > 0"
+                          [commenttype]="type"
+                          [commentMentionConfig]="multiMentionConfig"
+                          [clearAfterSubmit]="false"
+                          [isTemplate]="true"
+                          [value]="
+                            procDefForm.notificationTemplateSettings[type]
+                              .subjectLine
+                          "
+                          [templateType]="templateType.body"
+                          (submitted)="onContentSubjectSubmitted($event, type)"
+                        >
+                        </app-non-local-comment-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group mx-1">
+                    <p class="text-secondary">
+                      <small class="w-100 font-weight-normal text-primary"
+                        >Email Body</small
+                      >
+                      <span style="font-size: 11px">
+                        (
+                        <i
+                          ><span style="font-weight: 600">@</span> = Tag another
+                          user</i
+                        >
+                        <i
+                          ><span style="font-weight: 600">, $</span> = Tag a
+                          variable</i
+                        >
+                        <i class="ml-2"
+                          ><i class="fa fa-save" style="font-weight: 600"></i>
+                          click submit & save </i
+                        >)
+                      </span>
+                    </p>
+                    <div class="inputblock" [hidden]="!showCommentBox">
+                      <div class="demoInput">
+                        <app-non-local-comment-box
+                          #contentBox
+                          *ngIf="multiMentionConfig.mentions.length > 0"
+                          [commenttype]="type"
+                          [commentMentionConfig]="multiMentionConfig"
+                          [clearAfterSubmit]="false"
+                          [isTemplate]="true"
+                          [value]="
+                            procDefForm.notificationTemplateSettings[type]
+                              .emailBody
+                          "
+                          [templateType]="templateType.body"
+                          (submitted)="onContentBodySubmitted($event, type)"
+                        >
+                        </app-non-local-comment-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h5
+                *ngIf="
+                  procDefForm.notificationTemplateSettings[type]
+                    .othertemplates &&
+                  procDefForm.notificationTemplateSettings[type].othertemplates
+                    .length
+                "
+                class="w-100"
+              >
+                Other Templates
+              </h5>
+
+              <div
+                class="col-6 pr-2"
+                *ngFor="
+                  let navItem of procDefForm.notificationTemplateSettings[type]
+                    .othertemplates;
+                  let id = index
+                "
+              >
+                <div class="text-right px-2 mt-3">
+                  <i
+                    [ngbTooltip]="'Remove Button'"
+                    class="fa fa-close cursor-pointer close-button"
+                    (click)="removeOtherTemplate(type, id)"
+                  ></i>
+                </div>
+                <div class="form-group">
+                  <div class="custom-control custom-switch q-switch">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input cursor-pointer"
+                      [id]="'otherTemplateInitiatior' + id + type"
+                      [name]="'otherTemplateInitiatior' + id + type"
+                      [checked]="navItem.toinitiator"
+                      [(ngModel)]="navItem.toinitiator"
+                    />
+                    <label
+                      class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                      [for]="'otherTemplateInitiatior' + id + type"
+                      >To Initiator</label
+                    >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <small class="w-100 font-weight-normal">Templates</small>
+                  <input
+                    class="inputstyle w-100"
+                    name="{{ id + type + 'templates-id' }}"
+                    [(ngModel)]="
+                      procDefForm.notificationTemplateSettings[type]
+                        .othertemplates[id].template
+                    "
+                  />
+                </div>
+                <div class="form-group">
+                  <p class="text-secondary">
+                    <small class="w-100 font-weight-normal text-primary"
+                      >Sub Prefix Text</small
+                    >
+                    <span style="font-size: 11px">
+                      (
+                      <i
+                        ><span style="font-weight: 600">@</span> = Tag another
+                        user</i
+                      >
+                      <i
+                        ><span style="font-weight: 600">, $</span> = Tag a
+                        variable</i
+                      >
+                      <i class="ml-2"
+                        ><i class="fa fa-save" style="font-weight: 600"></i>
+                        click submit & save </i
+                      >)
+                    </span>
+                  </p>
+                  <div class="inputblock" [hidden]="!showCommentBox">
+                    <div class="demoInput">
+                      <app-non-local-comment-box
+                        #contentBox
+                        *ngIf="multiMentionConfig.mentions.length > 0"
+                        [commenttype]="type"
+                        [commentMentionConfig]="multiMentionConfig"
+                        [clearAfterSubmit]="false"
+                        [isTemplate]="true"
+                        [value]="
+                          procDefForm.notificationTemplateSettings[type]
+                            .othertemplates[id].subjectLine
+                        "
+                        [templateType]="templateType.body"
+                        (submitted)="
+                          onContentSubjectSubmitted($event, type, id)
+                        "
+                      >
+                      </app-non-local-comment-box>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <p class="text-secondary">
+                    <small class="w-100 font-weight-normal text-primary"
+                      >Email Body</small
+                    >
+                    <span style="font-size: 11px">
+                      (
+                      <i
+                        ><span style="font-weight: 600">@</span> = Tag another
+                        user</i
+                      >
+                      <i
+                        ><span style="font-weight: 600">, $</span> = Tag a
+                        variable</i
+                      >
+                      <i class="ml-2"
+                        ><i class="fa fa-save" style="font-weight: 600"></i>
+                        click submit & save </i
+                      >)
+                    </span>
+                  </p>
+                  <div class="inputblock" [hidden]="!showCommentBox">
+                    <div class="demoInput">
+                      <app-non-local-comment-box
+                        #contentBox
+                        *ngIf="multiMentionConfig.mentions.length > 0"
+                        [commenttype]="type"
+                        [commentMentionConfig]="multiMentionConfig"
+                        [clearAfterSubmit]="false"
+                        [isTemplate]="true"
+                        [value]="
+                          procDefForm.notificationTemplateSettings[type]
+                            .othertemplates[id].emailBody
+                        "
+                        [templateType]="templateType.body"
+                        (submitted)="onContentBodySubmitted($event, type, id)"
+                      >
+                      </app-non-local-comment-box>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="no-gutters pt-1 pb-4" *ngIf="navItem.roles">
+                  <small class="w-100 ml-1">
+                    Visible For Roles &nbsp;<span class="secondary-color"
+                      >({{ navItem.roles.length }})</span
+                    >
+                    <span
+                      class="secondary-color"
+                      *ngIf="navItem.roles.length == rolesArray.length"
+                    >
+                      All Selected</span
+                    >
+                  </small>
+                  <ng-multiselect-dropdown
+                    [placeholder]="'Select'"
+                    name="{{ navItem.template + id }}"
+                    [settings]="groupDropdownSettings"
+                    [data]="rolesArray"
+                    [(ngModel)]="navItem.roles"
+                    #toolbarbutton="ngModel"
+                  >
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="text-right w-100 mx-2">
+                <small
+                  class="secondarybtnstyle cursor-pointer"
+                  (click)="addOtherTemplate(type)"
+                  >Add Other Template</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'sidenav'" class="w-100">
+          <div class="ml-4">
+            <h5 class="">Change Menu Order</h5>
+            <div
+              cdkDropList
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div
+                class="example-box"
+                *ngFor="let movie of procDefForm.sideNavItemList"
+                cdkDrag
+              >
+                {{ movie.itemName }}
+              </div>
+            </div>
+          </div>
+          <div class="text-right m-2">
+            <small
+              class="primarybtnstyle cursor-pointer mr-2"
+              (click)="getNewSideNavData()"
+              >Add Default Side nav</small
+            >
+            <small
+              class="secondarybtnstyle cursor-pointer"
+              (click)="addNewMenu()"
+              >Add New Menu</small
+            >
+          </div>
+          <div
+            class="row no-gutters p-4 notification-row m-4"
+            *ngFor="let navItem of procDefForm.sideNavItemList; let id = index"
+          >
+            <div class="text-right w-100 px-1 mt-1">
+              <i
+                [ngbTooltip]="'Remove Menu'"
+                class="fa fa-close cursor-pointer close-button"
+                (click)="removeMenu(id)"
+              ></i>
+            </div>
+            <div class="col-12 m-0 p-0">
+              <h4 class="col-12 m-0 p-0">{{ navItem.itemName }}</h4>
+              <div class="col-6 m-0 p-0">
+                <app-custom-icon-picker
+                  [iconList]="iconList"
+                  [value]="navItem.itemIconPath"
+                  [placeholder]="navItem.itemIconPath"
+                  [id]="id"
+                  ($onSelectItem)="selectMenuIcon($event)"
+                ></app-custom-icon-picker>
+              </div>
+            </div>
+            <div class="col-6">
+              <small class="selected-item" container="body">Menu Name</small>
+              <input
+                class="inputstyle w-100"
+                name="{{ navItem.itemId + id }}"
+                [(ngModel)]="procDefForm.sideNavItemList[id].itemName"
+              />
+            </div>
+            <br /><br />
+            <div class="='form-group col-6 mb-2 pl-2">
+              <small
+                class="selected-item"
+                [ngbTooltip]="'PATH TO ROUTE'"
+                container="body"
+              >
+                Route Path
+              </small>
+              <input
+                class="inputstyle w-100"
+                name="{{ navItem.itemId + 'route' }}"
+                [(ngModel)]="navItem.routePath"
+              />
+            </div>
+            <div class="col-6 no-gutters pb-2">
+              <small class="w-100"
+                >Menu Visible For Roles &nbsp;
+                <span class="secondary-color"
+                  >({{ navItem.forRoles.length }})</span
+                >
+                <span
+                  class="secondary-color"
+                  *ngIf="navItem.forRoles.length == rolesArray.length"
+                  >All Selected</span
+                >
+              </small>
+
+              <!-- <div class="col-sm-2 " *ngFor="let user_type of navItem.visibleFor; let id = index">
+                                <div class="addedList m-1">
+                                    <span class="selected-item" [ngbTooltip]="user_type" container="body"> {{user_type}} </span>  
+                                </div>
+                            </div> -->
+              <ng-multiselect-dropdown
+                [placeholder]="'Select'"
+                name="{{ navItem.itemId }}"
+                [settings]="groupDropdownSettings"
+                [data]="rolesArray"
+                [(ngModel)]="navItem.forRoles"
+                #toolbarbutton="ngModel"
+              >
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="pb-2 mb-2 w-100">
+              <div class="row">
+                <div class="col-6">
+                  <h5 class="d-inline">Sub Menu</h5>
+                </div>
+                <div class="text-right col-6">
+                  <small
+                    class="secondarybtnstyle cursor-pointer"
+                    (click)="addSubMenu(id)"
+                    >Add Sub Menu</small
+                  >
+                </div>
+              </div>
+              <div class="row no-gutters">
+                <div
+                  class="col-sm-6"
+                  *ngFor="let sVars of navItem.itemChildren; let sub_id = index"
+                >
+                  <div class="text-right px-2 mt-1">
+                    <i
+                      [ngbTooltip]="'Move up'"
+                      *ngIf="sub_id != 0"
+                      class="fa fa-arrow-up cursor-pointer close-button"
+                      (click)="moveSubMenuUp(id, sub_id)"
+                    ></i>
+                    <i
+                      [ngbTooltip]="'Move Down'"
+                      *ngIf="sub_id < navItem.itemChildren.length - 1"
+                      class="fa fa-arrow-down cursor-pointer close-button"
+                      (click)="moveSubMenuDown(id, sub_id)"
+                    ></i>
+                    <i
+                      [ngbTooltip]="'Remove'"
+                      class="fa fa-close cursor-pointer close-button"
+                      (click)="removeSubMenu(id, sub_id)"
+                    ></i>
+                  </div>
+                  <div class="m-1">
+                    <small
+                      class="selected-item"
+                      [ngbTooltip]="sVars.itemName"
+                      container="body"
+                    >
+                      Name
+                      <!-- <i class="{{sVars.itemIconPath}} bg-light pl-2"></i> -->
+                    </small>
+                    <input
+                      class="inputstyle w-100"
+                      name="{{ sVars.itemId + 'name' + sub_id }}"
+                      [(ngModel)]="sVars.itemName"
+                    />
+                    <div class="col-12 m-0 p-0">
+                      <app-custom-icon-picker
+                        [iconList]="iconList"
+                        [value]="sVars.itemIconPath"
+                        [placeholder]="sVars.itemIconPath"
+                        [id]="id + '**' + sub_id"
+                        ($onSelectItem)="selectSubMenuIcon($event)"
+                      ></app-custom-icon-picker>
+                    </div>
+                    <small
+                      class="selected-item"
+                      [ngbTooltip]="sVars.itemName"
+                      container="body"
+                    >
+                      Route Path
+                    </small>
+                    <input
+                      class="inputstyle w-100"
+                      name="{{ sVars.itemId + 'route' + sub_id }}"
+                      [(ngModel)]="sVars.routePath"
+                    />
+                    <small class="w-100"
+                      >Sub Menu Visible For Roles &nbsp;
+                      <small class="secondary-color"
+                        >({{ sVars.forRoles.length }})</small
+                      >
+                      <small
+                        class="secondary-color"
+                        *ngIf="sVars.forRoles.length == rolesArray.length"
+                        >All Selected</small
+                      >
+                    </small>
+                    <ng-multiselect-dropdown
+                      [placeholder]="'Select'"
+                      name="{{ sVars.itemId + sub_id }}"
+                      [settings]="groupDropdownSettings"
+                      [data]="rolesArray"
+                      [(ngModel)]="sVars.forRoles"
+                      #toolbarbutton="ngModel"
+                    >
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'toolbar-button'" class="w-100">
+          <div class="col-12 px-1 py-2">
+            <div class="text-right w-100 px-1">
+              <small
+                class="primarybtnstyle cursor-pointer mr-2"
+                (click)="setDefaultToolbarButton()"
+                *ngIf="!procDefForm.toolBarButtons"
+              >
+                Add Default Buttons
+              </small>
+              <small
+                class="secondarybtnstyle cursor-pointer"
+                [style.display]="showAddButton ? 'inline' : 'none'"
+                (click)="showCategoryForm()"
+                >Add Button Category</small
+              >
+            </div>
+            <div
+              class="notification-row p-3 m-3 my-1"
+              [style.display]="!showAddButton ? 'block' : 'none'"
+            >
+              <label class="w-100 font-weight-normal">Category Name</label>
+              <input
+                class="inputstyle w-100 mb-2"
+                name="new_category"
+                [(ngModel)]="newButtonCategory"
+              />
+              <small
+                class="secondarybtnstyle cursor-pointer"
+                (click)="addButtonCategory()"
+                >Add Button Category</small
+              >
+              <small
+                class="secondarybtnstyle cursor-pointer ml-2"
+                (click)="showCategoryForm()"
+                >Cancel</small
+              >
+            </div>
+          </div>
+          <div
+            class="row no-gutters p-4 notification-row"
+            *ngFor="let type of buttonTypes"
+          >
+            <div class="text-right px-2 w-100">
+              <i
+                [ngbTooltip]="'Remove'"
+                class="fa fa-close cursor-pointer close-button"
+                (click)="removeButtonCategory(type)"
+              ></i>
+            </div>
+            <h4
+              class="w-100"
+              [innerHtml]="
+                mapProcessName(type).length ? mapProcessName(type) : type
+              "
+            >
+              {{ type }}
+            </h4>
+            <div class="text-right w-100 mx-2">
+              <small
+                class="secondarybtnstyle cursor-pointer"
+                (click)="addButton(type)"
+                >Add New Button</small
+              >
+            </div>
+            <div
+              class="col-6 pr-2"
+              *ngFor="
+                let navItem of procDefForm.toolBarButtons[type];
+                let id = index
+              "
+            >
+              <!-- <div class="text-right px-2 mt-3">
+                <i
+                  [ngbTooltip]="'Remove Button'"
+                  class="fa fa-close cursor-pointer close-button"
+                  (click)="removeButton(type, id)"
+                ></i>
+              </div> -->
+              <div class="text-right px-2 mt-1">
+                <i
+                  [ngbTooltip]="'Move up'"
+                  *ngIf="id != 0"
+                  class="fa fa-arrow-up cursor-pointer close-button"
+                  (click)="moveButton(type, id, 'up')"
+                ></i>
+                <i
+                  [ngbTooltip]="'Move Down'"
+                  *ngIf="id < procDefForm.toolBarButtons[type].length - 1"
+                  class="fa fa-arrow-down cursor-pointer close-button"
+                  (click)="moveButton(type, id, 'down')"
+                ></i>
+                <i
+                  [ngbTooltip]="'Remove'"
+                  class="fa fa-close cursor-pointer close-button"
+                  (click)="removeButton(type, id)"
+                ></i>
+              </div>
+              <div class="form-group">
+                <small class="w-100 font-weight-normal">Button Name</small>
+                <input
+                  class="inputstyle w-100"
+                  name="{{
+                    type + id + procDefForm.toolBarButtons[type][id].label
+                  }}"
+                  [(ngModel)]="procDefForm.toolBarButtons[type][id].label"
+                />
+              </div>
+              <div class="form-group">
+                <small class="w-100 font-weight-normal">Action</small>
+                <input
+                  class="inputstyle w-100"
+                  name="{{
+                    type +
+                      id +
+                      'action' +
+                      procDefForm.toolBarButtons[type][id].label
+                  }}"
+                  [(ngModel)]="procDefForm.toolBarButtons[type][id].action"
+                />
+              </div>
+
+              <div class="form-group mx-1">
+                <small class="w-100 font-weight-normal">For Screens Type</small>
+                <app-dropdown-search
+                  [value]="procDefForm.toolBarButtons[type][id].forScreens"
+                  [id]="type + '-' + id"
+                  [placeholder]="'Select Value'"
+                  [dataList]="screenTypes"
+                  ($onSelectItem)="setScreenTypes($event)"
+                ></app-dropdown-search>
+              </div>
+              <div class="custom-control custom-switch q-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input cursor-pointer"
+                  [id]="'disabled' + type + id"
+                  [name]="'disabled-id' + type + id"
+                  [checked]="procDefForm.toolBarButtons[type][id].disabled"
+                  [(ngModel)]="procDefForm.toolBarButtons[type][id].disabled"
+                />
+                <label
+                  class="custom-control-label cursor-pointer font-small font-weight-normal custom-label"
+                  [for]="'disabled' + type + id"
+                  >Button Disabled</label
+                >
+              </div>
+              <div class="no-gutters pt-1 pb-4">
+                <small class="w-100 ml-1">
+                  Visible For Roles &nbsp;<span class="secondary-color"
+                    >({{
+                      navItem.forRoles ? navItem.forRoles.length : "0"
+                    }})</span
+                  >
+                  <span
+                    class="secondary-color"
+                    *ngIf="
+                      navItem.forRoles &&
+                      navItem.forRoles.length == rolesArray.length
+                    "
+                  >
+                    All Selected</span
+                  >
+                </small>
+                <ng-multiselect-dropdown
+                  [placeholder]="'Select'"
+                  name="{{ navItem.action + id }}"
+                  [settings]="groupDropdownSettings"
+                  [data]="rolesArray"
+                  [(ngModel)]="navItem.forRoles"
+                  #toolbarbutton="ngModel"
+                >
+                </ng-multiselect-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'dms-settings'" class="w-100">
+          <div class="text-right m-2">
+            <small
+              *ngIf="!procDefForm.dmsSettings"
+              class="primarybtnstyle cursor-pointer mr-2"
+              (click)="setDefaultDMSSetting()"
+            >
+              Add Default DMS Settings
+            </small>
+            <small
+              class="secondarybtnstyle cursor-pointer"
+              (click)="addNewFolder()"
+              >Add New Folder</small
+            >
+          </div>
+          <div
+            class="row no-gutters p-4 notification-row m-4"
+            *ngFor="let navItem of procDefForm.dmsSettings; let id = index"
+          >
+            <div class="text-right w-100 px-1 mt-1">
+              <i
+                [ngbTooltip]="'Remove Menu'"
+                class="fa fa-close cursor-pointer close-button"
+                (click)="removeFolder(id)"
+              ></i>
+            </div>
+            <h4 class="col-12">
+              {{ navItem.itemName }}
+              <i class="{{ navItem.itemIconPath }} p-1"></i>
+            </h4>
+
+            <div class="='form-group col-6 mb-2">
+              <small
+                class="selected-item"
+                [ngbTooltip]="'Directory Name'"
+                container="body"
+              >
+                Root Folder
+              </small>
+              <input
+                class="inputstyle w-100"
+                name="{{ navItem.itemId + 'name' + id }}"
+                [(ngModel)]="navItem.itemName"
+              />
+            </div>
+            <div class="col-6 pl-2">
+              <small class="selected-item" container="body"
+                >Storage settings</small
+              >
+              <app-dropdown-search
+                [value]="procDefForm.processname"
+                [placeholder]="'Select Process Name'"
+                [dataList]="procDefs"
+                [id]="''"
+                [setting]="processNameSetting"
+                ($onSelectItem)="selectProcessName($event)"
+              ></app-dropdown-search>
+            </div>
+            <div class="pb-2 mb-2 w-100 mt-2">
+              <div class="row col-12 p-0">
+                <div class="col-6"><h5 class="d-inline">Sub Folder</h5></div>
+                <div class="text-right col-6 p-0">
+                  <small
+                    class="secondarybtnstyle cursor-pointers"
+                    (click)="addSubFolder(id)"
+                    >Add Sub Folder</small
+                  >
+                </div>
+              </div>
+              <div class="row no-gutters">
+                <div
+                  class="col-sm-6"
+                  *ngFor="let sVars of navItem.itemChildren; let sub_id = index"
+                >
+                  <div class="text-right px-2">
+                    <i
+                      [ngbTooltip]="'Remove'"
+                      class="fa fa-close cursor-pointer close-button"
+                      (click)="removeSubFolder(id, sub_id)"
+                    ></i>
+                  </div>
+                  <div class="m-1 arrow">
+                    <small
+                      class="selected-item"
+                      [ngbTooltip]="sVars.itemName"
+                      container="body"
+                    >
+                      Sub Folder Name
+                    </small>
+                    <input
+                      class="inputstyle w-100"
+                      name="{{ sVars.itemId + 'name' + sub_id }}"
+                      [(ngModel)]="sVars.itemName"
+                    />
+
+                    <small
+                      class="selected-item"
+                      [ngbTooltip]="sVars.itemName"
+                      container="body"
+                    >
+                      Sub Folder Id
+                    </small>
+                    <input
+                      class="inputstyle w-100"
+                      name="{{ sVars.itemId + 'id' + sub_id }}"
+                      [(ngModel)]="sVars.itemId"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Document list tabular form -->
+          <div class="container col-12">
+            <div class="row mt-2">
+              <div class="col-12">
+                <div class="notification-row p-4 m-4">
+                  <h5>Document Type for Listing</h5>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Document Type</th>
+                          <th>Is Visible</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let type of documentList">
+                          <td>{{ type.name }}</td>
+                          <td>
+                            <div class="custom-control custom-switch">
+                              <input
+                                type="checkbox"
+                                class="custom-control-input cursor-pointer"
+                                name="type.value"
+                                [id]="'isVisible' + type.name"
+                                [checked]="type.isVisible"
+                                (change)="
+                                  handleDocumentChange(
+                                    type.name,
+                                    'IsVisible',
+                                    $event
+                                  )
+                                "
+                              />
+                              <label
+                                class="custom-control-label cursor-pointer"
+                                [for]="'isVisible' + type.name"
+                                >Is Visible</label
+                              >
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div
+                    ngbDropdown
+                    class="d-inline-block w-100"
+                    container="body"
+                  >
+                    <!-- Dropdown content here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'theme'" class="w-100">
+          <div class="row no-gutters p-4 notification-row m-4 themeTab">
+            <div class="col-12 py-2">
+              <h5 class="d-inline">Color Scheme</h5>
+            </div>
+
+            <div class="col-12 py-2" style="text-align: right">
+              <button
+                class="secondarybtnstyle"
+                type="button"
+                (click)="setDefaultTheme(procDefForm)"
+              >
+                Set Default Theme
+              </button>
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Primary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="primaryColor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].primaryColor"
+              />
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Secondary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="secondaryColor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].secondaryColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Highlighting Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="primaryColor1"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].primaryColor1"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Tertiary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="tertiarycolor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].tertiarycolor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Quaternary Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="quaternaryColor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].quaternaryColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Error Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="dangerColor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].dangerColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >SideNav Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="sideNavColor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].sideNavColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Tab Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="tabColor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].tabColor"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Text Color</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="textColor"
+                type="color"
+                [(ngModel)]="procDefForm.themes[0].textColor"
+              />
+            </div>
+
+            <div class="col-12 py-2 pt-5">
+              <h5 class="d-inline">File Assets</h5>
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Logo (ideal height 50px, ideal width 150px )</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('logoUploader')"
+                >
+                  {{
+                    files.logo?.name && files.logo?.name !== "File"
+                      ? files.logo?.name
+                      : "Upload Logo"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-100 hidden"
+                  name="logoUrl"
+                  id="logoUploader"
+                  (change)="onFileChange($event, 'logo')"
+                  accept="image/*"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.logo"
+                *ngIf="previewImageUrls.logo"
+              />
+            </div>
+
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Login Banner</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('loginLogoUploader')"
+                >
+                  {{
+                    files.loginLogo?.name && files.loginLogo?.name !== "File"
+                      ? files.loginLogo?.name
+                      : "Upload Logo"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="loginLogoUrl"
+                  id="loginLogoUploader"
+                  accept="image/*"
+                  (change)="onFileChange($event, 'loginLogo')"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.loginLogo"
+                *ngIf="previewImageUrls.loginLogo"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Icon</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('iconUploader')"
+                >
+                  {{
+                    files.favicon?.name && files.favicon?.name !== "File"
+                      ? files.favicon?.name
+                      : "Upload Icon"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="logoUrl"
+                  id="iconUploader"
+                  accept=".ico"
+                  (change)="onFileChange($event, 'favicon')"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.favicon"
+                *ngIf="previewImageUrls.favicon"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Document Icon</label
+              >
+              <div class="fileuploader">
+                <div
+                  class="inputstyle w-30 pt-1"
+                  (click)="onLogoInputClick('documentIconUploader')"
+                >
+                  {{
+                    files.favicon?.name && files.favicon?.name !== "File"
+                      ? files.favicon?.name
+                      : "Upload Dcoument Icon"
+                  }}
+                </div>
+                <input
+                  type="file"
+                  class="inputstyle w-30 hidden"
+                  name="reportLogoUrl"
+                  id="documentIconUploader"
+                  accept=".png,.jpg"
+                  (change)="onFileChange($event, 'reportLogo')"
+                />
+              </div>
+              <img
+                width="50"
+                [src]="previewImageUrls.reportLogo"
+                *ngIf="previewImageUrls.reportLogo"
+              />
+            </div>
+            <div class="col-12 py-2 pt-5">
+              <h5 class="d-inline">Document Titles</h5>
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Workflow Document Title</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="documentTitle"
+                [(ngModel)]="procDefForm.themes[0].documentTitle"
+              />
+            </div>
+            <div class="col-4 px-1">
+              <label
+                class="selected-item font-weight-normal pr-1"
+                container="body"
+                >Workflow Overlay Title</label
+              >
+              <input
+                class="inputstyle w-30"
+                name="workflowOverlayTitle"
+                [(ngModel)]="procDefForm.themes[0].workflowOverlayTitle"
+              />
+            </div>
+            <div class="col-4 px-1"></div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab == 'jrms'" class="w-100">
+          <div class="text-right m-2">
+            <small
+              class="secondarybtnstyle cursor-pointer"
+              (click)="addNewJrmsModule()"
+              >Add New Module</small
+            >
+          </div>
+          <div class="container">
+            <h5>Access Control</h5>
+            <div
+              class="module mb-4"
+              *ngFor="let module of modules; let id = index"
+            >
+              <div class="text-right px-2 mt-1">
+                <i
+                  [ngbTooltip]="'Remove'"
+                  class="fa fa-close cursor-pointer close-button"
+                  (click)="removeJrmsModule(id)"
+                ></i>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <small class="w-100 font-weight-normal">Module Name</small>
+                    <input
+                      class="form-control my-2 mx-2"
+                      name="{{ id + module.moduleName }}"
+                      [(ngModel)]="module.moduleName"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div style="font-weight: 500">Add</div>
+                  <div class="no-gutters pt-1 pb-4">
+                    <small class="ml-1">Visible For Roles</small>
+                    <ng-multiselect-dropdown
+                      [placeholder]="'Select'"
+                      name="{{ 'addAccess' + id }}"
+                      [settings]="groupDropdownSettings"
+                      [data]="rolesArray"
+                      [(ngModel)]="module.actions[0].visibleForRoles"
+                    >
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div style="font-weight: 500">View</div>
+                  <div class="no-gutters pt-1 pb-4">
+                    <small class="ml-1">Visible For Roles</small>
+                    <ng-multiselect-dropdown
+                      [placeholder]="'Select'"
+                      name="{{ 'viewAccess' + id }}"
+                      [settings]="groupDropdownSettings"
+                      [data]="rolesArray"
+                      [(ngModel)]="module.actions[1].visibleForRoles"
+                    >
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div style="font-weight: 500">Edit</div>
+                  <div class="no-gutters pt-1 pb-4">
+                    <small class="ml-1">Visible For Roles</small>
+                    <ng-multiselect-dropdown
+                      [placeholder]="'Select'"
+                      name="{{ 'editAccess' + id }}"
+                      [settings]="groupDropdownSettings"
+                      [data]="rolesArray"
+                      [(ngModel)]="module.actions[2].visibleForRoles"
+                    >
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div style="font-weight: 500">Delete</div>
+                  <div class="no-gutters pt-1 pb-4">
+                    <small class="ml-1">Visible For Roles</small>
+                    <ng-multiselect-dropdown
+                      [placeholder]="'Select'"
+                      name="{{ 'deleteAccess' + id }}"
+                      [settings]="groupDropdownSettings"
+                      [data]="rolesArray"
+                      [(ngModel)]="module.actions[3].visibleForRoles"
+                    >
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <button class="primarybtnstyle">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

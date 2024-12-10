@@ -1,0 +1,34 @@
+<div class="comment-container position-relative">
+  <small class="subject-style">{{label}}</small>
+  <ng-template #list let-item="item" let-labelProp="labelProp">
+    <div [ngbTooltip]="item[labelProp]" container="body" class="text-truncate">
+      {{ item[labelProp] }}
+    </div>
+  </ng-template>
+  <div class="form-group p-0 m-0 pb-1">
+    <div
+      #comment
+      [mentionListTemplate]="list"
+      [mentionConfig]="commentMentionConfig"
+      (mouseenter)="showFullScreenIcon = true"
+      (mouseleave)="showFullScreenIcon = false"
+    ></div>
+    <div>
+      <textarea
+        class="hidden"
+        [value]="value"
+        cols="60"
+        rows="1"
+        [id]="_commentBoxOptions?.id"
+      ></textarea>
+    </div>
+  </div>
+
+  <!-- <i
+    *ngIf="_commentBoxOptions?.allowFullScreen"
+    class="fa fa-arrows-alt full-screen-icon"
+    aria-hidden="true"
+    (click)="showFullCommentBoxModal()"
+  ></i> -->
+</div>
+

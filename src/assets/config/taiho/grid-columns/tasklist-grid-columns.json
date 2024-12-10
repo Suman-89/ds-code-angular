@@ -1,0 +1,57 @@
+{
+    "work_list": [
+        { "text": "Priority", "filtertype": "input", "datafield": "casePriority", "width": "auto", "minwidth": 100},
+        { "text": "Last Updated Date", "datafield": "created", "filtertype": "date", "cellsformat": "dd-MMM-yyyy", "width": "15%" },
+        { "text": "Vendor", "filtertype": "input", "datafield": "partnerLegalName", "width": "auto", "minwidth": 150},
+        { "text": "Task Name", "filtertype": "input", "datafield": "name", "width": "auto", "minwidth": 150 },
+        { "text": "Product", "filtertype": "checkedlist", "datafield": "product",  "width": "auto", "minwidth": 100},
+        { "text": "Contract Type", "filtertype": "checkedlist", "datafield": "contractType", "width": "auto", "minwidth": 100},
+        { "text": "Contract Type (2nd Level)", "filtertype": "checkedlist", "datafield": "contractTypeSecondLevel", "width": "auto", "minwidth": 100},
+        { "text": "iBasis Contracting Entity", "filtertype": "input", "datafield": "ibasisContractingEntity", "width": "auto", "minwidth": 150},
+        { "text": "Country", "filtertype": "input", "datafield": "country", "width": "auto", "minwidth": 150},
+        { "text": "Medical Affairs Users", "filtertype": "input", "datafield": "initiator", "width": "auto", "minwidth": 100},
+        { "text": "Product Type", "filtertype": "checkedlist", "datafield": "productSecondLevel", "width": "auto", "minwidth": 100},
+        { "text": "Contract Initiation Date", "datafield": "contractInitiationTime", "filtertype": "date", "cellsformat":"dd-MMM-yyyy", "width": "15%"},
+        { "text": "Contract Id", "filtertype": "input", "datafield": "businessKey", "width": "auto", "minwidth": 200}
+    ],
+    "work_basket": [
+        { "text": "Priority", "filtertype": "input", "datafield": "casePriority", "width": "auto", "minwidth": 100},
+        { "text": "Last Updated Date", "datafield": "created", "filtertype": "date", "cellsformat": "dd-MMM-yyyy", "width": "15%" },
+        { "text": "Vendor", "filtertype": "input", "datafield": "partnerLegalName", "width": "auto", "minwidth": 150},
+        { "text": "Task Name", "filtertype": "input", "datafield": "name", "width": "auto", "minwidth": 150 },
+        { "text": "Product", "filtertype": "checkedlist", "datafield": "product",  "width": "auto", "minwidth": 100},
+        { "text": "Contract Type", "filtertype": "checkedlist", "datafield": "contractType", "width": "auto", "minwidth": 100},
+        { "text": "Contract Type (2nd Level)", "filtertype": "checkedlist", "datafield": "contractTypeSecondLevel", "width": "auto", "minwidth": 100},
+        { "text": "iBasis Contracting Entity", "filtertype": "input", "datafield": "ibasisContractingEntity", "width": "auto", "minwidth": 150},
+        { "text": "Country", "filtertype": "input", "datafield": "country", "width": "auto", "minwidth": 150},
+        { "text": "Medical Affairs Users", "filtertype": "input", "datafield": "initiator", "width": "auto", "minwidth": 100},
+        { "text": "Product Type", "filtertype": "checkedlist", "datafield": "productSecondLevel", "width": "auto", "minwidth": 100},
+        { "text": "Contract Initiation Date", "datafield": "contractInitiationTime", "filtertype": "date", "cellsformat":"dd-MMM-yyyy", "width": "15%"},
+        { "text": "Contract Id", "filtertype": "input", "datafield": "businessKey", "width": "auto", "minwidth": 200}
+    ],
+    "contract_list": [
+      { "text": "Company Name", "filtertype": "input", "datafield": "partnerlegalname", "width": "auto", "minwidth": 150},
+      { "text": "Initiator", "filtertype": "input", "datafield": "initiatedbyfullname", "width": "auto", "minwidth": 100},
+      { "text": "Product", "filtertype": "checkedlist", "datafield": "product", "width": "auto", "minwidth": 100},
+      { "text": "Contract Type", "filtertype": "checkedlist", "datafield": "contracttype", "width": "auto", "minwidth": 100},
+      { "text": "Contract Type (2nd Level)", "filtertype": "checkedlist", "datafield": "contractTypeSecondLevel", "width": "auto", "minwidth": 100},
+      { "text": "Product Type", "filtertype": "checkedlist", "datafield": "productSecondLevel", "width": "auto", "minwidth": 100},
+      { "text": "Priority", "filtertype": "input", "datafield": "casePriority", "width": "auto", "minwidth": 100},
+      { "text": "Overall Status", "filtertype": "checkedlist", "datafield": "overallStats", "width": "auto", "minwidth": 100 },
+        { "text": "Country", "filtertype": "input", "datafield": "country", "width": "auto", "minwidth": 150},
+        { "text": "iBasis Contracting Entity", "filtertype": "input", "datafield": "cename", "width": "auto", "minwidth": 150},
+        { "text": "Contract Initiation Time", "datafield": "initiationdate", "filtertype": "range", "cellsformat":"dd-MMM-yyyy HH:mm:ss", "width": "15%"},
+        { "text": "Contract Completion Time", "datafield": "completiondatetime", "filtertype": "range","cellsformat":"dd-MMM-yyyy HH:mm:ss", "width": "15%"},
+        { "text": "Contract Elapsed Time (Hours)", "datafield": "elapsedhour", "width": "auto", "cellsformat": "d2"},
+        { "text": "Contract Elapsed Time (Days)", "datafield": "elapseddays", "width": "auto", "cellsformat": "d2"},
+        { "text": "Contract Id", "filtertype": "input", "datafield": "contractid", "width": "auto", "minwidth": 200},
+        { "text": "Currency", "hidden":"true" , "datafield": "currency", "width": "auto"},
+        { "text": "Sort Order","hidden":"true", "datafield": "sortorder"}
+     ], 
+     "comments" : [
+        { "text": "Comment", "datafield": "comment"} ,
+        { "text": "User", "datafield": "name"},
+        { "text": "Date", "datafield": "createdDate", "cellsformat":"dd-MMM-yyyy HH:mm:ss"}
+
+     ]
+}

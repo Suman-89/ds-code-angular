@@ -1,0 +1,226 @@
+<form #form="ngForm" (ngSubmit)="form.valid && save()">
+  <div class="modal-header pt-1 pb-1">
+    <h5 class="modal-title secondary-color mt-0">{{ user.fullname }}</h5>
+    <button
+      type="button"
+      class="close btn"
+      aria-label="Close"
+      (click)="close()"
+    >
+      <img height="20" src="./assets/images/cross.png" />
+    </button>
+  </div>
+  <div class="modal-body position-relative">
+    <div class="row no-gutters">
+      <div class="col-md-6 pr-1">
+        <label class="form-label">Full Name</label>
+        <input
+          type="text"
+          readonly
+          class="form-control inputstyle"
+          name="fullname"
+          #fullname="ngModel"
+          [(ngModel)]="user.fullname"
+        />
+      </div>
+      <div class="col-md-6 pr-1">
+        <label class="form-label">User ID</label>
+        <input
+          type="text"
+          readonly
+          class="form-control inputstyle"
+          name="userid"
+          #userid="ngModel"
+          [(ngModel)]="user.userid"
+        />
+      </div>
+      <div class="col-md-6 pr-1" *ngIf="actionType === 'view'">
+        <label class="form-label">Group</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          name="groupselect"
+          [settings]="dropdownSettings"
+          [data]="groups"
+          [(ngModel)]="selectedGroups"
+          (onSelect)="onItemSelect($event, 'groupnames')"
+          (onDeSelect)="onDeSelect($event, 'groupnames')"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="col-md-6 pr-1" *ngIf="actionType === 'view'">
+        <label class="form-label">Roles</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          name="roleselect"
+          [settings]="dropdownSettings"
+          [data]="roles"
+          [(ngModel)]="selectedRoles"
+          (onSelect)="onItemSelect($event, 'roles')"
+          (onDeSelect)="onDeSelect($event, 'roles')"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="col-md-6 pr-1">
+        <label class="w-100 form-label">Active</label>
+        <div class="toggle-switch" style="top: 0">
+          <input
+            [disabled]="actionType === 'clear'"
+            type="checkbox"
+            [checked]="user.active"
+            (change)="toggleActiveStatus($event.target)"
+          />
+          <div class="knobs">
+            <span></span>
+          </div>
+          <div class="layer"></div>
+        </div>
+      </div>
+      <div class="col-md-6 pr-1">
+        <label class="form-label">Email ID</label>
+        <input
+          type="text"
+          class="form-control inputstyle"
+          name="userEmail"
+          #userEmail="ngModel"
+          [(ngModel)]="user.email"
+        />
+      </div>
+      <div class="col-md-6 pr-1" *ngIf="!isEditMode && user.phoneNumber">
+        <label class="form-label">Phone Number</label>
+        <input
+          type="text"
+          class="form-control inputstyle view-number"
+          name="userPhoneNumber"
+          #userPhoneNumber="ngModel"
+          [(ngModel)]="user.phoneNumber"
+          ngbTooltip="Click To Edit"
+          [readOnly]="true"
+          (click)="editMode(true)"
+        />
+      </div>
+      <div class="col-md-6 pr-1" *ngIf="isEditMode || !user.phoneNumber">
+        <label class="form-label">Phone Number</label>
+        <app-country-code
+          (fullNumberEmitter)="getFullNumber($event)"
+          [savedNumber]="user.phoneNumber"
+        ></app-country-code>
+      </div>
+      <div class="col-md-6 pr-1">
+        <label class="selected-item font-weight-normal pr-1" container="body"
+          >User's Profile Icon</label
+        >
+        <div class="fileuploader">
+          <div
+            class="inputstyle w-30 pt-1"
+            (click)="onIconInputClick('userProfileIcon')"
+          >
+            {{ profileIconName ? profileIconName : "Upload Icon" }}
+          </div>
+          <input
+            type="file"
+            class="inputstyle w-30 hidden"
+            id="userProfileIcon"
+            accept=".png"
+            (change)="getProfilePic($event)"
+          />
+        </div>
+        <img
+          style="margin-top: 10px"
+          width="100"
+          height="120"
+          [src]="tempProfileImageUrl || profileImageUrl"
+          *ngIf="profileImageUrl !== undefined"
+        />
+      </div>
+      <ng-container *ngIf="actionType === 'clear'">
+        <div class="col-md-6 pr-1">
+          <label class="form-label">Group</label>
+          <ng-multiselect-dropdown
+            [disabled]="actionType === 'clear'"
+            [placeholder]="'Select'"
+            name="groupselect"
+            [settings]="dropdownSettings"
+            [data]="groups"
+            [(ngModel)]="selectedGroups"
+            #groupselect="ngModel"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="col-md-6"></div>
+        <table class="table col-md-6">
+          <thead>
+            <tr>
+              <td class="w-50 form-label primary-color">Group Name</td>
+              <td class="w-50 form-label primary-color">Assigned User</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let group of selectedGroups; let i = index">
+              <ng-container
+                *ngIf="group.id !== 'camunda-admin' && group.id !== 'guest'"
+              >
+                <td class="col-md-1 form-label">
+                  {{ group.name }}
+                </td>
+
+                <td
+                  class="d-inline-block w-100 no-padding"
+                  container="body"
+                  style="position: relative"
+                >
+                  <div
+                    class="btn w-100 btn-outline-primary text-truncate nav-link dropdown-toggle rounded"
+                    id="'selectGroup-' +group.id"
+                    (click)="displayMenu($event, group.id)"
+                  >
+                    {{
+                      selectedAssignedUserMap[group.id]
+                        ? selectedAssignedUserMap[group.id] === "Group Queue"
+                          ? "Group Queue"
+                          : selectedAssignedUserMap[group.id].fullname
+                        : "Select "
+                    }}
+                  </div>
+                  <div
+                    class="w-100 dropdown-menu col-6"
+                    style="position: absolute; left: 4px"
+                    [ngClass]="
+                      displayAssignMenu && group.id == selectedGroupId
+                        ? 'd-block'
+                        : 'd-none'
+                    "
+                    aria-labelledby="'selectGroup' +group.id"
+                  >
+                    <button
+                      class="dropdown-item w-100"
+                      *ngIf="group.id !== 'sales'"
+                      (click)="setUserFromGroup(group, null, $event)"
+                    >
+                      Group Queue
+                    </button>
+                    <button
+                      class="dropdown-item w-100"
+                      *ngFor="let user of groupToUsersMap[selectedGroupId]"
+                      (click)="setUserFromGroup(group, user, $event)"
+                    >
+                      {{ user.fullname }}
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="modal-footer pt-1 pb-1">
+    <button type="button" class="btn secondarybtnstyle" (click)="close()">
+      Cancel
+    </button>
+    <button type="submit" [disabled]="!form.valid" class="btn primarybtnstyle">
+      Save
+    </button>
+  </div>
+</form>

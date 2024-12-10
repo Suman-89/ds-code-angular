@@ -1,0 +1,12 @@
+<div class="d-block p-4">
+    <select class="inpustyle w-100" (change)="setSelectedType($event.target.value)">
+        <option *ngFor="let wf of workflowtypes" [value]="wf.key">{{wf.label}}</option>
+    </select>
+<div class="d-flex justify-content-center mt-2">
+    <button class="btn primarybtnstyle mr-2" [disabled]="!selectedType" (click)="save()">OK</button>
+    <button class="btn secondarybtnstyle ml-2" (click)="close()">Cancel</button>
+</div>
+
+
+
+</div>
